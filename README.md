@@ -1,6 +1,8 @@
 Todo:
 Install Tailwind and make sure it functions properly.
 
+Create a plan for what needs to be created, each feature and how it would roughly work.
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
