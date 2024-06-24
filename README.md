@@ -1,7 +1,5 @@
 Todo:
-    Install Tailwind and make sure it functions properly.
-
-    Create a plan for what needs to be created, each feature and how it would roughly work.
+    
 Pages needed:
     Home feed
         Could try making the feed scroll across the screen/left to right, instead of up and down.
