@@ -12,6 +12,8 @@ Pages needed:
     Login and signup
         Can be the same style as the comparable login and signup pages. Looked clean and can easily tweak the color and style as I want.
 
+        Make it possible for users to login/signup using their google account and maybe a couple others but at least google.
+
     Settings
         Doesn't have to be an extensive list, just a few features that make sense. Stuff like changing your display name.
 
@@ -19,6 +21,11 @@ Pages needed:
         Posts should have a like button, repost button, and section to add comments.
 
         To add comments to posts a drop down box will appear so that the user can add their comment. A whole new page is not needed. When the comment is add the page will scroll to the added comment.
+
+Possible additional features:
+    A way for users to message each other.
+
+
 
 # React + Vite
 
