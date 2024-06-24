@@ -6,6 +6,8 @@ Pages needed:
     Home feed
         Could try making the feed scroll across the screen/left to right, instead of up and down.
 
+        No need to have a seperate page for post creation, it should be a popup window, or a box that expands at the top like Twitter.
+
     Profile page
         Your posts scroll across the screen like the Home feed but have a wheel effect where the posts become bigger and emphasized as they reach the center of the screen. As if you are turing a wheel
 
