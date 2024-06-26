@@ -1,10 +1,11 @@
 import React from "react";
+import Feed from "./Feed";
 
 const Profile = () => {
 
     return (
         <main>
-            <div>
+            <section>
                 <form action="POST">
                     <input 
                         type="text"
@@ -13,7 +14,12 @@ const Profile = () => {
                     />
                     <button type="submit">Send</button>
                 </form>
-            </div>
+            </section>
+            <section>
+                <div>
+                    <Feed />
+                </div>
+            </section>
         </main>
     )
 }
