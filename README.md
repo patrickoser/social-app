@@ -3,6 +3,8 @@ Todo:
     
     There should be no Header in the login/signup page.
 
+    Create a 'hamburger' dropdown button for the right side of the header.
+
 Pages needed:
     Home feed
         Could try making the feed scroll across the screen/left to right, instead of up and down.
