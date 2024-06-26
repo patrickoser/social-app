@@ -1,4 +1,7 @@
 Todo:
+    Create general Layout for Home Page.
+    
+    There should be no Header in the login/signup page.
 
 Pages needed:
     Home feed
