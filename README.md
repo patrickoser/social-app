@@ -5,6 +5,8 @@ Todo:
 
     Create a 'hamburger' dropdown button for the right side of the header.
 
+    No footer needed, github profile link can just be in Contact page.
+
 Pages needed:
     Home feed
         Could try making the feed scroll across the screen/left to right, instead of up and down.
