@@ -1,3 +1,5 @@
+One step at a time. 1% better everyday.
+
 Todo:
     Create general Layout for Home Page.
     
