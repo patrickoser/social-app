@@ -5,7 +5,11 @@ const Home = () => {
     return (
         <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
             <section></section>
-            <Feed />
+            <section>
+                <Feed />
+            </section>
+            <section>
+            </section>
         </main>
     )
 }
