@@ -7,6 +7,7 @@ import Footer from "./components/Footer.jsx"
 import Settings from "./components/Settings.jsx"
 import Contact from "./components/Contact.jsx"
 import Profile from "./components/Profile.jsx"
+import Home from "./components/Home.jsx"
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Header />
         <Routes>
           <Route path='/' element={<LoginSignupHub />} />
+          <Route path="home" element={<Home />} />
           <Route path="signup" element={<Signup />} />
           <Route path="login" element={<Login />} /> 
           <Route path="settings" element={<Settings />} />
