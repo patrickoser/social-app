@@ -1,7 +1,7 @@
 One step at a time. 1% better everyday.
 
 Todo:
-    Create general Layout for Home Page.
+    Create cards for posts on Home Feed.
     
     There should be no Header in the login/signup page.
 
