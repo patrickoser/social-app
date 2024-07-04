@@ -9,7 +9,19 @@ const Home = () => {
             <section className="flex-auto min-w-60 mt-5 px-5 border">
             </section>
             <section className="flex-initial w-6/12 mt-5 px-5 text-center border">
-                <Feed />
+                <div>
+                    <form action="POST">
+                        <input 
+                            type="text"
+                            name="post"
+                            placeholder="What's on your mind?"
+                        />
+                        <button type="submit">Send</button>
+                    </form>
+                </div>
+                <div>
+                    <Feed />
+                </div>
             </section>
             <section className="flex-auto min-w-60 mt-5 px-5 border">
             </section>
