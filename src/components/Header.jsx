@@ -6,7 +6,7 @@ const Header = () => {
     return (
         <header className="flex justify-between">
             <section>
-                <Link to="/profile"><h2>Social App</h2></Link>
+                <Link to="/Home"><h2>Social App</h2></Link>
             </section>
             <nav>
                 <ul className="flex flex-row justify-between">
