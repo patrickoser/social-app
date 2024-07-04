@@ -1,4 +1,4 @@
-One step at a time. 1% better everyday.
+One step at a time. 1% better everyday!
 
 Todo:
     Create cards for posts on Home Feed.
