@@ -9,7 +9,7 @@ Todo:
 
 Pages needed:
     Home feed
-        Could try making the feed scroll across the screen/left to right, instead of up and down.
+        Put Nav bar on left side and have it slide under the content for a mobile friendly version.
 
         No need to have a seperate page for post creation, it should be a popup window, or a box that expands at the top like Twitter.
 
