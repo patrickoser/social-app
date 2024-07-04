@@ -4,7 +4,8 @@ import Feed from "../components/Feed";
 const Profile = () => {
 
     return (
-        <main>
+        <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
+            
             <section>
                 <form action="POST">
                     <input 
