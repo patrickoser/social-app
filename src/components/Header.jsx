@@ -10,7 +10,7 @@ const Header = () => {
             </section>
             <nav>
                 <ul className="flex flex-row justify-between">
-                    <li><Link>Profile</Link></li>
+                    <li><Link to="/Profile">Profile</Link></li>
                     <li><Link to="/contact">Contact</Link></li>
                     <li><Link to="/settings">Settings</Link></li>
                 </ul>
