@@ -8,6 +8,7 @@ import Settings from "./pages/Settings.jsx"
 import Contact from "./pages/Contact.jsx"
 import Profile from "./pages/Profile.jsx"
 import Home from "./pages/Home.jsx"
+import PostPage from "./pages/PostPage.jsx"
 
 function App() {
 
