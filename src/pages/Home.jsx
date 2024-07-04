@@ -1,5 +1,5 @@
 import React from "react";
-import Feed from "./Feed";
+import Feed from "../components/Feed";
 
 const Home = () => {
     // Need to space the Home sections out more to give more room for Feed to display
