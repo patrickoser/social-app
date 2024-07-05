@@ -13,9 +13,6 @@ const Feed = () => {
             <div className="max-w-full border border-red-500">
                 <h1>Three Post</h1>
             </div>  
-            
-            
-            
         </div>
     )
 }
