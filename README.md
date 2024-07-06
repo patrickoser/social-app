@@ -5,8 +5,6 @@ Todo:
     
     There should be no Header in the login/signup page.
 
-    Create a 'hamburger' dropdown button for the right side of the header.
-
 Pages needed:
     Home feed
         Put Nav bar on left side and have it slide under the content for a mobile friendly version.

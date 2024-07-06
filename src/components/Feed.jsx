@@ -12,7 +12,7 @@ const Feed = () => {
             <div className="max-w-full border border-red-500 text-left">
                 <h1>Username</h1>
                 <h3>Date of post</h3>
-                <p>Tis is some more content to use as an example and figure out spacing</p>
+                <p>This is some more content to use as an example and figure out spacing</p>
             </div>
             <div className="max-w-full border border-red-500 text-left">
                 <h1 className="">Username</h1>
