@@ -1,6 +1,7 @@
 import React from "react";
 import Feed from "../components/Feed";
 import Nav from "../components/Nav";
+import CreatePost from "../components/CreatePost";
 
 const Home = () => {
     // Need to space the Home sections out more to give more room for Feed to display
@@ -11,16 +12,7 @@ const Home = () => {
                 <Nav />
             </section>
             <section id="home-main-content" className="flex-initial w-6/12 mt-5 px-5 text-center border">
-                <div>
-                    <form action="POST">
-                        <input 
-                            type="text"
-                            name="post"
-                            placeholder="What's on your mind?"
-                        />
-                        <button type="submit">Send</button>
-                    </form>
-                </div>
+                <CreatePost />
                 <div>
                     <Feed />
                 </div>
