@@ -2,7 +2,7 @@ import React from "react";
 
 const CreatePost = () => {
     return (
-        <div className="">
+        <div className="p-2">
             <form action="POST">
                 <input 
                     type="text"
