@@ -1,5 +1,6 @@
 import React from "react";
 import Feed from "../components/Feed";
+import CreatePost from "../components/CreatePost";
 
 const Profile = () => {
 
@@ -8,16 +9,7 @@ const Profile = () => {
             <section id="left-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
             </section>
             <section id="profile-main-content">
-                <div>
-                    <form action="POST">
-                        <input 
-                            type="text"
-                            name="post"
-                            placeholder="What's on your mind?"
-                        />
-                        <button type="submit">Send</button>
-                    </form>
-                </div>
+                <CreatePost />
                 <div>
                     <Feed />
                 </div>
