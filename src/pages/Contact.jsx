@@ -19,6 +19,7 @@ const Contact = () => {
                             type="text"
                             name="name"
                             placeholder="Your name"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5"
                             required
                         />
                     </div>
@@ -28,6 +29,7 @@ const Contact = () => {
                             type="text"
                             name="email"
                             placeholder="Your email"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5"
                             required
                         />
                     </div>
@@ -40,6 +42,7 @@ const Contact = () => {
                             placeholder="Your message"
                             cols="30"
                             rows="10"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5"
                             required
                         />
                     </div>
