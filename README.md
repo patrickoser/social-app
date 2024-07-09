@@ -7,6 +7,9 @@ Todo:
 
     Look into firebase and how to implement it.
 
+    Look into setting up Tailwind to set some default colors
+    and make it easier to reuse them throughout the project.
+
 Pages needed:
     Home feed
         Put Nav bar on left side and have it slide under the content for a mobile friendly version.
