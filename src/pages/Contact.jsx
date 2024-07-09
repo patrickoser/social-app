@@ -2,7 +2,7 @@ import React from "react";
 
 const Contact = () => {
     return (
-        <main>
+        <main className="flex">
             <section>
                 <h1>Need to get in touch?</h1>
                 <p>Notice something about the site that isn't working 
