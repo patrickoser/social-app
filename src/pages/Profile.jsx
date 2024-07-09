@@ -10,7 +10,7 @@ const Profile = () => {
             <div id="left-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
                 <Nav />
             </div>
-            <div id="profile-main-content" className="flex-initial w-6/12 mt-5 px-5 text-center border">
+            <div id="profile-main-content">
                 <CreatePost />
                 <div>
                     <Feed />

@@ -2,7 +2,7 @@ import React from "react";
 
 const Contact = () => {
     return (
-        <main className="flex">
+        <main className="flex justify-center max-w-7xl">
             <section className="w-6/12">
                 <h1>Need to get in touch?</h1>
                 <p>Notice something about the site that isn't working 
