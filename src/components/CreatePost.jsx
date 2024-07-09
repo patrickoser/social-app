@@ -2,7 +2,7 @@ import React from "react";
 
 const CreatePost = () => {
     return (
-        <div className="py-2">
+        <div className="py-2 border-b border-black">
             <form action="POST" className="flex">
                 <input 
                     type="text"
