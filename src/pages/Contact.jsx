@@ -3,7 +3,7 @@ import React from "react";
 const Contact = () => {
     return (
         <main className="flex">
-            <section>
+            <section className="w-6/12">
                 <h1>Need to get in touch?</h1>
                 <p>Notice something about the site that isn't working 
                     the way it should, have an idea how it could be better, 
@@ -11,7 +11,7 @@ const Contact = () => {
                     information I will get back to you ASAP.
                 </p>
             </section>
-            <section>
+            <section className="w-6/12">
                 <form action="https://formsubmit.co/patrick.oser1@gmail.com" method="POST">
                     <div className="nameCon">
                         <label>Name:</label>
