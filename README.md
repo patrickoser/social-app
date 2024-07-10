@@ -1,6 +1,11 @@
 One step at a time. 1% better everyday!
 
 Todo:
+    Setup DataProvider with all the context needed for CRUD
+    operations. Should work with a axios localhost to serve
+    static files for now until I get firebase working. Will 
+    tweak everything later on to work with firebase.
+
     Create cards for posts on Home Feed.
     
     There should be no Header in the login/signup page.
