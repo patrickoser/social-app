@@ -18,18 +18,20 @@ function App() {
   return (
     <main>
       <Router>
-        <Header />
-        <Routes>
-          <Route path='/' element={<LoginSignupHub />} />
-          <Route path="home" element={<Home />} />
-          <Route path="signup" element={<Signup />} />
-          <Route path="login" element={<Login />} /> 
-          <Route path="settings" element={<Settings />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="postpage" element={<PostPage />} />
-        </Routes>
-        <Footer />
+        <DataProvider>
+          <Header />
+          <Routes>
+            <Route path='/' element={<LoginSignupHub />} />
+            <Route path="home" element={<Home />} />
+            <Route path="signup" element={<Signup />} />
+            <Route path="login" element={<Login />} /> 
+            <Route path="settings" element={<Settings />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="postpage" element={<PostPage />} />
+          </Routes>
+          <Footer />
+        </DataProvider>
       </Router>
     </main>
   )
