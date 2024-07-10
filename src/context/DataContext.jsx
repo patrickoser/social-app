@@ -6,9 +6,13 @@ import { format } from 'date-fns'
 const DataContext = createContext({})
 
 export const DataProvider = ({ children }) => {
+
+    const [posts, setPosts] = useState([])
+    const navigate = useNavigate()
+
     return (
         <DataContext.Provider value={{
-            posts, setPosts
+            posts, setPosts, navigate
         }}>
             {children}
         </DataContext.Provider>
