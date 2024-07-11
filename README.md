@@ -43,7 +43,6 @@ Possible additional features:
     A way for users to message each other.
 
 
-
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
