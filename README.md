@@ -15,7 +15,7 @@ Todo:
     Look into setting up Tailwind to set some default colors
     and make it easier to reuse them throughout the project.
 
-    Set up structure for Contact page.
+    Set up structure for Contact page..
 
 Pages needed:
     Home feed
