@@ -1,7 +1,7 @@
 import React from "react";
 import Feed from "../components/Feed";
 import Nav from "../components/Nav";
-import CreatePost from "../components/PostForm";
+import PostForm from "../components/PostForm";
 
 const Profile = () => {
 
@@ -11,7 +11,7 @@ const Profile = () => {
                 <Nav />
             </div>
             <div id="profile-main-content">
-                <CreatePost />
+                <PostForm />
                 <div>
                     <Feed />
                 </div>
