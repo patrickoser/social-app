@@ -1,7 +1,7 @@
 import React from "react";
 import Feed from "../components/Feed";
 import Nav from "../components/Nav";
-import CreatePost from "../components/PostForm";
+import PostForm from "../components/PostForm";
 
 const Home = () => {
 
@@ -14,7 +14,7 @@ const Home = () => {
                 <Nav />
             </section>
             <section id="home-main-content" className="flex-initial w-6/12 mt-5 px-5 text-center border">
-                <CreatePost />
+                <PostForm />
                 <div>
                     <Feed />
                 </div>
