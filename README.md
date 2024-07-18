@@ -1,10 +1,11 @@
 One step at a time. 1% better everyday!
 
 Todo:
-    Setup DataProvider with all the context needed for CRUD
-    operations. Should work with a axios localhost to serve
-    static files from 'db.json' for now until I get firebase 
-    working. Will tweak everything later on to work with 
+    Setup the createPost function to pot everything to db.json
+    when a post is created. Then use useEffect to
+    automatically populate Home with posts from db.json. Will 
+    tweak everything later on to work
+    with 
     firebase.
 
     Create cards for posts on Home Feed.
