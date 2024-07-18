@@ -1,7 +1,7 @@
 import React from "react";
 import Feed from "../components/Feed";
 import Nav from "../components/Nav";
-import CreatePost from "../components/CreatePost";
+import CreatePost from "../components/PostForm";
 
 const Profile = () => {
 

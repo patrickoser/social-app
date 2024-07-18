@@ -1,10 +1,10 @@
 import React from "react";
 import Feed from "../components/Feed";
 import Nav from "../components/Nav";
-import CreatePost from "../components/CreatePost";
+import CreatePost from "../components/PostForm";
 
 const Home = () => {
-    
+
     // Need to space the Home sections out more to give more room for Feed to display
     // posts. Should probably be about twice as big as either individual sidebar.
 

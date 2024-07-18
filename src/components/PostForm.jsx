@@ -1,6 +1,6 @@
 import React from "react";
 
-const CreatePost = () => {
+const PostForm = () => {
     return (
         <div className="py-2 border-b border-black">
             <form action="POST" className="flex">
@@ -16,4 +16,4 @@ const CreatePost = () => {
     )
 }
 
-export default CreatePost
+export default PostForm
