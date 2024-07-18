@@ -16,7 +16,7 @@ const Home = () => {
             <section id="home-main-content" className="flex-initial w-6/12 mt-5 px-5 text-center border">
                 <PostForm />
                 <div>
-                    <Feed />
+                    {posts. length ? <Feed posts={posts} /> : <p>No posts to display</p>}
                 </div>
             </section>
             <section id="right-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
