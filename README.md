@@ -1,7 +1,7 @@
 One step at a time. 1% better everyday!
 
 Todo:
-    Setup the createPost function to pot everything to db.json
+    Setup the createPost function to post everything to db.json
     when a post is created. Then use useEffect to
     automatically populate Home with posts from db.json. Will 
     tweak everything later on to work
