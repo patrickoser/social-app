@@ -2,9 +2,10 @@ One step at a time. 1% better everyday!
 
 Todo:
     Figure out why post ids are only printing 1 and not 
-    incrementally increasing from the previous id. Then use 
-    useEffect to automatically populate Home with posts from 
-    db.json. Will tweak everything later on to work
+    incrementally increasing from the previous id. 
+    
+    Then use useEffect to automatically populate Home with 
+    posts from db.json. Will tweak everything later on to work
     with firebase.
 
     Create cards for posts on Home Feed.
