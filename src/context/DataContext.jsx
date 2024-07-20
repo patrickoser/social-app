@@ -21,7 +21,6 @@ export const DataProvider = ({ children }) => {
             const allPosts = [...posts, response.data]
             setPosts(allPosts)
             setPostContent('')
-            navigate('/')
         } catch(err) {
             console.log(`Error: ${err}`)
         }
