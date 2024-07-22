@@ -1,8 +1,10 @@
 One step at a time. 1% better everyday!
 
 Todo:
+    I get a 404 error code when trying to delete posts.
 
-    Add delete button to posst page.
+    id's do not properly check existing posts for duplicates before assigning a new id to a post.
+
     
     Then use useEffect to automatically populate Home with 
     posts from db.json. Will tweak everything later on to work

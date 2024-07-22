@@ -2,13 +2,8 @@
   "posts": [
     {
       "id": 1,
-      "content": "how about this?",
-      "datetime": "July 22 2024 1:01:15 PM"
-    },
-    {
-      "id": 1,
-      "content": "one more try",
-      "datetime": "July 22 2024 1:04:38 PM"
+      "content": "id check",
+      "datetime": "July 22 2024 1:07:10 PM"
     }
   ]
 }
