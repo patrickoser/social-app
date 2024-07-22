@@ -28,7 +28,7 @@ function App() {
             <Route path="settings" element={<Settings />} />
             <Route path="contact" element={<Contact />} />
             <Route path="profile" element={<Profile />} />
-            <Route path="postpage" element={<PostPage />} />
+            <Route path="posts/:id" element={<PostPage />} />
           </Routes>
           <Footer />
         </DataProvider>
