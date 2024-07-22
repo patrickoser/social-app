@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import DataContext from "../context/DataContext";
-import { Link, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 
 const PostPage = () => {
     // Pulls in the 'posts' object from 'db.json' for reference below.
