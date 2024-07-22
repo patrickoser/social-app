@@ -4,10 +4,10 @@ import DataContext from "../context/DataContext";
 import { Link, useParams } from "react-router-dom"
 
 const PostPage = () => {
-    // Pulls in the posts object from db.json for reference below.
+    // Pulls in the 'posts' object from 'db.json' for reference below.
     const { posts } = useContext(DataContext)
 
-    // useParams grabs the 'id' from the url for reference below.
+    // 'useParams' grabs the 'id' from the url for reference below.
     const { id } = useParams()
 
     // 'find()' loops through every post object to find the one that contains a 'post.id' that
