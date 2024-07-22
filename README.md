@@ -9,8 +9,6 @@ Todo:
     Comment out everything to talk through how everything 
     works to help yourself remember how all the pieces come 
     together.
-
-    Create cards for posts on Home Feed.
     
     There should be no Header in the login/signup page.
 
