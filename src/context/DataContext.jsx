@@ -36,6 +36,19 @@ export const DataProvider = ({ children }) => {
         }
     }
 
+    useEffect(() => {
+        const getPosts = async () => {
+            try {
+                const response = await api.get('/posts')
+                setPosts(response.data)
+            } catch(err) {
+                console.log(err.message)
+            }
+        }
+
+        getPosts()
+    }, [])
+
     return (
         <DataContext.Provider value={{
             posts, setPosts, navigate, postContent, setPostContent, createPost,
