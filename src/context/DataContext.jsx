@@ -28,6 +28,16 @@ export const DataProvider = ({ children }) => {
         }
     }
 
+    const deletePost = async (id) => {
+        try {
+            await api.delete(`/posts/${id}`)
+            setPosts(posts.filter((post) => post.id !== id))
+            navigate('/home')
+        } catch(err) {
+            console.log(err.message)
+        }
+    }
+
     return (
         <DataContext.Provider value={{
             posts, setPosts, navigate, postContent, setPostContent, createPost
