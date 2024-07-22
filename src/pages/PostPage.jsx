@@ -23,7 +23,7 @@ const PostPage = () => {
                 <h2>{post.datetime}</h2>
             </div>
             <div>
-                <p>{post.postContent}</p>
+                <p>{post.content}</p>
             </div>
             <div>
                 <button onClick={() => deletePost(post.id)}>Delete</button>
