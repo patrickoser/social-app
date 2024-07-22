@@ -14,6 +14,7 @@ export const DataProvider = ({ children }) => {
     const createPost = async (e) => {
         e.preventDefault()
         const id = posts.length ? posts[posts.length - 1].id + 1 : 1
+        console.log({posts})
         console.log(`id: ${id} posts length: ${posts.length}`)
         const datetime = format(new Date(), 'MMMM dd yyyy pp')
         const newPost = { id, content: postContent, datetime }
