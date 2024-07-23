@@ -1,9 +1,7 @@
 One step at a time. 1% better everyday!
 
 Todo:
-    I get a 404 error code when trying to delete posts.
-
-    id's do not properly check existing posts for duplicates before assigning a new id to a post.
+    Implment firebase for CRUD, user auth, posts, bookmarks, and such.
 
     Figure out why reloading the page when on a specific PostPage the page
     doesnt load properly.
@@ -13,8 +11,6 @@ Todo:
     together.
     
     There should be no Header in the login/signup page.
-
-    Look into firebase and how to implement it.
 
     Look into setting up Tailwind to set some default colors
     and make it easier to reuse them throughout the project.
