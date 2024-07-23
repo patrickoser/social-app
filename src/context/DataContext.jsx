@@ -32,7 +32,7 @@ export const DataProvider = ({ children }) => {
             setPosts(posts.filter((post) => post.id !== id))
             navigate('/home')
         } catch(err) {
-            console.log(err.message)
+            console.log(err)
         }
     }
 
