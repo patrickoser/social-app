@@ -15,6 +15,8 @@ Todo:
     Look into setting up Tailwind to set some default colors
     and make it easier to reuse them throughout the project.
 
+    Remove uneeded imports from files.
+
     Set up structure for Contact page.
 
 Pages needed:
