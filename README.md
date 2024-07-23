@@ -1,7 +1,7 @@
 One step at a time. 1% better everyday!
 
 Todo:
-    Implment firebase for CRUD, user auth, posts, bookmarks, and such.
+    Install/implment firebase for CRUD, user auth, posts, bookmarks, and such.
 
     Figure out why reloading the page when on a specific PostPage the page
     doesnt load properly.
