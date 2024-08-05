@@ -17,7 +17,9 @@ export const DataProvider = ({ children }) => {
 
     const signIn = async () => {
         try {
-            await 
+            await createUserWithEmailAndPassword(auth, email, password)
+        } catch (err) {
+            console.error(err)
         }
     }
 
