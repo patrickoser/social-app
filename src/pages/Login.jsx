@@ -5,8 +5,13 @@ const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const handleLogin = (e) => {
+    const handleSignIn = async (e) => {
         e.preventDefault()
+        try {
+            await createUserWithEmailAndPassword(auth, email, password)
+        } catch (err) {
+            console.error(err)
+        }
     }
 
     return (
@@ -15,7 +20,7 @@ const Login = () => {
                 <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account.</h2>
             </div>
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form onSubmit={handleLogin} className="space-y-6">
+                <form onSubmit={handleSignIn} className="space-y-6">
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email Address</label>
                         <div className="mt-2">
