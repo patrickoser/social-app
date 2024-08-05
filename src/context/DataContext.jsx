@@ -2,6 +2,8 @@ import { createContext, useEffect, useState } from "react";
 import api from '../api/postsAxios'
 import { useNavigate } from "react-router-dom";
 import { format } from 'date-fns'
+import { auth } from "../config/firebase"
+import { createUserWithEmailAndPassword } from "firebase/auth"
 
 const DataContext = createContext({})
 
