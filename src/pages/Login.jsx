@@ -9,11 +9,6 @@ const Login = () => {
 
     const handleSignIn = async (e) => {
         e.preventDefault()
-        try {
-            await createUserWithEmailAndPassword(auth, email, password)
-        } catch (err) {
-            console.error(err)
-        }
     }
 
     return (

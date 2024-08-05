@@ -6,9 +6,14 @@ const Signup = () => {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
 
-    const handleSignup = (e) => {
+    const handleSignup = async (e) => {
         e.preventDefault()
         console.log("Signup email: ", email, "password: ", password, "confirm password: ", confirmPassword)
+        try {
+            await createUserWithEmailAndPassword(auth, email, password)
+        } catch (err) {
+            console.error(err)
+        }
     }
 
     return (
