@@ -15,6 +15,12 @@ export const DataProvider = ({ children }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    const signIn = async () => {
+        try {
+            await 
+        }
+    }
+
     const createPost = async (e) => {
         e.preventDefault()
         const id = posts.length ? posts[posts.length - 1].id + 1 : 1
