@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from '../config/firebase'
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
@@ -10,15 +10,20 @@ const Signup = () => {
     // only need to check that it match password in the frontend and once that check
     // is complete it can be discarded.
     const [confirmPassword, setConfirmPassword] = useState('')
+    const navigate = useNavigate()
 
     const handleSignup = async (e) => {
         e.preventDefault()
         console.log("Signup email: ", email, "password: ", password, "confirm password: ", confirmPassword)
         try {
             await createUserWithEmailAndPassword(auth, email, password)
+            setPassword('')
+            setEmail('')
         } catch (err) {
             console.error(err)
         }
+
+
     }
 
     return (
