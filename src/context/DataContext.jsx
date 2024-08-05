@@ -12,6 +12,8 @@ export const DataProvider = ({ children }) => {
     const [posts, setPosts] = useState([])
     const navigate = useNavigate()
     const [postContent, setPostContent] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
     const createPost = async (e) => {
         e.preventDefault()
