@@ -3,6 +3,10 @@ One step at a time. 1% better everyday!
 Todo:
     Install/implment firebase for CRUD, user auth, posts, bookmarks, and such.
 
+    Use 'useMemo' in when interacting with firebase functions so that they are 
+    not called everytime there is an 'onChnage' event triggered. This counts as a 
+    'read' and contributes to billing.
+
     Figure out why reloading the page when on a specific PostPage the page
     doesnt load properly.
 
