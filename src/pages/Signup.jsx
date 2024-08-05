@@ -19,6 +19,7 @@ const Signup = () => {
             await createUserWithEmailAndPassword(auth, email, password)
             setPassword('')
             setEmail('')
+            navigate('/home')
         } catch (err) {
             console.error(err)
         }
