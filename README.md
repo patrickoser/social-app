@@ -9,6 +9,9 @@ Todo:
     Find out how to verify if login/signup was successful and if so redirect to the
     home page.
 
+    Add a check to direct users straight to the home page if they are already signed
+    in to an account. Pobably something I can do with local storage.
+
     Use 'useMemo' in when interacting with firebase functions so that they are 
     not called everytime there is an 'onChnage' event triggered. This counts as a 
     'read' and contributes to billing.
