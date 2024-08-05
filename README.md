@@ -3,6 +3,9 @@ One step at a time. 1% better everyday!
 Todo:
     Need to check if the singup/login functionality works as intended.
 
+    Find out how to verify if login/signup was successful and if so redirect to the
+    home page.
+
     Install/implment firebase for CRUD, user auth, posts, bookmarks, and such.
 
     Use 'useMemo' in when interacting with firebase functions so that they are 
