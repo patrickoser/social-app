@@ -1,6 +1,8 @@
 One step at a time. 1% better everyday!
 
 Todo:
+    Need to check if the singup/login functionality works as intended.
+
     Install/implment firebase for CRUD, user auth, posts, bookmarks, and such.
 
     Use 'useMemo' in when interacting with firebase functions so that they are 
