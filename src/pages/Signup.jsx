@@ -6,6 +6,9 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 const Signup = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    // confirmPassword is likely not needed when interacting with firebase. I probably
+    // only need to check that it match password in the frontend and once that check
+    // is complete it can be discarded.
     const [confirmPassword, setConfirmPassword] = useState('')
 
     const handleSignup = async (e) => {
