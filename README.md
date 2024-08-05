@@ -3,10 +3,11 @@ One step at a time. 1% better everyday!
 Todo:
     Need to check if the singup/login functionality works as intended.
 
+    I should add a username input field to the signup screen. It will check firebase
+    to see if that username is taken and if not add it to that users object.
+
     Find out how to verify if login/signup was successful and if so redirect to the
     home page.
-
-    Install/implment firebase for CRUD, user auth, posts, bookmarks, and such.
 
     Use 'useMemo' in when interacting with firebase functions so that they are 
     not called everytime there is an 'onChnage' event triggered. This counts as a 
