@@ -5,6 +5,8 @@ Todo:
 
     Add ability to logout.
 
+    Add google icon for google sign in.
+
     I should add a username input field to the signup screen. It will check firebase
     to see if that username is taken and if not add it to that users object.
 
