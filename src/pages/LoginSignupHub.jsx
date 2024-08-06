@@ -1,5 +1,5 @@
 import Signup from './Signup.jsx'
-import auth from '../config/firebase.jsx'
+import { auth } from '../config/firebase'
 
 const LoginSignupHub = () => {
     // Add a feature that checks local storage to see if they
