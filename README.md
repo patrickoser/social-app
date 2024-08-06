@@ -3,6 +3,8 @@ One step at a time. 1% better everyday!
 Todo:
     Need to check if the singup/login functionality works as intended.
 
+    Add ability to logout.
+
     I should add a username input field to the signup screen. It will check firebase
     to see if that username is taken and if not add it to that users object.
 
