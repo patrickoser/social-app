@@ -7,6 +7,8 @@ const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    console.log(`User Status: ${auth.currentUser} has signed in.`)
+
     const handleSignIn = async (e) => {
         e.preventDefault()
         try {
