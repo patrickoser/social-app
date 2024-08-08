@@ -13,6 +13,7 @@ const Login = () => {
         e.preventDefault()
         try {
             await signInWithEmailAndPassword(auth, email, password)
+
         } catch (err) {
             console.error(err)
         }
