@@ -9,12 +9,11 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const { navigate } = useContext(DataContext)
 
-    console.log(`User Status: ${auth?.currentUser?.email} has signed in.`)
-
     const handleSignIn = async (e) => {
         e.preventDefault()
         try {
             await signInWithEmailAndPassword(auth, email, password)
+            console.log(`User Status: ${auth?.currentUser?.email} has signed in.`)
             setEmail('')
             setPassword('')
             navigate('/home')

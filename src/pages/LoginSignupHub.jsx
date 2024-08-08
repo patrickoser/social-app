@@ -3,8 +3,7 @@ import { auth } from '../config/firebase'
 
 const LoginSignupHub = () => {
     // Add a feature that checks local storage to see if they
-    // already have an account before redirecting to Signup.
-    console.log(auth?.currentUser?.email)
+    // already have an account before redirecting to Signup
 
     return (
         <main>

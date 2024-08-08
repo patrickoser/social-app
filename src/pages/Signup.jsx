@@ -12,14 +12,12 @@ const Signup = () => {
     const [confirmPassword, setConfirmPassword] = useState('')
     const navigate = useNavigate()
 
-    console.log(`User Status: ${auth?.currentUser?.email} has created an account and signed in.`)
-
     const handleSignup = async (e) => {
         e.preventDefault()
-
         console.log("Signup email: ", email, "password: ", password, "confirm password: ", confirmPassword)
         try {
             await createUserWithEmailAndPassword(auth, email, password)
+            console.log(`User Status: ${auth?.currentUser?.email} has created an account and signed in.`)
             setPassword('')
             setEmail('')
             navigate('/home')
