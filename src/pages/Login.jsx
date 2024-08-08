@@ -15,6 +15,8 @@ const Login = () => {
         e.preventDefault()
         try {
             await signInWithEmailAndPassword(auth, email, password)
+            setEmail('')
+            setPassword('')
             navigate('/home')
         } catch (err) {
             console.error(err)
