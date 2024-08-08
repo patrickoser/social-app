@@ -12,7 +12,7 @@ const Signup = () => {
     const [confirmPassword, setConfirmPassword] = useState('')
     const navigate = useNavigate()
 
-    console.log(`User Status: ${auth?.currentUser} has created an account and signed in.`)
+    console.log(`User Status: ${auth?.currentUser?.email} has created an account and signed in.`)
 
     const handleSignup = async (e) => {
         e.preventDefault()

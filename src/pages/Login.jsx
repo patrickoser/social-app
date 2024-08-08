@@ -9,7 +9,7 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const { navigate } = useContext(DataContext)
 
-    console.log(`User Status: ${auth?.currentUser} has signed in.`)
+    console.log(`User Status: ${auth?.currentUser?.email} has signed in.`)
 
     const handleSignIn = async (e) => {
         e.preventDefault()
