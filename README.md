@@ -13,7 +13,7 @@ Todo:
     to see if that username is taken and if not add it to that users object.
 
     Find out how to verify if login/signup was successful and if so redirect to the
-    home page.
+    home page. 
 
     Add a check to direct users straight to the home page if they are already signed
     in to an account. Pobably something I can do with local storage.
