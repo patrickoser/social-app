@@ -82,6 +82,9 @@ const Signup = () => {
                         Already have an account?&nbsp;
                         <Link to="/login"><button className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Login here!</button></Link>
                     </p>
+                    <div>
+                        <p>Or</p>
+                    </div>
                 </form>
             </div>
         </main>
