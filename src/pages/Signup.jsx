@@ -84,7 +84,7 @@ const Signup = () => {
                     </p>
                     <div className="flex w-full items-center gap-2 py-6 text-sm text-slate-600">
                         <div className="h-px w-full bg-slate-200"></div>
-                        <p>Or</p>
+                        <p>OR</p>
                         <div className="h-px w-full bg-slate-200"></div>
                     </div>
                 </form>
