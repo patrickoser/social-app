@@ -9,6 +9,11 @@ Todo:
 
     Add google icon for google sign in.
 
+    Keep signed in users from accessing login/signup screens while
+    they are logged in.
+
+    
+
     I should add a username input field to the signup screen. It will check firebase
     to see if that username is taken and if not add it to that users object.
 
