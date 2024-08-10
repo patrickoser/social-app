@@ -97,7 +97,7 @@ const Signup = () => {
                     <div className="h-px w-full bg-slate-200"></div>
                 </div>
                 <div className="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black">
-                    <button>Sign in with Google</button>
+                    <button onClick={signInWithGoogle}>Sign in with Google</button>
                 </div>
             </div>
         </main>
