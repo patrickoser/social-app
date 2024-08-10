@@ -4,8 +4,8 @@ Todo:
     Syntax Error when loading LoginSignupHub after adding console 
     log.
 
-    Need to check if the singup/login functionality works as 
-    intended.
+    Need to check if the singup/login, and google sign up, 
+    functionality works as intended.
 
     Add ability to logout. 
 
