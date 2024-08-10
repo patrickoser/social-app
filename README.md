@@ -1,9 +1,11 @@
 One step at a time. 1% better everyday!
 
 Todo:
-    Syntax Error when loading LoginSignupHub after adding console log.
+    Syntax Error when loading LoginSignupHub after adding console 
+    log.
 
-    Need to check if the singup/login functionality works as intended.
+    Need to check if the singup/login functionality works as 
+    intended.
 
     Add ability to logout. 
 
@@ -15,18 +17,24 @@ Todo:
     Have firebase check if the emai lused during sign up is
     already assigned to an account.
 
-    I should add a username input field to the signup screen. It will check firebase
-    to see if that username is taken and if not add it to that users object.
+    I should add a username input field to the signup screen. It 
+    will check firebase to see if that username is taken and if 
+    not add it to that users object.
 
-    Add a check to direct users straight to the home page if they are already signed
-    in to an account. Pobably something I can do with local storage.
+    Add a check to direct users straight to the home page if they 
+    are already signed in to an account. Pobably something I can 
+    do with local storage.
 
-    Use 'useMemo' in when interacting with firebase functions so that they are 
-    not called everytime there is an 'onChnage' event triggered. This counts as a 
+    If user is not already signed in then they should not be able
+    to see anything but the login and signup screens.
+
+    Use 'useMemo' in when interacting with firebase functions so 
+    that they are not called everytime there is an 'onChnage' 
+    event triggered. This counts as a 
     'read' and contributes to billing.
 
-    Figure out why reloading the page when on a specific PostPage the page
-    doesnt load properly.
+    Figure out why reloading the page when on a specific PostPage 
+    the page doesnt load properly.
 
     Comment out everything to talk through how everything 
     works to help yourself remember how all the pieces come 
