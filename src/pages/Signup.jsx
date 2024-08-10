@@ -78,16 +78,16 @@ const Signup = () => {
                     <div>
                         <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create Account</button>
                     </div>
-                    <p className="mt-10 text-center text-sm text-gray-500">
-                        Already have an account?&nbsp;
-                        <Link to="/login"><button className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Login here!</button></Link>
-                    </p>
-                    <div className="flex w-full items-center gap-2 py-6 text-sm text-slate-600">
-                        <div className="h-px w-full bg-slate-200"></div>
-                        <p>OR</p>
-                        <div className="h-px w-full bg-slate-200"></div>
-                    </div>
                 </form>
+                <p className="mt-10 text-center text-sm text-gray-500">
+                    Already have an account?&nbsp;
+                    <Link to="/login"><button className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Login here!</button></Link>
+                </p>
+                <div className="flex w-full items-center gap-2 py-6 text-sm text-slate-600">
+                    <div className="h-px w-full bg-slate-200"></div>
+                    <p>OR</p>
+                    <div className="h-px w-full bg-slate-200"></div>
+                </div>
             </div>
         </main>
     )
