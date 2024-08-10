@@ -12,7 +12,8 @@ Todo:
     Keep signed in users from accessing login/signup screens while
     they are logged in.
 
-
+    Have firebase check if the emai lused during sign up is
+    already assigned to an account.
 
     I should add a username input field to the signup screen. It will check firebase
     to see if that username is taken and if not add it to that users object.
