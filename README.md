@@ -9,7 +9,7 @@ Todo:
 
     Add ability to logout. 
 
-    Add google icon for google sign in.
+    Add google icon for google sign in. 
 
     Keep signed in users from accessing login/signup screens while
     they are logged in.
