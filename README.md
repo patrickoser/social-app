@@ -7,7 +7,7 @@ Todo:
     Need to check if the singup/login, and google sign up, 
     functionality works as intended.
 
-    Add ability to logout. 
+    Add ability to logout.
 
     Add google icon for google sign in. 
 
