@@ -12,6 +12,7 @@ import Home from "./pages/Home.jsx"
 import PostPage from "./pages/PostPage.jsx"
 
 import { DataProvider } from "./context/DataContext.jsx"
+import Missing from "./pages/Missing.jsx"
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
             <Route path="contact" element={<Contact />} />
             <Route path="profile" element={<Profile />} />
             <Route path="post/:id" element={<PostPage />} />
+            <Route path="missing" element={<Missing />} />
           </Routes>
           <Footer />
         </DataProvider>
