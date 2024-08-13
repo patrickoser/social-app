@@ -10,9 +10,9 @@ import Contact from "./pages/Contact.jsx"
 import Profile from "./pages/Profile.jsx"
 import Home from "./pages/Home.jsx"
 import PostPage from "./pages/PostPage.jsx"
+import Missing from "./pages/Missing.jsx"
 
 import { DataProvider } from "./context/DataContext.jsx"
-import Missing from "./pages/Missing.jsx"
 
 function App() {
 
