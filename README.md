@@ -12,7 +12,7 @@ Todo:
 
     Add ability to logout.
 
-    Add google icon for google sign in. 
+    Add google icon for google sign in.
 
     Have firebase check if the email used during sign up is
     already assigned to an account. Should check if user is 
