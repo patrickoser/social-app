@@ -1,6 +1,9 @@
 One step at a time. 1% better everyday!
 
 Todo:
+    Add protected/private routes to all routes except 
+    Login/Signup.
+
     Syntax Error when loading LoginSignupHub after adding console 
     log.
 
@@ -10,9 +13,6 @@ Todo:
     Add ability to logout.
 
     Add google icon for google sign in. 
-
-    Keep signed in users from accessing login/signup screens while
-    they are logged in.
 
     Have firebase check if the email used during sign up is
     already assigned to an account. Should check if user is 
