@@ -13,7 +13,7 @@ const Settings = () => {
         console.log(`User Status: ${auth?.currentUser?.email} has signed out.`)
         try {
             await signOut(auth)
-            navigate('/')
+            navigate('/signup')
         } catch (err) {
             console.error(err)
         }
@@ -22,7 +22,6 @@ const Settings = () => {
     return (
         <div>
             <h1 className="text-center">Settings</h1>
-            
             <button onClick={logout}>Logout</button>
         </div>
     )
