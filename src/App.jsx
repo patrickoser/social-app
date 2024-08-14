@@ -13,6 +13,7 @@ import PostPage from "./pages/PostPage.jsx"
 import Missing from "./pages/Missing.jsx"
 
 import { DataProvider } from "./context/DataContext.jsx"
+import { AuthProvider } from "./context/AuthContext.jsx"
 
 function App() {
 
@@ -23,9 +24,9 @@ function App() {
           <Header />
           <Routes>
             <Route path='/' element={<LoginSignupHub />} />
-            <Route path="home" element={<Home />} />
             <Route path="signup" element={<Signup />} />
             <Route path="login" element={<Login />} /> 
+            <Route path="home" element={<Home />} />
             <Route path="settings" element={<Settings />} />
             <Route path="contact" element={<Contact />} />
             <Route path="profile" element={<Profile />} />
