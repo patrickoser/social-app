@@ -1,8 +1,10 @@
 One step at a time. 1% better everyday!
 
-Todo:
-    Add protected/private routes to all routes except 
-    Login/Signup.
+Todo: 
+    If you run into errors
+        Check placement of Protected component and AuthProvider
+
+        Check how Protected/AuthProvider are constructed.
 
     Syntax Error when loading LoginSignupHub after adding console 
     log.
