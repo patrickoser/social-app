@@ -22,7 +22,7 @@ const Settings = () => {
     return (
         <div>
             <h1 className="text-center">Settings</h1>
-            <Link to="/"><h1 className="text-center">LoginSignupHub</h1></Link>
+            <Link to="/signup"><h1 className="text-center">LoginSignupHub</h1></Link>
             <button onClick={logout}>Logout</button>
         </div>
     )
