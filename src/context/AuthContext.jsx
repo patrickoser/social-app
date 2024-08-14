@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
         <AuthContext.Provider value={{
             user, setUser
         }}>
-            {!loadng &&
+            {!loading &&
                 children
             }
         </AuthContext.Provider>
