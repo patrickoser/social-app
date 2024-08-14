@@ -19,23 +19,25 @@ function App() {
 
   return (
     <main>
-      <Router>
-        <DataProvider>
-          <Header />
-          <Routes>
-            <Route path='/' element={<LoginSignupHub />} />
-            <Route path="signup" element={<Signup />} />
-            <Route path="login" element={<Login />} /> 
-            <Route path="home" element={<Home />} />
-            <Route path="settings" element={<Settings />} />
-            <Route path="contact" element={<Contact />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="post/:id" element={<PostPage />} />
-            <Route path="missing" element={<Missing />} />
-          </Routes>
-          <Footer />
-        </DataProvider>
-      </Router>
+      <AuthProvider>
+        <Router>
+          <DataProvider>
+            <Header />
+            <Routes>
+              <Route path='/' element={<LoginSignupHub />} />
+              <Route path="signup" element={<Signup />} />
+              <Route path="login" element={<Login />} /> 
+              <Route path="home" element={<Home />} />
+              <Route path="settings" element={<Settings />} />
+              <Route path="contact" element={<Contact />} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="post/:id" element={<PostPage />} />
+              <Route path="missing" element={<Missing />} />
+            </Routes>
+            <Footer />
+          </DataProvider>
+        </Router>
+      </AuthProvider>
     </main>
   )
 }
