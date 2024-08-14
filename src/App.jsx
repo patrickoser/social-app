@@ -14,6 +14,7 @@ import Missing from "./pages/Missing.jsx"
 
 import { DataProvider } from "./context/DataContext.jsx"
 import { AuthProvider } from "./context/AuthContext.jsx"
+import Protected from "./components/Protected.jsx"
 
 function App() {
 
@@ -26,13 +27,15 @@ function App() {
             <Routes>
               <Route path='/' element={<LoginSignupHub />} />
               <Route path="signup" element={<Signup />} />
-              <Route path="login" element={<Login />} /> 
-              <Route path="home" element={<Home />} />
-              <Route path="settings" element={<Settings />} />
-              <Route path="contact" element={<Contact />} />
-              <Route path="profile" element={<Profile />} />
-              <Route path="post/:id" element={<PostPage />} />
-              <Route path="missing" element={<Missing />} />
+              <Route path="login" element={<Login />} />
+              <Protected>
+                <Route path="home" element={<Home />} />
+                <Route path="settings" element={<Settings />} />
+                <Route path="contact" element={<Contact />} />
+                <Route path="profile" element={<Profile />} />
+                <Route path="post/:id" element={<PostPage />} />
+                <Route path="missing" element={<Missing />} />
+              </Protected>
             </Routes>
             <Footer />
           </DataProvider>
