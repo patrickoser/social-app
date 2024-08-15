@@ -6,6 +6,9 @@ Todo:
 
         Check how Protected/AuthProvider are constructed.
 
+    Add a box to the home screen that displays the current users information.
+    Username, pfp, email.
+
     Syntax Error when loading LoginSignupHub after adding console 
     log.
 
@@ -13,10 +16,6 @@ Todo:
 
     Need to check if the singup/login, and google sign up, 
     functionality works as intended.
-
-    Add ability to logout.
-
-    Add google icon for google sign in.
 
     Have firebase check if the email used during sign up is
     already assigned to an account. Should check if user is 
