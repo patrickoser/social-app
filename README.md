@@ -9,6 +9,8 @@ Todo:
     Syntax Error when loading LoginSignupHub after adding console 
     log.
 
+    See if it makes sense to move all firebase auth checks to auth context.
+
     Need to check if the singup/login, and google sign up, 
     functionality works as intended.
 
