@@ -20,9 +20,9 @@ function App() {
 
   return (
     <main>
-      <AuthProvider>
-        <Router>
-          <DataProvider>
+      <Router>
+        <DataProvider>
+          <AuthProvider>
             <Header />
             <Routes>
               <Route path='/' element={<LoginSignupHub />} />
@@ -38,9 +38,9 @@ function App() {
               </Protected>
             </Routes>
             <Footer />
-          </DataProvider>
-        </Router>
-      </AuthProvider>
+          </AuthProvider>
+        </DataProvider>
+      </Router>
     </main>
   )
 }
