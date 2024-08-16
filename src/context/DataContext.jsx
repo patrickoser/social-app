@@ -15,17 +15,7 @@ export const DataProvider = ({ children }) => {
 
     const createPost = async (e) => {
         e.preventDefault()
-        const id = posts.length ? posts[posts.length - 1].id + 1 : 1
-        const datetime = format(new Date(), 'MMMM dd yyyy pp')
-        const newPost = { id, content: postContent, datetime }
-        try {
-            const response = await api.post('/posts', newPost)
-            const allPosts = [...posts, response.data]
-            setPosts(allPosts)
-            setPostContent('')
-        } catch(err) {
-            console.log(`Error: ${err}`)
-        }
+
     }
 
     const deletePost = async (id) => {
@@ -63,3 +53,16 @@ export const DataProvider = ({ children }) => {
 }
 
 export default DataContext
+
+/*        const id = posts.length ? posts[posts.length - 1].id + 1 : 1
+        const datetime = format(new Date(), 'MMMM dd yyyy pp')
+        const newPost = { id, content: postContent, datetime }
+        try {
+            const response = await api.post('/posts', newPost)
+            const allPosts = [...posts, response.data]
+            setPosts(allPosts)
+            setPostContent('')
+        } catch(err) {
+            console.log(`Error: ${err}`)
+        }
+*/
