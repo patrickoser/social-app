@@ -3,6 +3,7 @@ import { AuthContext } from "../context/AuthContext"
 import { Navigate } from "react-router-dom";
 
 export const Protected = ({children}) => {
+    // User holds auth info on current user if there is one.
     const { user } = useContext(AuthContext)
 
     // 'Navigate' will direct the page anywhere specified by the
