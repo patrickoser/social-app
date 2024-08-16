@@ -28,14 +28,12 @@ function App() {
               <Route path='/' element={<LoginSignupHub />} />
               <Route path="signup" element={<Signup />} />
               <Route path="login" element={<Login />} />
-              <Protected>
                 <Route path="home" element={<Home />} />
                 <Route path="settings" element={<Settings />} />
                 <Route path="contact" element={<Contact />} />
                 <Route path="profile" element={<Profile />} />
                 <Route path="post/:id" element={<PostPage />} />
                 <Route path="missing" element={<Missing />} />
-              </Protected>
             </Routes>
             <Footer />
           </AuthProvider>

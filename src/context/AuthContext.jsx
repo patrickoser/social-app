@@ -1,7 +1,7 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { createContext, useState, useEffect } from "react";
 
-const AuthContext = createContext({})
+export const AuthContext = createContext({})
 
 export const AuthProvider = ({ children }) => {
     const auth = getAuth()
@@ -32,5 +32,3 @@ export const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     )
 }
-
-export default AuthContext
