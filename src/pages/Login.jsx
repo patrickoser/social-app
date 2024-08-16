@@ -5,6 +5,9 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import DataContext from "../context/DataContext";
 
 const Login = () => {
+    // Add a feature that checks local storage to see if they
+    // already have an account before redirecting to Signup
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const { navigate } = useContext(DataContext)
