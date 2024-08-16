@@ -27,11 +27,10 @@ export const DataProvider = ({ children }) => {
     const deletePost = async (id) => {
         console.log(id)
         try {
-            await api.delete(`/posts/${id}`)
-            setPosts(posts.filter((post) => post.id !== id))
-            navigate('/home')
-        } catch(err) {
-            console.log(err)
+            const postDoc = doc(db, "posts", id)
+            await deleteDoc(postDoc)
+        } catch (err) {
+            console.error(err)
         }
     }
 
