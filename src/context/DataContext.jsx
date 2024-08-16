@@ -8,8 +8,8 @@ const DataContext = createContext({})
 
 export const DataProvider = ({ children }) => {
 
-    const [posts, setPosts] = useState([])
     const navigate = useNavigate()
+    const [posts, setPosts] = useState([])
     const [postContent, setPostContent] = useState('')
     const postsCollectionRef = collection(db, "posts")
 
