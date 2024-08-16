@@ -43,8 +43,6 @@ export const DataProvider = ({ children }) => {
             try {
                 const data = await getDocs(postsCollectionRef)
                 setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-                const response = await api.get('/posts')
-                setPosts(response.data)
             } catch(err) {
                 console.log(err.message)
             }
