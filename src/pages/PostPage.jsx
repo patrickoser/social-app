@@ -16,6 +16,8 @@ const PostPage = () => {
     // below to construct the page.
     const post = posts.find(post => (post.id).toString() === id)
 
+    // I need to add an auth check to see if the current user
+    // is the one who created the post and is authorized to delete.
     return (
         <main>
             <div>

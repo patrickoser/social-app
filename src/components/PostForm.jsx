@@ -4,6 +4,7 @@ import DataContext from "../context/DataContext";
 
 const PostForm = () => {
     const { createPost, postContent, setPostContent } = useContext(DataContext)
+    
     return (
         <div className="py-2 border-b border-black">
             <form action="POST" onSubmit={createPost} className="flex">
