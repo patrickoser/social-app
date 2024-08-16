@@ -41,6 +41,8 @@ export const DataProvider = ({ children }) => {
     useEffect(() => {
         const getPosts = async () => {
             try {
+                const data = await getDocs(postsCollectionRef)
+                setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
                 const response = await api.get('/posts')
                 setPosts(response.data)
             } catch(err) {
