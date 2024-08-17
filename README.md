@@ -17,9 +17,11 @@ Todo:
 
         A share button that allows users to share posts elsewhere.
 
-        A tab that shows what posts each user has like on their profile.
+        A tab that shows what posts each user has like on their 
+        profile.
 
-    Add a box to the home screen that displays the current users information.
+    Add a box to the home screen that displays the current users 
+    information.
     Username, pfp, email.
 
     Syntax Error when loading LoginSignupHub after adding console 
