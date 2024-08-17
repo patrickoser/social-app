@@ -4,7 +4,7 @@ Todo:
     If you run into errors
         None of the protected routes are populating.
 
-        Check placement of Protected component and AuthProvider
+        Check placement of Protected component and AuthProvider.
 
         Check how Protected/AuthProvider are constructed.
 
