@@ -17,10 +17,6 @@ Todo:
 
         A share button that allows users to share posts elsewhere.
 
-        The ability to create posts.
-
-        The ability to update posts.
-
         The ability to delete your own posts.
 
         A tab that shows what posts each user has like on their profile.
