@@ -4,6 +4,8 @@ Comment as you go. It will help with comprehension and be a good
 reference for later.
 
 Todo: 
+    Watch through the like vid and comment ervything out.
+
     If you run into errors
         None of the protected routes are populating.
 
