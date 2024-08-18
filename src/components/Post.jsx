@@ -7,6 +7,16 @@ import { db, auth } from "../config/firebase"
 
 const Post = ({ post }) => {
     const [user] = useAuthState(auth)
+    const [likes, setLikes] = useState(null)
+
+    // Reference the likes collection in firestore
+    const likesRef = collection(db, "likes")
+
+    // Reference the likes doc, using the 'likesRef' to target, 'where()' then loops
+    // through searching for the post id that matches.
+    const likesDoc = query(likesRef, where("postid", "==", post.id))
+
+    
 
     return (
         <div className="max-w-full border-b border-black text-left">
