@@ -16,7 +16,12 @@ const Post = ({ post }) => {
     // through searching for the post id that matches.
     const likesDoc = query(likesRef, where("postid", "==", post.id))
 
-    
+    const getLikes = async () => {
+        try {
+            const data = await getDocs(likesDoc)
+            setLikes(data.docs.map((doc) => ({ userId: doc.data().userId, likeId: doc.id})))
+        }
+    }
 
     return (
         <div className="max-w-full border-b border-black text-left">
