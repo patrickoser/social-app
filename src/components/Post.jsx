@@ -49,6 +49,28 @@ const Post = ({ post }) => {
         }
     }
 
+    const removeLike = async () => {
+        try {
+            const likeToDeleteQuery = query(
+                likesRef,
+                where("postId", "==", post.id),
+                where("userId", "==", user?.uid)
+            )
+
+            const likeToDeleteData = await getDocs(likeToDeleteQuery)
+            const likeId = likeToDeleteData.docs[0].id
+            const likeToDelete = doc(db, "likes", likeId)
+            await deleteDoc(likeToDelete)
+            if (user) {
+                setLikes(
+                    (prev) => prev && prev.filter((like) => like.likeId !== likeId)
+                )
+            }
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
     return (
         <div className="max-w-full border-b border-black text-left">
             <Link to={`/post/${post.id}`}>
