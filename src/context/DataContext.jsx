@@ -1,7 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { format } from 'date-fns'
-import { db } from "../config/firebase"
+import { db, auth } from "../config/firebase"
+import { useAuthState } from "react-firebase-hooks/auth"
 import { collection, getDocs, addDoc, deleteDoc, query, where, doc } from "firebase/firestore"
 
 const DataContext = createContext({})
