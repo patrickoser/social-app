@@ -89,7 +89,8 @@ const Post = ({ post }) => {
                 : `${(post.content).slice(0, 100)}...`
             }</p>
             <div className="flex justify-end">
-                <button className="pr-1">Like</button>
+                <button onClick={hasUserLiked ? removeLike : addLike} className="pr-1">Like</button>
+                
                 <button className="pr-1">Share</button>
                 <button className="pr-1">Save</button>
             </div>
