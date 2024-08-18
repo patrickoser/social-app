@@ -6,7 +6,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { db, auth } from "../config/firebase"
 
 const Post = ({ post }) => {
-
+    const [user] = useAuthState(auth)
 
     return (
         <div className="max-w-full border-b border-black text-left">
