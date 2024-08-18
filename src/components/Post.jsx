@@ -35,7 +35,7 @@ const Post = ({ post }) => {
         try {
             const newDoc = await addDoc(likesRef, {
                 userId: user?.uid,
-                postId: 
+                postId: post.id
             })
             if (user) {
                 setLikes((prev) => 
