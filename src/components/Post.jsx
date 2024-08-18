@@ -20,6 +20,8 @@ const Post = ({ post }) => {
         try {
             const data = await getDocs(likesDoc)
             setLikes(data.docs.map((doc) => ({ userId: doc.data().userId, likeId: doc.id})))
+        } catch (err) {
+            console.error(err)
         }
     }
 
