@@ -73,6 +73,10 @@ const Post = ({ post }) => {
 
     const hasUserLiked = likes?.find((like) => like.userId === user?.uid)
 
+    useEffect(() => {
+        getLikes()
+    }, [])
+
     return (
         <div className="max-w-full border-b border-black text-left">
             <Link to={`/post/${post.id}`}>
