@@ -27,6 +27,10 @@ const Post = ({ post }) => {
         } 
     }
 
+    /* Creates a new doc within the 'likes' collection. Checks the users auth and
+    sets the state of the likes. If there were previous likes then those are filled
+    in using the spread operator before adding the new addition, if no previous likes
+    then just add the new addition. */
     const addLike = async () => {
         try {
             const newDoc = await addDoc(likesRef, {
