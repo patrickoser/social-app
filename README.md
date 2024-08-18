@@ -21,11 +21,7 @@ Todo:
         profile.
 
     Add a box to the home screen that displays the current users 
-    information.
-    Username, pfp, email.
-
-    Syntax Error when loading LoginSignupHub after adding console 
-    log.
+    information. Username, pfp, email.
 
     See if it makes sense to move all firebase auth checks to auth context.
 
@@ -34,7 +30,9 @@ Todo:
 
     Have firebase check if the email used during sign up is
     already assigned to an account. Should check if user is 
-    signing up with google or email/password.
+    signing up with google or email/password. If the email is 
+    already in use then it sends an error message back to the 
+    user telling them they need to use a different email.
 
     I should add a username input field to the signup screen. It 
     will check firebase to see if that username is taken and if 
