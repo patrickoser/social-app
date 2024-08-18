@@ -1,8 +1,12 @@
 import React from "react";
 import { Link } from 'react-router-dom'
+import { addDoc, getDocs, collection, query, where, deleteDoc, doc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { db, auth } from "../config/firebase"
 
 const Post = ({ post }) => {
-    
+
 
     return (
         <div className="max-w-full border-b border-black text-left">
