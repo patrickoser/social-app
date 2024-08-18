@@ -16,6 +16,8 @@ const Post = ({ post }) => {
     // through searching for the post id that matches.
     const likesDoc = query(likesRef, where("postid", "==", post.id))
 
+    // Updates the 'likes' state by referencing the likes collection docs using the
+    // variables defined above.
     const getLikes = async () => {
         try {
             const data = await getDocs(likesDoc)
