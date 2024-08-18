@@ -27,6 +27,24 @@ const Post = ({ post }) => {
         } 
     }
 
+    const addLike = async () => {
+        try {
+            const newDoc = await addDoc(likesRef, {
+                userId: user?.uid,
+                postId: 
+            })
+            if (user) {
+                setLikes((prev) => 
+                    prev
+                        ?[...prev, {userId: user.uid, likeId: newDoc.id }]
+                        : [{ userId: user.uid, likeId: newDoc.id }]
+                )
+            }
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
     return (
         <div className="max-w-full border-b border-black text-left">
             <Link to={`/post/${post.id}`}>
