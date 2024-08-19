@@ -34,16 +34,17 @@ const Post = ({ post }) => {
         } 
     }
 
-    /* Creates a new doc within the 'likes' collection. Checks the users auth and
-    sets the state of the likes. If there were previous likes then those are filled
-    in using the spread operator before adding the new addition, if no previous likes
-    then just add the new addition. */
+    /* Creates a new doc within the 'likes' collection, taking the 'user.uid' and 
+    'post.id' and storing it for reference. */
     const addLike = async () => {
         try {
             const newDoc = await addDoc(likesRef, {
                 userId: user?.uid,
                 postId: post.id
             })
+            /* Checks the 'user' auth and sets the state of the likes. If there was 
+            already likes in the array those are set first with the new like data 
+            added to the end of the array. */
             if (user) {
                 setLikes((prev) => 
                     prev
@@ -51,6 +52,7 @@ const Post = ({ post }) => {
                         : [{ userId: user.uid, likeId: newDoc.id }]
                 )
             }
+        /* Catch block for potential errors. */ 
         } catch (err) {
             console.error(err)
         }
