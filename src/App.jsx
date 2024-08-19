@@ -13,7 +13,7 @@ import Missing from "./pages/Missing.jsx"
 
 import { DataProvider } from "./context/DataContext.jsx"
 import { AuthProvider } from "./context/AuthContext.jsx"
-import { PrivateRoutes } from "./components/Protected.jsx"
+import { PrivateRoutes } from "./components/PrivateRoutes.jsx"
 
 function App() {
 
