@@ -6,18 +6,21 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { db, auth } from "../config/firebase"
 
 const Post = ({ post }) => {
+    /* useAuthState gives information about current user */
     const [user] = useAuthState(auth)
+
+    /* Used hold and set the state of the number of likes. */
     const [likes, setLikes] = useState(null)
 
-    // Reference the likes collection in firestore
+    /* Reference the likes collection in firestore */
     const likesRef = collection(db, "likes")
 
-    // Reference the likes doc, using the 'likesRef' to target, 'where()' then loops
-    // through searching for the post id that matches.
+    /* Reference the likes doc, using the 'likesRef' to target, 'where()' then loops
+    through searching for the post id that matches. */
     const likesDoc = query(likesRef, where("postid", "==", post.id))
 
-    // Updates the 'likes' state by referencing the likes collection docs using the
-    // variables defined above.
+    /* Updates the 'likes' state by referencing the likes collection docs using the
+    variables defined above. */
     const getLikes = async () => {
         try {
             const data = await getDocs(likesDoc)
