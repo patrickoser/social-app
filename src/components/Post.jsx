@@ -58,7 +58,10 @@ const Post = ({ post }) => {
         }
     }
 
+    /* Deletes likes from the 'likes' collection array. */
     const removeLike = async () => {
+        /* Query the 'likes' collection to find the doc that holds a 'postId'/'userId 
+        that matches the current users 'user.uid' and 'post.id' */
         try {
             const likeToDeleteQuery = query(
                 likesRef,
@@ -66,15 +69,28 @@ const Post = ({ post }) => {
                 where("userId", "==", user?.uid)
             )
 
+            /* Call 'getDocs' on the query and assign data to 'likeToDeleteData'. */
             const likeToDeleteData = await getDocs(likeToDeleteQuery)
+
+            /* Get the doc id associated with the like and assign to 'likeId'. */
             const likeId = likeToDeleteData.docs[0].id
+
+            /* Use 'likeId' to refernce the specific like you want to delete in the 
+            'likes' collection. */
             const likeToDelete = doc(db, "likes", likeId)
+
+            /* Pass the specified like to 'deleteDoc' function to remove it from 
+            the 'likes' firestore collection. */
             await deleteDoc(likeToDelete)
+            /* Check for user auth, if true... */
             if (user) {
+                /* Loop through 'likes' state array and remove the like that matches 
+                the 'likeId'. */
                 setLikes(
                     (prev) => prev && prev.filter((like) => like.likeId !== likeId)
                 )
             }
+        /* Catch block for potential errors. */
         } catch (err) {
             console.error(err)
         }
@@ -85,6 +101,7 @@ const Post = ({ post }) => {
     hasn't liked that post */
     const hasUserLiked = likes?.find((like) => like.userId === user?.uid)
 
+    /* Calls 'getLikes' function on page load. */
     useEffect(() => {
         getLikes()
     }, [])
