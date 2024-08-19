@@ -5,6 +5,7 @@ reference for later.
 
 Todo:
     Fix the protected routes.
+        DataContext import is not being recognized in Feed component. Otherwise routes started to work after tweaking PrivateRoutes component.
 
     If you run into errors
         None of the protected routes are populating.
