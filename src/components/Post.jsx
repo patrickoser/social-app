@@ -15,15 +15,19 @@ const Post = ({ post }) => {
     /* Reference the likes collection in firestore */
     const likesRef = collection(db, "likes")
 
-    /* Reference the likes doc, using the 'likesRef' to target, 'where()' then loops
-    through searching for the post id that matches. */
+    /* Reference the 'likes' collection, using the 'likesRef'. 'where()' then loops
+    through searching for the postId, in the 'likes' collection that matches the
+    'post.id' of each individual post. */
     const likesDoc = query(likesRef, where("postid", "==", post.id))
 
     /* Updates the 'likes' state by referencing the likes collection docs using the
     variables defined above. */
     const getLikes = async () => {
         try {
+            /* 'getDocs' references pulls data from 'likesDoc' and stores it in 'data' */
             const data = await getDocs(likesDoc)
+
+            /*  */
             setLikes(data.docs.map((doc) => ({ userId: doc.data().userId, likeId: doc.id})))
         } catch (err) {
             console.error(err)
