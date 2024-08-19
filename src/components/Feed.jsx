@@ -1,7 +1,7 @@
 import React from "react";
 import Post from "./Post";
 
-const Feed = ({ posts }) => {
+const Feed = () => {
     return (
         //Maps each post to the Home page of the user.
         <div>

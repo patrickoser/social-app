@@ -11,5 +11,7 @@ export const PrivateRoutes = () => {
     // 'to' prop. 'Replace' makes sure the history stack is
     // altered in a way so that the user can't press the back
     // button and return to the protected page.
-    !user ? <Navigate to="/signup" replace /> : <Outlet />
+    return (
+        !user ? <Navigate to="/signup" replace /> : <Outlet />
+    )
 }
