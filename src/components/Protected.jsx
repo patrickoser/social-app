@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext"
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
-export const PrivateRoutes = ({children}) => {
+export const PrivateRoutes = () => {
     // User holds auth info on current user if there is one.
     const { user } = useContext(AuthContext)
 
@@ -10,5 +10,5 @@ export const PrivateRoutes = ({children}) => {
     // 'to' prop. 'Replace' makes sure the history stack is
     // altered in a way so that the user can't press the back
     // button and return to the protected page.
-    !user ? <Navigate to="/signup" replace /> : children
+    !user ? <Navigate to="/signup" replace /> : <Outlet />
 }
