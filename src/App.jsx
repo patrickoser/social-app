@@ -13,7 +13,7 @@ import Missing from "./pages/Missing.jsx"
 
 import { DataProvider } from "./context/DataContext.jsx"
 import { AuthProvider } from "./context/AuthContext.jsx"
-import { Protected } from "./components/Protected.jsx"
+import { PrivateRoutes } from "./components/Protected.jsx"
 
 function App() {
 
@@ -24,6 +24,7 @@ function App() {
           <AuthProvider>
             <Header />
             <Routes>
+              <Route element={<Pri}></Route>
               <Route path='/' element={<Protected><Home /></Protected>} />
               <Route path="signup" element={<Signup />} />
               <Route path="login" element={<Login />} />
