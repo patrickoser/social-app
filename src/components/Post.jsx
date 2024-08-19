@@ -78,6 +78,9 @@ const Post = ({ post }) => {
         }
     }
 
+    /* Loop through 'likes' state array and check if the current user.uid matches any 
+    user id associated with the post. If no match is found then that means the user 
+    hasn't liked that post */
     const hasUserLiked = likes?.find((like) => like.userId === user?.uid)
 
     useEffect(() => {
