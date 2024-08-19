@@ -24,16 +24,16 @@ function App() {
           <AuthProvider>
             <Header />
             <Routes>
-              <Route element={<Pri}></Route>
-              <Route path='/' element={<Protected><Home /></Protected>} />
+              <Route element={<PrivateRoutes />}>
+                <Route path="home" element={<Home />} />
+                <Route path="settings" element={<Settings />} />
+                <Route path="contact" element={<Contact />} />
+                <Route path="profile" element={<Profile />} />
+                <Route path="post/:id" element={<PostPage />} />
+              </Route>
               <Route path="signup" element={<Signup />} />
               <Route path="login" element={<Login />} />
-                <Route path="home" element={<Protected><Home /></Protected>} />
-                <Route path="settings" element={<Protected><Settings /></Protected>} />
-                <Route path="contact" element={<Protected><Contact /></Protected>} />
-                <Route path="profile" element={<Protected><Profile /></Protected>} />
-                <Route path="post/:id" element={<Protected><PostPage /></Protected>} />
-                <Route path="missing" element={<Missing />} />
+              <Route path="missing" element={<Missing />} />
             </Routes>
             <Footer />
           </AuthProvider>
