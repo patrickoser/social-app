@@ -25,15 +25,16 @@ function App() {
             <Header />
             <Routes>
               <Route element={<PrivateRoutes />}>
-                <Route path="home" element={<Home />} />
-                <Route path="settings" element={<Settings />} />
-                <Route path="contact" element={<Contact />} />
-                <Route path="profile" element={<Profile />} />
-                <Route path="post/:id" element={<PostPage />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/post/:id" element={<PostPage />} />
               </Route>
-              <Route path="signup" element={<Signup />} />
-              <Route path="login" element={<Login />} />
-              <Route path="missing" element={<Missing />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/missing" element={<Missing />} />
             </Routes>
             <Footer />
           </AuthProvider>
