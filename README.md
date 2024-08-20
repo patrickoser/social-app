@@ -4,7 +4,8 @@ Comment as you go. It will help with comprehension and be a good
 reference for later.
 
 Todo:
-    Add an error message when a user provides an email/password combo that doesnt match any existing account.
+    Add an error message when a user provides an email/password 
+    combo that doesnt match any existing account.
 
     Add loading screen when fetching data.
 
@@ -12,7 +13,7 @@ Todo:
     form to distinguish it from Home. Contains pfp, username, bio,
     and maybe a header image.
 
-    Pull in user specifc liked posts in a seperate tab on each users profile. Users
+    Pull in user specifc liked posts in a seperate tab on each users profile. Users 
     should be able to switch between tabs, gooing from profile specific posts and 
     likes.
 
@@ -36,16 +37,9 @@ Todo:
     already in use then it sends an error message back to the 
     user telling them they need to use a different email.
 
-    I should add a username input field to the signup screen. It 
-    will check firebase to see if that username is taken and if 
-    not add it to that users object.
-
     Add a check to direct users straight to the home page if they 
-    are already signed in to an account. Pobably something I can 
-    do with local storage.
-
-    If user is not already signed in then they should not be able
-    to see anything but the login and signup screens.
+    are already signed in to an account. Sign in and signup screen
+    should not be available to users who are signed in.
 
     Use 'useMemo' in when interacting with firebase functions so 
     that they are not called everytime there is an 'onChnage' 
@@ -54,10 +48,6 @@ Todo:
 
     Figure out why reloading the page when on a specific PostPage 
     the page doesnt load properly.
-
-    Comment out everything to talk through how everything 
-    works to help yourself remember how all the pieces come 
-    together.
     
     There should be no Header in the login/signup page.
 
