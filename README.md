@@ -6,6 +6,12 @@ reference for later.
 Todo:
     Add an error message when a user provides an email/password combo that doesnt match any existing account.
 
+    Add loading screen when fetching data.
+
+    Add a Profile component that sits above posts and create post
+    form to distinguish it from Home. Contains pfp, username, bio,
+    and maybe a header image.
+
     CRUD Operations
         Add ability to pull in all posts by users on home screen
 
