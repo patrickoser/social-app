@@ -17,12 +17,6 @@ Todo:
     likes.
 
     CRUD Operations
-        Add ability to pull in all posts by users on home screen
-
-        Users Profiles should display only posts made by that specific user.
-
-        A like button that saves each users likes.
-
         A share button that allows users to share posts elsewhere.
 
         A tab that shows what posts each user has like on their 
