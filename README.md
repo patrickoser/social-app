@@ -17,6 +17,9 @@ Todo:
     should be able to switch between tabs, gooing from profile specific posts and 
     likes.
 
+    Add username field when user creates an account. Usernames should be unique to 
+    each user.
+
     CRUD Operations
         A share button that allows users to share posts elsewhere.
 
