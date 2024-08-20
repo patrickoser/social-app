@@ -13,6 +13,16 @@ const Profile = () => {
                 <Nav />
             </div>
             <div id="profile-main-content">
+                <div id="prfile-bio">
+                    <div id="prfile-pfp">image</div>
+                    <div id="profile-username">Username</div>
+                    <div id="bio">
+                        <p>
+                        About me section that gives a brief description about the user 
+                        and what they want to tell other people about them.
+                        </p>
+                    </div>
+                </div>
                 <PostForm />
                 <div>
                     <Feed posts={posts} />
