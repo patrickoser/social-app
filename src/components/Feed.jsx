@@ -1,10 +1,8 @@
-import React, { useContext } from "react";
-import { DataContext } from "../context/DataContext"
+import React from "react";
 import Post from "./Post";
 
-const Feed = () => {
-    const { posts } = useContext(DataContext)
-    
+const Feed = ({ posts }) => {
+
     return (
         //Maps each post to the Home page of the user.
         <div>
