@@ -5,6 +5,7 @@ import PostForm from "../components/PostForm";
 import DataContext from "../context/DataContext"
 
 const Profile = () => {
+    const { posts } = useContext(DataContext)
 
     return (
         <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
