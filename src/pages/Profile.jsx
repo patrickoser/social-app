@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import Feed from "../components/Feed";
 import Nav from "../components/Nav";
 import PostForm from "../components/PostForm";
+import DataContext from "../context/DataContext"
 
 const Profile = () => {
 
