@@ -12,6 +12,10 @@ Todo:
     form to distinguish it from Home. Contains pfp, username, bio,
     and maybe a header image.
 
+    Pull in user specifc liked posts in a seperate tab on each users profile. Users
+    should be able to switch between tabs, gooing from profile specific posts and 
+    likes.
+
     CRUD Operations
         Add ability to pull in all posts by users on home screen
 
