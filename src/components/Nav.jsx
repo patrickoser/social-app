@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Nav = () => {
     return (
         <div>
-            <nav className="">
+            <nav className="flex flex-col">
                 <ul className="flex flex-col">
                     <li><Link to="/profile">Profile</Link></li>
                     <li><Link to="/contact">Contact</Link></li>
@@ -12,7 +12,7 @@ const Nav = () => {
                 </ul>
                 {/* Pin this current user info to the bottom of the left margin.
                 Should be in a fixed position like the one on twitter. */}
-                <div className="inset-x-0 bottom-0">
+                <div className="place-self-end inset-x-0 bottom-0">
                     <div id="pfp">Image</div>
                     <div id="username">username</div>
                 </div>
