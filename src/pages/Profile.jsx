@@ -15,7 +15,7 @@ const Profile = () => {
             <div id="profile-main-content">
                 <PostForm />
                 <div>
-                    <Feed />
+                    <Feed posts={posts} />
                 </div>
             </div>
             <div id="right-sidebar" className="flex-auto min-w-60 mt-5 px-5 border"></div>

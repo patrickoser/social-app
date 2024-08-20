@@ -4,15 +4,7 @@ Comment as you go. It will help with comprehension and be a good
 reference for later.
 
 Todo:
-    Fix the protected routes.
-        DataContext import is not being recognized in Feed component. Otherwise routes started to work after tweaking PrivateRoutes component.
-
-    If you run into errors
-        None of the protected routes are populating.
-
-        Check placement of Protected component and AuthProvider.
-
-        Check how Protected/AuthProvider are constructed.
+    Add an error message when a user provides an email/password combo that doesnt match any existing account.
 
     CRUD Operations
         Add ability to pull in all posts by users on home screen
