@@ -4,14 +4,14 @@ import { auth, googleProvider } from '../config/firebase'
 import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
 const Signup = () => {
-    // Add a feature that checks local storage to see if they
-    // already have an account before redirecting to Signup
+    /* Add a feature that checks local storage to see if they
+    already have an account before redirecting to Signup */
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    // 'confirmPassword' is likely not needed when interacting with firebase. I probably
-    // only need to check that it match password in the frontend and once that check
-    // is complete it can be discarded.
+    /* 'confirmPassword' is likely not needed when interacting with firebase. I probably
+    only need to check that it match password in the frontend and once that check
+    is complete it can be discarded. */
     const [confirmPassword, setConfirmPassword] = useState('')
     const navigate = useNavigate()
 
