@@ -25,14 +25,19 @@ const Signup = () => {
 
     const handleSignup = async (e) => {
         e.preventDefault()
-        try {
-            await createUserWithEmailAndPassword(auth, email, password)
-            console.log(`User Status: ${auth?.currentUser?.email} has created an account and signed in.`)
-            setPassword('')
-            setEmail('')
-            navigate('/home')
-        } catch (err) {
-            console.error(err)
+        const isAvailable = await isUsernameAvailable(username)
+        if (isAvailable) {
+            try {
+                await createUserWithEmailAndPassword(auth, email, password)
+                console.log(`User Status: ${auth?.currentUser?.email} has created an account and signed in.`)
+                setPassword('')
+                setEmail('')
+                navigate('/home')
+            } catch (err) {
+                console.error(err)
+            }
+        } else {
+            console.log('Username is taken.')
         }
     }
 
