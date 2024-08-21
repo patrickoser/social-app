@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth, googleProvider } from '../config/firebase'
+import { auth, googleProvider, db } from '../config/firebase'
 import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+
 
 const Signup = () => {
 
@@ -13,6 +14,10 @@ const Signup = () => {
     is complete it can be discarded. */
     const [confirmPassword, setConfirmPassword] = useState('')
     const navigate = useNavigate()
+
+    const isUsernameAvailable = async (username) => {
+        const usernameDocRef = 
+    }
 
     const handleSignup = async (e) => {
         e.preventDefault()
