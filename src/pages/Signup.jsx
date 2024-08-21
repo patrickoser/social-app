@@ -16,6 +16,8 @@ const Signup = () => {
     const [confirmPassword, setConfirmPassword] = useState('')
     const navigate = useNavigate()
 
+    const usernamesRef = collection(db, "usernames")
+
     const isUsernameAvailable = async (username) => {
         const usernameDocRef = doc(db, 'usernames', username.toLowerCase())
         const usernameDoc = await getDoc(usernameDocRef)
@@ -32,6 +34,7 @@ const Signup = () => {
                 console.log(`User Status: ${auth?.currentUser?.email} has created an account and signed in.`)
                 setPassword('')
                 setEmail('')
+                setUsername('')
                 navigate('/home')
             } catch (err) {
                 console.error(err)
