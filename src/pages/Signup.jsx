@@ -25,9 +25,7 @@ const Signup = () => {
 
     const handleSignup = async (e) => {
         e.preventDefault()
-        console.log("Signup email: ", email, "password: ", password, "confirm password: ", confirmPassword)
         try {
-            const isAvailable = await isUsernameAvailable(username)
             await createUserWithEmailAndPassword(auth, email, password)
             console.log(`User Status: ${auth?.currentUser?.email} has created an account and signed in.`)
             setPassword('')
