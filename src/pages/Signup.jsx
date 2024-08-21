@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, googleProvider, db } from '../config/firebase'
 import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { addDoc, getDocs, collection, query, where, doc } from "firebase/firestore";
+import { addDoc, getDoc, collection, query, where, doc } from "firebase/firestore";
 
 const Signup = () => {
 
@@ -61,7 +61,7 @@ const Signup = () => {
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                 <form onSubmit={handleSignup} className="space-y-6">
                     <div>
-                        <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+                        <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">Username:</label>
                         <div>
                             <input 
                                 type="username"
@@ -75,7 +75,7 @@ const Signup = () => {
                         </div>
                     </div>
                     <div>
-                        <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+                        <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email address:</label>
                         <div>
                             <input 
                                 type="email"
@@ -89,7 +89,7 @@ const Signup = () => {
                         </div>
                     </div>
                     <div>
-                        <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                        <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Password:</label>
                         <div className="mt-2">
                             <input 
                                 type="password"
@@ -103,7 +103,7 @@ const Signup = () => {
                         </div>
                     </div>
                     <div>
-                        <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Confirm password</label>
+                        <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Confirm password:</label>
                         <div className="mt-2">
                             <input 
                                 type="password"
