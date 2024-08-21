@@ -31,6 +31,7 @@ const Signup = () => {
         if (isAvailable) {
             try {
                 await createUserWithEmailAndPassword(auth, email, password)
+                const newDoc = await addDoc(usernamesRef, { userId: auth?.currentUser?.uid })
                 console.log(`User Status: ${auth?.currentUser?.email} has created an account and signed in.`)
                 setPassword('')
                 setEmail('')
