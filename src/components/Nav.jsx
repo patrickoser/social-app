@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const Nav = () => {
     return (
-        <div>
-            <nav className="flex flex-col">
+        <div className="flex">
+            <nav className="flex flex-col justify-end h-full">
                 <ul className="flex flex-col">
                     <li><Link to="/profile">Profile</Link></li>
                     <li><Link to="/contact">Contact</Link></li>
