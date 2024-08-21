@@ -7,7 +7,8 @@ Todo:
     Add an error message when a user provides an email/password 
     combo that doesnt match any existing account.
 
-    Add loading screen when fetching data.
+    Add loading screen when fetching data. Could implement this using 
+    'createBrowserRouter'.
 
     Add a Profile component that sits above posts and create post
     form to distinguish it from Home. Contains pfp, username, bio,
