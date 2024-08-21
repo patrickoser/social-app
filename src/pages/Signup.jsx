@@ -9,6 +9,7 @@ const Signup = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [username, setUsername] = useState('')
+
     /* 'confirmPassword' is likely not needed when interacting with firebase. I probably
     only need to check that it match password in the frontend and once that check
     is complete it can be discarded. */
@@ -16,13 +17,17 @@ const Signup = () => {
     const navigate = useNavigate()
 
     const isUsernameAvailable = async (username) => {
-        const usernameDocRef = 
+        const usernameDocRef = doc(db, 'usernames', username.toLowerCase())
+        const usernameDoc = await getDoc(usernameDocRef)
+
+        return !usernameDoc.exists()
     }
 
     const handleSignup = async (e) => {
         e.preventDefault()
         console.log("Signup email: ", email, "password: ", password, "confirm password: ", confirmPassword)
         try {
+            const isAvailable = await isUsernameAvailable(username)
             await createUserWithEmailAndPassword(auth, email, password)
             console.log(`User Status: ${auth?.currentUser?.email} has created an account and signed in.`)
             setPassword('')
