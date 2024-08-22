@@ -5,7 +5,7 @@ reference for later.
 
 Todo:
     Add an error message when a user provides an email/password 
-    combo that doesnt match any existing account.
+    combo that doesnt match any existing account. 
 
     Add loading screen when fetching data. Could implement this using 
     'createBrowserRouter'.
