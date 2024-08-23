@@ -4,6 +4,8 @@ Comment as you go. It will help with comprehension and be a good
 reference for later.
 
 Todo:
+    Username availability check is still not working as intended.
+
     Add an error message when a user provides an email/password 
     combo that doesnt match any existing account. 
 
