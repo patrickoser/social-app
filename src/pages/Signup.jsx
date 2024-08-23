@@ -34,6 +34,7 @@ const Signup = () => {
         return usernamesQuery ?? true
     }
 
+    /* Creates a new account as long as 'isAvailable' is false. */
     const handleSignup = async (e) => {
         e.preventDefault()
         const isAvailable = await isUsernameAvailable(username)
