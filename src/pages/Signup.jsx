@@ -16,8 +16,12 @@ const Signup = () => {
     const [confirmPassword, setConfirmPassword] = useState('')
     const navigate = useNavigate()
 
+    /* Reference the usernames collection. */
     const usernamesRef = collection(db, "usernames")
 
+    /* Queryusernames collection searching for a username in the usernames collection
+    that matches the username given in the signup form. If an identical username is 
+    found then isUsernameAvailable returns true, otherwise null. */
     const isUsernameAvailable = async (username) => {
         /* const usernameDocRef = doc(db, 'usernames', username.toLowerCase())
         const usernameDoc = await getDoc(usernameDocRef) */
