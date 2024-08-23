@@ -5,6 +5,7 @@ reference for later.
 
 Todo:
     Username availability check is still not working as intended.
+    Now it returns that the username is always taken.
 
     Add an error message when a user provides an email/password 
     combo that doesnt match any existing account. 
