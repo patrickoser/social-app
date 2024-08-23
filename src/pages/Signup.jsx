@@ -19,10 +19,15 @@ const Signup = () => {
     const usernamesRef = collection(db, "usernames")
 
     const isUsernameAvailable = async (username) => {
-        const usernameDocRef = doc(db, 'usernames', username.toLowerCase())
-        const usernameDoc = await getDoc(usernameDocRef)
+        /* const usernameDocRef = doc(db, 'usernames', username.toLowerCase())
+        const usernameDoc = await getDoc(usernameDocRef) */
+        const usernamesQuery = query(
+            usernamesRef,
+            where("username", "==", username)
+        )
+        console.log(usernamesQuery)
 
-        return !usernameDoc.exists()
+        return usernamesQuery ? null : true
     }
 
     const handleSignup = async (e) => {
