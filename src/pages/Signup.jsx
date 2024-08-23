@@ -25,7 +25,7 @@ const Signup = () => {
             usernamesRef,
             where("username", "==", username)
         )
-        console.log(usernamesQuery)
+        console.log(usernamesQuery ?? true)
 
         return usernamesQuery ?? true
     }

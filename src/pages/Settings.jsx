@@ -5,9 +5,9 @@ import DataContext from "../context/DataContext";
 import { useContext } from "react";
 
 const Settings = () => {
-    // Might not need to import context as it could be costll w/o
-    // useMemo. Might be better to define Navigate component in 
-    // here directly.
+    /* Might not need to import context as it could be costll w/o
+    useMemo. Might be better to define Navigate component in 
+    here directly. */
     const { navigate } = useContext(DataContext)
 
     const logout = async () => {
