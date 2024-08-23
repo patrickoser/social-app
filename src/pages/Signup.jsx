@@ -58,6 +58,7 @@ const Signup = () => {
         }
     }
 
+    /* Signs you in with a google account. */
     const signInWithGoogle = async () => {
         try {
             await signInWithPopup(auth, googleProvider)
