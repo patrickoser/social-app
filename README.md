@@ -14,9 +14,9 @@ Todo:
     form to distinguish it from Home. Contains pfp, username, bio,
     and maybe a header image.
 
-    Pull in user specifc liked posts in a seperate tab on each users profile. Users 
-    should be able to switch between tabs, gooing from profile specific posts and 
-    likes.
+    Pull in user specifc liked posts in a seperate tab on each 
+    users profile. Users should be able to switch between tabs, 
+    gooing from profile specific posts and likes.
 
     Add username field when user creates an account. Usernames should be unique to 
     each user.
