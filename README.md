@@ -15,7 +15,7 @@ Todo:
 
     Add a Profile component that sits above posts and create post
     form to distinguish it from Home. Contains pfp, username, bio,
-    and maybe a header image.
+    and maybe a header image. 
 
     Pull in user specifc liked posts in a seperate tab on each 
     users profile. Users should be able to switch between tabs, 
