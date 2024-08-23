@@ -27,7 +27,7 @@ const Signup = () => {
         )
         console.log(usernamesQuery)
 
-        return usernamesQuery ? null : true
+        return usernamesQuery ?? true
     }
 
     const handleSignup = async (e) => {
