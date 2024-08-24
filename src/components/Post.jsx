@@ -61,7 +61,7 @@ const Post = ({ post }) => {
     /* Deletes likes from the 'likes' collection array. */
     const removeLike = async () => {
         /* Query the 'likes' collection to find the doc that holds a 'postId'/'userId 
-        that matches the current users 'user.uid' and 'post.id' */
+        that matches the current users 'user.uid' and 'post.id' */ 
         try {
             const likeToDeleteQuery = query(
                 likesRef,
