@@ -4,18 +4,15 @@ Comment as you go. It will help with comprehension and be a good
 reference for later.
 
 Todo:
-    Username availability check is still not working as intended.
-    Check what properties can be accessed through the query.
+    Add a Profile component that sits above posts and create post
+    form to distinguish it from Home. Contains pfp, username, bio,
+    and maybe a header image. 
 
     Add an error message when a user provides an email/password 
     combo that doesnt match any existing account. 
 
     Add loading screen when fetching data. Could implement this 
     using 'createBrowserRouter'.
-
-    Add a Profile component that sits above posts and create post
-    form to distinguish it from Home. Contains pfp, username, bio,
-    and maybe a header image. 
 
     Pull in user specifc liked posts in a seperate tab on each 
     users profile. Users should be able to switch between tabs, 
