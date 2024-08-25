@@ -38,15 +38,18 @@ const Signup = () => {
         if (isAvailable) {
             try {
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+                const user = userCredential.user
                 await addDoc(usernamesRef, { 
-                    userId: ,
-                    username: username
+                    userId: user.uid,
+                    username: username,
+                    email: email
                  })
                 console.log(`User Status: ${auth?.currentUser?.email} has created an account and signed in.`)
                 setPassword('')
                 setEmail('')
                 setUsername('')
                 navigate('/home')
+                return user
             } catch (err) {
                 console.error(err)
             }
