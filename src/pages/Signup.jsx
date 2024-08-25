@@ -26,7 +26,7 @@ const Signup = () => {
         /* const usernameDocRef = doc(db, 'usernames', username.toLowerCase())
         const usernameDoc = await getDoc(usernameDocRef) */
         const usernamesQuery = query(usernamesRef, where("username", "==", username))
-        
+        const querySnapshot = await getDocs(usernamesQuery)
 
         return usernamesQuery ?? true
     }
