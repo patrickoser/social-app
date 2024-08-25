@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 const Nav = () => {
-
+    const { user, loading } = useContext(AuthContext)
 
     return (
         <div className="flex">
