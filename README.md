@@ -4,6 +4,8 @@ Comment as you go. It will help with comprehension and be a good
 reference for later.
 
 Todo:
+    Pull in currentUser username to Profile and add default images and the ability to upload their own images.
+
     Add a Profile component that sits above posts and create post
     form to distinguish it from Home. Contains pfp, username, bio,
     and maybe a header image. 
@@ -18,22 +20,13 @@ Todo:
     users profile. Users should be able to switch between tabs, 
     gooing from profile specific posts and likes.
 
-    Add username field when user creates an account. Usernames should be unique to 
-    each user.
-
     CRUD Operations
         A share button that allows users to share posts elsewhere.
 
         A tab that shows what posts each user has like on their 
         profile.
 
-    Add a box to the home screen that displays the current users 
-    information. Username, pfp, email.
-
     See if it makes sense to move all firebase auth checks to auth context.
-
-    Need to check if the singup/login, and google sign up, 
-    functionality works as intended.
 
     Have firebase check if the email used during sign up is
     already assigned to an account. Should check if user is 
