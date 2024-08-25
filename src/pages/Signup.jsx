@@ -37,7 +37,7 @@ const Signup = () => {
         const isAvailable = await isUsernameAvailable(username)
         if (isAvailable) {
             try {
-                await createUserWithEmailAndPassword(auth, email, password)
+                const user = await createUserWithEmailAndPassword(auth, email, password)
                 await addDoc(usernamesRef, { 
                     userId: auth?.currentUser?.uid,
                     username: username
