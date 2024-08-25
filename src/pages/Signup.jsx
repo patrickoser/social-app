@@ -37,9 +37,9 @@ const Signup = () => {
         const isAvailable = await isUsernameAvailable(username)
         if (isAvailable) {
             try {
-                const user = await createUserWithEmailAndPassword(auth, email, password)
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password)
                 await addDoc(usernamesRef, { 
-                    userId: auth?.currentUser?.uid,
+                    userId: ,
                     username: username
                  })
                 console.log(`User Status: ${auth?.currentUser?.email} has created an account and signed in.`)
