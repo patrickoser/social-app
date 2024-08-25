@@ -18,7 +18,7 @@ const Nav = () => {
                 Should be in a fixed position like the one on twitter. */}
                 <div className="place-self-end inset-x-0 bottom-0">
                     <div id="pfp">Image</div>
-                    <div id="username">{user}</div>
+                    <div id="username">{user.username}</div>
                 </div>
             </nav>
         </div>
