@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, googleProvider, db } from '../config/firebase'
 import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { addDoc, getDocs, collection, query, where, doc } from "firebase/firestore";
+import { addDoc, getDocs, collection, query, where } from "firebase/firestore";
 
 const Signup = () => {
 
