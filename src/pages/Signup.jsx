@@ -28,7 +28,7 @@ const Signup = () => {
         const usernamesQuery = query(usernamesRef, where("username", "==", username))
         const querySnapshot = await getDocs(usernamesQuery)
 
-        return usernamesQuery ?? true
+        return querySnapshot.empty
     }
 
     /* Creates a new account as long as 'isAvailable' is false. */
@@ -38,7 +38,7 @@ const Signup = () => {
         if (isAvailable) {
             try {
                 await createUserWithEmailAndPassword(auth, email, password)
-                const newDoc = await addDoc(usernamesRef, { 
+                await addDoc(usernamesRef, { 
                     userId: auth?.currentUser?.uid,
                     username: username
                  })
