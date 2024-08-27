@@ -21,7 +21,7 @@ Todo:
     gooing from profile specific posts and likes.
 
     CRUD Operations
-        A share button that allows users to share posts elsewhere.
+        A share button that allows users to share posts elsewhere. 
 
         A tab that shows what posts each user has like on their 
         profile.
