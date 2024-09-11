@@ -26,7 +26,7 @@ Todo:
         A tab that shows what posts each user has like on their 
         profile.
 
-    See if it makes sense to move all firebase auth checks to auth context.
+    See if it makes sense to move all firebase auth checks to auth context. 
 
     Have firebase check if the email used during sign up is
     already assigned to an account. Should check if user is 
