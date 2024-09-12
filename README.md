@@ -4,7 +4,8 @@ Comment as you go. It will help with comprehension and be a good
 reference for later.
 
 Todo:
-    Add default images and the ability to upload their own images. Hide it behind a dropdown menu.
+    Add default images and the ability to upload their own images. 
+    Hide it behind a dropdown menu.
 
     Add an error message when a user provides an email/password 
     combo that doesnt match any existing account. 
