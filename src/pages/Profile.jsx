@@ -7,6 +7,7 @@ import { AuthContext } from "../context/AuthContext";
 
 const Profile = () => {
     const { posts } = useContext(DataContext)
+    const { user } = useContext(AuthContext)
 
     return (
         <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
@@ -16,7 +17,7 @@ const Profile = () => {
             <div id="profile-main-content">
                 <div id="prfile-bio">
                     <div id="prfile-pfp">image</div>
-                    <div id="profile-username">Username</div>
+                    <div id="profile-username">{user.username}</div>
                     <div id="bio">
                         <p>
                         About me section that gives a brief description about the user 
