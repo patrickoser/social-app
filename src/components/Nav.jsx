@@ -15,7 +15,9 @@ const Nav = () => {
                     <li><Link to="/settings">Settings</Link></li>
                 </ul>
                 {/* Pin this current user info to the bottom of the left margin.
-                Should be in a fixed position like the one on twitter. */}
+                Should be in a fixed position like the one on twitter. Add loading
+                to account for when username is loading and a default for if no
+                username can be found. */}
                 <div className="place-self-end inset-x-0 bottom-0">
                     <div id="pfp">Image</div>
                     <div id="username">{user.username}</div>
