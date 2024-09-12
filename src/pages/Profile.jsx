@@ -3,6 +3,7 @@ import Feed from "../components/Feed";
 import Nav from "../components/Nav";
 import PostForm from "../components/PostForm";
 import DataContext from "../context/DataContext"
+import { AuthContext } from "../context/AuthContext";
 
 const Profile = () => {
     const { posts } = useContext(DataContext)
