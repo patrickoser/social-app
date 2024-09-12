@@ -4,7 +4,7 @@ Comment as you go. It will help with comprehension and be a good
 reference for later.
 
 Todo:
-    Pull in currentUser username to Profile and add default images and the ability to upload their own images. Hide it behind a dropdown menu.
+    Add default images and the ability to upload their own images. Hide it behind a dropdown menu.
 
     Add a Profile component that sits above posts and create post
     form to distinguish it from Home. Contains pfp, username, bio,
