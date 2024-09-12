@@ -6,10 +6,6 @@ reference for later.
 Todo:
     Add default images and the ability to upload their own images. Hide it behind a dropdown menu.
 
-    Add a Profile component that sits above posts and create post
-    form to distinguish it from Home. Contains pfp, username, bio,
-    and maybe a header image. 
-
     Add an error message when a user provides an email/password 
     combo that doesnt match any existing account. 
 
