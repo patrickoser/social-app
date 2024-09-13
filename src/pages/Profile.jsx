@@ -53,6 +53,8 @@ const Profile = () => {
             </div>
             <div id="profile-main-content">
                 <div id="profile-bio">
+                    <progress value={progress} max="100" />
+                    <input type="file" onChange={handleChange} />
                     {url && <img src={url} alt="uploaded" />}
                     <div id="profile-username">{user.username}</div>
                     <div id="bio">
