@@ -17,6 +17,8 @@ Todo:
     users profile. Users should be able to switch between tabs, 
     gooing from profile specific posts and likes.
 
+    Add Nav bar to display in Contact page.
+
     CRUD Operations
         A share button that allows users to share posts elsewhere. 
 
