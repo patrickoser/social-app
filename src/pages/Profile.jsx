@@ -18,7 +18,7 @@ const Profile = () => {
       if (e.target.files[0]) {
         setImage(e.target.files[0]);
       }
-    };
+    }; 
   
     const handleUpload = async () => {
         /* Refrencing firebase in this way isn't how I want to do it. Might be 
