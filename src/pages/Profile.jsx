@@ -52,8 +52,8 @@ const Profile = () => {
                 <Nav />
             </div>
             <div id="profile-main-content">
-                <div id="prfile-bio">
-                    <div id="prfile-pfp">image</div>
+                <div id="profile-bio">
+                    <div id="profile-pfp">image</div>
                     <div id="profile-username">{user.username}</div>
                     <div id="bio">
                         <p>
