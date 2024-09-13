@@ -19,7 +19,7 @@ const Profile = () => {
       }
     };
   
-    const handleUpload = () => {
+    const handleUpload = async () => {
       const uploadTask = firebase.storage().ref(`images/${image.name}`).put(image);
   
       uploadTask.on(
@@ -33,15 +33,17 @@ const Profile = () => {
         err => {
           console.log(err);
         },
-        () => {
-          firebase.storage()
-            .ref("images")
-            .child(image.name)
-            .getDownloadURL()
-            .then(url => {
+        async () => {
+            try {
+              const url = await firebase.storage()
+                .ref("images")
+                .child(image.name)
+                .getDownloadURL();
               setUrl(url);
-            });
-        }
+            } catch (error) {
+              console.log(error);
+            }
+          }
       );
     };
   
@@ -54,7 +56,7 @@ const Profile = () => {
             <div id="profile-main-content">
                 <div id="profile-bio">
                     <div id="img-con">
-                        <progress value={progress} max="100" />
+                        {progress && <progress value={progress} max="100" />}
                         <input type="file" onChange={handleChange} />
                         <button onClick={handleUpload}>Upload</button>
                         {url && <img src={url} alt="uploaded" />}
