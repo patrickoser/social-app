@@ -42,6 +42,9 @@ const Profile = () => {
               setUrl(url);
             } catch (error) {
               console.log(error);
+            } finally {
+              setProgress(0);
+              setImage(null);
             }
           }
       );
