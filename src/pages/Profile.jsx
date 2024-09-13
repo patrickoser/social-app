@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Feed from "../components/Feed";
 import Nav from "../components/Nav";
 import PostForm from "../components/PostForm";
