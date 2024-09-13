@@ -8,7 +8,7 @@ import firebase from "firebase/compat/app";
 
 const Profile = () => {
     const { posts } = useContext(DataContext)
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext) 
 
     const [image, setImage] = useState(null);
     const [url, setUrl] = useState("");
