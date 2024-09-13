@@ -9,6 +9,43 @@ const Profile = () => {
     const { posts } = useContext(DataContext)
     const { user } = useContext(AuthContext)
 
+    const [image, setImage] = useState(null);
+    const [url, setUrl] = useState("");
+    const [progress, setProgress] = useState(0);
+  
+    const handleChange = e => {
+      if (e.target.files[0]) {
+        setImage(e.target.files[0]);
+      }
+    };
+  
+    const handleUpload = () => {
+      const uploadTask = firebase.storage().ref(`images/${image.name}`).put(image);
+  
+      uploadTask.on(
+        "state_changed",
+        snapshot => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgress(progress);
+        },
+        err => {
+          console.log(err);
+        },
+        () => {
+          firebase.storage()
+            .ref("images")
+            .child(image.name)
+            .getDownloadURL()
+            .then(url => {
+              setUrl(url);
+            });
+        }
+      );
+    };
+  
+
     return (
         <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
             <div id="left-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
