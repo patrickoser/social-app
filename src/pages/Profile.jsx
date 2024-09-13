@@ -53,7 +53,7 @@ const Profile = () => {
             </div>
             <div id="profile-main-content">
                 <div id="profile-bio">
-                    <div id="profile-pfp">image</div>
+                    {url && <img src={url} alt="uploaded" />}
                     <div id="profile-username">{user.username}</div>
                     <div id="bio">
                         <p>
