@@ -61,7 +61,7 @@ const Profile = () => {
             <div id="profile-main-content">
                 <div id="profile-bio">
                     <div id="img-con">
-                        {progress && <progress value={progress} max="100" />}
+                        {progress > 0 && progress < 100 && <progress value={progress} max="100" />}
                         <input type="file" onChange={handleChange} />
                         <button onClick={handleUpload}>Upload</button>
                         {url && <img src={url} alt="uploaded" />}
