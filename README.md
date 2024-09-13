@@ -19,6 +19,10 @@ Todo:
 
     Add Nav bar to display in Contact page.
 
+    When trying to sign into older/existing accounts I got an error
+    that prevented me from signing in. Worth trying to replicate 
+    and figure out why its happening.
+
     CRUD Operations
         A share button that allows users to share posts elsewhere. 
 
