@@ -11,7 +11,7 @@ const Profile = () => {
     const { user } = useContext(AuthContext) 
 
     const [image, setImage] = useState(null);
-    const [url, setUrl] = useState("");
+    const [url, setUrl] = useState(""); 
     const [progress, setProgress] = useState(0);
   
     const handleChange = e => {
