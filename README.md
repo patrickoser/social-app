@@ -7,6 +7,9 @@ Errors:
     Likes dont seem to be logging properly after clicking away to a
     different page."
 
+    When signing into existing accounts it doesn't redirect to home
+    screen properly.
+
 Todo:
     Add default images and the ability to upload their own images. 
     Hide it behind a dropdown menu.
