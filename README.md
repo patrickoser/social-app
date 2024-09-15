@@ -3,6 +3,10 @@ One step at a time. 1% better everyday!
 Comment as you go. It will help with comprehension and be a good
 reference for later.
 
+Errors:
+    Likes dont seem to be logging properly after clicking away to a
+    different page."
+
 Todo:
     Add default images and the ability to upload their own images. 
     Hide it behind a dropdown menu.
