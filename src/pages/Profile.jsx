@@ -23,7 +23,7 @@ const Profile = () => {
     const handleUpload = async () => {
         /* Refrencing firebase in this way isn't how I want to do it. Might be 
         casuing issue elsewhere as well. */
-      const uploadTask = firebase.storage().ref(`images/${image.name}`).put(image);
+      const uploadTask = storage.ref(`images/${image.name}`).put(image);
   
       uploadTask.on(
         "state_changed",
