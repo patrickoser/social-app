@@ -38,7 +38,7 @@ const Profile = () => {
         },
         async () => {
             try {
-              const url = await firebase.storage()
+              const url = await storage
                 .ref("images")
                 .child(image.name)
                 .getDownloadURL();
