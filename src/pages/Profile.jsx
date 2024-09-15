@@ -4,6 +4,7 @@ import Nav from "../components/Nav";
 import PostForm from "../components/PostForm";
 import DataContext from "../context/DataContext"
 import { AuthContext } from "../context/AuthContext";
+import { storage } from "../config/firebase";
 
 const Profile = () => {
     const { posts } = useContext(DataContext)
