@@ -25,7 +25,7 @@ Todo:
     combo that doesnt match any existing account. 
 
     Add loading screen when fetching data. Could implement this 
-    using 'createBrowserRouter'. 
+    using 'createBrowserRouter'.
 
     Pull in user specifc liked posts in a seperate tab on each 
     users profile. Users should be able to switch between tabs, 
