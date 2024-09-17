@@ -22,10 +22,8 @@ const Profile = () => {
     };
   
     const handleUpload = async () => {
-        const storageRef = ref(storage, `images/${image.name}`);
-        /* Refrencing firebase in this way isn't how I want to do it. Might be 
-        casuing issue elsewhere as well. */
-      const uploadTask = uploadBytesResumable(storageRef, image);
+        const storageRef = ref(storage, `images/${image.name}`)
+      const uploadTask = uploadBytesResumable(storageRef, image)
   
       uploadTask.on(
         "state_changed",
