@@ -4,7 +4,8 @@ import Nav from "../components/Nav";
 import PostForm from "../components/PostForm";
 import DataContext from "../context/DataContext"
 import { AuthContext } from "../context/AuthContext";
-import { storage } from "../config/firebase";
+import { storage } from "../config/firebase";   
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const Profile = () => {
     const { posts } = useContext(DataContext)
@@ -21,6 +22,7 @@ const Profile = () => {
     };
   
     const handleUpload = async () => {
+        
         /* Refrencing firebase in this way isn't how I want to do it. Might be 
         casuing issue elsewhere as well. */
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
