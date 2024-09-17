@@ -22,7 +22,7 @@ const Profile = () => {
     };
   
     const handleUpload = async () => {
-        
+        const storageRef = ref(storage, `images/${image.name}`);
         /* Refrencing firebase in this way isn't how I want to do it. Might be 
         casuing issue elsewhere as well. */
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
