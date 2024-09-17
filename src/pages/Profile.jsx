@@ -39,9 +39,6 @@ const Profile = () => {
         async () => {
             try {
                 const url = await storage
-                .ref("images")
-                .child(image.name)
-                .getDownloadURL();
                 setUrl(url);
             } catch (error) {
                 console.log(error);
