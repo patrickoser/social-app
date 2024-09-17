@@ -22,12 +22,24 @@ const Profile = () => {
     };
   
     const handleUpload = async () => {
+        /* This line creates a reference to the location where the image will be stored in Firebase Storage. 
+        The ref() function takes two arguments: the storage instance and the path where the file will be 
+        stored. In this case, the image will be stored in the "images" folder and the name of the image 
+        will be the original name of the file. */
         const storageRef = ref(storage, `images/${image.name}`)
+
+        /* This line starts the upload of the image to Firebase Storage. The uploadBytesResumable() 
+        function takes two arguments: the storage reference and the file to be uploaded. It returns 
+        an UploadTask that you can use to manage and monitor the upload. */
         const uploadTask = uploadBytesResumable(storageRef, image)
 
+        /* This line adds event listeners for the state_changed, error, and complete events of the upload task. */
         uploadTask.on(
             "state_changed",
             snapshot => {
+                /* This line calculates the progress of the upload as a percentage. snapshot.bytesTransferred 
+                is the number of bytes that have been uploaded so far, and snapshot.totalBytes is the total 
+                number of bytes to be uploaded. */
                 const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
                 setProgress(progress);
             },
@@ -36,11 +48,19 @@ const Profile = () => {
             },
             async () => {
                 try {
+                    /* This line gets the download URL of the uploaded image. The getDownloadURL() function 
+                    takes a storage reference as its argument and returns a promise that resolves with 
+                    the download URL of the file. */
                     const url = await getDownloadURL(ref(storage, `images/${image.name}`));
+
+                    /* This line updates the url state with the download URL of the uploaded image. */
                     setUrl(url);
                 } catch (err) {
                     console.error(err);
                 } finally {
+                    /* These lines reset the progress and image states after the upload is complete. 
+                    This is done in a finally block to ensure that it happens whether the upload 
+                    succeeds or fails.*/
                     setProgress(0);
                     setImage(null);
                 }
