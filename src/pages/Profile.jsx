@@ -26,26 +26,24 @@ const Profile = () => {
         const uploadTask = uploadBytesResumable(storageRef, image)
 
         uploadTask.on(
-        "state_changed",
-        snapshot => {
-            const progress = Math.round(
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            );
-            setProgress(progress);
-        },
-        err => {
-            console.log(err);
-        },
-        async () => {
-            try {
-                const url = await storage
-                setUrl(url);
-            } catch (error) {
-                console.log(error);
-            } finally {
-                setProgress(0);
-                setImage(null);
-            }
+            "state_changed",
+            snapshot => {
+                const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+                setProgress(progress);
+            },
+            err => {
+                console.log(err);
+            },
+            async () => {
+                try {
+                    const url = await storage
+                    setUrl(url);
+                } catch (error) {
+                    console.log(error);
+                } finally {
+                    setProgress(0);
+                    setImage(null);
+                }
             }
         );
     };
