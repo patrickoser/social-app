@@ -36,10 +36,10 @@ const Profile = () => {
             },
             async () => {
                 try {
-                    const url = await storage
+                    const url = await getDownloadURL(ref(storage, `images/${image.name}`));
                     setUrl(url);
-                } catch (error) {
-                    console.log(error);
+                } catch (err) {
+                    console.error(err);
                 } finally {
                     setProgress(0);
                     setImage(null);
