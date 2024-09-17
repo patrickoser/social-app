@@ -23,34 +23,34 @@ const Profile = () => {
   
     const handleUpload = async () => {
         const storageRef = ref(storage, `images/${image.name}`)
-      const uploadTask = uploadBytesResumable(storageRef, image)
-  
-      uploadTask.on(
+        const uploadTask = uploadBytesResumable(storageRef, image)
+
+        uploadTask.on(
         "state_changed",
         snapshot => {
-          const progress = Math.round(
+            const progress = Math.round(
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          );
-          setProgress(progress);
+            );
+            setProgress(progress);
         },
         err => {
-          console.log(err);
+            console.log(err);
         },
         async () => {
             try {
-              const url = await storage
+                const url = await storage
                 .ref("images")
                 .child(image.name)
                 .getDownloadURL();
-              setUrl(url);
+                setUrl(url);
             } catch (error) {
-              console.log(error);
+                console.log(error);
             } finally {
-              setProgress(0);
-              setImage(null);
+                setProgress(0);
+                setImage(null);
             }
-          }
-      );
+            }
+        );
     };
   
 
