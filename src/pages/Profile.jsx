@@ -86,7 +86,7 @@ const Profile = () => {
                     <div id="bio">
                         <p>
                         About me section that gives a brief description about the user 
-                        and what they want to tell other people about them.
+                        and what they want to tell other people about them. 
                         </p>
                     </div>
                 </div>
