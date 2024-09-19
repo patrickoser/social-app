@@ -26,7 +26,7 @@ const Profile = () => {
         The ref() function takes two arguments: the storage instance and the path where the file will be 
         stored. In this case, the image will be stored in the "images" folder and the name of the image 
         will be the original name of the file. */
-        const storageRef = ref(storage, `images/${image.name}`)
+        const storageRef = ref(storage, `users/${user.uid}images/${image.name}`)
 
         /* This line starts the upload of the image to Firebase Storage. The uploadBytesResumable() 
         function takes two arguments: the storage reference and the file to be uploaded. It returns 
