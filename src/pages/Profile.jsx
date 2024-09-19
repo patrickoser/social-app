@@ -92,8 +92,8 @@ const Profile = () => {
                 </div>
                 {/* Add two tabs that switch between the users posts and likes. */}
                 <div id="profile-tabs">
-                    <div>Posts</div>
-                    <div>Likes</div>
+                    <button>Posts</button>
+                    <button>Likes</button>
                 </div>
                 <PostForm />
                 <div>
