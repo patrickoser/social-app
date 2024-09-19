@@ -51,7 +51,7 @@ const Profile = () => {
                     /* This line gets the download URL of the uploaded image. The getDownloadURL() function 
                     takes a storage reference as its argument and returns a promise that resolves with 
                     the download URL of the file. */
-                    const url = await getDownloadURL(ref(storage, `images/${image.name}`));
+                    const url = await getDownloadURL(ref(storage, `users/${user.uid}/images/${image.name}`));
 
                     /* This line updates the url state with the download URL of the uploaded image. */
                     setUrl(url);
