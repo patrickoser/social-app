@@ -85,8 +85,8 @@ const Profile = () => {
                     <div id="profile-username">{user.username}</div>
                     <div id="bio">
                         <p>
-                        About me section that gives a brief description about the user 
-                        and what they want to tell other people about them. 
+                            About me section that gives a brief description about the user 
+                            and what they want to tell other people about them. 
                         </p>
                     </div>
                 </div>
