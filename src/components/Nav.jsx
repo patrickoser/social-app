@@ -18,6 +18,7 @@ const Nav = () => {
                 const url = await getDownloadURL(res.items[0])
                 setUrl(url)
             } else {
+                /* This should return a default pic. */
                 return null
             }
         } catch (err) {
