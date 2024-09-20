@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { auth } from "../config/firebase";
+import { ref, getDownloadURL } from "firebase/storage";
 
 const Nav = () => {
     const { user, loading } = useContext(AuthContext)
