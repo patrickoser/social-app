@@ -26,8 +26,8 @@ const Profile = () => {
         The ref() function takes two arguments: the storage instance and the path where the file will be 
         stored. In this case, the image will be stored in the "images" folder and the name of the image 
         will be the original name of the file. */
-        console.log(user.uid)
-        const storageRef = ref(storage, `users/${user.uid}/${image.name}`)
+        console.log(currentUser.uid)
+        const storageRef = ref(storage, `users/${user.userId}/${image.name}`)
         console.log(storageRef)
 
         /* This line starts the upload of the image to Firebase Storage. The uploadBytesResumable() 
@@ -53,7 +53,7 @@ const Profile = () => {
                     /* This line gets the download URL of the uploaded image. The getDownloadURL() function 
                     takes a storage reference as its argument and returns a promise that resolves with 
                     the download URL of the file. */
-                    const url = await getDownloadURL(ref(storage, `users/${user.uid}/${image.name}`));
+                    const url = await getDownloadURL(ref(storage, `users/${user.userId}/${image.name}`));
 
                     /* This line updates the url state with the download URL of the uploaded image. */
                     setUrl(url);
