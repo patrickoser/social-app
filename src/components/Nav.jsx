@@ -3,11 +3,27 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { auth } from "../config/firebase";
-import { ref, getDownloadURL } from "firebase/storage";
+import { ref, getDownloadURL, listAll } from "firebase/storage";
 
 const Nav = () => {
     const { user, loading } = useContext(AuthContext)
-    
+
+    const getImageUrl = async () => {
+        const userRef = ref(storage, `users/${user.userId}`)
+
+        try {
+            const res = await listAll(userRef)
+            if (res.items.length > 0) {
+                const url = await getDownloadURL(res.items[0])
+                return url
+            } else {
+                return null
+            }
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
     return (
         <div className="flex">
             <nav className="flex flex-col justify-end h-full">
