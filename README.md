@@ -4,7 +4,7 @@ Comment as you go. It will help with comprehension and be a good
 reference for later.
 
 Errors:
-    Error when uploading image.
+    Pfp not displaying properly in profile bio.
 
     Likes dont seem to be logging properly after clicking away to a
     different page."
