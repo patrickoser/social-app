@@ -25,6 +25,12 @@ const Nav = () => {
         }
     }
 
+    useEffect(() => {
+        if (user) {
+            getImageUrl()
+        }
+    }, [user])
+
     return (
         <div className="flex">
             <nav className="flex flex-col justify-end h-full">
