@@ -26,7 +26,7 @@ const Profile = () => {
         The ref() function takes two arguments: the storage instance and the path where the file will be 
         stored. In this case, the image will be stored in the "images" folder and the name of the image 
         will be the original name of the file. */
-        console.log(user)
+        console.log(user.uid)
         const storageRef = ref(storage, `users/${user.uid}/${image.name}`)
         console.log(storageRef)
 
