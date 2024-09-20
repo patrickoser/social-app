@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { auth } from "../config/firebase";
 
 const Nav = () => {
     const { user, loading } = useContext(AuthContext)
