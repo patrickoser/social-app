@@ -7,8 +7,7 @@ import { ref, getDownloadURL } from "firebase/storage";
 
 const Nav = () => {
     const { user, loading } = useContext(AuthContext)
-    const currentUser = auth.currentUser
-
+    
     return (
         <div className="flex">
             <nav className="flex flex-col justify-end h-full">
