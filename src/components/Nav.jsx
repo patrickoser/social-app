@@ -7,6 +7,7 @@ import { ref, getDownloadURL, listAll } from "firebase/storage";
 
 const Nav = () => {
     const { user, loading } = useContext(AuthContext)
+    const [url, setUrl] = useState("")
 
     const getImageUrl = async () => {
         const userRef = ref(storage, `users/${user.userId}`)
