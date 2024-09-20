@@ -16,7 +16,7 @@ const Nav = () => {
             const res = await listAll(userRef)
             if (res.items.length > 0) {
                 const url = await getDownloadURL(res.items[0])
-                return url
+                setUrl(url)
             } else {
                 return null
             }
