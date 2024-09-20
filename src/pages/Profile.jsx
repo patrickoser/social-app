@@ -28,6 +28,7 @@ const Profile = () => {
         will be the original name of the file. */
         console.log(user)
         const storageRef = ref(storage, `users/${user.uid}/${image.name}`)
+        console.log(storageRef)
 
         /* This line starts the upload of the image to Firebase Storage. The uploadBytesResumable() 
         function takes two arguments: the storage reference and the file to be uploaded. It returns 
