@@ -5,7 +5,7 @@ import PostForm from "../components/PostForm";
 import DataContext from "../context/DataContext"
 import { AuthContext } from "../context/AuthContext";
 import { storage } from "../config/firebase";   
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytesResumable, getDownloadURL, listAll } from "firebase/storage";
 
 const Profile = () => {
     const { posts } = useContext(DataContext)
