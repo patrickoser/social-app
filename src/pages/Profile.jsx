@@ -70,6 +70,23 @@ const Profile = () => {
         );
     };
 
+    const getImageUrl = async () => {
+        const userRef = ref(storage, `users/${user.userId}`)
+
+        try {
+            const res = await listAll(userRef)
+            if (res.items.length > 0) {
+                const url = await getDownloadURL(res.items[0])
+                setUrl(url)
+            } else {
+                /* This should return a default pic. */
+                return null
+            }
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
     useEffect(() => {
         if (user) {
             getImageUrl();
