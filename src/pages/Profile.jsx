@@ -69,6 +69,12 @@ const Profile = () => {
             }
         );
     };
+
+    useEffect(() => {
+        if (user) {
+            getImageUrl();
+        }
+    }, [user]);
   
 
     return (
