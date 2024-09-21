@@ -18,6 +18,9 @@ Todo:
     Add default images and the ability to upload their own images. 
     Hide it behind a dropdown menu.
 
+    'getImageUrl is defined in Nav and Profile. It should be defined
+    and exported rom a context file so I dont repeat myself needlessly.
+
     Each post on the feed and individual profiles should have the
     username of the account that posted them displayed properly,
 
