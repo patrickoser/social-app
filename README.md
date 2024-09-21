@@ -12,7 +12,7 @@ Errors:
     When signing into existing accounts it doesn't redirect to home
     screen properly.
 
-    Create post form isnt posting. 
+    Create post form isnt posting.
 
 Todo:
     Add default images and the ability to upload their own images. 
