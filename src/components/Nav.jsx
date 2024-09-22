@@ -33,7 +33,7 @@ const Nav = () => {
     }, [user])
 
     return (
-        <div className="flex">
+        <div className="flex h-screen">
             <nav className="flex flex-col h-full relative">
                 <ul className="flex flex-col">
                     <li><Link to="/profile">Profile</Link></li>
