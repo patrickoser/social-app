@@ -34,7 +34,7 @@ const Nav = () => {
 
     return (
         <div className="flex">
-            <nav className="flex flex-col justify-end h-full">
+            <nav className="flex flex-col justify-end h-full relative">
                 <ul className="flex flex-col">
                     <li><Link to="/profile">Profile</Link></li>
                     <li><Link to="/contact">Contact</Link></li>
@@ -45,7 +45,7 @@ const Nav = () => {
                 to account for when username is loading and a default for if no
                 username can be found. */}
                 <div className="place-self-end inset-x-0 bottom-0">
-                    <img src={url} className="w-24 h-24 rounded-full" alt="profile-pic" />
+                    <img src={url} className="w-14 h-14 rounded-full" alt="profile-pic" />
                     <div id="username">{user.username}</div>
                 </div>
             </nav>
