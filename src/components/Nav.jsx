@@ -34,7 +34,7 @@ const Nav = () => {
 
     return (
         <div className="flex">
-            <nav className="flex flex-col justify-end h-full relative">
+            <nav className="flex flex-col h-full relative">
                 <ul className="flex flex-col">
                     <li><Link to="/profile">Profile</Link></li>
                     <li><Link to="/contact">Contact</Link></li>
