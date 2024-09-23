@@ -7,7 +7,7 @@ import { storage } from "../config/firebase";
 
 const Nav = () => {
     const { user, loading } = useContext(AuthContext)
-    const [url, setUrl] = useState("") 
+    const [url, setUrl] = useState("")
 
     const getImageUrl = async () => {
         const userRef = ref(storage, `users/${user.userId}`)
