@@ -45,7 +45,7 @@ const Nav = () => {
                 to account for when username is loading and a default for if no
                 username can be found. */}
                 <div className="absolute bottom-0 inset-x-0 w-full px-4">
-                    <img src={url} className="w-14 h-14 rounded-full" alt="profile-pic" />
+                    <img src={url} className="w-14 h-14 rounded-full object-contain" alt="profile-pic" />
                     <div id="username">{user.username}</div>
                 </div>
             </nav>
