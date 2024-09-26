@@ -44,7 +44,7 @@ const Nav = () => {
                 Should be in a fixed position like the one on twitter. Add loading
                 to account for when username is loading and a default for if no
                 username can be found. */}
-                <div className="absolute inset-x-0 bottom-0">
+                <div className="absolute bottom-0 inset-x-0 w-full px-4">
                     <img src={url} className="w-14 h-14 rounded-full" alt="profile-pic" />
                     <div id="username">{user.username}</div>
                 </div>
