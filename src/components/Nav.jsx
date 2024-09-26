@@ -46,7 +46,7 @@ const Nav = () => {
                 username can be found. */}
                 <div className="absolute bottom-0 inset-x-0 w-full px-4">
                     <img src={url} className="w-14 h-14 rounded-full object-contain" alt="profile-pic" />
-                    <div id="username">{user.username}</div>
+                    <div id="username" className="overflow-ellipsis overflow-hidden">{user.username}</div>
                 </div>
             </nav>
         </div>
