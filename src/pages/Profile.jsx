@@ -117,7 +117,7 @@ const Profile = () => {
                 </div>
                 <PostForm />
                 {/* Add two tabs that switch between the users posts and likes. */}
-                <div id="profile-tabs">
+                <div id="profile-tabs" className="flex justify-evenly border-b border-black">
                     <button>Posts</button>
                     <button>Likes</button>
                 </div>
