@@ -18,6 +18,13 @@ Todo:
     Each post on the feed and individual profiles should have the
     username of the account that posted them displayed properly.
 
+    Need to dynamically generate the profile info of each specific 
+    user when their username is clicked on. That means a feed of their 
+    posts, likes, and their pfp, bio and other public image. Might need 
+    to update routes to accomadate cumstom id routes, feed to display 
+    the content of the id being referenced, and any other info apart 
+    of their profile.
+
     Add default images and the ability to upload their own images. 
     Hide it behind a dropdown menu.
 
