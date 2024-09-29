@@ -120,6 +120,9 @@ const Profile = () => {
                     <button>Posts</button>
                     <button>Likes</button>
                 </div>
+                {/* I need the Feed component to display only the posts made by the user associated 
+                with the profile. Mya need a seperate Feed component if I can't get it to dynamically
+                adjust. */}
                 <div>
                     <Feed posts={posts} />
                 </div>
