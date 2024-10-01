@@ -14,7 +14,7 @@ Errors:
 
     Create post form isnt posting.
 
-Todo:
+Todo: 
     Each post on the feed and individual profiles should have the
     username of the account that posted them displayed properly.
 
