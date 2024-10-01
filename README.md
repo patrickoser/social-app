@@ -25,6 +25,9 @@ Todo:
     the content of the id being referenced, and any other info apart 
     of their profile.
 
+    Adjust routes so that each profile has an id associated with it 
+    that will bring you to that specific persons profile. 
+
     Add default images and the ability to upload their own images. 
     Hide it behind a dropdown menu.
 
