@@ -11,7 +11,7 @@ Errors:
     When signing into existing accounts it doesn't redirect to home
     screen properly.
 
-    Create post form isnt posting.
+    Create post form isnt posting. 
 
 Todo: 
     Each post on the feed and individual profiles should have the
