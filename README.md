@@ -22,7 +22,7 @@ Todo:
     posts, likes, and their pfp, bio and other public image. Might need 
     to update routes to accomadate cumstom id routes, feed to display 
     the content of the id being referenced, and any other info apart 
-    of their profile.
+    of their profile. 
 
     Adjust routes so that each profile has an id associated with it 
     that will bring you to that specific persons profile. 
