@@ -12,13 +12,15 @@ const Profile = () => {
     const { posts } = useContext(DataContext)
     const { user } = useContext(AuthContext) 
 
-    const [image, setImage] = useState(null);
-    const [url, setUrl] = useState(""); 
-    const [progress, setProgress] = useState(0);
+    const [image, setImage] = useState(null)
+    const [url, setUrl] = useState("")
+    const [progress, setProgress] = useState(0)
+
+    const { username } = useParams()
   
     const handleChange = e => {
       if (e.target.files[0]) {
-        setImage(e.target.files[0]);
+        setImage(e.target.files[0])
       }
     };
   
