@@ -6,6 +6,7 @@ import DataContext from "../context/DataContext"
 import { AuthContext } from "../context/AuthContext";
 import { storage } from "../config/firebase";   
 import { ref, uploadBytesResumable, getDownloadURL, listAll } from "firebase/storage";
+import { useParams } from "react-router-dom";
 
 const Profile = () => {
     const { posts } = useContext(DataContext)
