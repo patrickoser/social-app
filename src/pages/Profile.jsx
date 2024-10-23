@@ -15,6 +15,7 @@ const Profile = () => {
     const [image, setImage] = useState(null)
     const [url, setUrl] = useState("")
     const [progress, setProgress] = useState(0)
+    const [bio, setBio] = useState("")
 
     const { username } = useParams()
   
