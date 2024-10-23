@@ -29,7 +29,7 @@ function App() {
                 <Route path="/home" element={<Home />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="/profile/:username" element={<Profile />} />
                 <Route path="/post/:id" element={<PostPage />} />
               </Route>
               <Route path="/signup" element={<Signup />} />
