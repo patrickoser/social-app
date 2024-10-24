@@ -94,25 +94,25 @@ const Profile = () => {
 
     useEffect(() => {
         if (user) {
-            getImageUrl();
+            getImageUrl()
         }
-    }, [user]);
+    }, [user])
 
     useEffect(() => {
         const fetchData = async () => {
-          const userDoc = await firestore.collection('users').doc(username).get();
+          const userDoc = await firestore.collection('users').doc(username).get()
           if (userDoc.exists) {
-            setUserData(userDoc.data());
+            setUserData(userDoc.data())
           } else {
-            console.log('No such document!');
+            console.log('No such document!')
           }
         };
     
-        fetchData();
-      }, [username]);
+        fetchData()
+      }, [username])
     
       if (!userData) {
-        return <div>Loading...</div>;
+        return <div>Loading...</div>
       }
   
     return (
