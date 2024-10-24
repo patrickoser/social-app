@@ -98,19 +98,26 @@ const Profile = () => {
         }
     }, [user])
 
+    /* useEffect hook to fetch user data when the component mounts or when the username changes */
     useEffect(() => {
+        /* Define an asynchronous function to fetch user data */
         const fetchData = async () => {
+            /* Get the user document from Firestore using the username */
           const userDoc = await firestore.collection('users').doc(username).get()
+          /* If the document exists, update the userData state with the fetched data */
           if (userDoc.exists) {
             setUserData(userDoc.data())
           } else {
+            /* If the document doesn't exist, log an error message */
             console.log('No such document!')
           }
         };
-    
+        /* Call the fetchData function */
         fetchData()
+        /* Dependency array ensures this runs when the username changes */
       }, [username])
-    
+      
+        /* If the userData state is null, display a loading message */
       if (!userData) {
         return <div>Loading...</div>
       }
