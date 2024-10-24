@@ -98,7 +98,22 @@ const Profile = () => {
         }
     }, [user]);
 
-
+    useEffect(() => {
+        const fetchData = async () => {
+          const userDoc = await firestore.collection('users').doc(username).get();
+          if (userDoc.exists) {
+            setUserData(userDoc.data());
+          } else {
+            console.log('No such document!');
+          }
+        };
+    
+        fetchData();
+      }, [username]);
+    
+      if (!userData) {
+        return <div>Loading...</div>;
+      }
   
     return (
         <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
