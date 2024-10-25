@@ -15,7 +15,7 @@ Errors:
 
 Todo: 
     Talk out/write down every step need to add and pull data from the 
-    backend that is associated with individual accounts.
+    backend that is associated with individual accounts. 
 
     Each post on the feed and individual profiles should have the
     username of the account that posted them displayed properly.
