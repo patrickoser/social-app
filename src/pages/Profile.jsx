@@ -141,8 +141,7 @@ const Profile = () => {
                     Also needs to pull in the users bio information from firebase if there is any. */}
                     <div id="bio">
                         <p>
-                            About me section that gives a brief description about the user 
-                            and what they want to tell other people about them. 
+                            {userData.bio ? userData.bio : "No bio available"}
                         </p>
                     </div>
                 </div>
