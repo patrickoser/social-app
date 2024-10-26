@@ -27,6 +27,10 @@ const Profile = () => {
         setImage(e.target.files[0])
       }
     };
+
+    const handleBioChange = (e) => {
+        setBio(e.target.value)
+    }
   
     const handleUpload = async () => {
         /* This line creates a reference to the location where the image will be stored in Firebase Storage. 
