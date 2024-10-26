@@ -162,6 +162,7 @@ const Profile = () => {
                                 <button onClick={() => setIsEditing(true)}>Edit</button>
                             </div>
                         )}
+                    </div>
                 </div>
                 <PostForm />
                 {/* Add two tabs that switch between the users posts and likes. */}
