@@ -22,7 +22,7 @@ const Profile = () => {
 
     const { username } = useParams()
   
-    const handleChange = e => {
+    const handleImageChange = e => {
       if (e.target.files[0]) {
         setImage(e.target.files[0])
       }
@@ -136,7 +136,7 @@ const Profile = () => {
                 <div id="profile-bio">
                     <div id="img-con">
                         {progress > 0 && progress < 100 && <progress value={progress} max="100" />}
-                        <input type="file" onChange={handleChange} />
+                        <input type="file" onChange={handleImageChange} />
                         <button onClick={handleUpload}>Upload</button>
                         {url && <img src={url} className="w-24 h-24 rounded-full" alt="uploaded" />}
                     </div>
