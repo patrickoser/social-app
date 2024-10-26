@@ -120,12 +120,12 @@ const Profile = () => {
         /* Call the fetchData function */
         fetchData()
         /* Dependency array ensures this runs when the username changes */
-      }, [username])
+    }, [username])
       
         /* If the userData state is null, display a loading message */
-      if (!userData) {
+    if (!userData) {
         return <div>Loading...</div>
-      }
+    }
   
     return (
         <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
