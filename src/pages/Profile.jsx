@@ -32,7 +32,10 @@ const Profile = () => {
         setBio(e.target.value)
     }
 
-    
+    const handleBioUpload = async () => {
+        await firestore.collection('usernames').doc(username).update({ bio })
+        setIsEditing(false)
+    }
   
     const handleImageUpload = async () => {
         /* This line creates a reference to the location where the image will be stored in Firebase Storage. 
