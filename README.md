@@ -4,6 +4,7 @@ Comment as you go. It will help with comprehension and be a good
 reference for later.
 
 Errors:
+    Routes not setup properly for Profile.
 
     Likes dont seem to be logging properly after clicking away to a
     different page."
