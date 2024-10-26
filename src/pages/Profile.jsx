@@ -31,8 +31,10 @@ const Profile = () => {
     const handleBioChange = (e) => {
         setBio(e.target.value)
     }
+
+    
   
-    const handleUpload = async () => {
+    const handleImageUpload = async () => {
         /* This line creates a reference to the location where the image will be stored in Firebase Storage. 
         The ref() function takes two arguments: the storage instance and the path where the file will be 
         stored. In this case, the image will be stored in the "images" folder and the name of the image 
@@ -141,7 +143,7 @@ const Profile = () => {
                     <div id="img-con">
                         {progress > 0 && progress < 100 && <progress value={progress} max="100" />}
                         <input type="file" onChange={handleImageChange} />
-                        <button onClick={handleUpload}>Upload</button>
+                        <button onClick={handleImageUpload}>Upload</button>
                         {url && <img src={url} className="w-24 h-24 rounded-full" alt="uploaded" />}
                     </div>
                     <div id="profile-username">{user.username}</div>
