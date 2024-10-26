@@ -7,6 +7,7 @@ import { AuthContext } from "../context/AuthContext";
 import { storage } from "../config/firebase";   
 import { ref, uploadBytesResumable, getDownloadURL, listAll } from "firebase/storage";
 import { useParams } from "react-router-dom";
+import Post from "../components/Post";
 
 const Profile = () => {
     const { posts } = useContext(DataContext)
@@ -155,7 +156,7 @@ const Profile = () => {
                 with the profile. Mya need a seperate Feed component if I can't get it to dynamically
                 adjust. */}
                 <div>
-                    <Feed posts={posts} />
+                    {userData?.posts.map(post => (<Post key={post.id} post={post} />)) || <p>No posts yet</p>}
                 </div>
             </div>
             <div id="right-sidebar" className="flex-auto min-w-60 mt-5 px-5 border"></div>
