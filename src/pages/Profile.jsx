@@ -103,7 +103,7 @@ const Profile = () => {
         /* Define an asynchronous function to fetch user data */
         const fetchData = async () => {
             /* Get the user document from Firestore using the username */
-          const userDoc = await firestore.collection('users').doc(username).get()
+          const userDoc = await firestore.collection('usernames').doc(username).get()
           /* If the document exists, update the userData state with the fetched data */
           if (userDoc.exists) {
             setUserData(userDoc.data())
