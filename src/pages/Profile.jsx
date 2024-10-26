@@ -110,7 +110,8 @@ const Profile = () => {
             if (userDoc.exists) {
                 const data = userDoc.data()
                 console.log(userDoc.data())
-                setUserData(userDoc.data())
+                setUserData(data)
+                setBio(data.bio)
             } else {
                 /* If the document doesn't exist, log an error message */
                 console.log('No such document!')
