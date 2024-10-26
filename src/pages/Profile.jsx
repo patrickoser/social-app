@@ -108,6 +108,7 @@ const Profile = () => {
             const userDoc = await firestore.collection('usernames').doc(username).get()
             /* If the document exists, update the userData state with the fetched data */
             if (userDoc.exists) {
+                const data = userDoc.data()
                 console.log(userDoc.data())
                 setUserData(userDoc.data())
             } else {
