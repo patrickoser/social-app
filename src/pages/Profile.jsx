@@ -150,8 +150,6 @@ const Profile = () => {
                         {url && <img src={url} className="w-24 h-24 rounded-full" alt="uploaded" />}
                     </div>
                     <div id="profile-username">{user.username}</div>
-                    {/* Add a bio section that allows the user to write a brief description about themselves. 
-                    Also needs to pull in the users bio information from firebase if there is any. */}
                     <div id="bio-edit">
                         {isEditing ? (
                             <div>
