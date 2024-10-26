@@ -18,6 +18,7 @@ const Profile = () => {
     const [progress, setProgress] = useState(0)
     const [bio, setBio] = useState("")
     const [userData, setUserData] = useState({})
+    const [isEditing, setIsEditing] = useState(false)
 
     const { username } = useParams()
   
