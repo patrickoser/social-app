@@ -152,11 +152,18 @@ const Profile = () => {
                     <div id="profile-username">{user.username}</div>
                     {/* Add a bio section that allows the user to write a brief description about themselves. 
                     Also needs to pull in the users bio information from firebase if there is any. */}
-                    <div id="bio">
-                        <p>
-                            {userData.bio ? userData.bio : "No bio available"}
-                        </p>
-                    </div>
+                    <div id="bio-edit">
+                        {isEditing ? (
+                            <div>
+                                <textarea value={bio} onChange={handleBioChange} />
+                                <button onClick={handleBioUpload}>Save</button>
+                            </div>
+                        ) : (
+                            <div>
+                                <p>{bio}</p>
+                                <button onClick={() => setIsEditing(true)}>Edit</button>
+                            </div>
+                        )}
                 </div>
                 <PostForm />
                 {/* Add two tabs that switch between the users posts and likes. */}
