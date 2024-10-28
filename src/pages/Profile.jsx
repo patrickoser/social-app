@@ -114,18 +114,23 @@ const Profile = () => {
         /* Define an asynchronous function to fetch user data */
         const fetchData = async () => {
             /* Get the user document from Firestore using the username */
+            try {
             const userDoc = await firestore.collection('usernames').doc(username).get()
             /* If the document exists, update the userData state with the fetched data */
-            if (userDoc.exists) {
-                const data = userDoc.data()
-                console.log(userDoc.data())
-                setUserData(data)
-                setBio(data.bio)
-            } else {
-                /* If the document doesn't exist, log an error message */
-                console.log('No such document!')
+                if (userDoc.exists) {
+                    const data = userDoc.data()
+                    console.log(userDoc.data())
+                    setUserData(data)
+                    setBio(data.bio)
+                } else {
+                    /* If the document doesn't exist, log an error message */
+                    console.log('No such document!')
+                }
+            } catch (error) {
+                /* If there is an error, log the error message */
+                console.log('Error getting document:', error)
             }
-        };
+        }
         /* Call the fetchData function */
         fetchData()
         /* Dependency array ensures this runs when the username changes */
@@ -170,11 +175,11 @@ const Profile = () => {
                     <button>Posts</button>
                     <button>Likes</button>
                 </div>
-                {/* I need the Feed component to display only the posts made by the user associated 
-                with the profile. Mya need a seperate Feed component if I can't get it to dynamically
-                adjust. */}
+                    {/* I need the Feed component to display only the posts made by the user associated 
+                    with the profile. Mya need a seperate Feed component if I can't get it to dynamically
+                    adjust. */}
                 <div>
-                    {userData?.posts.map(post => (<Post key={post.id} post={post} />)) || <p>No posts yet</p>}
+                    {userData.posts.map(post => (<Post key={post.id} post={post} />)) || <p>No posts yet</p>}
                 </div>
             </div>
             <div id="right-sidebar" className="flex-auto min-w-60 mt-5 px-5 border"></div>

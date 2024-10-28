@@ -3,6 +3,9 @@ One step at a time. 1% better everyday!
 Comment as you go. It will help with comprehension and be a good
 reference for later.
 
+Currently:
+    
+
 Errors:
     Routes not setup properly for Profile. 
 
