@@ -36,7 +36,7 @@ const Nav = () => {
         <div className="flex h-screen">
             <nav className="flex flex-col h-full relative">
                 <ul className="flex flex-col">
-                    <li><Link to="/profile">Profile</Link></li>
+                    <li><Link to="/profile/:username">Profile</Link></li>
                     <li><Link to="/contact">Contact</Link></li>
                     <li><Link to="/settings">Settings</Link></li>
                 </ul>
