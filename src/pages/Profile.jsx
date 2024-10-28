@@ -179,7 +179,7 @@ const Profile = () => {
                     with the profile. Mya need a seperate Feed component if I can't get it to dynamically
                     adjust. */}
                 <div>
-                    {userData.posts.map(post => (<Post key={post.id} post={post} />)) || <p>No posts yet</p>}
+                    {userData.posts ? userData.posts.map(post => (<Post key={post.id} post={post} />)) : <p>No posts to display</p>}
                 </div>
             </div>
             <div id="right-sidebar" className="flex-auto min-w-60 mt-5 px-5 border"></div>
