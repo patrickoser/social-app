@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { format } from 'date-fns'
 import { db } from "../config/firebase"
 import { collection, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore"
+import { AuthContext } from "./AuthContext";
 
 const DataContext = createContext({})
 
