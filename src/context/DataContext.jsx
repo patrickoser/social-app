@@ -22,7 +22,12 @@ export const DataProvider = ({ children }) => {
         const id = posts.length ? posts[posts.length - 1].id + 1 : 1
         const datetime = format(new Date(), 'MMMM dd yyyy pp')
         try {
-            await addDoc(postsCollectionRef, { content: postContent, datetime: datetime, id: id})
+            await addDoc(postsCollectionRef, { 
+                username: user.username, 
+                content: postContent, 
+                datetime: datetime, 
+                id: id
+            })
         } catch(err) {
             console.error(err)
         }
