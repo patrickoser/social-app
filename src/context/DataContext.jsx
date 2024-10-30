@@ -14,6 +14,8 @@ export const DataProvider = ({ children }) => {
     const [postContent, setPostContent] = useState('')
     const postsCollectionRef = collection(db, "posts")
 
+    const { user } = useContext(AuthContext)
+
     const createPost = async (e) => {
         e.preventDefault()
         // id may not be needed anymore
