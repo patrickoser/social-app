@@ -10,7 +10,6 @@ import { useParams } from "react-router-dom";
 import Post from "../components/Post";
 
 const Profile = () => {
-    const { posts } = useContext(DataContext)
     const { user } = useContext(AuthContext) 
 
     const [image, setImage] = useState(null)
