@@ -18,7 +18,7 @@ Errors:
     different page."
 
     When signing into existing accounts it doesn't redirect to home
-    screen properly.
+    screen properly. 
 
     Create post form isnt posting.
 
