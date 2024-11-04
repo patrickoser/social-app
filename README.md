@@ -12,7 +12,7 @@ Currently:
      Same goes for likes but they have the userId already saved along side of it. Need to check if its the userId of the person who created the post or of the person who liked it. When populating each users likes I will need to map find all the posts they've liked and then pull in just those posts. So I will need a post id and the username/userId of the person who liked it.
 
 Errors:
-    Routes not setup properly for Profile. 
+    Routes not setup properly for Profile.
 
     Likes dont seem to be logging properly after clicking away to a
     different page."
