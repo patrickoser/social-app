@@ -9,7 +9,7 @@ const Post = ({ post }) => {
     /* useAuthState gives information about current user */
     const [user] = useAuthState(auth)
 
-    /* Used hold and set the state of the number of likes. */
+    /* Used to hold and set the state of the number of likes. */
     const [likes, setLikes] = useState(null)
 
     /* Reference the likes collection in firestore */
