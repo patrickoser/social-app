@@ -40,6 +40,7 @@ const Post = ({ post }) => {
         try {
             const newDoc = await addDoc(likesRef, {
                 userId: user?.uid,
+                username: user?.username,
                 postId: post.id
             })
             /* Checks the 'user' auth and sets the state of the likes. If there was 
