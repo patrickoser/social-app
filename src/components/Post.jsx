@@ -49,8 +49,8 @@ const Post = ({ post }) => {
             if (user) {
                 setLikes((prev) => 
                     prev
-                        ?[...prev, {userId: user.uid, likeId: newDoc.id }]
-                        : [{ userId: user.uid, likeId: newDoc.id }]
+                        ?[...prev, {userId: user.uid, username: user.username, likeId: newDoc.id }]
+                        : [{ userId: user.uid, username: user.username, likeId: newDoc.id }]
                 )
             }
         /* Catch block for potential errors. */ 
