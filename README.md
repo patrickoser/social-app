@@ -20,7 +20,7 @@ Errors:
     When signing into existing accounts it doesn't redirect to home
     screen properly. 
 
-    Create post form isnt posting.
+    Create post form isnt posting. 
 
 Todo: 
     Talk out/write down every step need to add and pull data from the 
