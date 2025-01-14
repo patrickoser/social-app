@@ -24,6 +24,7 @@ export const DataProvider = ({ children }) => {
         try {
             await addDoc(postsCollectionRef, { 
                 username: user.username, 
+                userId: user.uid,
                 content: postContent, 
                 datetime: datetime, 
                 id: id
