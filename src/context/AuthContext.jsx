@@ -34,6 +34,7 @@ export const AuthProvider = ({ children }) => {
             }
             setLoading(false)
         })
+        console.log('user: ', user)
 
         return () => {
             if(unsubscribe) unsubscribe()
