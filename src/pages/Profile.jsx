@@ -4,7 +4,7 @@ import Nav from "../components/Nav";
 import PostForm from "../components/PostForm";
 import DataContext from "../context/DataContext"
 import { AuthContext } from "../context/AuthContext";
-import { storage, firestore } from "../config/firebase";   
+import { storage, db } from "../config/firebase";   
 import { ref, uploadBytesResumable, getDownloadURL, listAll } from "firebase/storage";
 import { useParams } from "react-router-dom";
 import Post from "../components/Post";
@@ -32,7 +32,7 @@ const Profile = () => {
     }
 
     const handleBioUpload = async () => {
-        await firestore.collection('usernames').doc(username).update({ bio })
+        await db.collection('usernames').doc(username).update({ bio })
         setIsEditing(false)
     }
   
@@ -103,6 +103,7 @@ const Profile = () => {
     }
 
     useEffect(() => {
+        console.log('user in Profile:', user)
         if (user) {
             getImageUrl()
         }
@@ -114,7 +115,7 @@ const Profile = () => {
         const fetchData = async () => {
             /* Get the user document from Firestore using the username */
             try {
-            const userDoc = await firestore.collection('usernames').doc(username).get()
+            const userDoc = await db.collection('usernames').doc(username).get()
             /* If the document exists, update the userData state with the fetched data */
                 if (userDoc.exists) {
                     const data = userDoc.data()
