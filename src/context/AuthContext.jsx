@@ -18,6 +18,7 @@ export const AuthProvider = ({ children }) => {
                 try {
                     const q = query(collection(db, 'usernames'), where('userId', '==', currentUser.uid))
                     const querySnapshot = await getDocs(q)
+                    console.log('querySnapshot: ', querySnapshot)
                     if (!querySnapshot.empty) {
                         const userDoc = querySnapshot.docs[0]
                         setUser({

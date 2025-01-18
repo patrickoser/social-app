@@ -4,7 +4,7 @@ import Nav from "../components/Nav";
 import PostForm from "../components/PostForm";
 import DataContext from "../context/DataContext"
 import { AuthContext } from "../context/AuthContext";
-import { storage } from "../config/firebase";   
+import { storage, firestore } from "../config/firebase";   
 import { ref, uploadBytesResumable, getDownloadURL, listAll } from "firebase/storage";
 import { useParams } from "react-router-dom";
 import Post from "../components/Post";
