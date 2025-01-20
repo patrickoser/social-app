@@ -20,7 +20,7 @@ Errors:
     Routes not setup properly for Profile. 
 
     Likes dont seem to be logging properly after clicking away to a
-    different page."
+    different page." 
 
     When signing into existing accounts it doesn't redirect to home
     screen properly.
