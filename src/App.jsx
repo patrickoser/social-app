@@ -22,7 +22,7 @@ function App() {
       <Router>
         <AuthProvider>
           <DataProvider>
-              <Header />
+            <Header />
               <Routes>
                 <Route element={<PrivateRoutes />}>
                   <Route path="/" element={<Home />} />
@@ -36,7 +36,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/missing" element={<Missing />} />
               </Routes>
-              <Footer />
+            <Footer />
           </DataProvider>
         </AuthProvider>
       </Router>
