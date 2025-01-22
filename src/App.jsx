@@ -20,25 +20,25 @@ function App() {
   return (
     <main>
       <Router>
-        <DataProvider>
-          <AuthProvider>
-            <Header />
-            <Routes>
-              <Route element={<PrivateRoutes />}>
-                <Route path="/" element={<Home />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/settings" element={<Settings />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/profile/:username" element={<Profile />} />
-                <Route path="/post/:id" element={<PostPage />} />
-              </Route>
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/missing" element={<Missing />} />
-            </Routes>
-            <Footer />
-          </AuthProvider>
-        </DataProvider>
+        <AuthProvider>
+          <DataProvider>
+              <Header />
+              <Routes>
+                <Route element={<PrivateRoutes />}>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/home" element={<Home />} />
+                  <Route path="/settings" element={<Settings />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/profile/:username" element={<Profile />} />
+                  <Route path="/post/:id" element={<PostPage />} />
+                </Route>
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/missing" element={<Missing />} />
+              </Routes>
+              <Footer />
+          </DataProvider>
+        </AuthProvider>
       </Router>
     </main>
   )
