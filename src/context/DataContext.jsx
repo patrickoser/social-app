@@ -46,6 +46,7 @@ export const DataProvider = ({ children }) => {
     }
 
     useEffect(() => {
+        console.log('user in DataContext useEffect:', user)
         const getPosts = async () => {
             try {
                 const data = await getDocs(postsCollectionRef)
