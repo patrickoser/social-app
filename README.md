@@ -7,7 +7,7 @@ Working on:
     When a user likes a post the like needs to grab the id of the post, as well as, the username/userId of the person liking it.
 
 Currently:
-    The user object doesn't pass properly to DataContext but is passed properly in Profile. 
+    The user object doesn't pass properly to DataContext but is passed properly in Profile. This could be a problem with one context being unable to pass children to another context.
 
     All instances of 'firestore' in Profile was replaced with 'db' but 'db' pops as an error 
     for not being a function on page load.
