@@ -7,7 +7,7 @@ Working on:
     When a user likes a post the like needs to grab the id of the post, as well as, the username/userId of the person liking it.
 
 Currently:
-    Add Nav bar to Settings/Contact page.
+    Add Nav bar to Settings/Contact page. 
 
     The user object doesn't pass properly to DataContext but is passed properly in Profile. This could be a problem with one context being unable to pass children to another context.
 
