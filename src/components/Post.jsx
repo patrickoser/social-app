@@ -39,7 +39,7 @@ const Post = ({ post }) => {
     const addLike = async () => {
         try {
             const newDoc = await addDoc(likesRef, {
-                userId: user?.uid,
+                userId: user?.userId,
                 username: user?.username,
                 postId: post.id
             })
