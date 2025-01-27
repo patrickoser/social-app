@@ -37,6 +37,7 @@ const Post = ({ post }) => {
     /* Creates a new doc within the 'likes' collection, taking the 'user.userId' and 
     'post.id' and storing it for reference. */
     const addLike = async () => {
+        console.log(user)
         try {
             const newDoc = await addDoc(likesRef, {
                 userId: user?.userId,
