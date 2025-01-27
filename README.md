@@ -9,8 +9,6 @@ Working on:
 Currently:
     Add Nav bar to Settings/Contact page. 
 
-    The user object doesn't pass properly to DataContext but is passed properly in Profile. This could be a problem with one context being unable to pass children to another context.
-
     All instances of 'firestore' in Profile was replaced with 'db' but 'db' pops as an error 
     for not being a function on page load.
 
