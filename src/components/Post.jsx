@@ -49,8 +49,8 @@ const Post = ({ post }) => {
             if (user) {
                 setLikes((prev) => 
                     prev
-                        ?[...prev, {userId: user.uid, username: user.username, likeId: newDoc.id }]
-                        : [{ userId: user.uid, username: user.username, likeId: newDoc.id }]
+                        ?[...prev, {userId: user.userId, username: user.username, likeId: newDoc.id }]
+                        : [{ userId: user.userId, username: user.username, likeId: newDoc.id }]
                 )
             }
         /* Catch block for potential errors. */ 
@@ -67,7 +67,7 @@ const Post = ({ post }) => {
             const likeToDeleteQuery = query(
                 likesRef,
                 where("postId", "==", post.id),
-                where("userId", "==", user?.uid)
+                where("userId", "==", user?.userId)
             )
 
             /* Call 'getDocs' on the query and assign data to 'likeToDeleteData'. */
@@ -100,7 +100,7 @@ const Post = ({ post }) => {
     /* Loop through 'likes' state array and check if the current user.uid matches any 
     user id associated with the post. If no match is found then that means the user 
     hasn't liked that post */
-    const hasUserLiked = likes?.find((like) => like.userId === user?.uid)
+    const hasUserLiked = likes?.find((like) => like.userId === user?.userId)
 
     /* Calls 'getLikes' function on page load. */
     useEffect(() => {
