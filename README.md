@@ -9,6 +9,8 @@ Working on:
 Currently:
     Add Nav bar to Settings/Contact page. 
 
+    Add css structure to the posts pages.
+
     All instances of 'firestore' in Profile was replaced with 'db' but 'db' pops as an error 
     for not being a function on page load.
 
