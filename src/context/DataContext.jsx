@@ -18,7 +18,6 @@ export const DataProvider = ({ children }) => {
 
     const createPost = async (e) => {
         e.preventDefault()
-        console.log(user)
         // id may not be needed anymore
         const id = posts.length ? posts[posts.length - 1].id + 1 : 1
         const datetime = format(new Date(), 'MMMM dd yyyy pp')
@@ -46,7 +45,6 @@ export const DataProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        console.log('user in DataContext useEffect:', user)
         const getPosts = async () => {
             try {
                 const data = await getDocs(postsCollectionRef)
