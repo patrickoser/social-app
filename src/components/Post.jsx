@@ -9,6 +9,7 @@ import { AuthContext } from "../context/AuthContext";
 const Post = ({ post }) => {
     /* useAuthState gives information about current user */
     /* const [user] = useAuthState(auth) */
+    const { user } = useContext(AuthContext)
 
     /* Used to hold and set the state of the number of likes. */
     const [likes, setLikes] = useState(null)
