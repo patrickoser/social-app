@@ -34,7 +34,7 @@ const Post = ({ post }) => {
         } 
     }
 
-    /* Creates a new doc within the 'likes' collection, taking the 'user.uid' and 
+    /* Creates a new doc within the 'likes' collection, taking the 'user.userId' and 
     'post.id' and storing it for reference. */
     const addLike = async () => {
         try {
@@ -62,7 +62,7 @@ const Post = ({ post }) => {
     /* Deletes likes from the 'likes' collection array. */
     const removeLike = async () => {
         /* Query the 'likes' collection to find the doc that holds a 'postId'/'userId 
-        that matches the current users 'user.uid' and 'post.id' */ 
+        that matches the current users 'user.userId' and 'post.id' */ 
         try {
             const likeToDeleteQuery = query(
                 likesRef,
@@ -97,7 +97,7 @@ const Post = ({ post }) => {
         }
     }
 
-    /* Loop through 'likes' state array and check if the current user.uid matches any 
+    /* Loop through 'likes' state array and check if the current user.userId matches any 
     user id associated with the post. If no match is found then that means the user 
     hasn't liked that post */
     const hasUserLiked = likes?.find((like) => like.userId === user?.userId)
