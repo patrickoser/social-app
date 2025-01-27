@@ -4,6 +4,7 @@ import { addDoc, getDocs, collection, query, where, deleteDoc, doc } from "fireb
 import { useEffect, useState, useContext } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { db, auth } from "../config/firebase"
+import { AuthContext } from "../context/AuthContext";
 
 const Post = ({ post }) => {
     /* useAuthState gives information about current user */
