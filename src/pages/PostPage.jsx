@@ -20,6 +20,9 @@ const PostPage = () => {
     // is the one who created the post and is authorized to delete.
     return (
         <main>
+            <section id="left-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
+                <Nav />
+            </section>
             <div>
                 <h1>Username</h1>
                 <h2>{post.datetime}</h2>
