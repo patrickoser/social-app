@@ -35,6 +35,8 @@ const PostPage = () => {
                     <button onClick={() => deletePost(post.id)}>Delete</button>
                 </div>
             </section>
+            <section id="right-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
+            </section>
         </main>
     )
 }
