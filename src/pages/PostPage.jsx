@@ -19,7 +19,7 @@ const PostPage = () => {
     // I need to add an auth check to see if the current user
     // is the one who created the post and is authorized to delete.
     return (
-        <main>
+        <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
             <section id="left-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
                 <Nav />
             </section>
