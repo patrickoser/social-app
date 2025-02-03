@@ -25,7 +25,7 @@ const PostPage = () => {
                 <Nav />
             </section>
             <section className="flex-initial w-6/12 mt-5 px-5 text-center border">
-                <div>
+                <div className="max-w-full border-b border-black text-left">
                     <h1>Username</h1>
                     <h2>{post.datetime}</h2>
                 </div>
