@@ -7,7 +7,7 @@ Working on:
     When a user likes a post the like needs to grab the id of the post, as well as, the username/userId of the person liking it.
 
 Currently:
-    db still pops up as an issue when clicking on Profile.
+    db still pops up as an issue when clicking on Profile. 
 
     Add Nav bar to Settings/Contact page.
 
