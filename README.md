@@ -14,7 +14,7 @@ Currently:
     Add css structure to the posts pages.
 
     All instances of 'firestore' in Profile was replaced with 'db' but 'db' pops as an error 
-    for not being a function on page load.(This seems to be fixed but leaving it just in case that changes so I remember what changed.) 
+    for not being a function on page load.(This seems to be fixed but leaving it just in case that changes so I remember what changed.)
 
     When userdata is pulled from firebase in Profile it grabs Everything associated with the usernames collection. When the users posts are being pulled/mapped in the Feed below they are not found. Posts are located in a seperate collection and there is no username/userId associating it with the user who created it. Add the username of the posts creator upon each posts creation. That way you can pull all the posts of one user at a time and populate their profile with only their posts.
     
