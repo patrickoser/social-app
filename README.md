@@ -4,7 +4,8 @@ Comment as you go. It will help with comprehension and be a good
 reference for later.
 
 Working on:
-    When a user likes a post the like needs to grab the id of the post, as well as, the username/userId of the person liking it.
+    I get an error when reloading PostPage after navigating to it. It says it is not
+    able to read 'id'.
 
 Currently:
     db still pops up as an issue when clicking on Profile. 
