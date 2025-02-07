@@ -19,14 +19,14 @@ const PostPage = () => {
     const post = posts.find(post => (post.id).toString() === id)
 
     // I need to add an auth check to see if the current user
-    // is the one who created the post and is authorized to delete.
+    // is the one who created the post and is authorized to delete. 
     return (
         <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
             <section id="left-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
                 <Nav />
             </section>
             <section className="flex-initial w-6/12 mt-5 px-5 text-center border-b border-t border-black">
-            <div className="max-w-full text-left">
+                <div className="max-w-full text-left">
                     <h1 className="font-bold">Username</h1>
                     <h2 className="text-xs">{post.datetime}</h2>
                 </div>
