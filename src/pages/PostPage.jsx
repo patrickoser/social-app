@@ -25,7 +25,7 @@ const PostPage = () => {
             <section id="left-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
                 <Nav />
             </section>
-            <section className="flex-initial w-6/12 mt-5 px-5 text-center border-b border-black">
+            <section className="flex-initial w-6/12 mt-5 px-5 text-center border-b border-t border-black">
             <div className="max-w-full text-left">
                     <h1 className="font-bold">Username</h1>
                     <h2 className="text-xs">{post.datetime}</h2>
