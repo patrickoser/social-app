@@ -3,6 +3,7 @@ import { useContext } from "react";
 import DataContext from "../context/DataContext";
 import { useParams } from "react-router-dom"
 import Nav from "../components/Nav";
+import Post from "../components/Post";
 
 const PostPage = () => {
     // Pulls in the 'posts' object from 'db.json' for reference below.
@@ -24,8 +25,19 @@ const PostPage = () => {
             <section id="left-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
                 <Nav />
             </section>
-            <section className="flex-initial w-6/12 mt-5 px-5 text-center border">
-                <div className="max-w-full border-b border-black text-left">
+            <section className="flex-initial w-6/12 mt-5 px-5 text-center border-b border-black">
+                <Post key={post.id} post={post} />
+            </section>
+            <section id="right-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
+            </section>
+        </main>
+    )
+}
+
+export default PostPage
+
+/*
+                <div className="max-w-full text-left">
                     <h1 className="font-bold">Username</h1>
                     <h2 className="text-xs">{post.datetime}</h2>
                 </div>
@@ -39,11 +51,4 @@ const PostPage = () => {
                 <div>
                     <button className="pr-1" onClick={() => deletePost(post.id)}>Delete</button>
                 </div>
-            </section>
-            <section id="right-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
-            </section>
-        </main>
-    )
-}
-
-export default PostPage
+*/
