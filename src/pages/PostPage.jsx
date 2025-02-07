@@ -26,18 +26,7 @@ const PostPage = () => {
                 <Nav />
             </section>
             <section className="flex-initial w-6/12 mt-5 px-5 text-center border-b border-black">
-                <Post key={post.id} post={post} />
-            </section>
-            <section id="right-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
-            </section>
-        </main>
-    )
-}
-
-export default PostPage
-
-/*
-                <div className="max-w-full text-left">
+            <div className="max-w-full text-left">
                     <h1 className="font-bold">Username</h1>
                     <h2 className="text-xs">{post.datetime}</h2>
                 </div>
@@ -51,4 +40,17 @@ export default PostPage
                 <div>
                     <button className="pr-1" onClick={() => deletePost(post.id)}>Delete</button>
                 </div>
+            </section>
+            <section id="right-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
+            </section>
+        </main>
+    )
+}
+
+export default PostPage
+
+/*
+
+
+                <Post key={post.id} post={post} />
 */
