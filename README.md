@@ -8,6 +8,9 @@ Working on:
     able to read 'id'. Probably has to do with the way I am passing 'Post' to 'PostPage'/
     how the key is passed/some combination of the two. Could also be a heirarchy issue.
 
+    The problem with the PostPage not reloading properly is likely because the context within
+    PostPage is not able to be fetched/initialized by the time the component tried to access it.
+
 Currently:
     db still pops up as an issue when clicking on Profile. 
 
