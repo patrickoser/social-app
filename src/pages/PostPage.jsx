@@ -3,7 +3,6 @@ import { useContext } from "react";
 import DataContext from "../context/DataContext";
 import { useParams } from "react-router-dom"
 import Nav from "../components/Nav";
-import Post from "../components/Post";
 
 const PostPage = () => {
     // Pulls in the 'posts' object from 'db.json' for reference below.
