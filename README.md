@@ -4,12 +4,11 @@ Comment as you go. It will help with comprehension and be a good
 reference for later.
 
 Working on:
-    I get an error when reloading PostPage after navigating to it. It says it is not
-    able to read 'id'. Probably has to do with the way I am passing 'Post' to 'PostPage'/
-    how the key is passed/some combination of the two. Could also be a heirarchy issue.
 
-    The problem with the PostPage not reloading properly is likely because the context within
-    PostPage is not able to be fetched/initialized by the time the component tried to access it.
+    The problem with the PostPage not reloading properly is because the context within
+    PostPage is not able to be fetched/initialized by the time the component tried to access it. 
+
+    I should have logic in context that will help deal with this on all pages.
 
 Currently:
     db still pops up as an issue when clicking on Profile. 
