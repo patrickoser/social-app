@@ -18,12 +18,6 @@ const PostPage = () => {
     // below to construct the page.
     const post = posts.find(post => (post.id).toString() === id)
 
-    useEffect(() => {
-        console.log('id: ' + id)
-        console.log('post: ' + post.datetime, post.content)
-        getPosts()
-    }, [])
-
     // I need to add an auth check to see if the current user
     // is the one who created the post and is authorized to delete. 
     return (
