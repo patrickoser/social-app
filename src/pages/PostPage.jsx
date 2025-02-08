@@ -20,30 +20,36 @@ const PostPage = () => {
     // I need to add an auth check to see if the current user
     // is the one who created the post and is authorized to delete. 
     return (
-        <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
-            <section id="left-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
-                <Nav />
-            </section>
-            <section className="flex-initial w-6/12 mt-5 px-5 text-center border-b border-t border-black">
-                <div className="max-w-full text-left">
-                    <h1 className="font-bold">Username</h1>
-                    <h2 className="text-xs">{post.datetime}</h2>
-                </div>
-                <div>
-                    <p>{
-                        (post.content).length <= 100
-                        ? post.content
-                        : `${(post.content).slice(0, 100)}...`
-                    }</p>
-                </div>
-                <div>
-                    <button className="pr-1" onClick={() => deletePost(post.id)}>Delete</button>
-                </div>
-            </section>
-            <section id="right-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
-            </section>
-        </main>
-    )
+        <div>
+            {!post ? (
+                <h1>Loading...</h1>
+            ) : (    
+                <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
+                    <section id="left-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
+                        <Nav />
+                    </section>
+                    <section className="flex-initial w-6/12 mt-5 px-5 text-center border-b border-t border-black">
+                        <div className="max-w-full text-left">
+                            <h1 className="font-bold">Username</h1>
+                            <h2 className="text-xs">{post.datetime}</h2>
+                        </div>
+                        <div>
+                            <p>{
+                                (post.content).length <= 100
+                                ? post.content
+                                : `${(post.content).slice(0, 100)}...`
+                            }</p>
+                        </div>
+                        <div>
+                            <button className="pr-1" onClick={() => deletePost(post.id)}>Delete</button>
+                        </div>
+                    </section>
+                    <section id="right-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
+                    </section>
+                </main>
+            )}
+        </div>
+    );
 }
 
 export default PostPage
