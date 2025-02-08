@@ -44,16 +44,16 @@ export const DataProvider = ({ children }) => {
         }
     }
 
-    useEffect(() => {
-        const getPosts = async () => {
-            try {
-                const data = await getDocs(postsCollectionRef)
-                setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-            } catch(err) {
-                console.log(err.message)
-            }
+    const getPosts = async () => {
+        try {
+            const data = await getDocs(postsCollectionRef)
+            setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+        } catch(err) {
+            console.log(err.message)
         }
+    }
 
+    useEffect(() => {
         getPosts()
     }, [])
 
