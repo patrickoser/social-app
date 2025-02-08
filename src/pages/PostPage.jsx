@@ -20,9 +20,9 @@ const PostPage = () => {
 
     useEffect(() => {
         console.log('id: ' + id)
-        console.log('post: ' + post)
+        console.log('post: ' + post.datetime, post.content)
         getPosts()
-    }, [post])
+    }, [])
 
     // I need to add an auth check to see if the current user
     // is the one who created the post and is authorized to delete. 
