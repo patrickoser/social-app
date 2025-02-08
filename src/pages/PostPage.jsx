@@ -7,7 +7,7 @@ import Post from "../components/Post";
 
 const PostPage = () => {
     // Pulls in the 'posts' object from 'db.json' for reference below.
-    const { posts, deletePost } = useContext(DataContext)
+    const { posts, deletePost, getPosts } = useContext(DataContext)
 
     // 'useParams' grabs the 'id' from the url for reference below.
     const { id } = useParams()
