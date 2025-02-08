@@ -19,7 +19,7 @@ const PostPage = () => {
     const post = posts.find(post => (post.id).toString() === id)
 
     useEffect(() => {
-        
+        getPosts()
     }, [])
 
     // I need to add an auth check to see if the current user
