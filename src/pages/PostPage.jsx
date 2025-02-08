@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useContext } from "react";
 import DataContext from "../context/DataContext";
 import { useParams } from "react-router-dom"
@@ -17,6 +17,10 @@ const PostPage = () => {
     // back as 'true' then the 'post' variable is assigned that object so that it can be referenced
     // below to construct the page.
     const post = posts.find(post => (post.id).toString() === id)
+
+    useEffect(() => {
+        
+    }, [])
 
     // I need to add an auth check to see if the current user
     // is the one who created the post and is authorized to delete. 
