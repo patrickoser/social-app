@@ -83,11 +83,15 @@ const Profile = () => {
         );
     };
 
-    const getUserPosts = async () => {
-        const userPosts = await db.collection('posts').where('userId', '==', user.userId).get()
-        const posts = userPosts.docs.map(doc => doc.data())
-        console.log(posts)
-    }
+    const getUserPosts = async (userId) => {
+        const q = query(collection(db, "posts"), where("userId", "==", user.userId));
+        const querySnapshot = await getDocs(q);
+        const posts = [];
+        querySnapshot.forEach((doc) => {
+          posts.push({ id: doc.id, ...doc.data() });
+        });
+        return posts;
+      };
 
     const getImageUrl = async () => {
         const userRef = ref(storage, `users/${user.userId}`)
