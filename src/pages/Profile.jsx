@@ -83,6 +83,12 @@ const Profile = () => {
         );
     };
 
+    const getUserPosts = async () => {
+        const userPosts = await db.collection('posts').where('userId', '==', user.userId).get()
+        const posts = userPosts.docs.map(doc => doc.data())
+        console.log(posts)
+    }
+
     const getImageUrl = async () => {
         const userRef = ref(storage, `users/${user.userId}`)
 
@@ -170,7 +176,7 @@ const Profile = () => {
                 <PostForm />
                 {/* Add two tabs that switch between the users posts and likes. */}
                 <div id="profile-tabs" className="flex justify-evenly border-b border-black">
-                    <button>Posts</button>
+                    <button onClick={}>Posts</button>
                     <button>Likes</button>
                 </div>
                     {/* I need the Feed component to display only the posts made by the user associated 
