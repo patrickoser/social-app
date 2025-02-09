@@ -158,7 +158,7 @@ const Profile = () => {
           fetchUserPosts();
     }, [user])
       
-        /* If the userData state is null, display a loading message */ 
+        /* If the userData state is null, display a loading message */
     if (!userData) {
         return <div>Loading...</div>
     }
