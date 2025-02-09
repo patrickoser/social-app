@@ -7,6 +7,7 @@ import { getDocs, query, collection, where } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL, listAll } from "firebase/storage";
 import { useParams } from "react-router-dom";
 import Post from "../components/Post";
+import { use } from "react";
 
 const Profile = () => {
     const { user } = useContext(AuthContext) 
@@ -144,6 +145,17 @@ const Profile = () => {
         fetchData()
         /* Dependency array ensures this runs when the username changes */
     }, [username])
+
+    useEffect(() => {
+        const fetchUserPosts = async () => {
+            if (user) {
+              const posts = await getUserPosts(user.uid);
+              setUserPosts(posts);
+            }
+        };
+      
+          fetchUserPosts();
+    }, [user])
       
         /* If the userData state is null, display a loading message */
     if (!userData) {
