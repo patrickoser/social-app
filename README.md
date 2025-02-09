@@ -10,6 +10,8 @@ Working on:
 
     I should have logic in context that will help deal with this on all pages.
 
+    db still popping up as an error, this time in Profile.
+
 Currently:
     db still pops up as an issue when clicking on Profile. 
 
