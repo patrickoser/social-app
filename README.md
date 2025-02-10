@@ -12,6 +12,9 @@ Working on:
 
     db still popping up as an error, this time in Profile.
 
+    Sort through the code I have already written to see if it can be used to populate user specific
+    posts.
+
 Currently:
     db still pops up as an issue when clicking on Profile. 
 
