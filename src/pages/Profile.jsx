@@ -161,6 +161,14 @@ const Profile = () => {
     if (!userData) {
         return <div>Loading...</div>
     }
+
+    const handlePosts = () => {
+        {userPosts.length === 0 ? (
+            <p>You have not created any posts yet.</p>
+          ) : (
+            userPosts.map((post) => <Post key={post.id} post={post} />)
+          )}
+    }
   
     return (
         <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
@@ -193,7 +201,7 @@ const Profile = () => {
                 <PostForm />
                 {/* Add two tabs that switch between the users posts and likes. */}
                 <div id="profile-tabs" className="flex justify-evenly border-b border-black">
-                    <button onClick={() => getUserPosts()}>Posts</button>
+                    <button onClick={handlePosts()}>Posts</button>
                     <button>Likes</button>
                 </div>
                     {/* I need the Feed component to display only the posts made by the user associated 
