@@ -161,16 +161,6 @@ const Profile = () => {
     if (!userData) {
         return <div>Loading...</div>
     }
-
-    const handlePosts = async () => {
-        return(
-            {userPosts.length === 0 ? (
-                <p>You have not created any posts yet.</p>
-            ) : (
-                userPosts.map((post) => <Post key={post.id} post={post} />)
-            )}
-        )
-    }
   
     return (
         <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
