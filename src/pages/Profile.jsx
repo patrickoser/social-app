@@ -88,6 +88,7 @@ const Profile = () => {
     const getUserPosts = async (userId) => {
         const q = query(collection(db, "posts"), where("userId", "==", user.userId));
         const querySnapshot = await getDocs(q);
+        const posts = [];
         querySnapshot.forEach((doc) => {
           posts.push({ id: doc.id, ...doc.data() });
         });
