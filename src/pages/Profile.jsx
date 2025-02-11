@@ -146,6 +146,7 @@ const Profile = () => {
         /* Dependency array ensures this runs when the username changes */
     }, [username])
 
+    /* useEffect hook to fetch user posts when the user state changes */
     useEffect(() => {
         const fetchUserPosts = async () => {
             if (user) {
