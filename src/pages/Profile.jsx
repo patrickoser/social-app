@@ -163,6 +163,7 @@ const Profile = () => {
         return <div>Loading...</div>
     }
 
+    /* If userPosts is not empty then map over the posts and display them */
     const handlePosts = () => {
         {userPosts.length === 0 ? (
             <p>You have not created any posts yet.</p>
