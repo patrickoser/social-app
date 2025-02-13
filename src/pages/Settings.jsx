@@ -3,6 +3,7 @@ import { auth } from "../config/firebase";
 import { signOut } from "firebase/auth";
 import DataContext from "../context/DataContext";
 import { useContext } from "react";
+import Nav from "../components/Nav";
 
 const Settings = () => {
     /* Might not need to import context as it could be costll w/o
