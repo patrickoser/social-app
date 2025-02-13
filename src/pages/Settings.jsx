@@ -22,6 +22,9 @@ const Settings = () => {
 
     return (
         <main>
+            <div id="left-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
+                <Nav />
+            </div>
             <h1 className="text-center">Settings</h1>
             <button onClick={logout}>Logout</button>
         </main>
