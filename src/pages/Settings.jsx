@@ -22,7 +22,7 @@ const Settings = () => {
     }
 
     return (
-        <main>
+        <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
             <div id="left-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
                 <Nav />
             </div>
