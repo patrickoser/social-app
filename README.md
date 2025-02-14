@@ -4,6 +4,8 @@ Comment as you go. It will help with comprehension and be a good
 reference for later.
 
 Working on:
+    Use the loading function within DataContext to handle the loading time needed
+    for components to load properly.
 
     I should have logic in context that will help deal with this on all pages.
 
