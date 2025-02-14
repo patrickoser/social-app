@@ -30,7 +30,7 @@ const PostPage = () => {
                     </section>
                     <section className="flex-initial w-6/12 mt-5 px-5 text-center border-b border-t border-black">
                         <div className="max-w-full text-left">
-                            <h1 className="font-bold">Username</h1>
+                            <h1 className="font-bold">{post.username}</h1>
                             <h2 className="text-xs">{post.datetime}</h2>
                         </div>
                         <div>
