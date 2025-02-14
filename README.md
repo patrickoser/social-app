@@ -16,7 +16,7 @@ Working on:
 
 Currently:
 
-    Add Nav bar to Settings/Contact page.
+    Add Nav bar to Settings/Contact page. 
 
     Add css structure to the posts pages. 
 
