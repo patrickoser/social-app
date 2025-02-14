@@ -113,7 +113,7 @@ const Post = ({ post }) => {
     return (
         <div className="max-w-full border-b border-black text-left">
             <Link to={`/post/${post.id}`}>
-                <h2 className="font-bold">Username</h2>
+                <h2 className="font-bold">{post.username}</h2>
                 <h5 className="text-xs">{post.datetime}</h5>
             </Link>
             <p>{
