@@ -13,7 +13,6 @@ Working on:
     posts.
 
 Currently:
-    db still pops up as an issue when clicking on Profile. 
 
     Add Nav bar to Settings/Contact page.
 
