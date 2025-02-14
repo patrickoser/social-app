@@ -5,9 +5,6 @@ reference for later.
 
 Working on:
 
-    The problem with the PostPage not reloading properly is because the context within
-    PostPage is not able to be fetched/initialized by the time the component tried to access it. 
-
     I should have logic in context that will help deal with this on all pages.
 
     db still popping up as an error, this time in Profile.
