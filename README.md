@@ -25,7 +25,7 @@ Currently:
 
     When userdata is pulled from firebase in Profile it grabs Everything associated with the usernames collection. When the users posts are being pulled/mapped in the Feed below they are not found. Posts are located in a seperate collection and there is no username/userId associating it with the user who created it. Add the username of the posts creator upon each posts creation. That way you can pull all the posts of one user at a time and populate their profile with only their posts.
     
-    When populating each users likes I will need to map find all the posts they've liked and then pull in just those posts. So I will need a post id and the username/userId of the person who liked it.
+    When populating each users likes I will need to map find all the posts they've liked and then pull in just those posts. So I will need a post id and the username/userId of the person who liked it. 
 
 Errors:
     Routes not setup properly for Profile. 
