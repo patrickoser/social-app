@@ -9,7 +9,7 @@ Working on:
 
     I should have logic in context that will help deal with this on all pages.
 
-    db still popping up as an error, this time in Profile. 
+    db still popping up as an error, this time in Profile.
 
     Sort through the code I have already written to see if it can be used to populate user specific
     posts.
