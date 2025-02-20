@@ -130,9 +130,9 @@ const Profile = () => {
             /* Get the user document from Firestore using the username */
             try {
                 const userDocRef = doc(db, 'usernames', username);
-                console.log('Fetching document from path:', userDocRef.path);
+                console.log('Fetching document from path:', userDocRef);
                 const userDoc = await getDoc(userDocRef);
-                console.log('Document data:', userDoc.data());
+                console.log('Document data:', userDoc);
                 /* If the document exists, update the userData state with the fetched data */
                 if (userDoc.exists()) {
                     const data = userDoc.data();
