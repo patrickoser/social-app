@@ -32,8 +32,13 @@ const Profile = () => {
     }
 
     const handleBioUpload = async () => {
-        await db.collection('usernames').doc(username).update({ bio })
-        setIsEditing(false)
+        try {
+            const userDoc = doc(db, 'usernames', username);
+            await updateDoc(userDoc, { bio });
+            setIsEditing(false);
+        } catch (error) {
+            console.error('Error updating bio:', error);
+        }
     }
   
     const handleImageUpload = async () => {
