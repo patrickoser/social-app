@@ -130,26 +130,27 @@ const Profile = () => {
         const fetchData = async () => {
             /* Get the user document from Firestore using the username */
             try {
-            const userDoc = await db.collection('usernames').doc(username).get()
-            /* If the document exists, update the userData state with the fetched data */
-                if (userDoc.exists) {
-                    const data = userDoc.data()
-                    console.log(userDoc.data())
-                    setUserData(data)
-                    setBio(data.bio)
+                const userDocRef = doc(db, 'usernames', username);
+                const userDoc = await getDoc(userDocRef);
+                /* If the document exists, update the userData state with the fetched data */
+                if (userDoc.exists()) {
+                    const data = userDoc.data();
+                    console.log(data);
+                    setUserData(data);
+                    setBio(data.bio);
                 } else {
                     /* If the document doesn't exist, log an error message */
-                    console.log('No such document!')
+                    console.log('No such document!');
                 }
             } catch (error) {
                 /* If there is an error, log the error message */
-                console.log('Error getting document:', error)
+                console.log('Error getting document:', error);
             }
-        }
+        };
         /* Call the fetchData function */
-        fetchData()
+        fetchData();
         /* Dependency array ensures this runs when the username changes */
-    }, [username])
+    }, [username]);
 
     /* useEffect hook to fetch user posts when the user state changes */
     useEffect(() => {
