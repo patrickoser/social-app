@@ -118,7 +118,6 @@ const Profile = () => {
     }
 
     useEffect(() => {
-        console.log('user in Profile:', user)
         if (user) {
             getImageUrl()
         }
@@ -131,6 +130,7 @@ const Profile = () => {
             /* Get the user document from Firestore using the username */
             try {
                 const userDocRef = doc(db, 'usernames', username);
+                console.log('Fetching document from path:', userDocRef.path);
                 const userDoc = await getDoc(userDocRef);
                 /* If the document exists, update the userData state with the fetched data */
                 if (userDoc.exists()) {
