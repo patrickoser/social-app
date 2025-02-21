@@ -8,7 +8,7 @@ Working on:
 
     I should have logic in context that will help deal with this on all pages.
 
-    db issue fixed in Profile but data is not pulled properly from firebase.
+    db issue fixed in Profile but data is not pulled properly from firebase. This could be because I am confusing the username check with the getPosts function.
 
     Sort through the code I have already written to see if it can be used to populate user specific
     posts.
