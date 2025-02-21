@@ -8,7 +8,7 @@ Working on:
 
     I should have logic in context that will help deal with this on all pages.
 
-    db still popping up as an error, this time in Profile.
+    db issue fixed in Profile but data is not pulled properly from firebase.
 
     Sort through the code I have already written to see if it can be used to populate user specific
     posts.
