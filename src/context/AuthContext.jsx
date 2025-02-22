@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState()
     const [loading, setLoading] = useState(true)
 
+    /* Need to go through this and comment out each section because I forget how it works. */
     useEffect(() => {
         let unsubscribe;
 
