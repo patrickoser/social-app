@@ -16,6 +16,7 @@ export const DataProvider = ({ children }) => {
 
     const { user } = useContext(AuthContext)
 
+    /* Called from within PostForm component. Adds a new post to the "posts" collection. */
     const createPost = async (e) => {
         e.preventDefault()
         console.log('user createPost: ', user)
