@@ -16,7 +16,7 @@ export const DataProvider = ({ children }) => {
 
     const { user } = useContext(AuthContext)
 
-    /* Called from within PostForm component. Adds a new post to the "posts" collection. */
+    /* Called from within 'PostForm' component. Adds a new post to the "posts" collection. */
     const createPost = async (e) => {
         e.preventDefault()
         console.log('user createPost: ', user)
@@ -37,7 +37,8 @@ export const DataProvider = ({ children }) => {
             console.error(err)
         }
     }
-
+    /* Called within 'PostPage'. Takes in 'id' as a parameter and uses it to find the right
+    post in firebase and remove it from the database. */
     const deletePost = async (id) => {
         console.log(id)
         try {
