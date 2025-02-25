@@ -1,7 +1,7 @@
 One step at a time. 1% better everyday!
 
 Comment as you go. It will help with comprehension and be a good
-reference for later.
+reference for later. 
 
 Working on:
     I need to go through the functions/code in general to explicitly 
