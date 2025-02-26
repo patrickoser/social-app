@@ -50,7 +50,7 @@ export const DataProvider = ({ children }) => {
     }
 
     /* Called below in a useEffect. References the "posts" collection in firebase, then uses
-    'setPosts' to update the current state of the 'posts' object. */
+    'setPosts' to update the current state of the 'posts' object.. */
     const getPosts = async () => {
         try {
             const data = await getDocs(postsCollectionRef)
