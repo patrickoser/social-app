@@ -11,9 +11,7 @@ Working on:
     'createPost' is posting new posts to firebase but they are not updating/populating to the home page. When yousubmit a new post it also skips over all the console logs in createpost, but
     still adds the posts to firebase.
 
-    Use the loading function within DataContext to handle the loading time needed for components to load properly.
-
-    I should have logic in context that will help deal with this on all pages.
+    Use the loading function within DataContext to handle the loading time needed for components to load properly. I should have logic in context that will help deal with this on all pages.
 
     db issue fixed in Profile but data is not pulled properly from firebase. This could be because I am confusing the username check with the getPosts function. It looks like I need to figure out whats needed in Profile. I could be wrong but it looks like I have a few redundant functions in there.
 
