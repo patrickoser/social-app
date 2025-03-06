@@ -8,7 +8,8 @@ Working on:
     mark/comment on what each of them do. Then I will know what I need
     and what can be erased. 
 
-    'createPost' is posting new posts to firebase but they are not updating/populating to the home page.
+    'createPost' is posting new posts to firebase but they are not updating/populating to the home page. When yousubmit a new post it also skips over all the console logs in createpost, but
+    still adds the posts to firebase.
 
     Use the loading function within DataContext to handle the loading time needed for components to load properly.
 
