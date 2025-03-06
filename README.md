@@ -18,7 +18,6 @@ Working on:
     Sort through the code I have already written to see if it can be used to populate user specific posts.
 
 Currently:
-
     Add Nav bar to Settings/Contact page. 
 
     Add css structure to the posts pages. 
