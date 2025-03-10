@@ -132,7 +132,7 @@ const Profile = () => {
                 const userDocRef = doc(db, 'usernames', username);
                 console.log('username: ', username);
                 const userDoc = await getDoc(userDocRef);
-                console.log('Document data:', userDoc);
+                console.log('Document data:', userDoc.exists());
                 /* If the document exists, update the userData state with the fetched data */
                 if (userDoc.exists()) {
                     const data = userDoc.data();
