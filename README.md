@@ -4,6 +4,9 @@ Comment as you go. It will help with comprehension and be a good
 reference for later. 
 
 Working on:
+    Theres an issue when pulling the users username using useParams from the URL. It seems to pull in the default placeholder and 
+    doesn't dynamically add the current users username.
+
     I need to go through the functions/code in general to explicitly 
     mark/comment on what each of them do. Then I will know what I need
     and what can be erased. 
