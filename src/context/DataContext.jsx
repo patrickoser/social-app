@@ -37,6 +37,7 @@ export const DataProvider = ({ children }) => {
             console.error(err)
         }
     }
+    
     /* Called within 'PostPage'. Takes in 'id' as a parameter and uses it to find the right
     post in firebase and remove it from the database. */
     const deletePost = async (id) => {
