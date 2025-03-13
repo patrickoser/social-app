@@ -19,6 +19,10 @@ Working on:
 
     Sort through the code I have already written to see if it can be used to populate user specific posts.
 
+    When optimizing the performance of the project use Chrome Devtools/react dev tools to pinpoint 
+    where the performance issues are originating from. 'useMemo' should help with some slower 
+    components that use 'useEffect' so that they don't rerender needlessly.
+
 Currently:
     Add Nav bar to Settings/Contact page. 
 
