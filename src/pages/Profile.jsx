@@ -157,10 +157,14 @@ const Profile = () => {
     /* useEffect hook to fetch user posts when the user state changes */
     useEffect(() => {
         const fetchUserPosts = async () => {
-            if (user) {
-              const posts = await getUserPosts(user.uid);
-              setUserPosts(posts);
-            }
+            try {
+                if (user) {
+                    const posts = await getUserPosts(user.userId);
+                    setUserPosts(posts);
+                }
+            } catch (error) {
+                console.log('Error getting user posts:', error);
+            };
         };
       
           fetchUserPosts();
