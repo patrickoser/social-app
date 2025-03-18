@@ -61,7 +61,8 @@ export const DataProvider = ({ children }) => {
         }
     }
 
-    /* useEffect hook to fetch posts when the component mounts */
+    /* useEffect hook to fetch posts when the component mounts. This should probably be moved to
+    somewhere else so it only mounts when being called on the home screen. */
     useEffect(() => {
         getPosts()
     }, [])
