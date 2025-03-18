@@ -4,7 +4,8 @@ Comment as you go. It will help with comprehension and be a good
 reference for later. 
 
 Working on:
-    Each time an id is assigned to a newly created post, it does not create a unique id for each post. The post id is the same for every post created by that user. The post id is different for each user but every post created by those users has the same id.
+    Each time an id is assigned to a newly created post, it does not create a unique id for each post. The post id is the same for every post created by that user. The post id is different for each user but every post created by those users has the same id. Still
+    not sure why this happens.
 
     'userData' in Profile is not pulling in the information properly. 
     Could be because the component needs time to load first before 
