@@ -4,6 +4,10 @@ Comment as you go. It will help with comprehension and be a good
 reference for later. 
 
 Working on:
+    'userData' doesn't grab the data needed. 'userPosts' does grab the 
+    posts but doesn't populate them on the page. I wonder if its worth 
+    it to combine 'userData' and 'userPosts'.
+
     'userData' in Profile is not pulling in the information properly. 
     Could be because the component needs time to load first before 
     the data can be accessed. There is an 'if' statement at the bottom
