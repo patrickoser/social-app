@@ -6,7 +6,8 @@ reference for later.
 Working on:
     'userData' in Profile is not pulling in the information properly. 
     Could be because the component needs time to load first before 
-    the data can be accessed.
+    the data can be accessed. There is an 'if' statement at the bottom
+    that checks if 'userData' has loaded yet which may be interferring.
 
     I could move the 'useEffect' hook into the Profile component, that 
     way it would only load when you were on the Profile page.
