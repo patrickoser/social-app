@@ -99,7 +99,7 @@ const Profile = () => {
           posts.push({ id: doc.id, ...doc.data() });
         });
         return posts;
-      };
+    };
 
     const getImageUrl = async () => {
         const userRef = ref(storage, `users/${user.userId}`)
