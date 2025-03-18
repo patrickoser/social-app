@@ -7,6 +7,12 @@ Working on:
     Each time an id is assigned to a newly created post, it does not create a unique id for each post. The post id is the same for every post created by that user. The post id is different for each user but every post created by those users has the same id. Still
     not sure why this happens.
 
+    When I click on a post on the 'Home' page, 'PostPage' populates 
+    that post as intended. When I click on a post on the 'Profile' 
+    it gets stuck in a loading screen. This may have to do with the 
+    id issue, but still unclear why it would only happen when clicking 
+    on the posts on Profile.
+
     'userData' in Profile is not pulling in the information properly. 
     Could be because the component needs time to load first before 
     the data can be accessed. There is an 'if' statement at the bottom
