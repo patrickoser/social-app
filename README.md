@@ -22,6 +22,8 @@ Working on:
     the data can be accessed. There is an 'if' statement at the bottom
     that checks if 'userData' has loaded yet which may be interferring.
 
+    Set the posts to be displayed based on when they were created.
+
     I could move the 'useEffect' hook into the Profile component, that 
     way it would only load when you were on the Profile page.
 
