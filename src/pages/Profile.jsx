@@ -91,6 +91,7 @@ const Profile = () => {
         );
     };
 
+    /* I pull in the posts here differently than I do through Home/Feed/Post. */
     const getUserPosts = async (userId) => {
         const q = query(collection(db, "posts"), where("userId", "==", user.userId));
         const querySnapshot = await getDocs(q);
