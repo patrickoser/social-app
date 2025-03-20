@@ -138,9 +138,10 @@ const Profile = () => {
                 /* If the document exists, update the userData state with the fetched data */
                 if (userDoc.exists()) {
                     const data = userDoc.data();
-                    console.log(data);
+                    console.log('userDoc.data: ', data);
                     setUserData(data);
                     setBio(data.bio);
+                    console.log('userData: ', userData);
                 } else {
                     /* If the document doesn't exist, log an error message */
                     console.log('No such document!');
