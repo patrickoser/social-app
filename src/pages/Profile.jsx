@@ -199,7 +199,7 @@ const Profile = () => {
                         <button onClick={handleImageUpload}>Upload</button>
                         {url && <img src={url} className="w-24 h-24 rounded-full" alt="uploaded" />}
                     </div>
-                    <div id="profile-username">{user.username}</div>
+                    <div id="profile-username">{username}</div>
                     <div id="bio-edit">
                         {isEditing ? (
                             <div>
