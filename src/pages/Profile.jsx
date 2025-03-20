@@ -154,7 +154,7 @@ const Profile = () => {
         /* Call the fetchData function */
         fetchData();
         /* Dependency array ensures this runs when the username changes */
-    }, [username]);
+    }, [username, bio, image, userPosts]);
 
     /* useEffect hook to fetch user posts when the user state changes */
     useEffect(() => {
