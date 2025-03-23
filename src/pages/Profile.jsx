@@ -173,10 +173,11 @@ const Profile = () => {
           fetchUserPosts();
     }, [user])
       
-        /* If the userData state is null, display a loading message */ 
-    if (!userData) {
-        return <div>Loading...</div>
-    }
+    /* useEffect hook to set isMounted to true when the component mounts */
+    useEffect(() => {
+        setIsMounted(true);
+        return () => setIsMounted(false);
+    }, []);
 
     /* If userPosts is not empty then map over the posts and display them */
     const handlePosts = () => {
