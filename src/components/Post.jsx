@@ -2,8 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom'
 import { addDoc, getDocs, collection, query, where, deleteDoc, doc } from "firebase/firestore";
 import { useEffect, useState, useContext } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { db, auth } from "../config/firebase"
+import { db } from "../config/firebase"
 import { AuthContext } from "../context/AuthContext";
 
 const Post = ({ post }) => {
