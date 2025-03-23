@@ -19,8 +19,9 @@ Working on:
 
     'userData' in Profile is not pulling in the information properly. 
     Could be because the component needs time to load first before 
-    the data can be accessed. There is an 'if' statement at the bottom
-    that checks if 'userData' has loaded yet which may be interferring.
+    the data can be accessed. This could also be because it needs to
+    pull the 'username' from the url using 'useParams' so it can create a
+    reference to then get that users data.
 
     Set the posts to be displayed based on when they were created. 
 
