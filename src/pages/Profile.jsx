@@ -233,7 +233,7 @@ const Profile = () => {
                 <div id="right-sidebar" className="flex-auto min-w-60 mt-5 px-5 border"></div>
             </main> 
         )
-        : (<p>Loading...</p> )
+        : (<h3>Loading...</h3> )
     )
 }
 
