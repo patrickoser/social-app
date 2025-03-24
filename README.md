@@ -22,8 +22,6 @@ Working on:
     the data can be accessed. Added a check to see if the component has mounted 
     but still encountering the same issue.
 
-    Set the posts to be displayed based on when they were created. 
-
     I could move the 'useEffect' hook into the Profile component, that 
     way it would only load when you were on the Profile page.
 
