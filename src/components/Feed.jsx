@@ -4,7 +4,7 @@ import Post from "./Post";
 const Feed = ({ posts }) => {
 
     return (
-        //Maps each post to the Home page of the user.
+        /* Maps each post to the Home page of the user. */
         <div>
             {posts.map(post => (
                 <Post key={post.id} post={post} />
