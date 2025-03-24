@@ -3,7 +3,7 @@ import Post from "./Post";
 
 const Feed = ({ posts }) => {
 
-    const sortedPosts = posts.sort((a, b) => new Date(b.datetime) - new Date(a.datetime ))
+    const sortedPosts = posts.sort((a, b) => new Date(b.datetime) - new Date(a.datetime))
 
     return (
         /* Maps each post to the Home page of the user. */
