@@ -30,7 +30,6 @@ export const DataProvider = ({ children }) => {
                 userId: user.userId,
                 content: postContent, 
                 datetime: datetime, 
-                id: id
             })
         } catch(err) {
             console.error(err)
