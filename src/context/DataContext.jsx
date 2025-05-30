@@ -29,6 +29,13 @@ export const DataProvider = ({ children }) => {
                 content: postContent, 
                 datetime: datetime, 
             })
+            const newPost = {
+                id: docRef.id,
+                username: user.username,
+                userId: user.userId,
+                content: postContent,
+                datetime: datetime,
+            }
         } catch(err) {
             console.error(err)
         }
