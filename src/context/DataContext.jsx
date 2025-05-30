@@ -36,6 +36,8 @@ export const DataProvider = ({ children }) => {
                 content: postContent,
                 datetime: datetime,
             }
+            setPosts(prevPosts =>[...prevPosts, newPost])
+            setPostContent('')
         } catch(err) {
             console.error(err)
         }
