@@ -23,7 +23,7 @@ export const DataProvider = ({ children }) => {
         const datetime = format(new Date(), 'MMMM dd yyyy pp')
         console.log('datetime: ', datetime)
         try {
-            await addDoc(postsCollectionRef, { 
+            const docRef = await addDoc(postsCollectionRef, { 
                 username: user.username, 
                 userId: user.userId,
                 content: postContent, 
