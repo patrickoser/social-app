@@ -17,8 +17,8 @@ const Profile = () => {
     const [url, setUrl] = useState("")
     const [progress, setProgress] = useState(0)
     const [bio, setBio] = useState("")
-    
-    const [userData, setUserData] = useState({})
+    const [isLoading, setIsLoading] = useState(true)
+    const [userData, setUserData] = useState(null)
     const [isEditing, setIsEditing] = useState(false)
     const [userPosts, setUserPosts] = useState([])
     const [isMounted, setIsMounted] = useState(false)
