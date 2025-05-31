@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import Nav from "../components/Nav";
 import PostForm from "../components/PostForm";
+import DataContext from "../context/DataContext";
 import { AuthContext } from "../context/AuthContext";
 import { storage, db } from "../config/firebase"; 
 import { getDocs, query, collection, where, doc, getDoc, updateDoc } from "firebase/firestore";
