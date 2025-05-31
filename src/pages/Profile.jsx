@@ -11,6 +11,7 @@ import Post from "../components/Post";
 
 const Profile = () => {
     const { user } = useContext(AuthContext) 
+    const { posts } = useContext(DataContext)
 
     const [image, setImage] = useState(null)
     const [url, setUrl] = useState("")
