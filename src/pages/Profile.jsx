@@ -17,7 +17,7 @@ const Profile = () => {
     const [url, setUrl] = useState("")
     const [progress, setProgress] = useState(0)
     const [bio, setBio] = useState("")
-    /* 'userData' is being returned as an empty object. */
+    
     const [userData, setUserData] = useState({})
     const [isEditing, setIsEditing] = useState(false)
     const [userPosts, setUserPosts] = useState([])
