@@ -135,26 +135,26 @@ const Profile = () => {
     useEffect(() => {
         /* Define an asynchronous function to fetch user data */
         const fetchData = async () => {
+            setIsLoading(true)
             /* Get the user document from Firestore using the username */
             try {
                 const userDocRef = doc(db, 'usernames', username);
-                console.log('username: ', username);
                 const userDoc = await getDoc(userDocRef);
-                console.log('Document data:', userDoc.exists());
                 /* If the document exists, update the userData state with the fetched data */
                 if (userDoc.exists()) {
                     const data = userDoc.data();
-                    console.log('userDoc.data: ', data);
                     setUserData(data);
-                    setBio(data.bio);
-                    console.log('userData: ', userData);
+                    setBio(data.bio || 'Add bio here...');
                 } else {
                     /* If the document doesn't exist, log an error message */
-                    console.log('No such document!');
+                    setUserData(null)
                 }
             } catch (error) {
                 /* If there is an error, log the error message */
                 console.log('Error getting document:', error);
+                setUserData(null)
+            } finally {
+                setIsLoading(false)
             }
         };
         /* Call the fetchData function */
