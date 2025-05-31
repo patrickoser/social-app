@@ -162,21 +162,13 @@ const Profile = () => {
         /* Dependency array ensures this runs when the username changes */
     }, [username, bio, image, userPosts]);
 
-    /* useEffect hook to fetch user posts when the user state changes */
+    /* useEffect hook to fetch user posts when the user/posts state changes */
     useEffect(() => {
-        const fetchUserPosts = async () => {
-            try {
-                if (user) {
-                    const posts = await getUserPosts(user.userId);
-                    setUserPosts(posts);
-                }
-            } catch (error) {
-                console.log('Error getting user posts:', error);
-            };
-        };
-      
-          fetchUserPosts();
-    }, [user])
+        if (user) {
+            const userPosts = getUserPosts()
+            setUserPosts(userPosts)
+        }
+    }, [user, posts])
       
     /* useEffect hook to set isMounted to true when the component mounts */
     useEffect(() => {
