@@ -103,16 +103,10 @@ const Profile = () => {
         );
     };
 
-    /* I pull in the posts here differently than I do through Home/Feed/Post. */
-    const getUserPosts = async (userId) => {
-        const q = query(collection(db, "posts"), where("userId", "==", user.userId));
-        const querySnapshot = await getDocs(q);
-        const posts = [];
-        querySnapshot.forEach((doc) => {
-          posts.push({ id: doc.id, ...doc.data() });
-        });
-        return posts;
-    };
+    /* Use posts context to pull in posts and filter for the user's posts. */
+    const getUserPosts = () => {
+        return posts.filter(post => post.userId === user.userId)
+    }
 
     const getImageUrl = async () => {
         const userRef = ref(storage, `users/${user.userId}`)
