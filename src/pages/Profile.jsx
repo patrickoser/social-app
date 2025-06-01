@@ -181,54 +181,55 @@ const Profile = () => {
         <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
             {isLoading ? (
                 <h3>Loading...</h3>
+            ) : error ? (
+                <h3>{error}</h3>
             ) : userData ? (
                 <>
                     <div id="left-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
                         <Nav />
                     </div>
-                <div id="profile-main-content">
-                    <div id="profile-bio">
-                        <div id="img-con">
-                            {progress > 0 && progress < 100 && <progress value={progress} max="100" />}
-                            <input type="file" onChange={handleImageChange} />
-                            <button onClick={handleImageUpload}>Upload</button>
-                            {url && <img src={url} className="w-24 h-24 rounded-full" alt="uploaded" />}
+                    <div id="profile-main-content">
+                        <div id="profile-bio">
+                            <div id="img-con">
+                                {progress > 0 && progress < 100 && <progress value={progress} max="100" />}
+                                <input type="file" onChange={handleImageChange} />
+                                <button onClick={handleImageUpload}>Upload</button>
+                                {url && <img src={url} className="w-24 h-24 rounded-full" alt="uploaded" />}
+                            </div>
+                            <div id="profile-username">{username}</div>
+                            <div id="bio-edit">
+                                {isEditing ? (
+                                    <div>
+                                        <textarea value={bio} onChange={handleBioChange} />
+                                        <button onClick={handleBioUpload}>Save</button>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <p>{bio}</p>
+                                        <button onClick={() => setIsEditing(true)}>Edit</button>
+                                    </div>
+                                )}
+                            </div>
                         </div>
-                        <div id="profile-username">{username}</div>
-                        <div id="bio-edit">
-                            {isEditing ? (
-                                <div>
-                                    <textarea value={bio} onChange={handleBioChange} />
-                                    <button onClick={handleBioUpload}>Save</button>
-                                </div>
-                            ) : (
-                                <div>
-                                    <p>{bio}</p>
-                                    <button onClick={() => setIsEditing(true)}>Edit</button>
-                                </div>
-                            )}
+                        <PostForm />
+                        {/* Add two tabs that switch between the users posts and likes. */}
+                        <div id="profile-tabs" className="flex justify-evenly border-b border-black">
+                            <button onClick={handlePosts()}>Posts</button>
+                            <button>Likes</button>
+                        </div>
+                            {/* I need the Feed component to display only the posts made by the user associated 
+                            with the profile. Mya need a seperate Feed component if I can't get it to dynamically
+                            adjust. */}
+                        <div>
+                            {userPosts ? userPosts.map(post => (<Post key={post.id} post={post} />)) : <p>No posts to display</p>}
                         </div>
                     </div>
-                    <PostForm />
-                    {/* Add two tabs that switch between the users posts and likes. */}
-                    <div id="profile-tabs" className="flex justify-evenly border-b border-black">
-                        <button onClick={handlePosts()}>Posts</button>
-                        <button>Likes</button>
-                    </div>
-                        {/* I need the Feed component to display only the posts made by the user associated 
-                        with the profile. Mya need a seperate Feed component if I can't get it to dynamically
-                        adjust. */}
-                    <div>
-                        {userPosts ? userPosts.map(post => (<Post key={post.id} post={post} />)) : <p>No posts to display</p>}
-                    </div>
-                </div>
-                <div id="right-sidebar" className="flex-auto min-w-60 mt-5 px-5 border"></div>
-            </>
-        ) : (
-            <h3>User not found...</h3>
-        )
-    }
-    </main> 
+                    <div id="right-sidebar" className="flex-auto min-w-60 mt-5 px-5 border"></div>
+                </>
+            ) : (
+                <h3>User not found...</h3>
+            )}
+        </main> 
     )
 }
 
