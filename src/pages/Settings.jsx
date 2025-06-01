@@ -1,7 +1,7 @@
 import React from "react";
 import { auth } from "../config/firebase";
 import { signOut } from "firebase/auth";
-import DataContext from "../context/DataContext";
+import { DataContext } from "../context/DataContext";
 import { useContext } from "react";
 import Nav from "../components/Nav";
 

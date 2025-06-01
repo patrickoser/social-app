@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link } from 'react-router-dom'
 import { auth } from "../config/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import DataContext from "../context/DataContext";
+import { DataContext } from "../context/DataContext";
 
 const Login = () => {
     // Add a feature that checks local storage to see if they

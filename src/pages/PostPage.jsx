@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useContext } from "react";
-import DataContext from "../context/DataContext";
+import { DataContext } from "../context/DataContext";
 import { useParams } from "react-router-dom"
 import Nav from "../components/Nav";
 

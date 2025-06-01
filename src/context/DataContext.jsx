@@ -5,7 +5,7 @@ import { db } from "../config/firebase"
 import { collection, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore"
 import { AuthContext } from "./AuthContext";
 
-const DataContext = createContext({})
+export const DataContext = createContext({})
 
 export const DataProvider = ({ children }) => {
 
@@ -81,5 +81,3 @@ export const DataProvider = ({ children }) => {
         </DataContext.Provider>
     )
 }
-
-export default DataContext
