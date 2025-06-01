@@ -136,6 +136,7 @@ const Profile = () => {
         /* Define an asynchronous function to fetch user data */
         const fetchData = async () => {
             setIsLoading(true)
+            setError(null)
             console.log('Fetching data for username:', username);
             /* Get the user document from Firestore using the username */
             try {
