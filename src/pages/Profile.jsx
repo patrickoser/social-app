@@ -21,6 +21,7 @@ const Profile = () => {
     const [userData, setUserData] = useState(null)
     const [isEditing, setIsEditing] = useState(false)
     const [userPosts, setUserPosts] = useState([])
+    const [error, setError] = useState(null)
 
     const { username } = useParams()
   
