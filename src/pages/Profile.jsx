@@ -158,7 +158,9 @@ const Profile = () => {
             }
         };
         /* Call the fetchData function */
-        fetchData();
+        if (username) {
+            fetchData()
+        }
         /* Dependency array ensures this runs when the username changes */
     }, [username, bio, image, userPosts]);
 
@@ -169,19 +171,16 @@ const Profile = () => {
             setUserPosts(userPosts)
         }
     }, [user, posts])
-      
-    /* useEffect hook to set isMounted to true when the component mounts */
-    useEffect(() => {
-        setIsMounted(true);
-        return () => setIsMounted(false);
-    }, []);
   
     return (
-        (isMounted) ? (
-            <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
-                <div id="left-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
-                    <Nav />
-                </div>
+        <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
+            {isLoading ? (
+                <h3>Loading...</h3>
+            ) : userData ? (
+                <>
+                    <div id="left-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
+                        <Nav />
+                    </div>
                 <div id="profile-main-content">
                     <div id="profile-bio">
                         <div id="img-con">
@@ -219,9 +218,12 @@ const Profile = () => {
                     </div>
                 </div>
                 <div id="right-sidebar" className="flex-auto min-w-60 mt-5 px-5 border"></div>
-            </main> 
+            </>
+        ) : (
+            <h3>User not found...</h3>
         )
-        : (<h3>Loading...</h3> )
+    }
+    </main> 
     )
 }
 
