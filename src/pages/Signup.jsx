@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, googleProvider, db } from '../config/firebase'
 import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { addDoc, getDocs, collection, query, where } from "firebase/firestore";
+import { addDoc, getDocs, collection, query, where, doc, setDoc } from "firebase/firestore";
 
 const Signup = () => {
 
@@ -39,11 +39,14 @@ const Signup = () => {
             try {
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password)
                 const user = userCredential.user
-                await addDoc(usernamesRef, { 
+                /* Add the user to the usernames collection. */
+                await setDoc(doc(db, 'usernames', username), { 
                     userId: user.uid,
                     username: username,
-                    email: email
-                 })
+                    email: email,
+                    createdAt: new Date().toISOString() // Optional: add timestamp
+                })
+                /* Add the user to the usernames collection. */
                 console.log(`User Status: ${auth?.currentUser?.email} has created an account and signed in.`)
                 setPassword('')
                 setEmail('')
