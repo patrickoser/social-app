@@ -9,19 +9,6 @@ Learned:
 
 Working on:
 
-    When I click on a post on the 'Home' page, 'PostPage' populates 
-    that post as intended. When I click on a post on the 'Profile' 
-    it gets stuck in a loading screen. This may have to do with the 
-    id issue, but still unclear why it would only happen when clicking 
-    on the posts on 'Profile'. When I pull in posts from 'Profile', I dont 
-    reference the 'posts' object in from 'DataContext', instead I create a
-    new one within 'Profile'. This may be part of them problem.
-
-    'userData' in Profile is not pulling in the information properly. 
-    Could be because the component needs time to load first before 
-    the data can be accessed. Added a check to see if the component has mounted 
-    but still encountering the same issue.
-
     I could move the 'useEffect' hook into the Profile component, that 
     way it would only load when you were on the Profile page.
 
