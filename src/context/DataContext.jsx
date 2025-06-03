@@ -13,6 +13,7 @@ export const DataProvider = ({ children }) => {
     const [posts, setPosts] = useState([])
     const [postContent, setPostContent] = useState('')
     const postsCollectionRef = collection(db, "posts")
+    const [isLoading, setIsLoading] = useState(true)
 
     const { user } = useContext(AuthContext)
 
