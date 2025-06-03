@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useContext } from "react";
 import { DataContext } from "../context/DataContext";
 import { useParams } from "react-router-dom"
@@ -6,7 +6,7 @@ import Nav from "../components/Nav";
 
 const PostPage = () => {
     // Pulls in the 'posts' object from 'db.json' for reference below.
-    const { posts, deletePost } = useContext(DataContext)
+    const { posts, deletePost, postIsLoading } = useContext(DataContext)
 
     // 'useParams' grabs the 'id' from the url for reference below.
     const { id } = useParams()
@@ -21,7 +21,7 @@ const PostPage = () => {
     // is the one who created the post and is authorized to delete. 
     return (
         <div>
-            {!post ? (
+            {postIsLoading ? (
                 <h1>Loading...</h1>
             ) : (    
                 <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
@@ -53,9 +53,3 @@ const PostPage = () => {
 }
 
 export default PostPage
-
-/*
-
-
-                <Post key={post.id} post={post} />
-*/
