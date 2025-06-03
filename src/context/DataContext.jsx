@@ -13,7 +13,8 @@ export const DataProvider = ({ children }) => {
     const [posts, setPosts] = useState([])
     const [postContent, setPostContent] = useState('')
     const postsCollectionRef = collection(db, "posts")
-    const [isLoading, setIsLoading] = useState(true)
+    const [postIsLoading, setPostIsLoading] = useState(true)
+    const [userIsLoading, setUserIsLoading] = useState(true)
 
     const { user } = useContext(AuthContext)
 
@@ -59,14 +60,14 @@ export const DataProvider = ({ children }) => {
     /* Called below in a useEffect. References the "posts" collection in firebase, then uses
     'setPosts' to update the current state of the 'posts' object.. */
     const getPosts = async () => {
-        setIsLoading(true)
+        setPostIsLoading(true)
         try {
             const data = await getDocs(postsCollectionRef)
             setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
         } catch(err) {
             console.log(err.message)
         } finally {
-            setIsLoading(false)
+            setPostIsLoading(false)
         }
     }
 
@@ -79,7 +80,7 @@ export const DataProvider = ({ children }) => {
     return (
         <DataContext.Provider value={{
             posts, setPosts, navigate, postContent, setPostContent, createPost,
-            deletePost, getPosts, isLoading, setIsLoading
+            deletePost, getPosts, postIsLoading, setPostIsLoading, userIsLoading, setUserIsLoading
         }}>
             {children}
         </DataContext.Provider>
