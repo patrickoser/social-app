@@ -59,11 +59,14 @@ export const DataProvider = ({ children }) => {
     /* Called below in a useEffect. References the "posts" collection in firebase, then uses
     'setPosts' to update the current state of the 'posts' object.. */
     const getPosts = async () => {
+        setIsLoading(true)
         try {
             const data = await getDocs(postsCollectionRef)
             setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
         } catch(err) {
             console.log(err.message)
+        } finally {
+            setIsLoading(false)
         }
     }
 
