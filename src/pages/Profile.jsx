@@ -11,14 +11,12 @@ import Post from "../components/Post";
 
 const Profile = () => {
     const { user } = useContext(AuthContext) 
-    const { posts } = useContext(DataContext)
+    const { posts, postIsLoading } = useContext(DataContext)
 
     const [image, setImage] = useState(null)
     const [url, setUrl] = useState("")
     const [progress, setProgress] = useState(0)
     const [bio, setBio] = useState("")
-    const [postIsLoading, setPostIsLoading] = useState(true)
-    const [userIsLoading, setUserIsLoading] = useState(true)
     const [userData, setUserData] = useState(null)
     const [isEditing, setIsEditing] = useState(false)
     const [userPosts, setUserPosts] = useState([])
