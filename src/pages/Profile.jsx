@@ -135,26 +135,21 @@ const Profile = () => {
         /* Define an asynchronous function to fetch user data */
         const fetchData = async () => {
             setError(null)
-            console.log('Fetching data for username:', username);
             /* Get the user document from Firestore using the username */
             try {
                 const userDocRef = doc(db, 'usernames', username);
                 const userDoc = await getDoc(userDocRef);
-                console.log('User document exists:', userDoc.exists());
                 /* If the document exists, update the userData state with the fetched data */
                 if (userDoc.exists()) {
                     const data = userDoc.data();
-                    console.log('User data:', data);
                     setUserData(data);
                     setBio(data.bio || 'Add bio here...');
                 } else {
                     /* If the document doesn't exist, log an error message */
-                    console.log('No user document found for username:', username);
                     setUserData(null)
                 }
             } catch (error) {
                 /* If there is an error, log the error message */
-                console.log('Error getting document:', error);
                 setUserData(null)
             }
         };
