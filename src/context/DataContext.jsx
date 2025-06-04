@@ -14,7 +14,6 @@ export const DataProvider = ({ children }) => {
     const [postContent, setPostContent] = useState('')
     const postsCollectionRef = collection(db, "posts")
     const [postIsLoading, setPostIsLoading] = useState(true)
-    const [userIsLoading, setUserIsLoading] = useState(true)
 
     const { user } = useContext(AuthContext)
 
@@ -80,7 +79,7 @@ export const DataProvider = ({ children }) => {
     return (
         <DataContext.Provider value={{
             posts, setPosts, navigate, postContent, setPostContent, createPost,
-            deletePost, getPosts, postIsLoading, setPostIsLoading, userIsLoading, setUserIsLoading
+            deletePost, getPosts, postIsLoading, setPostIsLoading
         }}>
             {children}
         </DataContext.Provider>
