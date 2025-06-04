@@ -34,11 +34,7 @@ const PostPage = () => {
                             <h2 className="text-xs">{post.datetime}</h2>
                         </div>
                         <div>
-                            <p>{
-                                (post.content).length <= 100
-                                ? post.content
-                                : `${(post.content).slice(0, 100)}...`
-                            }</p>
+                            <p>{post.content}</p>
                         </div>
                         <div>
                             <button className="pr-1" onClick={() => deletePost(post.id)}>Delete</button>
