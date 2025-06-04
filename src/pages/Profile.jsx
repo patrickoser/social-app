@@ -134,7 +134,6 @@ const Profile = () => {
     useEffect(() => {
         /* Define an asynchronous function to fetch user data */
         const fetchData = async () => {
-            setUserIsLoading(true)
             setError(null)
             console.log('Fetching data for username:', username);
             /* Get the user document from Firestore using the username */
@@ -157,8 +156,6 @@ const Profile = () => {
                 /* If there is an error, log the error message */
                 console.log('Error getting document:', error);
                 setUserData(null)
-            } finally {
-                setUserIsLoading(false)
             }
         };
         /* Call the fetchData function */
@@ -178,7 +175,7 @@ const Profile = () => {
   
     return (
         <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
-            {userIsLoading || postIsLoading ? (
+            {postIsLoading ? (
                 <h3>Loading...</h3>
             ) : error ? (
                 <h3>{error}</h3>
