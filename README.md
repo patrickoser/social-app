@@ -18,6 +18,10 @@ Working on:
 
     need to fix user info box displaying their name and pfp in the left sidebar
 
+    add loading state to login/signup for better ux when signing in/loggin in, and redirects
+
+    make the sidebar/main content section more uniform through out all web pages
+
     When optimizing the performance of the project use Chrome Devtools/react dev tools to pinpoint 
     where the performance issues are originating from. 'useMemo' should help with some slower 
     components that use 'useEffect' so that they don't rerender needlessly.
