@@ -12,8 +12,6 @@ const Post = ({ post }) => {
 
     /* Used to hold and set the state of the number of likes. */
     const [likes, setLikes] = useState(null)
-    const [isLoading, setIsLoading] = useState(false)
-    const [error, setError] = useState(null)
 
     /* Reference the likes collection in firestore */
     const likesRef = collection(db, "likes")
@@ -26,8 +24,6 @@ const Post = ({ post }) => {
     /* Updates the 'likes' state by referencing the likes collection docs using the
     variables defined above. */
     const getLikes = async () => {
-        setIsLoading(true)
-        setError(null)
         try {
             /* 'getDocs' references pulls data from 'likesDoc' and stores it in 'data' */
             const data = await getDocs(likesDoc)
@@ -36,16 +32,12 @@ const Post = ({ post }) => {
             setLikes(data.docs.map((doc) => ({ userId: doc.data().userId, likeId: doc.id})))
         } catch (err) {
             console.error(err)
-            setError(err.message)
-        } finally {
-            setIsLoading(false)
         }
     }
 
     /* Creates a new doc within the 'likes' collection, taking the 'user.userId' and 
     'post.id' and storing it for reference. */
     const addLike = async () => {
-        console.log(user)
         try {
             const newDoc = await addDoc(likesRef, {
                 userId: user?.userId,
