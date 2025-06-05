@@ -19,7 +19,7 @@ const Post = ({ post }) => {
     /* Reference the 'likes' collection, using the 'likesRef'. 'where()' then loops
     through searching for the postId, in the 'likes' collection that matches the
     'post.id' of each individual post. */
-    const likesDoc = query(likesRef, where("postid", "==", post.id))
+    const likesDoc = query(likesRef, where("postId", "==", post.id))
 
     /* Updates the 'likes' state by referencing the likes collection docs using the
     variables defined above. */
