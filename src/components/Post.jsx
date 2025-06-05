@@ -12,6 +12,8 @@ const Post = ({ post }) => {
 
     /* Used to hold and set the state of the number of likes. */
     const [likes, setLikes] = useState(null)
+    const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState(null)
 
     /* Reference the likes collection in firestore */
     const likesRef = collection(db, "likes")
