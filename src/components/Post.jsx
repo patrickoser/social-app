@@ -26,6 +26,8 @@ const Post = ({ post }) => {
     /* Updates the 'likes' state by referencing the likes collection docs using the
     variables defined above. */
     const getLikes = async () => {
+        setIsLoading(true)
+        setError(null)
         try {
             /* 'getDocs' references pulls data from 'likesDoc' and stores it in 'data' */
             const data = await getDocs(likesDoc)
@@ -34,7 +36,10 @@ const Post = ({ post }) => {
             setLikes(data.docs.map((doc) => ({ userId: doc.data().userId, likeId: doc.id})))
         } catch (err) {
             console.error(err)
-        } 
+            setError(err.message)
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     /* Creates a new doc within the 'likes' collection, taking the 'user.userId' and 
