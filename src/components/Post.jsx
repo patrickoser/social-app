@@ -104,10 +104,10 @@ const Post = ({ post }) => {
     hasn't liked that post. */
     const hasUserLiked = likes?.find((like) => like.userId === user?.userId)
 
-    /* Calls 'getLikes' function on page load. */ 
+    /* Calls 'getLikes' function on page load or change to dependent variables. */ 
     useEffect(() => {
         getLikes()
-    }, [])
+    }, [post.id, user?.userId])
 
     return (
         <div className="max-w-full border-b border-black text-left">
