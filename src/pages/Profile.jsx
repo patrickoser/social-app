@@ -213,11 +213,22 @@ const Profile = () => {
                             <div id="profile-username" className="text-2xl font-bold mb-4">
                                 {username}
                             </div>
-                            <div id="bio-edit">
+                            <div id="bio-edit" className="w-full max-w-2xl">
                                 {isEditing ? (
-                                    <div>
-                                        <textarea value={bio} onChange={handleBioChange} />
-                                        <button onClick={handleBioUpload}>Save</button>
+                                    <div className="flex flex-col items-center gap-4">
+                                        <textarea 
+                                            value={bio} 
+                                            onChange={handleBioChange} 
+                                            className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                            rows="4"
+                                            placeholder="Tell us about yourself..."
+                                        />
+                                        <button 
+                                            onClick={handleBioUpload}
+                                            className="px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300"
+                                        >
+                                            Save Bio
+                                        </button>
                                     </div>
                                 ) : (
                                     <div>
