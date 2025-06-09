@@ -231,9 +231,14 @@ const Profile = () => {
                                         </button>
                                     </div>
                                 ) : (
-                                    <div>
-                                        <p>{bio}</p>
-                                        <button onClick={() => setIsEditing(true)}>Edit</button>
+                                    <div className="flex flex-col items-center gap-4">
+                                        <p className="text-gray-700 whitespace-pre-wrap">{bio}</p>
+                                        <button 
+                                            onClick={() => setIsEditing(true)}
+                                            className="px-4 py-2 text-sm font-medium text-blue-700 bg-blue-50 rounded-lg hover:bg-blue-100 focus:ring-4 focus:ring-blue-300"
+                                        >
+                                            Edit
+                                        </button>
                                     </div>
                                 )}
                             </div>
