@@ -183,7 +183,7 @@ const Profile = () => {
                     </div>
                     <div id="profile-main-content" className="flex-initial w-6/12 mt-5 px-5 text-center border">
                         <div id="profile-bio" className="flex flex-col items-center p-4 border-b border-black">
-                            <div id="img-con">
+                            <div id="img-con" className="flex flex-col items-center mb-4">
                                 {progress > 0 && progress < 100 && <progress value={progress} max="100" />}
                                 <input type="file" onChange={handleImageChange} />
                                 <button onClick={handleImageUpload}>Upload</button>
