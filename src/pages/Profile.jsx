@@ -147,10 +147,12 @@ const Profile = () => {
                 } else {
                     /* If the document doesn't exist, log an error message */
                     setUserData(null)
+                    setError('User not found')
                 }
             } catch (error) {
                 /* If there is an error, log the error message */
                 setUserData(null)
+                setError('Error fetching user data')
             }
         };
         /* Call the fetchData function */
@@ -179,7 +181,7 @@ const Profile = () => {
                     <div id="left-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
                         <Nav />
                     </div>
-                    <div id="profile-main-content">
+                    <div id="profile-main-content" className="flex-initial w-6/12 mt-5 px-5 text-center border">
                         <div id="profile-bio">
                             <div id="img-con">
                                 {progress > 0 && progress < 100 && <progress value={progress} max="100" />}
