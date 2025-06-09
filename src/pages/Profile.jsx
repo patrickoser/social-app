@@ -184,10 +184,31 @@ const Profile = () => {
                     <div id="profile-main-content" className="flex-initial w-6/12 mt-5 px-5 text-center border">
                         <div id="profile-bio" className="flex flex-col items-center p-4 border-b border-black">
                             <div id="img-con" className="flex flex-col items-center mb-4">
-                                {progress > 0 && progress < 100 && <progress value={progress} max="100" />}
-                                <input type="file" onChange={handleImageChange} />
-                                <button onClick={handleImageUpload}>Upload</button>
-                                {url && <img src={url} className="w-24 h-24 rounded-full" alt="uploaded" />}
+                                {progress > 0 && progress < 100 && (
+                                    <div className="w-full mb-2">
+                                        <progress value={progress} max="100" />
+                                    </div>
+                                )}
+                                <div className="flex items-center gap-4 mb-4">
+                                    <input 
+                                        type="file" 
+                                        onChange={handleImageChange} 
+                                        className="text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                                    />
+                                    <button 
+                                        onClick={handleImageUpload}
+                                        className="px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300"
+                                    >
+                                        Upload
+                                    </button>
+                                </div>
+                                {url && (
+                                    <img 
+                                        src={url} 
+                                        className="w-32 h-32 rounded-full object-cover border-4 border-gray-200" 
+                                        alt="uploaded" 
+                                    />
+                                )}
                             </div>
                             <div id="profile-username">{username}</div>
                             <div id="bio-edit">
