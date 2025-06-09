@@ -182,7 +182,7 @@ const Profile = () => {
                         <Nav />
                     </div>
                     <div id="profile-main-content" className="flex-initial w-6/12 mt-5 px-5 text-center border">
-                        <div id="profile-bio">
+                        <div id="profile-bio" className="flex flex-col items-center p-4 border-b border-black">
                             <div id="img-con">
                                 {progress > 0 && progress < 100 && <progress value={progress} max="100" />}
                                 <input type="file" onChange={handleImageChange} />
