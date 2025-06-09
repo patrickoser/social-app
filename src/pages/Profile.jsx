@@ -210,7 +210,9 @@ const Profile = () => {
                                     />
                                 )}
                             </div>
-                            <div id="profile-username">{username}</div>
+                            <div id="profile-username" className="text-2xl font-bold mb-4">
+                                {username}
+                            </div>
                             <div id="bio-edit">
                                 {isEditing ? (
                                     <div>
