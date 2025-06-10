@@ -15,7 +15,7 @@ const Contact = () => {
                     information I will get back to you ASAP.
                 </p>
             </section>
-            <section className="w-6/12">
+            <section id="contact-main-content" className="flex-initial w-6/12 mt-5 px-5 text-center border">
                 <form action="https://formsubmit.co/patrick.oser1@gmail.com" method="POST">
                     <div className="nameCon">
                         <label>Name:</label>
