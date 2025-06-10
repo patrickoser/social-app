@@ -5,30 +5,6 @@ import { AuthContext } from "../context/AuthContext";
 
 const Nav = () => {
     const { user } = useContext(AuthContext)
-    const [url, setUrl] = useState("")
-
-    const getImageUrl = async () => {
-        const userRef = ref(storage, `users/${user.userId}`)
-
-        try {
-            const res = await listAll(userRef)
-            if (res.items.length > 0) {
-                const url = await getDownloadURL(res.items[0])
-                setUrl(url)
-            } else {
-                /* This should return a default pic. */
-                return null
-            }
-        } catch (err) {
-            console.error(err)
-        }
-    }
-
-    useEffect(() => {
-        if (user) {
-            getImageUrl()
-        }
-    }, [user])
 
     return (
         <div className="flex h-screen">
@@ -38,14 +14,6 @@ const Nav = () => {
                     <li><Link to="/contact">Contact</Link></li>
                     <li><Link to="/settings">Settings</Link></li>
                 </ul>
-                {/* Pin this current user info to the bottom of the left margin.
-                Should be in a fixed position like the one on twitter. Add loading
-                to account for when username is loading and a default for if no
-                username can be found. */}
-                <div id="current-user-info" className="absolute bottom-0 inset-x-0 w-full px-4">
-                    <img src={url} className="w-14 h-14 rounded-full object-contain" alt="profile-pic" />
-                    <div id="username" className="overflow-ellipsis overflow-hidden">{user.username}</div>
-                </div>
             </nav>
         </div>
     )
