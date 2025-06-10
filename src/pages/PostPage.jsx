@@ -25,7 +25,7 @@ const PostPage = () => {
                 <h1>Loading...</h1>
             ) : (    
                 <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
-                    <section id="left-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
+                    <section id="left-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border">
                         <Nav />
                     </section>
                     <section className="flex-initial w-6/12 mt-5 px-5 text-center border-b border-t border-black">
@@ -40,7 +40,7 @@ const PostPage = () => {
                             <button className="pr-1" onClick={() => deletePost(post.id)}>Delete</button>
                         </div>
                     </section>
-                    <section id="right-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
+                    <section id="right-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border">
                     </section>
                 </main>
             )}
