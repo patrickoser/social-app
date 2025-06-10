@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { DataContext } from "../context/DataContext";
 import { useParams } from "react-router-dom"
 import Nav from "../components/Nav";
+import CurrentUserInfo from "../components/CurrentUserInfo";
 
 const PostPage = () => {
     // Pulls in the 'posts' object from 'db.json' for reference below.
@@ -41,6 +42,7 @@ const PostPage = () => {
                         </div>
                     </section>
                     <section id="right-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border">
+                        <CurrentUserInfo />
                     </section>
                 </main>
             )}
