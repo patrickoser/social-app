@@ -179,7 +179,7 @@ const Profile = () => {
                 <h3>{error}</h3>
             ) : userData ? (
                 <>
-                    <div id="left-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
+                    <div id="left-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border">
                         <Nav />
                     </div>
                     <div id="profile-main-content" className="flex-initial w-6/12 mt-5 px-5 text-center border">
@@ -257,7 +257,7 @@ const Profile = () => {
                             {userPosts ? userPosts.map(post => (<Post key={post.id} post={post} />)) : <p>No posts to display</p>}
                         </div>
                     </div>
-                    <div id="right-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
+                    <div id="right-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border">
                         <CurrentUserInfo />
                     </div>
                 </>
