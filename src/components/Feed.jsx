@@ -8,7 +8,6 @@ const Feed = ({ posts }) => {
     return (
         /* Maps each post to the Home page of the user. */
         <div>
-            {console.log('sortedPosts: ', sortedPosts)}
             {sortedPosts.map(post => (
                 <Post key={post.id} post={post} />
             ))}
