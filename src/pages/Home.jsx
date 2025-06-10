@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import Feed from "../components/Feed";
 import Nav from "../components/Nav";
 import PostForm from "../components/PostForm";
+import CurrentUserInfo from "../components/CurrentUserInfo";
 import { DataContext } from "../context/DataContext";
 
 const Home = () => {
@@ -20,6 +21,7 @@ const Home = () => {
                 </div>
             </section>
             <section id="right-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
+                <CurrentUserInfo />
             </section>
         </main>
     )
