@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import Nav from "../components/Nav";
 import PostForm from "../components/PostForm";
+import CurrentUserInfo from "../components/CurrentUserInfo";
 import { DataContext } from "../context/DataContext";
 import { AuthContext } from "../context/AuthContext";
 import { storage, db } from "../config/firebase"; 
@@ -256,7 +257,9 @@ const Profile = () => {
                             {userPosts ? userPosts.map(post => (<Post key={post.id} post={post} />)) : <p>No posts to display</p>}
                         </div>
                     </div>
-                    <div id="right-sidebar" className="flex-auto min-w-60 mt-5 px-5 border"></div>
+                    <div id="right-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
+                        <CurrentUserInfo />
+                    </div>
                 </>
             ) : (
                 <h3>User not found...</h3>
