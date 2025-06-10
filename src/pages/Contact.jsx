@@ -5,7 +5,7 @@ import CurrentUserInfo from "../components/CurrentUserInfo";
 const Contact = () => {
     return (
         <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
-            <div id="left-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
+            <div id="left-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border">
                 <Nav />
             </div>
             <div id="contact-main-content" className="flex-initial w-6/12 mt-5 px-5 text-center border">
@@ -60,7 +60,7 @@ const Contact = () => {
                     </form>
                 </div>
             </div>
-            <div id="right-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
+            <div id="right-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border">
                 <CurrentUserInfo />
             </div>
         </main>
