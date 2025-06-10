@@ -7,19 +7,19 @@ const Contact = () => {
             <div id="left-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
                 <Nav />
             </div>
-            <div>
-                <div className="w-6/12">
-                    <h1>Need to get in touch?</h1>
-                    <p>Notice something about the site that isn't working 
+            <div id="contact-main-content" className="flex-initial w-6/12 mt-5 px-5 text-center border">
+                <div className="mb-8">
+                    <h1 className="text-2xl font-bold mb-4">Need to get in touch?</h1>
+                    <p className="text-gray-700">Notice something about the site that isn't working 
                         the way it should, have an idea how it could be better, 
                         or just need to talk? Send me a message with your contact
                         information I will get back to you ASAP.
                     </p>
                 </div>
                 <div>
-                    <form action="https://formsubmit.co/patrick.oser1@gmail.com" method="POST">
-                        <div className="nameCon">
-                            <label>Name:</label>
+                    <form action="https://formsubmit.co/patrick.oser1@gmail.com" method="POST" className="max-w-lg mx-auto">
+                        <div className="mb-4">
+                            <label className="block text-left mb-2">Name:</label>
                             <input 
                                 type="text"
                                 name="name"
