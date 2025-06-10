@@ -1,5 +1,6 @@
 import React from "react";
 import Nav from "../components/Nav";
+import CurrentUserInfo from "../components/CurrentUserInfo";
 
 const Contact = () => {
     return (
