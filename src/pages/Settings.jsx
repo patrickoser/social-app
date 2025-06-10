@@ -4,6 +4,7 @@ import { signOut } from "firebase/auth";
 import { DataContext } from "../context/DataContext";
 import { useContext } from "react";
 import Nav from "../components/Nav";
+import CurrentUserInfo from "../components/CurrentUserInfo";
 
 const Settings = () => {
     /* Might not need to import context as it could be costll w/o
@@ -30,7 +31,9 @@ const Settings = () => {
                 <h1 className="text-center">Settings</h1>
                 <button onClick={logout}>Logout</button>
             </div>
-            <div id="right-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border"></div>
+            <div id="right-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border">
+                <CurrentUserInfo />
+            </div>
         </main>
     )
 }
