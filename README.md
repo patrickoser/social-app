@@ -13,8 +13,6 @@ Working on:
 
     add structure to Contact, no sidebars/nav
 
-    pfp currently broken
-
     need to fix user info box displaying their name and pfp in the left sidebar
 
     add loading state to login/signup for better ux when signing in/loggin in, and redirects
@@ -24,6 +22,8 @@ Working on:
     When optimizing the performance of the project use Chrome Devtools/react dev tools to pinpoint 
     where the performance issues are originating from. 'useMemo' should help with some slower 
     components that use 'useEffect' so that they don't rerender needlessly.
+
+    Add ability to view site as a guest so people can check the functionality of the site.
 
 Currently:
     Add Nav bar to Settings/Contact page. 
