@@ -61,6 +61,7 @@ const Contact = () => {
                 </div>
             </div>
             <div id="right-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
+                <CurrentUserInfo />
             </div>
         </main>
     )
