@@ -4,6 +4,9 @@ import Nav from "../components/Nav";
 const Contact = () => {
     return (
         <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
+            <section id="left-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
+                <Nav />
+            </section>
             <section className="w-6/12">
                 <h1>Need to get in touch?</h1>
                 <p>Notice something about the site that isn't working 
