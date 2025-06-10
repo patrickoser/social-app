@@ -18,7 +18,7 @@ const Contact = () => {
                 </div>
                 <div>
                     <form action="https://formsubmit.co/patrick.oser1@gmail.com" method="POST" className="max-w-lg mx-auto">
-                        <div className="mb-4">
+                        <div id="nameCon" className="mb-4">
                             <label className="block text-left mb-2">Name:</label>
                             <input 
                                 type="text"
@@ -28,8 +28,8 @@ const Contact = () => {
                                 required
                             />
                         </div>
-                        <div className="emailCon">
-                            <label>Email</label>
+                        <div id="emailCon" className="mb-4">
+                            <label className="block text-left mb-2">Email</label>
                             <input 
                                 type="text"
                                 name="email"
@@ -38,9 +38,9 @@ const Contact = () => {
                                 required
                             />
                         </div>
-                        <div className="messageCon">
-                            <label>Message</label>
-                            <input 
+                        <div id="messageCon" className="mb-4">
+                            <label className="block text-left mb-2">Message</label>
+                            <textarea 
                                 type="textarea"
                                 name="message"
                                 id="message"
