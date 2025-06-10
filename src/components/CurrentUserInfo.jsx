@@ -45,3 +45,5 @@ const CurrentUserInfo = () => {
         </div>
     )
 }
+
+export default CurrentUserInfo;
