@@ -23,14 +23,14 @@ const Settings = () => {
 
     return (
         <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
-            <div id="left-sidebar" className="flex-auto min-w-60 mt-5 px-5 border">
+            <div id="left-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border">
                 <Nav />
             </div>
-            <div id="main-content-settings" className="max-w-full flex-auto min-w-60 border-b border-black text-left">
+            <div id="main-content-settings" className="flex-initial w-6/12 mt-5 px-5 text-center border">
                 <h1 className="text-center">Settings</h1>
                 <button onClick={logout}>Logout</button>
             </div>
-            <div id="right-sidebar" className="flex-auto min-w-60 mt-5 px-5 border"></div>
+            <div id="right-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border"></div>
         </main>
     )
 }
