@@ -13,7 +13,7 @@ import Post from "../components/Post";
 const Profile = () => {
     const { user } = useContext(AuthContext) 
     const { posts, postIsLoading } = useContext(DataContext)
-
+    const [activeTab, setActiveTab] = useState("posts")
     const [image, setImage] = useState(null)
     const [url, setUrl] = useState("")
     const [progress, setProgress] = useState(0)
