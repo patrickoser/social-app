@@ -107,11 +107,6 @@ const Profile = () => {
         );
     };
 
-    /* Use posts context to pull in posts and filter for the user's posts.
-    const getUserPosts = () => {
-        return posts.filter(post => post.userId === user.userId)
-    }  */
-
     const getProfilePosts = () => {
         const profilePosts = posts.filter(post => post.username === username)
         setUserPosts(profilePosts)
@@ -201,14 +196,6 @@ const Profile = () => {
         }
     }, [username, posts])
 
-    /* useEffect hook to fetch user posts when the user/posts state changes
-    useEffect(() => {
-        if (user) {
-            const userPosts = getUserPosts()
-            setUserPosts(userPosts)
-        }
-    }, [user, posts]) */
-  
     return (
         <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
             {postIsLoading ? (
