@@ -287,8 +287,18 @@ const Profile = () => {
                         </div>
                         {/* Add two tabs that switch between the users posts and likes. */}
                         <div id="profile-tabs" className="flex justify-evenly border-b border-black">
-                            <button onClick={handlePosts()}>Posts</button>
-                            <button>Likes</button>
+                        <button 
+                                onClick={() => setActiveTab('posts')}
+                                className={`px-4 py-2 ${activeTab === 'posts' ? 'border-b-2 border-blue-500' : ''}`}
+                            >
+                                Posts
+                            </button>
+                            <button 
+                                onClick={() => setActiveTab('likes')}
+                                className={`px-4 py-2 ${activeTab === 'likes' ? 'border-b-2 border-blue-500' : ''}`}
+                            >
+                                Likes
+                            </button>
                         </div>
                             {/* I need the Feed component to display only the posts made by the user associated 
                             with the profile. Mya need a seperate Feed component if I can't get it to dynamically
