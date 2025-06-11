@@ -25,6 +25,8 @@ Working on:
 
     Add ability to view site as a guest so people can check the functionality of the site.
 
+    posts on profile should have the newests posts at the top, same for likes.
+
 Currently:
     Add Nav bar to Settings/Contact page. 
 
