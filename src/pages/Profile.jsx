@@ -12,8 +12,7 @@ import Post from "../components/Post";
 
 const Profile = () => {
     const { user } = useContext(AuthContext) 
-    const { posts, postIsLoading } = useContext(DataContext)
-    const [activeTab, setActiveTab] = useState("posts")
+    const { posts, postIsLoading } = useContext(DataContext) // This seems off.
     const [image, setImage] = useState(null)
     const [url, setUrl] = useState("")
     const [progress, setProgress] = useState(0)
@@ -22,6 +21,11 @@ const Profile = () => {
     const [isEditing, setIsEditing] = useState(false)
     const [userPosts, setUserPosts] = useState([])
     const [error, setError] = useState(null)
+    /* New */
+    const [userLikes, setUserLikes] = useState([])
+    const [likedPosts, setLikedPosts] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
+    const [activeTab, setActiveTab] = useState("posts")
 
     const { username } = useParams()
   
@@ -113,6 +117,27 @@ const Profile = () => {
         setUserPosts(profilePosts)
     }
 
+    const getProfileLikes = async () => {
+        try {
+            const likesRef = collection(db, "likes")
+            const q = query(likesRef, where("username", "==", username))
+            const querySnapshot = await getDocs(q)
+            // Come back to this
+            const likes = querySnapshot.docs.map(doc => ({
+                ...doc.data(),
+                likeId: doc.id
+            }))
+            setUserLikes(likes)
+
+            // Get the posts that were liked. Might be redundant. Come back to this.
+            const likedPostIds = likes.map(like => like.postId)
+            const likedPostsData = posts.filter(post => likedPostIds.includes(post.id))
+            setLikedPosts(likedPostsData)
+        } catch (err) {
+            console.error("Error fetching likes:", err)
+        }
+    }
+
     const getImageUrl = async () => {
         const userRef = ref(storage, `users/${user.userId}`)
 
@@ -168,13 +193,21 @@ const Profile = () => {
         /* Dependency array ensures this runs when the username changes */
     }, [username]);
 
-    /* useEffect hook to fetch user posts when the user/posts state changes */
+    useEffect(() => {
+        if (username && posts) {
+            getProfilePosts()
+            getProfileLikes()
+            setIsLoading(false)
+        }
+    }, [username, posts])
+
+    /* useEffect hook to fetch user posts when the user/posts state changes
     useEffect(() => {
         if (user) {
             const userPosts = getUserPosts()
             setUserPosts(userPosts)
         }
-    }, [user, posts])
+    }, [user, posts]) */
   
     return (
         <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
