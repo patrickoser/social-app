@@ -103,9 +103,14 @@ const Profile = () => {
         );
     };
 
-    /* Use posts context to pull in posts and filter for the user's posts. */
+    /* Use posts context to pull in posts and filter for the user's posts.
     const getUserPosts = () => {
         return posts.filter(post => post.userId === user.userId)
+    }  */
+
+    const getProfilePosts = () => {
+        const profilePosts = posts.filter(post => post.username === username)
+        setUserPosts(profilePosts)
     }
 
     const getImageUrl = async () => {
