@@ -6,7 +6,7 @@ import { DataContext } from "../context/DataContext";
 import { AuthContext } from "../context/AuthContext";
 import { storage, db } from "../config/firebase"; 
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { ref, uploadBytesResumable, getDownloadURL, listAll } from "firebase/storage";
+import { ref, uploadBytesResumable, getDownloadURL, listAll, collection, getDocs, query, where } from "firebase/storage";
 import { useParams } from "react-router-dom";
 import Post from "../components/Post";
 
@@ -182,7 +182,7 @@ const Profile = () => {
                     <div id="left-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border">
                         <Nav />
                     </div>
-                    <div id="profile-main-content" className="flex-initial w-6/12 mt-5 px-5 text-center border">
+                    <div id="profile-main-content"  >
                         <div id="profile-bio" className="flex flex-col items-center p-4 border-b border-black">
                             <div id="img-con" className="flex flex-col items-center mb-4">
                                 {progress > 0 && progress < 100 && (
