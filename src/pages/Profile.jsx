@@ -287,7 +287,7 @@ const Profile = () => {
                         </div>
                         {/* Add two tabs that switch between the users posts and likes. */}
                         <div id="profile-tabs" className="flex justify-evenly border-b border-black">
-                        <button 
+                            <button 
                                 onClick={() => setActiveTab('posts')}
                                 className={`px-4 py-2 ${activeTab === 'posts' ? 'border-b-2 border-blue-500' : ''}`}
                             >
@@ -300,11 +300,20 @@ const Profile = () => {
                                 Likes
                             </button>
                         </div>
-                            {/* I need the Feed component to display only the posts made by the user associated 
-                            with the profile. Mya need a seperate Feed component if I can't get it to dynamically
-                            adjust. */}
-                        <div>
-                            {userPosts ? userPosts.map(post => (<Post key={post.id} post={post} />)) : <p>No posts to display</p>}
+                        <div className="mt-4">
+                            {activeTab === 'posts' ? (
+                                userPosts.length > 0 ? (
+                                    userPosts.map(post => <Post key={post.id} post={post} />)
+                                ) : (
+                                    <p>No posts to display</p>
+                                )
+                            ) : (
+                                likedPosts.length > 0 ? (
+                                    likedPosts.map(post => <Post key={post.id} post={post} />)
+                                ) : (
+                                    <p>No liked posts to display</p>
+                                )
+                            )}
                         </div>
                     </div>
                     <div id="right-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border">
