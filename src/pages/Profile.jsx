@@ -220,7 +220,7 @@ const Profile = () => {
                     <div id="left-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border">
                         <Nav />
                     </div>
-                    <div id="profile-main-content"  >
+                    <div id="profile-main-content" className="flex-initial w-6/12 mt-5 px-5 text-center border" >
                         <div id="profile-bio" className="flex flex-col items-center p-4 border-b border-black">
                             <div id="img-con" className="flex flex-col items-center mb-4">
                                 {progress > 0 && progress < 100 && (
@@ -282,7 +282,9 @@ const Profile = () => {
                                 )}
                             </div>
                         </div>
-                        <PostForm />
+                        <div>
+                            {username === user?.username && <PostForm />}
+                        </div>
                         {/* Add two tabs that switch between the users posts and likes. */}
                         <div id="profile-tabs" className="flex justify-evenly border-b border-black">
                             <button onClick={handlePosts()}>Posts</button>
