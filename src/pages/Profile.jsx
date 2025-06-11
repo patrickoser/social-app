@@ -5,8 +5,8 @@ import CurrentUserInfo from "../components/CurrentUserInfo";
 import { DataContext } from "../context/DataContext";
 import { AuthContext } from "../context/AuthContext";
 import { storage, db } from "../config/firebase"; 
-import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { ref, uploadBytesResumable, getDownloadURL, listAll, collection, getDocs, query, where } from "firebase/storage";
+import { doc, getDoc, updateDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { ref, uploadBytesResumable, getDownloadURL, listAll } from "firebase/storage";
 import { useParams } from "react-router-dom";
 import Post from "../components/Post";
 
