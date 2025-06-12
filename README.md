@@ -28,7 +28,7 @@ Working on:
     posts on profile should have the newests posts at the top, same for likes.
 
 Currently:
-    Add Nav bar to Settings/Contact page. 
+    Add Nav bar to Settings/Contact page.
 
     Add css structure to the posts pages. 
 
