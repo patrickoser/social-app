@@ -7,9 +7,11 @@ const Header = () => {
     
     return (
         <header className="flex justify-between">
-            <section>
-                <Link to="/home"><h2>Social App</h2></Link>
-            </section>
+            <div>
+                <Link to="/home">
+                    <h2 className="text-gray-900 dark:text-white">Social App</h2>
+                </Link>
+            </div>
         </header>
     )
 }
