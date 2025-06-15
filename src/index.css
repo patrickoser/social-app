@@ -6,7 +6,7 @@
   color-scheme: light dark;
 }
 
-body{
+body {
     background-color: white;
     color: rgb(17, 24, 39); /* text-gray-900 */
     transition-property: color, background-color;
