@@ -13,6 +13,7 @@ import Missing from "./pages/Missing.jsx"
 
 import { DataProvider } from "./context/DataContext.jsx"
 import { AuthProvider } from "./context/AuthContext.jsx"
+import { ThemeProvider } from "./context/ThemeContext.jsx"
 import { PrivateRoutes } from "./components/PrivateRoutes.jsx"
 
 function App() {
@@ -22,7 +23,8 @@ function App() {
       <Router>
         <AuthProvider>
           <DataProvider>
-            <Header />
+            <ThemeProvider>
+              <Header />
               <Routes>
                 <Route element={<PrivateRoutes />}>
                   <Route path="/" element={<Home />} />
@@ -36,7 +38,8 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/missing" element={<Missing />} />
               </Routes>
-            <Footer />
+              <Footer />
+            </ThemeProvider>
           </DataProvider>
         </AuthProvider>
       </Router>
