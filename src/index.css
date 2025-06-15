@@ -6,6 +6,14 @@
   color-scheme: light dark;
 }
 
-body {
-  @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-200;
+body{
+    background-color: white;
+    color: rgb(17, 24, 39); /* text-gray-900 */
+    transition-property: color, background-color;
+    transition-duration: 200ms;
+}
+
+.dark body {
+    background-color: rgb(17, 24, 39); /* bg-gray-900 */
+    color: white;
 }
