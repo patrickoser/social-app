@@ -13,6 +13,10 @@ Learned:
 
 Working on:
 
+    Css still needs to be add to other pages like Settings, Contact and SignUp.
+
+    Adjust indentation of elements with long tailwind classes/other attributes to make it more readable.
+
     Add ntelisense for tailwind now that were using cursor.
 
     Add spacing to Post buttons.
