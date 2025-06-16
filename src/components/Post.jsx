@@ -108,21 +108,24 @@ const Post = ({ post }) => {
     }, [post.id, user?.userId])
 
     return (
-        <div className="max-w-full border-b border-black text-left">
+        <div className="max-w-full border-b border-gray-200 dark:border-gray-700 text-left bg-white dark:bg-gray-800 p-4">
             <Link to={`/post/${post.id}`}>
                 <h2 className="font-bold">{post.username}</h2>
-                <h5 className="text-xs">{post.datetime}</h5>
+                <h5 className="text-xs text-gray-500 dark:text-gray-400">{post.datetime}</h5>
             </Link>
-            <p>{
+            <p className="text-gray-800 dark:text-gray-200 mt-2">{
                 (post.content).length <= 100
                 ? post.content
                 : `${(post.content).slice(0, 100)}...`
             }</p>
-            <div className="flex justify-end">
-                <button onClick={hasUserLiked ? removeLike : addLike} className="pr-1">Like</button>
-                {likes && <p> {likes?.length} </p>}
-                <button className="pr-1">Share</button>
-                <button className="pr-1">Save</button>
+            <div className="flex justify-end mt-2">
+                <button 
+                    onClick={hasUserLiked ? removeLike : addLike} 
+                    className="pr-1 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+                >Like</button>
+                {likes && <p className="text-gray-600 dark:text-gray-300"> {likes?.length} </p>}
+                <button className="pr-1 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Share</button>
+                <button className="pr-1 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Save</button>
             </div>
         </div>
     )
