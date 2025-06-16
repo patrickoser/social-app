@@ -30,17 +30,17 @@ const CurrentUserInfo = () => {
     }, [user]);
 
     return (
-        <div className="flex items-center gap-3 p-4 border-b">
+        <div className="flex items-center gap-3 p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
             {/* Profile picture */}
             <img 
                 src={url} 
-                className="w-12 h-12 rounded-full object-cover border-2 border-gray-200" 
+                className="w-12 h-12 rounded-full object-cover border-2 border-gray-200 dark:border-gray-600" 
                 alt="profile-pic" 
             />
             {/* User details container */}
             <div className="flex flex-col">
-                <span className="font-semibold text-gray-900">{user?.username}</span>
-                <span className="text-sm text-gray-500">{user?.email}</span>
+                <span className="font-semibold text-gray-900 dark:text-white">{user?.username}</span>
+                <span className="text-sm text-gray-500 dark:text-gray-400">{user?.email}</span>
             </div>
         </div>
     )
