@@ -9,10 +9,10 @@ const Nav = () => {
     return (
         <div className="flex h-screen">
             <nav className="flex flex-col h-full relative">
-                <ul className="flex flex-col">
-                    <li><Link to={`/profile/${user?.username}`}>Profile</Link></li>
-                    <li><Link to="/contact">Contact</Link></li>
-                    <li><Link to="/settings">Settings</Link></li>
+                <ul className="flex flex-col space-y-2">
+                    <li><Link to={`/profile/${user?.username}`} className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Profile</Link></li>
+                    <li><Link to="/contact" className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Contact</Link></li>
+                    <li><Link to="/settings" className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Settings</Link></li>
                 </ul>
             </nav>
         </div>

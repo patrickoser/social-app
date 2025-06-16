@@ -13,6 +13,10 @@ Learned:
 
 Working on:
 
+    Add ntelisense for tailwind now that were using cursor.
+
+    Add spacing to Post buttons.
+
     add buttons for likes, etc.. to PostPage
 
     add structure to Contact, no sidebars/nav
