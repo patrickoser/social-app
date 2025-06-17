@@ -12,6 +12,8 @@ Learned:
     which in turn keeps load times manageable. 
 
 Working on:
+    The posts kind of break the bottom of the Profile page. Might happen to Home too if there is enough of them.
+
     When visiting another users profile you shouldnt be able to see buttons that let you edit.
 
     When logging into an existing account you dont get redirected to Home but instead to Signup.
