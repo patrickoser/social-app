@@ -6,15 +6,15 @@ const Header = () => {
     const { isDarkMode, toggleTheme } = useContext(ThemeContext);
     
     return (
-        <header className="flex justify-between">
+        <header className="flex justify-between items-center px-3 py-1 bg-white dark:bg-gray-800 shadow-sm">
             <div>
                 <Link to="/home">
-                    <h2 className="text-gray-900 dark:text-white">Social App</h2>
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Social App</h2>
                 </Link>
             </div>
             <button
                 onClick={toggleTheme}
-                className="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200"
+                className="p-3 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200 shadow-sm"
                 aria-label="Toggle theme"
             >
                 {isDarkMode ? (
