@@ -12,6 +12,8 @@ Learned:
     which in turn keeps load times manageable. 
 
 Working on:
+    When visiting another users profile you shouldnt be able to see buttons that let you edit.
+
     When logging into an existing account you dont get redirected to Home but instead to Signup.
 
     I want the footer to be at the bottom of the page and not stuck to the bottom of the screen.

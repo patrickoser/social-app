@@ -199,16 +199,16 @@ const Profile = () => {
     return (
         <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
             {postIsLoading ? (
-                <h3>Loading...</h3>
+                <h3 className="text-gray-900 dark:text-white">Loading...</h3>
             ) : error ? (
-                <h3>{error}</h3>
+                <h3 className="text-red-600 dark:text-red-400">{error}</h3>
             ) : userData ? (
                 <>
-                    <div id="left-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border">
+                    <div id="left-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
                         <Nav />
                     </div>
-                    <div id="profile-main-content" className="flex-initial w-6/12 mt-5 px-5 text-center border" >
-                        <div id="profile-bio" className="flex flex-col items-center p-4 border-b border-black">
+                    <div id="profile-main-content" className="flex-initial w-6/12 mt-5 px-5 text-center border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white" >
+                        <div id="profile-bio" className="flex flex-col items-center p-4 border-b border-gray-200 dark:border-gray-700">
                             <div id="img-con" className="flex flex-col items-center mb-4">
                                 {progress > 0 && progress < 100 && (
                                     <div className="w-full mb-2">
@@ -219,11 +219,11 @@ const Profile = () => {
                                     <input 
                                         type="file" 
                                         onChange={handleImageChange} 
-                                        className="text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                                        className="text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 dark:file:bg-blue-900 file:text-blue-700 dark:file:text-blue-300 hover:file:bg-blue-100 dark:hover:file:bg-blue-800"
                                     />
                                     <button 
                                         onClick={handleImageUpload}
-                                        className="px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300"
+                                        className="px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700"
                                     >
                                         Upload
                                     </button>
@@ -231,12 +231,12 @@ const Profile = () => {
                                 {url && (
                                     <img 
                                         src={url} 
-                                        className="w-32 h-32 rounded-full object-cover border-4 border-gray-200" 
+                                        className="w-32 h-32 rounded-full object-cover border-4 border-gray-200 dark:border-gray-600" 
                                         alt="uploaded" 
                                     />
                                 )}
                             </div>
-                            <div id="profile-username" className="text-2xl font-bold mb-4">
+                            <div id="profile-username" className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
                                 {username}
                             </div>
                             <div id="bio-edit" className="w-full max-w-2xl">
@@ -245,23 +245,23 @@ const Profile = () => {
                                         <textarea 
                                             value={bio} 
                                             onChange={handleBioChange} 
-                                            className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                            className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                                             rows="4"
                                             placeholder="Tell us about yourself..."
                                         />
                                         <button 
                                             onClick={handleBioUpload}
-                                            className="px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300"
+                                            className="px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700"
                                         >
                                             Save Bio
                                         </button>
                                     </div>
                                 ) : (
                                     <div className="flex flex-col items-center gap-4">
-                                        <p className="text-gray-700 whitespace-pre-wrap">{bio}</p>
+                                        <p className="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{bio}</p>
                                         <button 
                                             onClick={() => setIsEditing(true)}
-                                            className="px-4 py-2 text-sm font-medium text-blue-700 bg-blue-50 rounded-lg hover:bg-blue-100 focus:ring-4 focus:ring-blue-300"
+                                            className="px-4 py-2 text-sm font-medium text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/50 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900 focus:ring-4 focus:ring-blue-300"
                                         >
                                             Edit
                                         </button>
@@ -272,17 +272,20 @@ const Profile = () => {
                         <div>
                             {username === user?.username && <PostForm />}
                         </div>
-                        {/* Add two tabs that switch between the users posts and likes. */}
-                        <div id="profile-tabs" className="flex justify-evenly border-b border-black">
+                        <div id="profile-tabs" className="flex justify-evenly border-b border-gray-200 dark:border-gray-700">
                             <button 
                                 onClick={() => setActiveTab('posts')}
-                                className={`px-4 py-2 ${activeTab === 'posts' ? 'border-b-2 border-blue-500' : ''}`}
+                                className={`px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white ${
+                                    activeTab === 'posts' ? 'border-b-2 border-blue-500 dark:border-blue-400' : ''
+                                }`}
                             >
                                 Posts
                             </button>
                             <button 
                                 onClick={() => setActiveTab('likes')}
-                                className={`px-4 py-2 ${activeTab === 'likes' ? 'border-b-2 border-blue-500' : ''}`}
+                                className={`px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white ${
+                                    activeTab === 'likes' ? 'border-b-2 border-blue-500 dark:border-blue-400' : ''
+                                }`}
                             >
                                 Likes
                             </button>
@@ -292,23 +295,23 @@ const Profile = () => {
                                 userPosts.length > 0 ? (
                                     userPosts.map(post => <Post key={post.id} post={post} />)
                                 ) : (
-                                    <p>No posts to display</p>
+                                    <p className="text-gray-700 dark:text-gray-300">No posts to display</p>
                                 )
                             ) : (
                                 likedPosts.length > 0 ? (
                                     likedPosts.map(post => <Post key={post.id} post={post} />)
                                 ) : (
-                                    <p>No liked posts to display</p>
+                                    <p className="text-gray-700 dark:text-gray-300">No liked posts to display</p>
                                 )
                             )}
                         </div>
                     </div>
-                    <div id="right-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border">
+                    <div id="right-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
                         <CurrentUserInfo />
                     </div>
                 </>
             ) : (
-                <h3>User not found...</h3>
+                <h3 className="text-gray-900 dark:text-white">User not found...</h3>
             )}
         </main> 
     )
