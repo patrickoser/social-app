@@ -71,14 +71,14 @@ const Signup = () => {
     }
 
     return (
-        <main className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+        <main className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 bg-white dark:bg-gray-800">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Not signed up yet?</h2>
+                <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-white">Not signed up yet?</h2>
             </div>
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                 <form onSubmit={handleSignup} className="space-y-6">
                     <div>
-                        <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">Username:</label>
+                        <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Username:</label>
                         <div>
                             <input 
                                 type="username"
@@ -87,12 +87,12 @@ const Signup = () => {
                                 onChange={(e) => setUsername(e.target.value)}
                                 autoComplete="username"
                                 required
-                                className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                         </div>
                     </div>
                     <div>
-                        <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email address:</label>
+                        <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Email address:</label>
                         <div>
                             <input 
                                 type="email"
@@ -101,12 +101,12 @@ const Signup = () => {
                                 onChange={(e) => setEmail(e.target.value)}
                                 autoComplete="email"
                                 required
-                                className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                         </div>
                     </div>
                     <div>
-                        <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Password:</label>
+                        <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Password:</label>
                         <div className="mt-2">
                             <input 
                                 type="password"
@@ -115,12 +115,12 @@ const Signup = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                                 autoComplete="new-password"
                                 required
-                                className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                         </div>
                     </div>
                     <div>
-                        <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Confirm password:</label>
+                        <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Confirm password:</label>
                         <div className="mt-2">
                             <input 
                                 type="password"
@@ -129,24 +129,24 @@ const Signup = () => {
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 autoComplete="new-password"
                                 required
-                                className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                         </div>
                     </div>
                     <div>
-                        <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create Account</button>
+                        <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 dark:bg-indigo-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 dark:hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create Account</button>
                     </div>
                 </form>
-                <p className="mt-5 text-center text-sm text-gray-500">
+                <p className="mt-5 text-center text-sm text-gray-500 dark:text-gray-400">
                     Already have an account?&nbsp;
-                    <Link to="/login"><button className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Login here!</button></Link>
+                    <Link to="/login"><button className="font-semibold leading-6 text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">Login here!</button></Link>
                 </p>
                 <div className="flex w-full items-center gap-2 py-6 text-sm text-slate-600">
-                    <div className="h-px w-full bg-slate-200"></div>
-                    <p>OR</p>
-                    <div className="h-px w-full bg-slate-200"></div>
+                    <div className="h-px w-full bg-slate-200 dark:bg-slate-600"></div>
+                    <p className="text-gray-900 dark:text-white">Or</p>
+                    <div className="h-px w-full bg-slate-200 dark:bg-slate-600"></div>
                 </div>
-                <div className="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black">
+                <div className="inline-flex h-10 w-full items-center justify-center gap-2 rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-gray-700 p-2 text-sm font-medium text-black dark:text-white">
                     <button onClick={signInWithGoogle}>Sign in with Google</button>
                 </div>
             </div>
