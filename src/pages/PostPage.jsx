@@ -26,22 +26,25 @@ const PostPage = () => {
                 <h1>Loading...</h1>
             ) : (    
                 <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
-                    <section id="left-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border">
+                    <section id="left-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
                         <Nav />
                     </section>
-                    <section className="flex-initial w-6/12 mt-5 px-5 text-center border-b border-t border-black">
+                    <section id="main-content-post" className="flex-initial w-6/12 mt-5 px-5 text-center border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
                         <div className="max-w-full text-left">
-                            <h1 className="font-bold">{post.username}</h1>
-                            <h2 className="text-xs">{post.datetime}</h2>
+                            <h1 className="text-xl font-bold text-gray-900 dark:text-white">{post.username}</h1>
+                            <h2 className="text-xs text-gray-500 dark:text-gray-400">{post.datetime}</h2>
                         </div>
                         <div>
-                            <p>{post.content}</p>
+                            <p className="mt-4 text-gray-800 dark:text-gray-200 text-left">{post.content}</p>
                         </div>
                         <div>
-                            <button className="pr-1" onClick={() => deletePost(post.id)}>Delete</button>
+                            <button 
+                                onClick={() => deletePost(post.id)} 
+                                className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600"
+                            >Delete</button>
                         </div>
                     </section>
-                    <section id="right-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border">
+                    <section id="right-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
                         <CurrentUserInfo />
                     </section>
                 </main>
