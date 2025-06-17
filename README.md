@@ -12,6 +12,8 @@ Learned:
     which in turn keeps load times manageable. 
 
 Working on:
+    When logging into an existing account you dont get redirected to Home but instead to Signup.
+
     I want the footer to be at the bottom of the page and not stuck to the bottom of the screen.
 
     I want the Header stuck to the top of the screen even when you scroll down and to have a drop shadow under it when you start scrolling.
