@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
 import Feed from "../components/Feed";
-import Nav from "../components/Nav";
 import PostForm from "../components/PostForm";
-import CurrentUserInfo from "../components/CurrentUserInfo";
 import LeftSidebar from "../components/LeftSidebar";
 import RightSidebar from "../components/RightSidebar";
 import { DataContext } from "../context/DataContext";
