@@ -197,7 +197,7 @@ const Profile = () => {
     }, [username, posts])
 
     return (
-        <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
+        <main className="flex max-w-7xl mx-auto py-0 px-3">
             {postIsLoading ? (
                 <h3 className="text-gray-900 dark:text-white">Loading...</h3>
             ) : error ? (

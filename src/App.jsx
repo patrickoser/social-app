@@ -17,33 +17,34 @@ import { ThemeProvider } from "./context/ThemeContext.jsx"
 import { PrivateRoutes } from "./components/PrivateRoutes.jsx"
 
 function App() {
-
   return (
-    <main>
+    <div className="flex flex-col min-h-screen">
       <Router>
         <AuthProvider>
           <DataProvider>
             <ThemeProvider>
               <Header />
-              <Routes>
-                <Route element={<PrivateRoutes />}>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/home" element={<Home />} />
-                  <Route path="/settings" element={<Settings />} />
-                  <Route path="/contact" element={<Contact />} />
-                  <Route path="/profile/:username" element={<Profile />} />
-                  <Route path="/post/:id" element={<PostPage />} />
-                </Route>
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/missing" element={<Missing />} />
-              </Routes>
+              <div className="flex-1">
+                <Routes>
+                  <Route element={<PrivateRoutes />}>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/home" element={<Home />} />
+                    <Route path="/settings" element={<Settings />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/profile/:username" element={<Profile />} />
+                    <Route path="/post/:id" element={<PostPage />} />
+                  </Route>
+                  <Route path="/signup" element={<Signup />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/missing" element={<Missing />} />
+                </Routes>
+              </div>
               <Footer />
             </ThemeProvider>
           </DataProvider>
         </AuthProvider>
       </Router>
-    </main>
+    </div>
   )
 }
 

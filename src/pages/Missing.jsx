@@ -5,7 +5,7 @@ import RightSidebar from "../components/RightSidebar";
 
 const Missing = () => {
     return (
-        <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
+        <main className="flex max-w-7xl mx-auto py-0 px-3">
             <LeftSidebar />
             <div className="flex-1 flex flex-col items-center justify-center bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-t border-gray-200 dark:border-gray-700">
                 <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Something went wrong.</h1>
