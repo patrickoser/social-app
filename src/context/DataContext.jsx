@@ -2,7 +2,7 @@ import { createContext, useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { format } from 'date-fns'
 import { db } from "../config/firebase"
-import { collection, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore"
+import { collection, getDocs, addDoc, deleteDoc, doc, query, where } from "firebase/firestore"
 import { AuthContext } from "./AuthContext";
 
 export const DataContext = createContext({})
@@ -14,6 +14,8 @@ export const DataProvider = ({ children }) => {
     const [postContent, setPostContent] = useState('')
     const postsCollectionRef = collection(db, "posts")
     const [postIsLoading, setPostIsLoading] = useState(true)
+    const [likes, setLikes] = useState(null)
+    const likesRef = collection(db, "likes")
 
     const { user } = useContext(AuthContext)
 
@@ -70,6 +72,62 @@ export const DataProvider = ({ children }) => {
         }
     }
 
+    const getLikes = async (postId) => {
+        try {
+            const likesDoc = query(likesRef, where("postId", "==", postId))
+            const data = await getDocs(likesDoc)
+            setLikes(data.docs.map((doc) => ({ userId: doc.data().userId, likeId: doc.id})))
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    const addLike = async (postId, user) => {
+        try {
+            const newDoc = await addDoc(likesRef, {
+                userId: user?.userId,
+                username: user?.username,
+                postId: postId
+            })
+            if (user) {
+                setLikes((prev) => 
+                    prev
+                        ?[...prev, {userId: user.userId, username: user.username, likeId: newDoc.id }]
+                        : [{ userId: user.userId, username: user.username, likeId: newDoc.id }]
+                )
+            }
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    const removeLike = async (postId, user) => {
+        try {
+            const likeToDeleteQuery = query(
+                likesRef,
+                where("postId", "==", postId),
+                where("userId", "==", user?.userId)
+            )
+
+            const likeToDeleteData = await getDocs(likeToDeleteQuery)
+            const likeId = likeToDeleteData.docs[0].id
+            const likeToDelete = doc(db, "likes", likeId)
+
+            await deleteDoc(likeToDelete)
+            if (user) {
+                setLikes(
+                    (prev) => prev && prev.filter((like) => like.likeId !== likeId)
+                )
+            }
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    const hasUserLiked = (user) => {
+        return likes?.find((like) => like.userId === user?.userId)
+    }
+
     /* useEffect hook to fetch posts when the component mounts. This should probably be moved to
     somewhere else so it only mounts when being called on the home screen. */
     useEffect(() => {
@@ -79,7 +137,8 @@ export const DataProvider = ({ children }) => {
     return (
         <DataContext.Provider value={{
             posts, setPosts, navigate, postContent, setPostContent, createPost,
-            deletePost, getPosts, postIsLoading, setPostIsLoading
+            deletePost, getPosts, postIsLoading, setPostIsLoading,
+            likes, getLikes, addLike, removeLike, hasUserLiked
         }}>
             {children}
         </DataContext.Provider>
