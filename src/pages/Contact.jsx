@@ -1,14 +1,12 @@
 import React from "react";
-import Nav from "../components/Nav";
-import CurrentUserInfo from "../components/CurrentUserInfo";
+import LeftSidebar from "../components/LeftSidebar";
+import RightSidebar from "../components/RightSidebar";
 
 const Contact = () => {
     return (
         <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
-            <div id="left-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-                <Nav />
-            </div>
-            <div id="contact-main-content" className="flex-initial w-6/12 mt-5 px-5 text-center border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
+            <LeftSidebar />
+            <section id="contact-main-content" className="flex-initial w-6/12 mt-5 px-5 text-center bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
                 <div className="mb-8">
                     <h1 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Need to get in touch?</h1>
                     <p className="text-gray-700 dark:text-gray-300">Notice something about the site that isn't working 
@@ -59,10 +57,8 @@ const Contact = () => {
                         >Submit</button>
                     </form>
                 </div>
-            </div>
-            <div id="right-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-                <CurrentUserInfo />
-            </div>
+            </section>
+            <RightSidebar />
         </main>
     )
 }
