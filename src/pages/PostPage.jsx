@@ -6,15 +6,12 @@ import Nav from "../components/Nav";
 import CurrentUserInfo from "../components/CurrentUserInfo";
 
 const PostPage = () => {
-    // Original: Only DataContext for posts
-    // Changed to: Add AuthContext and like functions
+
     const { posts, deletePost, postIsLoading, likes, getLikes, addLike, removeLike, hasUserLiked } = useContext(DataContext)
     const { user } = useContext(AuthContext)
     const { id } = useParams()
     const post = posts.find(post => (post.id).toString() === id)
 
-    // Original: No useEffect
-    // Changed to: Add useEffect to load likes
     useEffect(() => {
         getLikes(id)
     }, [id, user?.userId])
@@ -36,24 +33,16 @@ const PostPage = () => {
                         <div className="p-4">
                             <p className="mt-4 text-gray-800 dark:text-gray-200 text-left">{post?.content}</p>
                         </div>
-                        {/* Original: Only delete button */}
-                        {/* Changed to: Add like button */}
-                        <div className="flex justify-between items-center p-4 border-t border-gray-200 dark:border-gray-700">
-                            <div className="flex items-center space-x-4">
-                                {/* Original: No like button */}
-                                {/* Changed to: Add like button */}
-                                <button 
-                                    onClick={hasUserLiked(user) ? () => removeLike(id, user) : () => addLike(id, user)} 
-                                    className="pr-1 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
-                                >Like</button>
-                                {likes && <p className="text-gray-600 dark:text-gray-300"> {likes?.length} </p>}
-                            </div>
-                            <div>
-                                <button 
-                                    onClick={() => deletePost(post?.id)} 
-                                    className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600"
-                                >Delete</button>
-                            </div>
+                        <div className="flex justify-end items-center p-4">
+                            <button 
+                                onClick={hasUserLiked(user) ? () => removeLike(id, user) : () => addLike(id, user)} 
+                                className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white mr-2"
+                            >Like</button>
+                            {likes && <span className="text-gray-600 dark:text-gray-300 mr-4"> {likes?.length} </span>}
+                            <button 
+                                onClick={() => deletePost(post?.id)} 
+                                className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600"
+                            >Delete</button>
                         </div>
                     </section>
                     <section id="right-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
