@@ -3,8 +3,8 @@ import { auth } from "../config/firebase";
 import { signOut } from "firebase/auth";
 import { DataContext } from "../context/DataContext";
 import { useContext } from "react";
-import Nav from "../components/Nav";
-import CurrentUserInfo from "../components/CurrentUserInfo";
+import LeftSidebar from "../components/LeftSidebar";
+import RightSidebar from "../components/RightSidebar";
 
 const Settings = () => {
     /* Might not need to import context as it could be costly w/o
@@ -24,19 +24,15 @@ const Settings = () => {
 
     return (
         <main className="flex h-screen max-w-7xl mx-auto py-0 px-3">
-            <div id="left-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-                <Nav />
-            </div>
-            <div id="main-content-settings" className="flex-initial w-6/12 mt-5 px-5 text-center border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
+            <LeftSidebar />
+            <section id="main-content-settings" className="flex-initial w-6/12 mt-5 px-5 text-center bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
                 <h1 className="text-center text-2xl font-bold mb-6 text-gray-900 dark:text-white">Settings</h1>
                 <button 
                     onClick={logout} 
-                    className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors duration-200"
+                    className="px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700"
                 >Logout</button>
-            </div>
-            <div id="right-sidebar" className="w-3/12 min-w-60 mt-5 px-5 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-                <CurrentUserInfo />
-            </div>
+            </section>
+            <RightSidebar />
         </main>
     )
 }
