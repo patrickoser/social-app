@@ -32,10 +32,6 @@ Working on:
 
     add buttons for likes, etc.. to PostPage
 
-    add structure to Contact, no sidebars/nav
-
-    need to fix user info box displaying their name and pfp in the left sidebar
-
     add loading state to login/signup for better ux when signing in/loggin in, and redirects
 
     make the sidebar/main content section more uniform through out all web pages
