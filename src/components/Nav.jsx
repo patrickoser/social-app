@@ -7,7 +7,7 @@ const Nav = () => {
     const { user } = useContext(AuthContext)
 
     return (
-        <div className="flex h-screen">
+        <div className="flex h-full">
             <nav className="flex flex-col h-full relative">
                 <ul className="flex flex-col space-y-2">
                     <li><Link to={`/profile/${user?.username}`} className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Profile</Link></li>

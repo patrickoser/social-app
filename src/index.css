@@ -6,6 +6,13 @@
   color-scheme: light dark;
 }
 
+/* Add these lines to ensure full viewport height */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
     background-color: white;
     color: rgb(17, 24, 39); /* text-gray-900 */
