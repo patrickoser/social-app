@@ -19,7 +19,7 @@ const Post = ({ post }) => {
                 <p className="text-gray-800 dark:text-gray-200 mt-2">{
                     (post.content).length <= 100
                     ? post.content
-                    : `${(post.content).slice(0, 100)}...`
+                    : `${(post.content).slice(0, 140)}...`
                 }</p>
             </Link>
             <div className="flex justify-end mt-2 space-x-4">
