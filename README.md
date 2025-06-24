@@ -12,37 +12,24 @@ Learned:
     which in turn keeps load times manageable. 
 
 Working on:
-    The posts kind of break the bottom of the Profile page. Might happen to Home too if there is enough of them.
+    Make sight responsive, so when you get close to the width of a mobile device the nav links shift to the bottom and the 
+    currentuserinfo shifts to the top or along the bottom too.
 
     When visiting another users profile you shouldnt be able to see buttons that let you edit.
 
     When logging into an existing account you dont get redirected to Home but instead to Signup.
 
-    I want the footer to be at the bottom of the page and not stuck to the bottom of the screen.
-
     I want the Header stuck to the top of the screen even when you scroll down and to have a drop shadow under it when you start scrolling.
-
-    Css still needs to be add to other pages like Settings, Contact and SignUp.
 
     Adjust indentation of elements with long tailwind classes/other attributes to make it more readable.
 
-    Add ntelisense for tailwind now that were using cursor.
-
-    Add spacing to Post buttons.
-
-    add buttons for likes, etc.. to PostPage
-
     add loading state to login/signup for better ux when signing in/loggin in, and redirects
-
-    make the sidebar/main content section more uniform through out all web pages
 
     When optimizing the performance of the project use Chrome Devtools/react dev tools to pinpoint 
     where the performance issues are originating from. 'useMemo' should help with some slower 
     components that use 'useEffect' so that they don't rerender needlessly.
 
     Add ability to view site as a guest so people can check the functionality of the site.
-
-    posts on profile should have the newests posts at the top, same for likes.
 
 Currently:
     Add Nav bar to Settings/Contact page.
