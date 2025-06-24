@@ -22,14 +22,16 @@ const Post = ({ post }) => {
                     : `${(post.content).slice(0, 100)}...`
                 }</p>
             </Link>
-            <div className="flex justify-end mt-2">
-                <button 
-                    onClick={hasUserLiked(user) ? () => removeLike(post.id, user) : () => addLike(post.id, user)} 
-                    className="pr-1 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
-                >Like</button>
-                {likes && <p className="text-gray-600 dark:text-gray-300"> {likes?.length} </p>}
-                <button className="pr-1 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Share</button>
-                <button className="pr-1 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Save</button>
+            <div className="flex justify-end mt-2 space-x-4">
+                <div className="flex items-center space-x-2">
+                    <button
+                        onClick={hasUserLiked(user) ? () => removeLike(post.id, user) : () => addLike(post.id, user)}
+                        className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+                    >Like</button>
+                    {likes && <p className="text-gray-600 dark:text-gray-300"> {likes?.length} </p>}
+                </div>
+                <button className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Share</button>
+                <button className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Save</button>
             </div>
         </div>
     )
