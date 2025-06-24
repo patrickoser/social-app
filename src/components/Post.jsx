@@ -13,15 +13,15 @@ const Post = ({ post }) => {
 
     return (
         <div className="max-w-full border-b border-gray-200 dark:border-gray-700 text-left bg-white dark:bg-gray-800 p-4">
-            <Link to={`/post/${post.id}`}>
+            <Link to={`/post/${post.id}`} className="block hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 rounded-lg p-2 -m-2">
                 <h2 className="font-bold">{post.username}</h2>
                 <h5 className="text-xs text-gray-500 dark:text-gray-400">{post.datetime}</h5>
+                <p className="text-gray-800 dark:text-gray-200 mt-2">{
+                    (post.content).length <= 100
+                    ? post.content
+                    : `${(post.content).slice(0, 100)}...`
+                }</p>
             </Link>
-            <p className="text-gray-800 dark:text-gray-200 mt-2">{
-                (post.content).length <= 100
-                ? post.content
-                : `${(post.content).slice(0, 100)}...`
-            }</p>
             <div className="flex justify-end mt-2">
                 <button 
                     onClick={hasUserLiked(user) ? () => removeLike(post.id, user) : () => addLike(post.id, user)} 
