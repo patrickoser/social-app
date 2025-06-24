@@ -22,7 +22,7 @@ const PostPage = () => {
             ) : (    
                 <main className="flex max-w-7xl mx-auto py-0 px-3">
                     <LeftSidebar />
-                    <section id="main-content-post" className="flex-initial w-6/12 mt-5 px-5 text-center bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-t border-gray-200 dark:border-gray-700">
+                    <section id="main-content-post" className="flex-initial w-6/12 mt-5 px-5 text-center bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-t border-b border-gray-200 dark:border-gray-700">
                         <div className="max-w-full text-left p-4">
                             <h1 className="text-xl font-bold text-gray-900 dark:text-white">{post?.username}</h1>
                             <h2 className="text-xs text-gray-500 dark:text-gray-400">{post?.datetime}</h2>
