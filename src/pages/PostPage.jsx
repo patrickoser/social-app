@@ -33,9 +33,9 @@ const PostPage = () => {
                         <div className="flex justify-end items-center p-4">
                             <button 
                                 onClick={hasUserLiked(user) ? () => removeLike(id, user) : () => addLike(id, user)} 
-                                className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white mr-2"
+                                className="px-4 py-2 text-base font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white mr-2"
                             >Like</button>
-                            {likes && <span className="text-gray-600 dark:text-gray-300 mr-4"> {likes?.length} </span>}
+                            {likes && <span className="text-base text-gray-600 dark:text-gray-300 mr-4"> {likes?.length} </span>}
                             <button 
                                 onClick={() => deletePost(post?.id)} 
                                 className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600"
