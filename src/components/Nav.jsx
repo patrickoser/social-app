@@ -9,7 +9,7 @@ const Nav = () => {
     return (
         <div className="flex h-full">
             <nav className="flex flex-col h-full relative">
-                <ul className="flex flex-col space-y-3">
+                <ul className="flex flex-col space-y-3 pb-4">
                     <li>
                         <Link to={`/profile/${user?.username}`} className="flex items-center space-x-2 text-lg font-semibold text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
