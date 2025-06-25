@@ -12,6 +12,9 @@ Learned:
     which in turn keeps load times manageable. 
 
 Working on:
+    likes seem to only show for the people who liked them. After creating a new account the likes I made on 'newestguy dont 
+    show when viewing through a new account. State may not be in sync with the likes stored in firebase.
+
     Posts need to have a link over the username of the person who created the post, that takes you to there profile.
 
     need a default profile pic for when one is not added.
