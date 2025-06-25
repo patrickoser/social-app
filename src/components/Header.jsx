@@ -6,7 +6,7 @@ const Header = () => {
     const { isDarkMode, toggleTheme } = useContext(ThemeContext);
     
     return (
-        <header className="bg-white dark:bg-gray-800 shadow-sm">
+        <header className="bg-white dark:bg-gray-800 shadow-sm pt-2">
             <div className="flex max-w-7xl mx-auto py-0 px-3">
                 <div className="w-3/12 min-w-60 px-5">
                     <Link to="/home">
