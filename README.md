@@ -13,7 +13,10 @@ Learned:
 
 Working on:
     likes seem to only show for the people who liked them. After creating a new account the likes I made on 'newestguy dont 
-    show when viewing through a new account. State may not be in sync with the likes stored in firebase.
+    show when viewing through a new account. State may not be in sync with the likes stored in firebase. As further 
+    evidence of this the likes tab shows another user has liked posts but the posts themselves do not show it.
+
+    oter users pfp dont show, for maybe the same reason as likes, state may not be in sync with firebase.
 
     Posts need to have a link over the username of the person who created the post, that takes you to there profile.
 
