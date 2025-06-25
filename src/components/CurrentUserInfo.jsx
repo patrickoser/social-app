@@ -39,7 +39,7 @@ const CurrentUserInfo = () => {
     );
 
     return (
-        <div className="flex items-center gap-3 p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+        <div className="flex items-center gap-3 p-4 border-y border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
             {/* Profile picture */}
             {url ? (
                 <img 
