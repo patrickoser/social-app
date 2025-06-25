@@ -14,7 +14,15 @@ const Post = ({ post }) => {
     return (
         <div className="max-w-full border-b border-gray-200 dark:border-gray-700 text-left bg-white dark:bg-gray-800 p-4">
             <Link to={`/post/${post.id}`} className="block hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 rounded-lg p-2 -m-2">
-                <h2 className="font-bold">{post.username}</h2>
+                <div className="flex items-center space-x-2">
+                    <Link 
+                        to={`/profile/${post.username}`} 
+                        className="font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        {post.username}
+                    </Link>
+                </div>
                 <h5 className="text-xs text-gray-500 dark:text-gray-400">{post.datetime}</h5>
                 <p className="text-gray-800 dark:text-gray-200 mt-2">{
                     (post.content).length <= 100
