@@ -29,6 +29,15 @@ const Profile = () => {
 
     const { username } = useParams()
   
+    // Default profile picture component
+    const DefaultProfilePic = () => (
+        <div className="w-32 h-32 rounded-full bg-gray-300 dark:bg-gray-600 border-4 border-gray-200 dark:border-gray-600 flex items-center justify-center">
+            <svg className="w-16 h-16 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+        </div>
+    );
+
     const handleImageChange = e => {
       if (e.target.files[0]) {
         setImage(e.target.files[0])
@@ -142,11 +151,11 @@ const Profile = () => {
                 const url = await getDownloadURL(res.items[0])
                 setUrl(url)
             } else {
-                /* This should return a default pic. */
-                return null
+                setUrl("") // Set empty string to trigger default image
             }
         } catch (err) {
             console.error(err)
+            setUrl("") // Set empty string on error to trigger default image
         }
     }
 
@@ -226,12 +235,14 @@ const Profile = () => {
                                         Upload
                                     </button>
                                 </div>
-                                {url && (
+                                {url ? (
                                     <img 
                                         src={url} 
                                         className="w-32 h-32 rounded-full object-cover border-4 border-gray-200 dark:border-gray-600" 
-                                        alt="uploaded" 
+                                        alt="profile-pic" 
                                     />
+                                ) : (
+                                    <DefaultProfilePic />
                                 )}
                             </div>
                             <div id="profile-username" className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
