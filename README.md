@@ -12,6 +12,10 @@ Learned:
     which in turn keeps load times manageable. 
 
 Working on:
+    Posts need to have a link over the username of the person who created the post, that takes you to there profile.
+
+    need a default profile pic for when one is not added.
+
     Make sight responsive, so when you get close to the width of a mobile device the nav links shift to the bottom and the 
     currentuserinfo shifts to the top or along the bottom too.
 
