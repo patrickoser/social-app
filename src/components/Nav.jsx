@@ -7,7 +7,7 @@ const Nav = () => {
     const { user } = useContext(AuthContext)
 
     return (
-        <div className="flex h-full">
+        <div className="flex border-b border-gray-200 dark:border-gray-700">
             <nav className="flex flex-col h-full relative">
                 <ul className="flex flex-col space-y-3 pb-4">
                     <li>
