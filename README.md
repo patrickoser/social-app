@@ -18,9 +18,9 @@ Working on:
 
     oter users pfp dont show, for maybe the same reason as likes, state may not be in sync with firebase.
 
-    Posts need to have a link over the username of the person who created the post, that takes you to there profile.
+    Consider adding DafaultProfilePic to DC, or making a component for it. DRY.
 
-    need a default profile pic for when one is not added.
+    Add sticky header with slight drop shadow when scrolling.
 
     Make sight responsive, so when you get close to the width of a mobile device the nav links shift to the bottom and the 
     currentuserinfo shifts to the top or along the bottom too.
