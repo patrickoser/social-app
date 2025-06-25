@@ -12,6 +12,8 @@ Learned:
     which in turn keeps load times manageable. 
 
 Working on:
+    Add more contast to borders and hover effect in the light theme.
+
     likes seem to only show for the people who liked them. After creating a new account the likes I made on 'newestguy dont 
     show when viewing through a new account. State may not be in sync with the likes stored in firebase. As further 
     evidence of this the likes tab shows another user has liked posts but the posts themselves do not show it.
