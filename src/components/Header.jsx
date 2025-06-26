@@ -6,7 +6,7 @@ const Header = () => {
     const { isDarkMode, toggleTheme } = useContext(ThemeContext);
     
     return (
-        <header className="bg-white dark:bg-gray-800 shadow-sm py-2 border-b border-gray-200 dark:border-gray-700">
+        <header className="bg-white dark:bg-gray-800 shadow-sm pt-2 border-b border-gray-300 dark:border-gray-700">
             <div className="flex max-w-7xl mx-auto py-0 px-3">
                 <div className="w-3/12 min-w-60 px-5">
                     <Link to="/home">
@@ -17,7 +17,7 @@ const Header = () => {
                 <div className="w-3/12 min-w-60 px-5 flex justify-end">
                     <button
                         onClick={toggleTheme}
-                        className="p-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200 shadow-sm"
+                        className="p-3 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200 shadow-sm"
                         aria-label="Toggle theme"
                     >
                         {isDarkMode ? (

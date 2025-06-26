@@ -6,7 +6,7 @@ const PostForm = () => {
     const { createPost, postContent, setPostContent } = useContext(DataContext)
     
     return (
-        <div className="py-2 border-b border-gray-200 dark:border-gray-700">
+        <div className="py-2 border-b border-gray-300 dark:border-gray-700">
             <form action="POST" onSubmit={createPost} className="flex">
                 <label 
                     htmlFor="postContent" 

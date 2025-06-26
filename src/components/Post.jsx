@@ -12,8 +12,8 @@ const Post = ({ post }) => {
     }, [post.id, user?.userId])
 
     return (
-        <div className="max-w-full border-b border-gray-200 dark:border-gray-700 text-left bg-white dark:bg-gray-800 p-4">
-            <Link to={`/post/${post.id}`} className="block hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 rounded-lg p-2 -m-2">
+        <div className="max-w-full border-b border-gray-300 dark:border-gray-700 text-left bg-white dark:bg-gray-800 p-4">
+            <Link to={`/post/${post.id}`} className="block hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 rounded-lg p-2 -m-2">
                 <div className="flex items-center space-x-2">
                     <Link 
                         to={`/profile/${post.username}`} 

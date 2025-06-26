@@ -31,7 +31,7 @@ const Profile = () => {
   
     // Default profile picture component
     const DefaultProfilePic = () => (
-        <div className="w-32 h-32 rounded-full bg-gray-300 dark:bg-gray-600 border-4 border-gray-200 dark:border-gray-600 flex items-center justify-center">
+        <div className="w-32 h-32 rounded-full bg-gray-300 dark:bg-gray-600 border-4 border-gray-300 dark:border-gray-600 flex items-center justify-center">
             <svg className="w-16 h-16 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
@@ -214,8 +214,8 @@ const Profile = () => {
             ) : userData ? (
                 <>
                     <LeftSidebar />
-                    <section id="profile-main-content" className="flex-initial w-6/12 mt-5 px-5 text-center bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-t border-gray-200 dark:border-gray-700">
-                        <div id="profile-bio" className="flex flex-col items-center p-4 border-b border-gray-200 dark:border-gray-700">
+                    <section id="profile-main-content" className="flex-initial w-6/12 mt-5 px-5 text-center bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-t border-gray-300 dark:border-gray-700">
+                        <div id="profile-bio" className="flex flex-col items-center p-4 border-b border-gray-300 dark:border-gray-700">
                             <div id="img-con" className="flex flex-col items-center mb-4">
                                 {progress > 0 && progress < 100 && (
                                     <div className="w-full mb-2">
@@ -238,7 +238,7 @@ const Profile = () => {
                                 {url ? (
                                     <img 
                                         src={url} 
-                                        className="w-32 h-32 rounded-full object-cover border-4 border-gray-200 dark:border-gray-600" 
+                                        className="w-32 h-32 rounded-full object-cover border-4 border-gray-300 dark:border-gray-600" 
                                         alt="profile-pic" 
                                     />
                                 ) : (
@@ -281,7 +281,7 @@ const Profile = () => {
                         <div>
                             {username === user?.username && <PostForm />}
                         </div>
-                        <div id="profile-tabs" className="flex justify-evenly border-b border-gray-200 dark:border-gray-700">
+                        <div id="profile-tabs" className="flex justify-evenly border-b border-gray-300 dark:border-gray-700">
                             <button 
                                 onClick={() => setActiveTab('posts')}
                                 className={`px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white ${
