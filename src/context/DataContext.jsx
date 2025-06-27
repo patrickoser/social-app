@@ -14,7 +14,6 @@ export const DataProvider = ({ children }) => {
     const [postContent, setPostContent] = useState('')
     const postsCollectionRef = collection(db, "posts")
     const [postIsLoading, setPostIsLoading] = useState(true)
-    const [likes, setLikes] = useState(null)
     const likesRef = collection(db, "likes")
 
     const { user } = useContext(AuthContext)
@@ -64,7 +63,11 @@ export const DataProvider = ({ children }) => {
         setPostIsLoading(true)
         try {
             const data = await getDocs(postsCollectionRef)
-            setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+            const fetchedPosts = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+            setPosts(fetchedPosts)
+            
+            // Fetch all likes and attach to posts
+            await attachLikesToPosts(fetchedPosts)
         } catch(err) {
             console.log(err.message)
         } finally {
@@ -72,11 +75,23 @@ export const DataProvider = ({ children }) => {
         }
     }
 
-    const getLikes = async (postId) => {
+    const attachLikesToPosts = async (postsToUpdate) => {
         try {
-            const likesDoc = query(likesRef, where("postId", "==", postId))
-            const data = await getDocs(likesDoc)
-            setLikes(data.docs.map((doc) => ({ userId: doc.data().userId, likeId: doc.id})))
+            const allLikes = await getDocs(likesRef)
+            const likesByPost = {}
+            
+            allLikes.docs.forEach(doc => {
+                const like = { ...doc.data(), likeId: doc.id }
+                if (!likesByPost[like.postId]) {
+                    likesByPost[like.postId] = []
+                }
+                likesByPost[like.postId].push(like)
+            })
+            
+            setPosts(postsToUpdate.map(post => ({
+                ...post,
+                likes: likesByPost[post.id] || []
+            })))
         } catch (err) {
             console.error(err)
         }
@@ -89,11 +104,21 @@ export const DataProvider = ({ children }) => {
                 username: user?.username,
                 postId: postId
             })
+            
             if (user) {
-                setLikes((prev) => 
-                    prev
-                        ?[...prev, {userId: user.userId, username: user.username, likeId: newDoc.id }]
-                        : [{ userId: user.userId, username: user.username, likeId: newDoc.id }]
+                setPosts(prevPosts => 
+                    prevPosts.map(post => 
+                        post.id === postId 
+                            ? { 
+                                ...post, 
+                                likes: [...(post.likes || []), {
+                                    userId: user.userId, 
+                                    username: user.username, 
+                                    likeId: newDoc.id
+                                }]
+                              }
+                            : post
+                    )
                 )
             }
         } catch (err) {
@@ -114,9 +139,17 @@ export const DataProvider = ({ children }) => {
             const likeToDelete = doc(db, "likes", likeId)
 
             await deleteDoc(likeToDelete)
+            
             if (user) {
-                setLikes(
-                    (prev) => prev && prev.filter((like) => like.likeId !== likeId)
+                setPosts(prevPosts => 
+                    prevPosts.map(post => 
+                        post.id === postId 
+                            ? { 
+                                ...post, 
+                                likes: (post.likes || []).filter(like => like.likeId !== likeId)
+                              }
+                            : post
+                    )
                 )
             }
         } catch (err) {
@@ -124,8 +157,8 @@ export const DataProvider = ({ children }) => {
         }
     }
 
-    const hasUserLiked = (user) => {
-        return likes?.find((like) => like.userId === user?.userId)
+    const hasUserLiked = (post, user) => {
+        return post.likes?.find((like) => like.userId === user?.userId)
     }
 
     /* useEffect hook to fetch posts when the component mounts. This should probably be moved to
@@ -138,7 +171,7 @@ export const DataProvider = ({ children }) => {
         <DataContext.Provider value={{
             posts, setPosts, navigate, postContent, setPostContent, createPost,
             deletePost, getPosts, postIsLoading, setPostIsLoading,
-            likes, getLikes, addLike, removeLike, hasUserLiked
+            addLike, removeLike, hasUserLiked
         }}>
             {children}
         </DataContext.Provider>

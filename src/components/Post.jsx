@@ -1,15 +1,11 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { Link } from 'react-router-dom'
 import { AuthContext } from "../context/AuthContext";
 import { DataContext } from "../context/DataContext";
 
 const Post = ({ post }) => {
     const { user } = useContext(AuthContext)
-    const { likes, getLikes, addLike, removeLike, hasUserLiked } = useContext(DataContext)
-
-    useEffect(() => {
-        getLikes(post.id)
-    }, [post.id, user?.userId])
+    const { addLike, removeLike, hasUserLiked } = useContext(DataContext)
 
     return (
         <div className="max-w-full border-b border-gray-300 dark:border-gray-700 text-left bg-white dark:bg-gray-800 p-4">
@@ -33,10 +29,10 @@ const Post = ({ post }) => {
             <div className="flex justify-end mt-2 space-x-4">
                 <div className="flex items-center space-x-2">
                     <button
-                        onClick={hasUserLiked(user) ? () => removeLike(post.id, user) : () => addLike(post.id, user)}
+                        onClick={hasUserLiked(post, user) ? () => removeLike(post.id, user) : () => addLike(post.id, user)}
                         className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
                     >Like</button>
-                    {likes && <p className="text-gray-600 dark:text-gray-300"> {likes?.length} </p>}
+                    {post.likes && <p className="text-gray-600 dark:text-gray-300"> {post.likes.length} </p>}
                 </div>
                 <button className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Share</button>
                 <button className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Save</button>

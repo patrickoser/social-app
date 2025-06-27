@@ -12,7 +12,7 @@ import RightSidebar from "../components/RightSidebar";
 
 const Profile = () => {
     const { user } = useContext(AuthContext) 
-    const { posts, postIsLoading } = useContext(DataContext) // This seems off.
+    const { posts, postIsLoading } = useContext(DataContext)
     const [image, setImage] = useState(null)
     const [url, setUrl] = useState("")
     const [progress, setProgress] = useState(0)
@@ -117,14 +117,14 @@ const Profile = () => {
             const likesRef = collection(db, "likes")
             const q = query(likesRef, where("username", "==", username))
             const querySnapshot = await getDocs(q)
-            // Come back to this
+            
             const likes = querySnapshot.docs.map(doc => ({
                 ...doc.data(),
                 likeId: doc.id
             }))
             setUserLikes(likes)
 
-            // Get the posts that were liked. Might be redundant. Come back to this.
+            // Get the posts that were liked
             const likedPostIds = likes.map(like => like.postId)
             const likedPostsData = posts.filter(post => likedPostIds.includes(post.id))
             setLikedPosts(likedPostsData)
