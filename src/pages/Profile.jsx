@@ -57,15 +57,6 @@ const Profile = () => {
             console.error('Error updating bio:', error);
         }
     }
-
-    /* If userPosts is not empty then map over the posts and display them */
-    const handlePosts = () => {
-        {userPosts.length === 0 ? (
-            <p>You have not created any posts yet.</p>
-            ) : (
-            userPosts.map((post) => <Post key={post.id} post={post} />)
-            )}
-    }
   
     const handleImageUpload = async () => {
         /* This line creates a reference to the location where the image will be stored in Firebase Storage. 
