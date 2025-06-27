@@ -11,12 +11,13 @@ Learned:
     Using all the data/state that is already client side when possible. The goal being to limit the number of api requests, 
     which in turn keeps load times manageable. 
 
-Working on:
-    likes seem to only show for the people who liked them. After creating a new account the likes I made on 'newestguy dont 
-    show when viewing through a new account. State may not be in sync with the likes stored in firebase. As further 
-    evidence of this the likes tab shows another user has liked posts but the posts themselves do not show it.
-    They do show up on the PostPage tho.
+    When setting the likes state I was only able to store one posts likes at a time, so if I was trying to view more 
+    than one post, I wouldn't get the right like numbers on each one. Now the likes state is apart of the posts state array 
+    and so each post has their own likes object that contains each users like and the data that comes along with each post. 
+    Before likes and posts were two seperate collections and two seperate states. Now they remain seperate collections 
+    but they are combined/sorted into one state that is able to define/communicate each posts likes data more clearly.
 
+Working on:
     oter users pfp dont show, for maybe the same reason as likes, state may not be in sync with firebase.
 
     Consider adding DafaultProfilePic to DC, or making a component for it. DRY.
