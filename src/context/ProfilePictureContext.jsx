@@ -44,7 +44,8 @@ export const ProfilePictureProvider = ({ children }) => {
         } catch (err) {
             console.error("Error fetching profile picture:", err);
             
-            // Store empty string in cache for error cases
+            // For permission errors or any other errors, store empty string
+            // This prevents repeated failed requests for the same user
             setProfilePictures(prev => ({
                 ...prev,
                 [userId]: ""
