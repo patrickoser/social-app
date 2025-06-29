@@ -18,6 +18,8 @@ Learned:
     but they are combined/sorted into one state that is able to define/communicate each posts likes data more clearly.
 
 Working on:
+    Comment out all logic related to the new profile picture code. Read through, understand it, comment it.
+
     Adjust security rules for firebase storage to limit what type of file can be uploaded and add size constraints to
     prevent abuse of storage.
 
