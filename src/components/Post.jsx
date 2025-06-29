@@ -10,26 +10,27 @@ const Post = ({ post }) => {
 
     return (
         <div className="max-w-full border-b border-gray-300 dark:border-gray-700 text-left bg-white dark:bg-gray-800 p-4">
-            <Link to={`/post/${post.id}`} className="block hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 rounded-lg p-2 -m-2">
+            <div className="block hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 rounded-lg p-2 -m-2">
                 <div className="flex items-center space-x-3">
                     <ProfilePicture userId={post.userId} size="sm" />
                     <div className="flex flex-col">
                         <Link 
                             to={`/profile/${post.username}`} 
                             className="font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
-                            onClick={(e) => e.stopPropagation()}
                         >
                             {post.username}
                         </Link>
                         <h5 className="text-xs text-gray-500 dark:text-gray-400">{post.datetime}</h5>
                     </div>
                 </div>
-                <p className="text-gray-800 dark:text-gray-200 mt-2">{
-                    (post.content).length <= 100
-                    ? post.content
-                    : `${(post.content).slice(0, 140)}...`
-                }</p>
-            </Link>
+                <Link to={`/post/${post.id}`}>
+                    <p className="text-gray-800 dark:text-gray-200 mt-2">{
+                        (post.content).length <= 100
+                        ? post.content
+                        : `${(post.content).slice(0, 140)}...`
+                    }</p>
+                </Link>
+            </div>
             <div className="flex justify-end mt-2 space-x-4">
                 <div className="flex items-center space-x-2">
                     <button
