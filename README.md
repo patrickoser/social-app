@@ -18,9 +18,8 @@ Learned:
     but they are combined/sorted into one state that is able to define/communicate each posts likes data more clearly.
 
 Working on:
-    oter users pfp dont show, for maybe the same reason as likes, state may not be in sync with firebase.
-
-    Consider adding DafaultProfilePic to DC, or making a component for it. DRY.
+    Adjust security rules for firebase storage to limit what type of file can be uploaded and add size constraints to
+    prevent abuse of storage.
 
     Add sticky header with slight drop shadow when scrolling.
 
@@ -30,8 +29,6 @@ Working on:
     When visiting another users profile you shouldnt be able to see buttons that let you edit.
 
     When logging into an existing account you dont get redirected to Home but instead to Signup.
-
-    I want the Header stuck to the top of the screen even when you scroll down and to have a drop shadow under it when you start scrolling.
 
     Adjust indentation of elements with long tailwind classes/other attributes to make it more readable.
 
