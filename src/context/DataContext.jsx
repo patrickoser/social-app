@@ -24,9 +24,7 @@ export const DataProvider = ({ children }) => {
     /* Called from within 'PostForm' component. Adds a new post to the "posts" collection. */
     const createPost = async (e) => {
         e.preventDefault()
-        console.log('user createPost: ', user)
         const datetime = format(new Date(), 'MMMM dd yyyy pp')
-        console.log('datetime: ', datetime)
         try {
             const docRef = await addDoc(postsCollectionRef, { 
                 username: user.username, 
