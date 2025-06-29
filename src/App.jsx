@@ -14,6 +14,7 @@ import Missing from "./pages/Missing.jsx"
 import { DataProvider } from "./context/DataContext.jsx"
 import { AuthProvider } from "./context/AuthContext.jsx"
 import { ThemeProvider } from "./context/ThemeContext.jsx"
+import { ProfilePictureProvider } from "./context/ProfilePictureContext.jsx"
 import { PrivateRoutes } from "./components/PrivateRoutes.jsx"
 
 function App() {
@@ -23,23 +24,25 @@ function App() {
         <AuthProvider>
           <DataProvider>
             <ThemeProvider>
-              <Header />
-              <div className="flex-1">
-                <Routes>
-                  <Route element={<PrivateRoutes />}>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/home" element={<Home />} />
-                    <Route path="/settings" element={<Settings />} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="/profile/:username" element={<Profile />} />
-                    <Route path="/post/:id" element={<PostPage />} />
-                  </Route>
-                  <Route path="/signup" element={<Signup />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/missing" element={<Missing />} />
-                </Routes>
-              </div>
-              <Footer />
+              <ProfilePictureProvider>
+                <Header />
+                <div className="flex-1">
+                  <Routes>
+                    <Route element={<PrivateRoutes />}>
+                      <Route path="/" element={<Home />} />
+                      <Route path="/home" element={<Home />} />
+                      <Route path="/settings" element={<Settings />} />
+                      <Route path="/contact" element={<Contact />} />
+                      <Route path="/profile/:username" element={<Profile />} />
+                      <Route path="/post/:id" element={<PostPage />} />
+                    </Route>
+                    <Route path="/signup" element={<Signup />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/missing" element={<Missing />} />
+                  </Routes>
+                </div>
+                <Footer />
+              </ProfilePictureProvider>
             </ThemeProvider>
           </DataProvider>
         </AuthProvider>
