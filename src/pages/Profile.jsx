@@ -4,39 +4,31 @@ import { DataContext } from "../context/DataContext";
 import { AuthContext } from "../context/AuthContext";
 import { storage, db } from "../config/firebase"; 
 import { doc, getDoc, updateDoc, collection, getDocs, query, where } from "firebase/firestore";
-import { ref, uploadBytesResumable, getDownloadURL, listAll } from "firebase/storage";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useParams } from "react-router-dom";
 import Post from "../components/Post";
 import LeftSidebar from "../components/LeftSidebar";
 import RightSidebar from "../components/RightSidebar";
+import ProfilePicture from "../components/ProfilePicture";
+import { useProfilePicture } from "../context/ProfilePictureContext";
 
 const Profile = () => {
     const { user } = useContext(AuthContext) 
     const { posts, postIsLoading } = useContext(DataContext)
+    const { getProfilePicture } = useProfilePicture();
     const [image, setImage] = useState(null)
-    const [url, setUrl] = useState("")
     const [progress, setProgress] = useState(0)
     const [bio, setBio] = useState("")
     const [userData, setUserData] = useState(null)
     const [isEditing, setIsEditing] = useState(false)
     const [userPosts, setUserPosts] = useState([])
     const [error, setError] = useState(null)
-    /* New */
     const [userLikes, setUserLikes] = useState([])
     const [likedPosts, setLikedPosts] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [activeTab, setActiveTab] = useState("posts")
 
     const { username } = useParams()
-  
-    // Default profile picture component
-    const DefaultProfilePic = () => (
-        <div className="w-32 h-32 rounded-full bg-gray-300 dark:bg-gray-600 border-4 border-gray-300 dark:border-gray-600 flex items-center justify-center">
-            <svg className="w-16 h-16 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
-        </div>
-    );
 
     const handleImageChange = e => {
       if (e.target.files[0]) {
@@ -91,9 +83,10 @@ const Profile = () => {
                     takes a storage reference as its argument and returns a promise that resolves with 
                     the download URL of the file. */
                     const url = await getDownloadURL(ref(storage, `users/${user.userId}/${image.name}`));
-
-                    /* This line updates the url state with the download URL of the uploaded image. */
-                    setUrl(url);
+                    
+                    // Update the profile picture cache after upload
+                    await getProfilePicture(user.userId);
+                    
                 } catch (err) {
                     console.error(err);
                 } finally {
@@ -132,29 +125,6 @@ const Profile = () => {
             console.error("Error fetching likes:", err)
         }
     }
-
-    const getImageUrl = async () => {
-        const userRef = ref(storage, `users/${user.userId}`)
-
-        try {
-            const res = await listAll(userRef)
-            if (res.items.length > 0) {
-                const url = await getDownloadURL(res.items[0])
-                setUrl(url)
-            } else {
-                setUrl("") // Set empty string to trigger default image
-            }
-        } catch (err) {
-            console.error(err)
-            setUrl("") // Set empty string on error to trigger default image
-        }
-    }
-
-    useEffect(() => {
-        if (user) {
-            getImageUrl()
-        }
-    }, [user])
 
     /* useEffect hook to fetch user data when the component mounts or when the username changes */
     useEffect(() => {
@@ -213,28 +183,22 @@ const Profile = () => {
                                         <progress value={progress} max="100" />
                                     </div>
                                 )}
-                                <div className="flex items-center gap-4 mb-4">
-                                    <input 
-                                        type="file" 
-                                        onChange={handleImageChange} 
-                                        className="text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 dark:file:bg-blue-900 file:text-blue-700 dark:file:text-blue-300 hover:file:bg-blue-100 dark:hover:file:bg-blue-800"
-                                    />
-                                    <button 
-                                        onClick={handleImageUpload}
-                                        className="px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700"
-                                    >
-                                        Upload
-                                    </button>
-                                </div>
-                                {url ? (
-                                    <img 
-                                        src={url} 
-                                        className="w-32 h-32 rounded-full object-cover border-4 border-gray-300 dark:border-gray-600" 
-                                        alt="profile-pic" 
-                                    />
-                                ) : (
-                                    <DefaultProfilePic />
+                                {username === user?.username && (
+                                    <div className="flex items-center gap-4 mb-4">
+                                        <input 
+                                            type="file" 
+                                            onChange={handleImageChange} 
+                                            className="text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 dark:file:bg-blue-900 file:text-blue-700 dark:file:text-blue-300 hover:file:bg-blue-100 dark:hover:file:bg-blue-800"
+                                        />
+                                        <button 
+                                            onClick={handleImageUpload}
+                                            className="px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700"
+                                        >
+                                            Upload
+                                        </button>
+                                    </div>
                                 )}
+                                <ProfilePicture userId={userData.userId} size="2xl" />
                             </div>
                             <div id="profile-username" className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
                                 {username}
@@ -259,12 +223,14 @@ const Profile = () => {
                                 ) : (
                                     <div className="flex flex-col items-center gap-4">
                                         <p className="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{bio}</p>
-                                        <button 
-                                            onClick={() => setIsEditing(true)}
-                                            className="px-4 py-2 text-sm font-medium text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/50 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900 focus:ring-4 focus:ring-blue-300"
-                                        >
-                                            Edit
-                                        </button>
+                                        {username === user?.username && (
+                                            <button 
+                                                onClick={() => setIsEditing(true)}
+                                                className="px-4 py-2 text-sm font-medium text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/50 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900 focus:ring-4 focus:ring-blue-300"
+                                            >
+                                                Edit
+                                            </button>
+                                        )}
                                     </div>
                                 )}
                             </div>
