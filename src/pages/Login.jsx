@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
-import { Link } from 'react-router-dom'
+import React, { useContext, useState, useEffect } from "react";
+import { Link, useNavigate } from 'react-router-dom'
 import { auth } from "../config/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { DataContext } from "../context/DataContext";
+import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
     // Add a feature that checks local storage to see if they
@@ -10,19 +10,43 @@ const Login = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { navigate } = useContext(DataContext)
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState('')
+    const { user, loading: authLoading } = useContext(AuthContext)
+    const navigate = useNavigate()
+
+    // Redirect if already logged in
+    useEffect(() => {
+        if (user && !authLoading) {
+            navigate('/home')
+        }
+    }, [user, authLoading, navigate])
 
     const handleSignIn = async (e) => {
         e.preventDefault()
+        setLoading(true)
+        setError('')
+        
         try {
             await signInWithEmailAndPassword(auth, email, password)
             console.log(`User Status: ${auth?.currentUser?.email} has signed in.`)
             setEmail('')
             setPassword('')
-            navigate('/home')
+            // Don't navigate here - let useEffect handle it when user state updates
         } catch (err) {
             console.error(err)
+            setError('Invalid email or password. Please try again.')
+            setLoading(false)
         }
+    }
+
+    // Show loading if auth is still being determined
+    if (authLoading) {
+        return (
+            <div className="flex items-center justify-center min-h-screen bg-white dark:bg-gray-800">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 dark:border-indigo-400"></div>
+            </div>
+        )
     }
 
     return (
@@ -32,6 +56,11 @@ const Login = () => {
             </div>
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                 <form onSubmit={handleSignIn} className="space-y-6">
+                    {error && (
+                        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md p-3">
+                            <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+                        </div>
+                    )}
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Email Address</label>
                         <div className="mt-2">
@@ -43,7 +72,8 @@ const Login = () => {
                                 autoComplete="email"
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
-                                className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                disabled={loading}
+                                className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 disabled:opacity-50 disabled:cursor-not-allowed"
                             />
                         </div>
                     </div>
@@ -63,12 +93,19 @@ const Login = () => {
                                 autoComplete="current-password"
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
-                                className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                disabled={loading}
+                                className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 disabled:opacity-50 disabled:cursor-not-allowed"
                             />
                         </div>
                     </div>
                     <div>
-                        <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 dark:bg-indigo-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 dark:hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign In</button>
+                        <button 
+                            type="submit" 
+                            disabled={loading}
+                            className="flex w-full justify-center rounded-md bg-indigo-600 dark:bg-indigo-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 dark:hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            {loading ? 'Signing In...' : 'Sign In'}
+                        </button>
                     </div>
                 </form>
                 <p className="mt-10 text-center text-sm text-gray-500">
