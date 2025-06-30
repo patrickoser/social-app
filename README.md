@@ -22,13 +22,15 @@ Working on:
 
     Comment out all logic related to the intersection observer code in Header. Read through, understand it, comment it.
 
+    Comment out all logic related to the Login redirect/error/loading handling. Read through, understand it, comment it.
+
     Adjust security rules for firebase storage to limit what type of file can be uploaded and add size constraints to
     prevent abuse of storage.
-    
+
     Make sight responsive, so when you get close to the width of a mobile device the nav links shift to the bottom and the 
     currentuserinfo shifts to the top or along the bottom too.
 
-    When visiting another users profile you shouldnt be able to see buttons that let you edit.
+    Add functionality to save and share button.
 
     When logging into an existing account you dont get redirected to Home but instead to Signup.
 
