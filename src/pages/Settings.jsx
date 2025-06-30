@@ -16,7 +16,7 @@ const Settings = () => {
         console.log(`User Status: ${auth?.currentUser?.email} has signed out.`)
         try {
             await signOut(auth)
-            navigate('/signup')
+            navigate('/login')
         } catch (err) {
             console.error(err)
         }
