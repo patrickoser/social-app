@@ -43,8 +43,8 @@ const Header = () => {
     }, []);
     
     return (
-        <header className={`bg-white dark:bg-gray-800 py-2 border-b border-gray-300 dark:border-gray-700 sticky top-0 z-50 transition-shadow duration-200 ${
-            isScrolled ? 'shadow-md' : 'shadow-sm'
+        <header className={`bg-white dark:bg-gray-800 py-2 border-b border-gray-300 dark:border-gray-700 sticky top-0 z-50 transition-shadow duration-100 ${
+            isScrolled ? 'shadow-lg' : 'shadow-sm'
         }`}>
             <div className="flex max-w-7xl mx-auto py-0 px-3">
                 <div className="w-3/12 min-w-60 px-5">
