@@ -24,6 +24,8 @@ Working on:
 
     Comment out all logic related to the Login/SignUp redirect/error/loading handling. Read through, understand it, comment it.
 
+    Comment out all tailwind changes related to responsive design especially in Nav.
+
     Look at other places I have used navigate from context and see if it makes sense to use useNavigate instead.
 
     Adjust security rules for firebase storage to limit what type of file can be uploaded and add size constraints to
