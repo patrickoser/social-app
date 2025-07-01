@@ -22,7 +22,7 @@ Working on:
 
     Comment out all logic related to the intersection observer code in Header. Read through, understand it, comment it.
 
-    Comment out all logic related to the Login redirect/error/loading handling. Read through, understand it, comment it.
+    Comment out all logic related to the Login/SignUp redirect/error/loading handling. Read through, understand it, comment it.
 
     Look at other places I have used navigate from context and see if it makes sense to use useNavigate instead.
 
@@ -31,9 +31,6 @@ Working on:
 
     Make site responsive, so when you get close to the width of a mobile device the nav links shift to the bottom and the 
     currentuserinfo shifts to the top or along the bottom too.
-
-    Check that when starting up server and navigating to the site that it checks auth status and redirects to Home 
-    if you are already signed in.
 
     Adjust indentation of elements with long tailwind classes/other attributes to make it more readable.
 
