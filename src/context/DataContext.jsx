@@ -18,6 +18,9 @@ export const DataProvider = ({ children }) => {
     // LIKES REFERENCE: Points to the likes collection in Firebase
     // This stays the same - we still use the separate likes collection
     const likesRef = collection(db, "likes")
+    
+    // SAVES REFERENCE: Points to the saves collection in Firebase
+    const savesRef = collection(db, "saves")
 
     const { user } = useContext(AuthContext)
 
@@ -70,6 +73,8 @@ export const DataProvider = ({ children }) => {
             // NEW: After fetching posts, we now attach likes to each post
             // This is the key change - instead of separate likes state, likes become part of each post
             await attachLikesToPosts(fetchedPosts)
+            // NEW: Also attach saves to each post
+            await attachSavesToPosts(fetchedPosts)
         } catch(err) {
             console.log(err.message)
         } finally {
@@ -100,6 +105,32 @@ export const DataProvider = ({ children }) => {
             setPosts(postsToUpdate.map(post => ({
                 ...post,
                 likes: likesByPost[post.id] || [] // If no likes, use empty array
+            })))
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    // NEW FUNCTION: Similar to attachLikesToPosts but for saves
+    const attachSavesToPosts = async (postsToUpdate) => {
+        try {
+            // Step 1: Fetch ALL saves from Firebase in one query
+            const allSaves = await getDocs(savesRef)
+            const savesByPost = {}
+            
+            // Step 2: Group saves by postId (organize saves by which post they belong to)
+            allSaves.docs.forEach(doc => {
+                const save = { ...doc.data(), saveId: doc.id }
+                if (!savesByPost[save.postId]) {
+                    savesByPost[save.postId] = []
+                }
+                savesByPost[save.postId].push(save)
+            })
+            
+            // Step 3: Attach the grouped saves to each post
+            setPosts(prevPosts => prevPosts.map(post => ({
+                ...post,
+                saves: savesByPost[post.id] || [] // If no saves, use empty array
             })))
         } catch (err) {
             console.error(err)
@@ -183,6 +214,95 @@ export const DataProvider = ({ children }) => {
         return post.likes?.find((like) => like.userId === user?.userId)
     }
 
+    // NEW: Add save functionality - similar to addLike
+    const addSave = async (postId, user) => {
+        try {
+            // Step 1: Add save to Firebase
+            const newDoc = await addDoc(savesRef, {
+                userId: user?.userId,
+                username: user?.username,
+                postId: postId
+            })
+            
+            if (user) {
+                // Step 2: Update the specific post's saves in local state
+                setPosts(prevPosts => 
+                    prevPosts.map(post => 
+                        post.id === postId 
+                            ? { 
+                                ...post, 
+                                saves: [...(post.saves || []), {
+                                    userId: user.userId, 
+                                    username: user.username, 
+                                    saveId: newDoc.id
+                                }]
+                              }
+                            : post
+                    )
+                )
+            }
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    // NEW: Remove save functionality - similar to removeLike
+    const removeSave = async (postId, user) => {
+        try {
+            // Step 1: Find and delete the save from Firebase
+            const saveToDeleteQuery = query(
+                savesRef,
+                where("postId", "==", postId),
+                where("userId", "==", user?.userId)
+            )
+
+            const saveToDeleteData = await getDocs(saveToDeleteQuery)
+            const saveId = saveToDeleteData.docs[0].id
+            const saveToDelete = doc(db, "saves", saveId)
+
+            await deleteDoc(saveToDelete)
+            
+            if (user) {
+                // Step 2: Remove the save from the specific post's saves array
+                setPosts(prevPosts => 
+                    prevPosts.map(post => 
+                        post.id === postId 
+                            ? { 
+                                ...post, 
+                                saves: (post.saves || []).filter(save => save.saveId !== saveId)
+                              }
+                            : post
+                    )
+                )
+            }
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    // NEW: Check if user has saved a post
+    const hasUserSaved = (post, user) => {
+        return post.saves?.find((save) => save.userId === user?.userId)
+    }
+
+    // NEW: Get saved posts for a user
+    const getSavedPosts = async (user) => {
+        try {
+            const savedPostsQuery = query(
+                savesRef,
+                where("userId", "==", user?.userId)
+            )
+            const savedPostsData = await getDocs(savedPostsQuery)
+            const savedPostIds = savedPostsData.docs.map(doc => doc.data().postId)
+            
+            // Filter posts to only include saved ones
+            return posts.filter(post => savedPostIds.includes(post.id))
+        } catch (err) {
+            console.error(err)
+            return []
+        }
+    }
+
     /* useEffect hook to fetch posts when the component mounts. This should probably be moved to
     somewhere else so it only mounts when being called on the home screen. */
     useEffect(() => {
@@ -195,7 +315,9 @@ export const DataProvider = ({ children }) => {
             deletePost, getPosts, postIsLoading, setPostIsLoading,
             // REMOVED: likes, getLikes (no longer needed)
             // ADDED: addLike, removeLike, hasUserLiked (updated versions)
-            addLike, removeLike, hasUserLiked
+            addLike, removeLike, hasUserLiked,
+            // NEW: Save functionality
+            addSave, removeSave, hasUserSaved, getSavedPosts
         }}>
             {children}
         </DataContext.Provider>

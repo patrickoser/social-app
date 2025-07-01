@@ -6,7 +6,7 @@ import ProfilePicture from "./ProfilePicture";
 
 const Post = ({ post }) => {
     const { user } = useContext(AuthContext)
-    const { addLike, removeLike, hasUserLiked } = useContext(DataContext)
+    const { addLike, removeLike, hasUserLiked, addSave, removeSave, hasUserSaved } = useContext(DataContext)
 
     return (
         <div className="max-w-full border-b border-gray-300 dark:border-gray-700 text-left bg-white dark:bg-gray-800 p-4">
@@ -40,7 +40,12 @@ const Post = ({ post }) => {
                     {post.likes && <p className="text-gray-600 dark:text-gray-300"> {post.likes.length} </p>}
                 </div>
                 <button className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Share</button>
-                <button className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Save</button>
+                <button
+                    onClick={hasUserSaved(post, user) ? () => removeSave(post.id, user) : () => addSave(post.id, user)}
+                    className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+                >
+                    {hasUserSaved(post, user) ? 'Unsave' : 'Save'}
+                </button>
             </div>
         </div>
     )
