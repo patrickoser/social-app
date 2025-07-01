@@ -29,10 +29,8 @@ Working on:
     Adjust security rules for firebase storage to limit what type of file can be uploaded and add size constraints to
     prevent abuse of storage.
 
-    Make sight responsive, so when you get close to the width of a mobile device the nav links shift to the bottom and the 
+    Make site responsive, so when you get close to the width of a mobile device the nav links shift to the bottom and the 
     currentuserinfo shifts to the top or along the bottom too.
-
-    Add functionality to save and share button.
 
     Check that when starting up server and navigating to the site that it checks auth status and redirects to Home 
     if you are already signed in.
