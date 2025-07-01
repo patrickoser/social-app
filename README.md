@@ -34,6 +34,9 @@ Working on:
 
     Add functionality to save and share button.
 
+    Check that when starting up server and navigating to the site that it checks auth status and redirects to Home 
+    if you are already signed in.
+
     Adjust indentation of elements with long tailwind classes/other attributes to make it more readable.
 
     When optimizing the performance of the project use Chrome Devtools/react dev tools to pinpoint 
