@@ -280,7 +280,7 @@ const Profile = () => {
                     <h3 className="text-gray-900 dark:text-white">User not found...</h3>
                 )}
             </main>
-            <Nav />
+            <Nav mobileOnly={true} />
         </>
     )
 }

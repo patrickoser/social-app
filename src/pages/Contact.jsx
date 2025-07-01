@@ -62,7 +62,7 @@ const Contact = () => {
                 </section>
                 <RightSidebar />
             </main>
-            <Nav />
+            <Nav mobileOnly={true} />
         </>
     )
 }

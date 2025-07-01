@@ -36,7 +36,7 @@ const Settings = () => {
                 </section>
                 <RightSidebar />
             </main>
-            <Nav />
+            <Nav mobileOnly={true} />
         </>
     )
 }

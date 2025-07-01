@@ -41,7 +41,7 @@ const SavedPosts = () => {
                 </section>
                 <RightSidebar />
             </main>
-            <Nav />
+            <Nav mobileOnly={true} />
         </>
     );
 };

@@ -21,7 +21,7 @@ const Home = () => {
                 </section>
                 <RightSidebar />
             </main>
-            <Nav />
+            <Nav mobileOnly={true} />
         </>
     )
 }
