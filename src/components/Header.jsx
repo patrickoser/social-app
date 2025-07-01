@@ -47,13 +47,13 @@ const Header = () => {
             isScrolled ? 'shadow-lg' : 'shadow-sm'
         }`}>
             <div className="flex max-w-7xl mx-auto py-0 px-3">
-                <div className="w-3/12 min-w-60 px-5">
+                <div className="w-full md:w-3/12 md:min-w-60 px-3 md:px-5">
                     <Link to="/home">
-                        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Social App</h2>
+                        <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">Social App</h2>
                     </Link>
                 </div>
-                <div className="flex-initial w-6/12"></div>
-                <div className="w-3/12 min-w-60 px-5 flex justify-end">
+                <div className="hidden md:block flex-initial w-6/12"></div>
+                <div className="w-full md:w-3/12 md:min-w-60 px-3 md:px-5 flex justify-end">
                     <button
                         onClick={toggleTheme}
                         className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200 shadow-sm"
