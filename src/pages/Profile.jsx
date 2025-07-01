@@ -167,7 +167,7 @@ const Profile = () => {
     }, [username, posts])
 
     return (
-        <main className="flex max-w-7xl mx-auto py-0 px-3">
+        <main className="flex flex-col md:flex-row max-w-7xl mx-auto py-0 px-3">
             {postIsLoading ? (
                 <h3 className="text-gray-900 dark:text-white">Loading...</h3>
             ) : error ? (
@@ -175,7 +175,7 @@ const Profile = () => {
             ) : userData ? (
                 <>
                     <LeftSidebar />
-                    <section id="profile-main-content" className="flex-initial w-6/12 mt-5 px-5 text-center bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-t border-gray-300 dark:border-gray-700">
+                    <section className="flex-1 w-full md:w-6/12 mt-5 px-3 md:px-5 text-center bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-t border-gray-300 dark:border-gray-700 pb-20 md:pb-0">
                         <div id="profile-bio" className="flex flex-col items-center p-4 border-b border-gray-300 dark:border-gray-700">
                             <div id="img-con" className="flex flex-col items-center mb-4">
                                 {progress > 0 && progress < 100 && (
