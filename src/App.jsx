@@ -10,6 +10,7 @@ import Profile from "./pages/Profile.jsx"
 import Home from "./pages/Home.jsx"
 import PostPage from "./pages/PostPage.jsx"
 import Missing from "./pages/Missing.jsx"
+import SavedPosts from "./pages/SavedPosts.jsx"
 
 import { DataProvider } from "./context/DataContext.jsx"
 import { AuthProvider } from "./context/AuthContext.jsx"
@@ -35,6 +36,7 @@ function App() {
                       <Route path="/contact" element={<Contact />} />
                       <Route path="/profile/:username" element={<Profile />} />
                       <Route path="/post/:id" element={<PostPage />} />
+                      <Route path="/saved" element={<SavedPosts />} />
                     </Route>
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/login" element={<Login />} />
