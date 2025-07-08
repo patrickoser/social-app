@@ -9,7 +9,7 @@ Learned:
 
     When making a network request to an api, it is best practice to make a well constructed/structured request.
     Using all the data/state that is already client side when possible. The goal being to limit the number of api requests, 
-    which in turn keeps load times manageable. 
+    which in turn keeps load times manageable.
 
     When setting the likes state I was only able to store one posts likes at a time, so if I was trying to view more 
     than one post, I wouldn't get the right like numbers on each one. Now the likes state is apart of the posts state array 
@@ -30,9 +30,6 @@ Working on:
 
     Adjust security rules for firebase storage to limit what type of file can be uploaded and add size constraints to
     prevent abuse of storage.
-
-    Make site responsive, so when you get close to the width of a mobile device the nav links shift to the bottom and the 
-    currentuserinfo shifts to the top or along the bottom too.
 
     Adjust indentation of elements with long tailwind classes/other attributes to make it more readable.
 
