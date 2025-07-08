@@ -31,7 +31,7 @@ Working on:
     Adjust security rules for firebase storage to limit what type of file can be uploaded and add size constraints to
     prevent abuse of storage.
 
-    Adjust indentation of elements with long tailwind classes/other attributes to make it more readable.
+    Adjust indentation of elements with long tailwind classes/other attributes to make it more readable. 
 
     When optimizing the performance of the project use Chrome Devtools/react dev tools to pinpoint 
     where the performance issues are originating from. 'useMemo' should help with some slower 
