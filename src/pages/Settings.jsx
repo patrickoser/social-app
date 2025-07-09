@@ -5,7 +5,7 @@ import { DataContext } from "../context/DataContext";
 import { useContext } from "react";
 import LeftSidebar from "../components/LeftSidebar";
 import RightSidebar from "../components/RightSidebar";
-import Nav from "../components/Nav";
+import MobileNav from "../components/MobileNav";
 
 const Settings = () => {
     /* Might not need to import context as it could be costly w/o
@@ -36,7 +36,7 @@ const Settings = () => {
                 </section>
                 <RightSidebar />
             </main>
-            <Nav mobileOnly={true} />
+            <MobileNav />
         </>
     )
 }

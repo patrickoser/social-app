@@ -4,7 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 import Feed from "../components/Feed";
 import LeftSidebar from "../components/LeftSidebar";
 import RightSidebar from "../components/RightSidebar";
-import Nav from "../components/Nav";
+import MobileNav from "../components/MobileNav";
 
 const SavedPosts = () => {
     const { getSavedPosts } = useContext(DataContext);
@@ -41,7 +41,7 @@ const SavedPosts = () => {
                 </section>
                 <RightSidebar />
             </main>
-            <Nav mobileOnly={true} />
+            <MobileNav />
         </>
     );
 };

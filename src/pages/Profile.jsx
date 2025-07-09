@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 import Post from "../components/Post";
 import LeftSidebar from "../components/LeftSidebar";
 import RightSidebar from "../components/RightSidebar";
-import Nav from "../components/Nav";
+import MobileNav from "../components/MobileNav";
 import ProfilePicture from "../components/ProfilePicture";
 import { useProfilePicture } from "../context/ProfilePictureContext";
 
@@ -280,7 +280,7 @@ const Profile = () => {
                     <h3 className="text-gray-900 dark:text-white">User not found...</h3>
                 )}
             </main>
-            <Nav mobileOnly={true} />
+            <MobileNav />
         </>
     )
 }

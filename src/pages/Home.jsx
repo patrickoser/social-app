@@ -3,7 +3,7 @@ import Feed from "../components/Feed";
 import PostForm from "../components/PostForm";
 import LeftSidebar from "../components/LeftSidebar";
 import RightSidebar from "../components/RightSidebar";
-import Nav from "../components/Nav";
+import MobileNav from "../components/MobileNav";
 import { DataContext } from "../context/DataContext";
 
 const Home = () => {
@@ -21,7 +21,7 @@ const Home = () => {
                 </section>
                 <RightSidebar />
             </main>
-            <Nav mobileOnly={true} />
+            <MobileNav />
         </>
     )
 }

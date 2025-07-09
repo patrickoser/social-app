@@ -4,7 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 import { useParams } from "react-router-dom"
 import LeftSidebar from "../components/LeftSidebar";
 import RightSidebar from "../components/RightSidebar";
-import Nav from "../components/Nav";
+import MobileNav from "../components/MobileNav";
 import ProfilePicture from "../components/ProfilePicture";
 
 const PostPage = () => {
@@ -50,7 +50,7 @@ const PostPage = () => {
                     <RightSidebar />
                 </main>
             )}
-            <Nav mobileOnly={true} />
+            <MobileNav />
         </>
     );
 }

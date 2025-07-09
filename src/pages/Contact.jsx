@@ -1,7 +1,7 @@
 import React from "react";
 import LeftSidebar from "../components/LeftSidebar";
 import RightSidebar from "../components/RightSidebar";
-import Nav from "../components/Nav";
+import MobileNav from "../components/MobileNav";
 
 const Contact = () => {
     return (
@@ -62,7 +62,7 @@ const Contact = () => {
                 </section>
                 <RightSidebar />
             </main>
-            <Nav mobileOnly={true} />
+            <MobileNav />
         </>
     )
 }
