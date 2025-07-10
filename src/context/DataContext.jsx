@@ -4,6 +4,7 @@ import { format } from 'date-fns'
 import { db } from "../config/firebase"
 import { collection, getDocs, addDoc, deleteDoc, doc, query, where } from "firebase/firestore"
 import { AuthContext } from "./AuthContext";
+import { isGuestUser, storeGuestData, getGuestData, GUEST_KEYS, generateGuestId } from "../utils/guestUtils";
 
 export const DataContext = createContext({})
 
@@ -28,24 +29,49 @@ export const DataProvider = ({ children }) => {
     const createPost = async (e) => {
         e.preventDefault()
         const datetime = format(new Date(), 'MMMM dd yyyy pp')
-        try {
-            const docRef = await addDoc(postsCollectionRef, { 
-                username: user.username, 
-                userId: user.userId,
-                content: postContent, 
-                datetime: datetime, 
-            })
-            const newPost = {
-                id: docRef.id,
+        
+        if (isGuestUser(user)) {
+            // Handle guest post creation
+            const guestPost = {
+                id: generateGuestId(),
                 username: user.username,
                 userId: user.userId,
                 content: postContent,
                 datetime: datetime,
+                likes: [],
+                saves: [],
+                isGuest: true
+            };
+            
+            // Store in sessionStorage
+            const guestPosts = getGuestData(GUEST_KEYS.POSTS);
+            const updatedGuestPosts = [...guestPosts, guestPost];
+            storeGuestData(GUEST_KEYS.POSTS, updatedGuestPosts);
+            
+            // Update local state
+            setPosts(prevPosts => [...prevPosts, guestPost]);
+            setPostContent('');
+        } else {
+            // Handle regular Firebase post creation
+            try {
+                const docRef = await addDoc(postsCollectionRef, { 
+                    username: user.username, 
+                    userId: user.userId,
+                    content: postContent, 
+                    datetime: datetime, 
+                })
+                const newPost = {
+                    id: docRef.id,
+                    username: user.username,
+                    userId: user.userId,
+                    content: postContent,
+                    datetime: datetime,
+                }
+                setPosts(prevPosts =>[...prevPosts, newPost])
+                setPostContent('')
+            } catch(err) {
+                console.error(err)
             }
-            setPosts(prevPosts =>[...prevPosts, newPost])
-            setPostContent('')
-        } catch(err) {
-            console.error(err)
         }
     }
     
@@ -53,11 +79,23 @@ export const DataProvider = ({ children }) => {
     post in firebase and remove it from the database. */
     const deletePost = async (id) => {
         console.log(id)
-        try {
-            const postDoc = doc(db, "posts", id)
-            await deleteDoc(postDoc)
-        } catch (err) {
-            console.error(err)
+        
+        if (isGuestUser(user)) {
+            // Handle guest post deletion
+            const guestPosts = getGuestData(GUEST_KEYS.POSTS);
+            const updatedGuestPosts = guestPosts.filter(post => post.id !== id);
+            storeGuestData(GUEST_KEYS.POSTS, updatedGuestPosts);
+            
+            // Update local state
+            setPosts(prevPosts => prevPosts.filter(post => post.id !== id));
+        } else {
+            // Handle regular Firebase post deletion
+            try {
+                const postDoc = doc(db, "posts", id)
+                await deleteDoc(postDoc)
+            } catch (err) {
+                console.error(err)
+            }
         }
     }
 
@@ -65,20 +103,45 @@ export const DataProvider = ({ children }) => {
     'setPosts' to update the current state of the 'posts' object.. */
     const getPosts = async () => {
         setPostIsLoading(true)
+        
+        if (isGuestUser(user)) {
+            // Load guest posts from sessionStorage
+            const guestPosts = getGuestData(GUEST_KEYS.POSTS);
+            const allPosts = await getFirebasePosts(); // Get real posts for display
+            const combinedPosts = [...allPosts, ...guestPosts];
+            setPosts(combinedPosts);
+            setPostIsLoading(false);
+        } else {
+            // Handle regular Firebase posts
+            try {
+                const data = await getDocs(postsCollectionRef)
+                const fetchedPosts = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+                setPosts(fetchedPosts)
+                
+                // NEW: After fetching posts, we now attach likes to each post
+                // This is the key change - instead of separate likes state, likes become part of each post
+                await attachLikesToPosts(fetchedPosts)
+                // NEW: Also attach saves to each post
+                await attachSavesToPosts(fetchedPosts)
+            } catch(err) {
+                console.log(err.message)
+            } finally {
+                setPostIsLoading(false)
+            }
+        }
+    }
+
+    // Helper function to get Firebase posts (for guest users to see real posts)
+    const getFirebasePosts = async () => {
         try {
             const data = await getDocs(postsCollectionRef)
             const fetchedPosts = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-            setPosts(fetchedPosts)
-            
-            // NEW: After fetching posts, we now attach likes to each post
-            // This is the key change - instead of separate likes state, likes become part of each post
             await attachLikesToPosts(fetchedPosts)
-            // NEW: Also attach saves to each post
             await attachSavesToPosts(fetchedPosts)
+            return fetchedPosts;
         } catch(err) {
             console.log(err.message)
-        } finally {
-            setPostIsLoading(false)
+            return []
         }
     }
 
@@ -139,71 +202,122 @@ export const DataProvider = ({ children }) => {
 
     // UPDATED: Now updates the specific post's likes array instead of global likes state
     const addLike = async (postId, user) => {
-        try {
-            // Step 1: Add like to Firebase (unchanged)
-            const newDoc = await addDoc(likesRef, {
-                userId: user?.userId,
-                username: user?.username,
+        if (isGuestUser(user)) {
+            // Handle guest like
+            const guestLikes = getGuestData(GUEST_KEYS.LIKES);
+            const newLike = {
+                likeId: generateGuestId(),
+                userId: user.userId,
+                username: user.username,
                 postId: postId
-            })
+            };
             
-            if (user) {
-                // Step 2: Update the specific post's likes in local state
-                // This is the key change - we update the post's likes array, not global likes
-                setPosts(prevPosts => 
-                    prevPosts.map(post => 
-                        post.id === postId 
-                            ? { 
-                                ...post, 
-                                // Spread existing likes and add the new one
-                                likes: [...(post.likes || []), {
-                                    userId: user.userId, 
-                                    username: user.username, 
-                                    likeId: newDoc.id
-                                }]
-                              }
-                            : post // Leave other posts unchanged
-                    )
+            const updatedGuestLikes = [...guestLikes, newLike];
+            storeGuestData(GUEST_KEYS.LIKES, updatedGuestLikes);
+            
+            // Update local state
+            setPosts(prevPosts => 
+                prevPosts.map(post => 
+                    post.id === postId 
+                        ? { 
+                            ...post, 
+                            likes: [...(post.likes || []), newLike]
+                          }
+                        : post
                 )
+            );
+        } else {
+            // Handle regular Firebase like
+            try {
+                // Step 1: Add like to Firebase (unchanged)
+                const newDoc = await addDoc(likesRef, {
+                    userId: user?.userId,
+                    username: user?.username,
+                    postId: postId
+                })
+                
+                if (user) {
+                    // Step 2: Update the specific post's likes in local state
+                    // This is the key change - we update the post's likes array, not global likes
+                    setPosts(prevPosts => 
+                        prevPosts.map(post => 
+                            post.id === postId 
+                                ? { 
+                                    ...post, 
+                                    // Spread existing likes and add the new one
+                                    likes: [...(post.likes || []), {
+                                        userId: user.userId, 
+                                        username: user.username, 
+                                        likeId: newDoc.id
+                                    }]
+                                  }
+                                : post // Leave other posts unchanged
+                        )
+                    )
+                }
+            } catch (err) {
+                console.error(err)
             }
-        } catch (err) {
-            console.error(err)
         }
     }
 
     // UPDATED: Now removes from the specific post's likes array instead of global likes state
     const removeLike = async (postId, user) => {
-        try {
-            // Step 1: Find and delete the like from Firebase (unchanged)
-            const likeToDeleteQuery = query(
-                likesRef,
-                where("postId", "==", postId),
-                where("userId", "==", user?.userId)
-            )
-
-            const likeToDeleteData = await getDocs(likeToDeleteQuery)
-            const likeId = likeToDeleteData.docs[0].id
-            const likeToDelete = doc(db, "likes", likeId)
-
-            await deleteDoc(likeToDelete)
+        if (isGuestUser(user)) {
+            // Handle guest unlike
+            const guestLikes = getGuestData(GUEST_KEYS.LIKES);
+            const updatedGuestLikes = guestLikes.filter(like => 
+                !(like.postId === postId && like.userId === user.userId)
+            );
+            storeGuestData(GUEST_KEYS.LIKES, updatedGuestLikes);
             
-            if (user) {
-                // Step 2: Remove the like from the specific post's likes array
-                // This is the key change - we filter the post's likes, not global likes
-                setPosts(prevPosts => 
-                    prevPosts.map(post => 
-                        post.id === postId 
-                            ? { 
-                                ...post, 
-                                // Filter out the deleted like
-                                likes: (post.likes || []).filter(like => like.likeId !== likeId)
-                              }
-                            : post // Leave other posts unchanged
-                    )
+            // Update local state
+            setPosts(prevPosts => 
+                prevPosts.map(post => 
+                    post.id === postId 
+                        ? { 
+                            ...post, 
+                            likes: (post.likes || []).filter(like => 
+                                !(like.userId === user.userId)
+                            )
+                          }
+                        : post
                 )
+            );
+        } else {
+            // Handle regular Firebase unlike
+            try {
+                // Step 1: Find and delete the like from Firebase (unchanged)
+                const likeToDeleteQuery = query(
+                    likesRef,
+                    where("postId", "==", postId),
+                    where("userId", "==", user?.userId)
+                )
+
+                const likeToDeleteData = await getDocs(likeToDeleteQuery)
+                const likeId = likeToDeleteData.docs[0].id
+                const likeToDelete = doc(db, "likes", likeId)
+
+                await deleteDoc(likeToDelete)
+                
+                if (user) {
+                    // Step 2: Remove the like from the specific post's likes array
+                    // This is the key change - we filter the post's likes, not global likes
+                    setPosts(prevPosts => 
+                        prevPosts.map(post => 
+                            post.id === postId 
+                                ? { 
+                                    ...post, 
+                                    // Filter out the deleted like
+                                    likes: (post.likes || []).filter(like => like.likeId !== likeId)
+                                  }
+                                : post // Leave other posts unchanged
+                        )
+                    )
+                }
+            } catch (err) {
+                console.error(err)
             }
-        } catch (err) {
-            console.error(err)
         }
     }
 
@@ -216,67 +330,118 @@ export const DataProvider = ({ children }) => {
 
     // NEW: Add save functionality - similar to addLike
     const addSave = async (postId, user) => {
-        try {
-            // Step 1: Add save to Firebase
-            const newDoc = await addDoc(savesRef, {
-                userId: user?.userId,
-                username: user?.username,
+        if (isGuestUser(user)) {
+            // Handle guest save
+            const guestSaves = getGuestData(GUEST_KEYS.SAVES);
+            const newSave = {
+                saveId: generateGuestId(),
+                userId: user.userId,
+                username: user.username,
                 postId: postId
-            })
+            };
             
-            if (user) {
-                // Step 2: Update the specific post's saves in local state
-                setPosts(prevPosts => 
-                    prevPosts.map(post => 
-                        post.id === postId 
-                            ? { 
-                                ...post, 
-                                saves: [...(post.saves || []), {
-                                    userId: user.userId, 
-                                    username: user.username, 
-                                    saveId: newDoc.id
-                                }]
-                              }
-                            : post
-                    )
+            const updatedGuestSaves = [...guestSaves, newSave];
+            storeGuestData(GUEST_KEYS.SAVES, updatedGuestSaves);
+            
+            // Update local state
+            setPosts(prevPosts => 
+                prevPosts.map(post => 
+                    post.id === postId 
+                        ? { 
+                            ...post, 
+                            saves: [...(post.saves || []), newSave]
+                          }
+                        : post
                 )
+            );
+        } else {
+            // Handle regular Firebase save
+            try {
+                // Step 1: Add save to Firebase
+                const newDoc = await addDoc(savesRef, {
+                    userId: user?.userId,
+                    username: user?.username,
+                    postId: postId
+                })
+                
+                if (user) {
+                    // Step 2: Update the specific post's saves in local state
+                    setPosts(prevPosts => 
+                        prevPosts.map(post => 
+                            post.id === postId 
+                                ? { 
+                                    ...post, 
+                                    saves: [...(post.saves || []), {
+                                        userId: user.userId, 
+                                        username: user.username, 
+                                        saveId: newDoc.id
+                                    }]
+                                  }
+                                : post
+                        )
+                    )
+                }
+            } catch (err) {
+                console.error(err)
             }
-        } catch (err) {
-            console.error(err)
         }
     }
 
     // NEW: Remove save functionality - similar to removeLike
     const removeSave = async (postId, user) => {
-        try {
-            // Step 1: Find and delete the save from Firebase
-            const saveToDeleteQuery = query(
-                savesRef,
-                where("postId", "==", postId),
-                where("userId", "==", user?.userId)
-            )
-
-            const saveToDeleteData = await getDocs(saveToDeleteQuery)
-            const saveId = saveToDeleteData.docs[0].id
-            const saveToDelete = doc(db, "saves", saveId)
-
-            await deleteDoc(saveToDelete)
+        if (isGuestUser(user)) {
+            // Handle guest unsave
+            const guestSaves = getGuestData(GUEST_KEYS.SAVES);
+            const updatedGuestSaves = guestSaves.filter(save => 
+                !(save.postId === postId && save.userId === user.userId)
+            );
+            storeGuestData(GUEST_KEYS.SAVES, updatedGuestSaves);
             
-            if (user) {
-                // Step 2: Remove the save from the specific post's saves array
-                setPosts(prevPosts => 
-                    prevPosts.map(post => 
-                        post.id === postId 
-                            ? { 
-                                ...post, 
-                                saves: (post.saves || []).filter(save => save.saveId !== saveId)
-                              }
-                            : post
-                    )
+            // Update local state
+            setPosts(prevPosts => 
+                prevPosts.map(post => 
+                    post.id === postId 
+                        ? { 
+                            ...post, 
+                            saves: (post.saves || []).filter(save => 
+                                !(save.userId === user.userId)
+                            )
+                          }
+                        : post
                 )
+            );
+        } else {
+            // Handle regular Firebase unsave
+            try {
+                // Step 1: Find and delete the save from Firebase
+                const saveToDeleteQuery = query(
+                    savesRef,
+                    where("postId", "==", postId),
+                    where("userId", "==", user?.userId)
+                )
+
+                const saveToDeleteData = await getDocs(saveToDeleteQuery)
+                const saveId = saveToDeleteData.docs[0].id
+                const saveToDelete = doc(db, "saves", saveId)
+
+                await deleteDoc(saveToDelete)
+                
+                if (user) {
+                    // Step 2: Remove the save from the specific post's saves array
+                    setPosts(prevPosts => 
+                        prevPosts.map(post => 
+                            post.id === postId 
+                                ? { 
+                                    ...post, 
+                                    saves: (post.saves || []).filter(save => save.saveId !== saveId)
+                                  }
+                                : post
+                        )
+                    )
+                }
+            } catch (err) {
+                console.error(err)
             }
-        } catch (err) {
-            console.error(err)
         }
     }
 
@@ -287,19 +452,27 @@ export const DataProvider = ({ children }) => {
 
     // NEW: Get saved posts for a user
     const getSavedPosts = async (user) => {
-        try {
-            const savedPostsQuery = query(
-                savesRef,
-                where("userId", "==", user?.userId)
-            )
-            const savedPostsData = await getDocs(savedPostsQuery)
-            const savedPostIds = savedPostsData.docs.map(doc => doc.data().postId)
-            
-            // Filter posts to only include saved ones
-            return posts.filter(post => savedPostIds.includes(post.id))
-        } catch (err) {
-            console.error(err)
-            return []
+        if (isGuestUser(user)) {
+            // Handle guest saved posts
+            const guestSaves = getGuestData(GUEST_KEYS.SAVES);
+            const savedPostIds = guestSaves.map(save => save.postId);
+            return posts.filter(post => savedPostIds.includes(post.id));
+        } else {
+            // Handle regular Firebase saved posts
+            try {
+                const savedPostsQuery = query(
+                    savesRef,
+                    where("userId", "==", user?.userId)
+                )
+                const savedPostsData = await getDocs(savedPostsQuery)
+                const savedPostIds = savedPostsData.docs.map(doc => doc.data().postId)
+                
+                // Filter posts to only include saved ones
+                return posts.filter(post => savedPostIds.includes(post.id))
+            } catch (err) {
+                console.error(err)
+                return []
+            }
         }
     }
 
@@ -307,7 +480,7 @@ export const DataProvider = ({ children }) => {
     somewhere else so it only mounts when being called on the home screen. */
     useEffect(() => {
         getPosts()
-    }, [])
+    }, [user]) // Added user dependency to reload when user changes
 
     return (
         <DataContext.Provider value={{
