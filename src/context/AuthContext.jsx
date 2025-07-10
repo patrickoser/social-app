@@ -12,6 +12,34 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState()
     const [loading, setLoading] = useState(true)
 
+    // Guest mode comment: Guest authentication functions - defined outside useEffect to ensure availability
+    const signInAsGuest = () => {
+        console.log('signInAsGuest called'); // Debug log
+        const guestUser = createGuestUser();
+        sessionStorage.setItem(GUEST_KEYS.IS_GUEST, 'true');
+        setUser(guestUser);
+    };
+
+    // Guest mode comment: Sign out guest and clean up their data
+    const signOutGuest = () => {
+        cleanupGuestData();
+        setUser(null);
+    };
+
+    // Guest mode comment: Enhanced sign out that handles both guest and regular users
+    const signOut = async () => {
+        if (isGuestUser(user)) {
+            signOutGuest();
+        } else {
+            // Regular Firebase sign out
+            try {
+                await auth.signOut();
+            } catch (error) {
+                console.error('Error signing out:', error);
+            }
+        }
+    };
+
     /* Need to go through this and comment out each section because I forget how it works. */
     useEffect(() => {
         let unsubscribe;
@@ -52,33 +80,6 @@ export const AuthProvider = ({ children }) => {
         } 
 
     }, [])
-
-    // Guest mode comment: Guest authentication functions
-    const signInAsGuest = () => {
-        const guestUser = createGuestUser();
-        sessionStorage.setItem(GUEST_KEYS.IS_GUEST, 'true');
-        setUser(guestUser);
-    };
-
-    // Guest mode comment: Sign out guest and clean up their data
-    const signOutGuest = () => {
-        cleanupGuestData();
-        setUser(null);
-    };
-
-    // Guest mode comment: Enhanced sign out that handles both guest and regular users
-    const signOut = async () => {
-        if (isGuestUser(user)) {
-            signOutGuest();
-        } else {
-            // Regular Firebase sign out
-            try {
-                await auth.signOut();
-            } catch (error) {
-                console.error('Error signing out:', error);
-            }
-        }
-    };
 
     // Guest mode comment: Set up cleanup on page unload for guest users
     useEffect(() => {
