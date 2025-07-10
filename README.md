@@ -37,9 +37,6 @@ Working on:
     where the performance issues are originating from. 'useMemo' should help with some slower 
     components that use 'useEffect' so that they don't rerender needlessly.
 
-    Add ability to view site as a guest so people can check the functionality of the site.
-    Prompt: How hard would it be to add the ability to sign in as a guest? No need to create an account to view the site and interact? Maybe it would be a temp user that saves user posts and likes and displays them on their own profile, like with a real account but just wipse the slate clean everytime they leave the site/log out. The main goal being to make it easy for employers to use my site/test functionality/ux, without having to login everytime.
-
 Currently:
     Add Nav bar to Settings/Contact page.
 
