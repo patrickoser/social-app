@@ -2,6 +2,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { collection, query, getDocs, where } from "firebase/firestore";
 import { createContext, useState, useEffect } from "react";
 import { db } from "../config/firebase";
+// Guest mode comment: Import guest utilities for guest authentication
 import { createGuestUser, isGuestUser, cleanupGuestData, GUEST_KEYS } from "../utils/guestUtils";
 
 export const AuthContext = createContext({})
@@ -15,7 +16,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         let unsubscribe;
 
-        // Check if user is a guest first
+        // Guest mode comment: Check if user is a guest first before checking Firebase auth
         const isGuest = sessionStorage.getItem(GUEST_KEYS.IS_GUEST);
         if (isGuest === 'true') {
             const guestUser = createGuestUser();
@@ -52,19 +53,20 @@ export const AuthProvider = ({ children }) => {
 
     }, [])
 
-    // Guest authentication functions
+    // Guest mode comment: Guest authentication functions
     const signInAsGuest = () => {
         const guestUser = createGuestUser();
         sessionStorage.setItem(GUEST_KEYS.IS_GUEST, 'true');
         setUser(guestUser);
     };
 
+    // Guest mode comment: Sign out guest and clean up their data
     const signOutGuest = () => {
         cleanupGuestData();
         setUser(null);
     };
 
-    // Enhanced sign out that handles both guest and regular users
+    // Guest mode comment: Enhanced sign out that handles both guest and regular users
     const signOut = async () => {
         if (isGuestUser(user)) {
             signOutGuest();
@@ -78,7 +80,7 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    // Set up cleanup on page unload for guest users
+    // Guest mode comment: Set up cleanup on page unload for guest users
     useEffect(() => {
         const handleBeforeUnload = () => {
             if (isGuestUser(user)) {
@@ -96,6 +98,7 @@ export const AuthProvider = ({ children }) => {
         <AuthContext.Provider value={{
             user, 
             loading,
+            // Guest mode comment: Expose guest authentication functions
             signInAsGuest,
             signOutGuest,
             signOut,

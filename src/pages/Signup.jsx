@@ -13,7 +13,8 @@ const Signup = () => {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
-    const { user, loading: authLoading } = useContext(AuthContext)
+    // Guest mode comment: Added signInAsGuest function from auth context
+    const { user, loading: authLoading, signInAsGuest } = useContext(AuthContext)
     const navigate = useNavigate()
 
     // Redirect if already logged in
@@ -87,6 +88,12 @@ const Signup = () => {
             setError('Failed to sign in with Google. Please try again.')
         }
     }
+
+    // Guest mode comment: Handle guest sign in without creating account
+    const handleGuestSignIn = () => {
+        signInAsGuest();
+        // Navigation will be handled by useEffect when user state updates
+    };
 
     // Show loading if auth is still being determined
     if (authLoading) {
@@ -179,6 +186,31 @@ const Signup = () => {
                         </button>
                     </div>
                 </form>
+
+                {/* Guest mode comment: Guest Sign In Section */}
+                <div className="mt-6">
+                    <div className="relative">
+                        <div className="absolute inset-0 flex items-center">
+                            <div className="w-full border-t border-gray-300 dark:border-gray-600" />
+                        </div>
+                        <div className="relative flex justify-center text-sm">
+                            <span className="bg-white dark:bg-gray-800 px-2 text-gray-500 dark:text-gray-400">Or</span>
+                        </div>
+                    </div>
+                    <div className="mt-6">
+                        <button
+                            type="button"
+                            onClick={handleGuestSignIn}
+                            className="flex w-full justify-center rounded-md bg-gray-100 dark:bg-gray-700 px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 dark:text-white shadow-sm hover:bg-gray-200 dark:hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+                        >
+                            Try as Guest
+                        </button>
+                        <p className="mt-2 text-xs text-center text-gray-500 dark:text-gray-400">
+                            Explore the app without creating an account. Your data will be deleted when you leave.
+                        </p>
+                    </div>
+                </div>
+
                 <p className="mt-5 text-center text-sm text-gray-500 dark:text-gray-400">
                     Already have an account?&nbsp;
                     <Link to="/login"><button className="font-semibold leading-6 text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300">Login here!</button></Link>

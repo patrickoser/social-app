@@ -12,6 +12,7 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
+    // Guest mode comment: Added signInAsGuest function from auth context
     const { user, loading: authLoading, signInAsGuest } = useContext(AuthContext)
     const navigate = useNavigate()
 
@@ -40,6 +41,7 @@ const Login = () => {
         }
     }
 
+    // Guest mode comment: Handle guest sign in without creating account
     const handleGuestSignIn = () => {
         signInAsGuest();
         // Navigation will be handled by useEffect when user state updates
@@ -114,7 +116,7 @@ const Login = () => {
                     </div>
                 </form>
 
-                {/* Guest Sign In Section */}
+                {/* Guest mode comment: Guest Sign In Section */}
                 <div className="mt-6">
                     <div className="relative">
                         <div className="absolute inset-0 flex items-center">

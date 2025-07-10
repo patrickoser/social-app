@@ -1,10 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { DataContext } from "../context/DataContext";
 import { AuthContext } from "../context/AuthContext";
 import Feed from "../components/Feed";
 import LeftSidebar from "../components/LeftSidebar";
 import RightSidebar from "../components/RightSidebar";
 import MobileNav from "../components/MobileNav";
+// Guest mode comment: Guest indicator component for showing guest status
+import GuestIndicator from "../components/GuestIndicator";
 
 const SavedPosts = () => {
     const { getSavedPosts } = useContext(DataContext);
@@ -13,13 +15,21 @@ const SavedPosts = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const fetchSavedPosts = async () => {
+        const loadSavedPosts = async () => {
             setIsLoading(true);
-            const posts = await getSavedPosts(user);
-            setSavedPosts(posts);
-            setIsLoading(false);
+            try {
+                const posts = await getSavedPosts(user);
+                setSavedPosts(posts);
+            } catch (error) {
+                console.error('Error loading saved posts:', error);
+            } finally {
+                setIsLoading(false);
+            }
         };
-        fetchSavedPosts();
+
+        if (user) {
+            loadSavedPosts();
+        }
     }, [user, getSavedPosts]);
 
     return (
@@ -27,6 +37,8 @@ const SavedPosts = () => {
             <main className="flex flex-col md:flex-row max-w-7xl mx-auto py-0 px-3">
                 <LeftSidebar />
                 <section className="flex-1 w-full md:w-6/12 mt-5 px-3 md:px-5 text-center bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-t border-gray-300 dark:border-gray-700 pb-20 md:pb-0">
+                    {/* Guest mode comment: Show guest indicator when in guest mode */}
+                    <GuestIndicator />
                     <h1 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Saved Posts</h1>
                     {isLoading ? (
                         <div className="text-center text-gray-600 dark:text-gray-400">Loading...</div>

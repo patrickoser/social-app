@@ -1,4 +1,7 @@
-// Guest user utilities
+// Guest mode comment: Guest user utilities for managing temporary guest accounts
+import { useState, useEffect } from 'react';
+
+// Guest mode comment: Create a new guest user object with unique ID
 export const createGuestUser = () => {
     const guestId = 'guest_' + Date.now();
     return {
@@ -10,7 +13,7 @@ export const createGuestUser = () => {
     };
 };
 
-// Guest data storage keys
+// Guest mode comment: Storage keys for guest data in sessionStorage
 export const GUEST_KEYS = {
     POSTS: 'guestPosts',
     LIKES: 'guestLikes', 
@@ -18,7 +21,7 @@ export const GUEST_KEYS = {
     IS_GUEST: 'isGuest'
 };
 
-// Store guest data in sessionStorage
+// Guest mode comment: Store guest data in sessionStorage (temporary storage)
 export const storeGuestData = (key, data) => {
     if (typeof data === 'object') {
         sessionStorage.setItem(key, JSON.stringify(data));
@@ -27,7 +30,7 @@ export const storeGuestData = (key, data) => {
     }
 };
 
-// Retrieve guest data from sessionStorage
+// Guest mode comment: Retrieve guest data from sessionStorage
 export const getGuestData = (key, defaultValue = []) => {
     const data = sessionStorage.getItem(key);
     if (data) {
@@ -40,19 +43,19 @@ export const getGuestData = (key, defaultValue = []) => {
     return defaultValue;
 };
 
-// Clean up all guest data
+// Guest mode comment: Clean up all guest data when guest leaves
 export const cleanupGuestData = () => {
     Object.values(GUEST_KEYS).forEach(key => {
         sessionStorage.removeItem(key);
     });
 };
 
-// Check if current user is a guest
+// Guest mode comment: Check if current user is a guest user
 export const isGuestUser = (user) => {
     return user && user.isGuest === true;
 };
 
-// Generate unique guest ID
+// Guest mode comment: Generate unique guest ID for temporary data
 export const generateGuestId = () => {
     return 'guest_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 }; 

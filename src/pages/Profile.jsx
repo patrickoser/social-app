@@ -12,6 +12,8 @@ import RightSidebar from "../components/RightSidebar";
 import MobileNav from "../components/MobileNav";
 import ProfilePicture from "../components/ProfilePicture";
 import { useProfilePicture } from "../context/ProfilePictureContext";
+import GuestIndicator from "../components/GuestIndicator";
+import { isGuestUser, getGuestData, GUEST_KEYS } from "../utils/guestUtils";
 
 const Profile = () => {
     const { user } = useContext(AuthContext) 
@@ -178,6 +180,8 @@ const Profile = () => {
                     <>
                         <LeftSidebar />
                         <section className="flex-1 w-full md:w-6/12 mt-5 px-3 md:px-5 text-center bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-t border-gray-300 dark:border-gray-700 pb-20 md:pb-0">
+                            {/* Guest mode comment: Show guest indicator when in guest mode */}
+                            <GuestIndicator />
                             <div id="profile-bio" className="flex flex-col items-center p-4 border-b border-gray-300 dark:border-gray-700">
                                 <div id="img-con" className="flex flex-col items-center mb-4">
                                     {progress > 0 && progress < 100 && (

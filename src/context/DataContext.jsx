@@ -4,6 +4,7 @@ import { format } from 'date-fns'
 import { db } from "../config/firebase"
 import { collection, getDocs, addDoc, deleteDoc, doc, query, where } from "firebase/firestore"
 import { AuthContext } from "./AuthContext";
+// Guest mode comment: Import guest utilities for guest data management
 import { isGuestUser, storeGuestData, getGuestData, GUEST_KEYS, generateGuestId } from "../utils/guestUtils";
 
 export const DataContext = createContext({})
@@ -30,8 +31,9 @@ export const DataProvider = ({ children }) => {
         e.preventDefault()
         const datetime = format(new Date(), 'MMMM dd yyyy pp')
         
+        // Guest mode comment: Handle guest post creation differently than Firebase posts
         if (isGuestUser(user)) {
-            // Handle guest post creation
+            // Guest mode comment: Create guest post with temporary ID and store in sessionStorage
             const guestPost = {
                 id: generateGuestId(),
                 username: user.username,
@@ -43,12 +45,12 @@ export const DataProvider = ({ children }) => {
                 isGuest: true
             };
             
-            // Store in sessionStorage
+            // Guest mode comment: Store guest post in sessionStorage
             const guestPosts = getGuestData(GUEST_KEYS.POSTS);
             const updatedGuestPosts = [...guestPosts, guestPost];
             storeGuestData(GUEST_KEYS.POSTS, updatedGuestPosts);
             
-            // Update local state
+            // Guest mode comment: Update local state with guest post
             setPosts(prevPosts => [...prevPosts, guestPost]);
             setPostContent('');
         } else {
@@ -80,13 +82,13 @@ export const DataProvider = ({ children }) => {
     const deletePost = async (id) => {
         console.log(id)
         
+        // Guest mode comment: Handle guest post deletion from sessionStorage
         if (isGuestUser(user)) {
-            // Handle guest post deletion
             const guestPosts = getGuestData(GUEST_KEYS.POSTS);
             const updatedGuestPosts = guestPosts.filter(post => post.id !== id);
             storeGuestData(GUEST_KEYS.POSTS, updatedGuestPosts);
             
-            // Update local state
+            // Guest mode comment: Update local state by removing guest post
             setPosts(prevPosts => prevPosts.filter(post => post.id !== id));
         } else {
             // Handle regular Firebase post deletion
@@ -104,8 +106,8 @@ export const DataProvider = ({ children }) => {
     const getPosts = async () => {
         setPostIsLoading(true)
         
+        // Guest mode comment: Load guest posts from sessionStorage and combine with Firebase posts
         if (isGuestUser(user)) {
-            // Load guest posts from sessionStorage
             const guestPosts = getGuestData(GUEST_KEYS.POSTS);
             const allPosts = await getFirebasePosts(); // Get real posts for display
             const combinedPosts = [...allPosts, ...guestPosts];
@@ -131,7 +133,7 @@ export const DataProvider = ({ children }) => {
         }
     }
 
-    // Helper function to get Firebase posts (for guest users to see real posts)
+    // Guest mode comment: Helper function to get Firebase posts (for guest users to see real posts)
     const getFirebasePosts = async () => {
         try {
             const data = await getDocs(postsCollectionRef)
@@ -202,8 +204,8 @@ export const DataProvider = ({ children }) => {
 
     // UPDATED: Now updates the specific post's likes array instead of global likes state
     const addLike = async (postId, user) => {
+        // Guest mode comment: Handle guest likes in sessionStorage
         if (isGuestUser(user)) {
-            // Handle guest like
             const guestLikes = getGuestData(GUEST_KEYS.LIKES);
             const newLike = {
                 likeId: generateGuestId(),
@@ -215,7 +217,7 @@ export const DataProvider = ({ children }) => {
             const updatedGuestLikes = [...guestLikes, newLike];
             storeGuestData(GUEST_KEYS.LIKES, updatedGuestLikes);
             
-            // Update local state
+            // Guest mode comment: Update local state with guest like
             setPosts(prevPosts => 
                 prevPosts.map(post => 
                     post.id === postId 
@@ -263,15 +265,15 @@ export const DataProvider = ({ children }) => {
 
     // UPDATED: Now removes from the specific post's likes array instead of global likes state
     const removeLike = async (postId, user) => {
+        // Guest mode comment: Handle guest unlikes in sessionStorage
         if (isGuestUser(user)) {
-            // Handle guest unlike
             const guestLikes = getGuestData(GUEST_KEYS.LIKES);
             const updatedGuestLikes = guestLikes.filter(like => 
                 !(like.postId === postId && like.userId === user.userId)
             );
             storeGuestData(GUEST_KEYS.LIKES, updatedGuestLikes);
             
-            // Update local state
+            // Guest mode comment: Update local state by removing guest like
             setPosts(prevPosts => 
                 prevPosts.map(post => 
                     post.id === postId 
@@ -330,8 +332,8 @@ export const DataProvider = ({ children }) => {
 
     // NEW: Add save functionality - similar to addLike
     const addSave = async (postId, user) => {
+        // Guest mode comment: Handle guest saves in sessionStorage
         if (isGuestUser(user)) {
-            // Handle guest save
             const guestSaves = getGuestData(GUEST_KEYS.SAVES);
             const newSave = {
                 saveId: generateGuestId(),
@@ -343,7 +345,7 @@ export const DataProvider = ({ children }) => {
             const updatedGuestSaves = [...guestSaves, newSave];
             storeGuestData(GUEST_KEYS.SAVES, updatedGuestSaves);
             
-            // Update local state
+            // Guest mode comment: Update local state with guest save
             setPosts(prevPosts => 
                 prevPosts.map(post => 
                     post.id === postId 
@@ -389,15 +391,15 @@ export const DataProvider = ({ children }) => {
 
     // NEW: Remove save functionality - similar to removeLike
     const removeSave = async (postId, user) => {
+        // Guest mode comment: Handle guest unsaves in sessionStorage
         if (isGuestUser(user)) {
-            // Handle guest unsave
             const guestSaves = getGuestData(GUEST_KEYS.SAVES);
             const updatedGuestSaves = guestSaves.filter(save => 
                 !(save.postId === postId && save.userId === user.userId)
             );
             storeGuestData(GUEST_KEYS.SAVES, updatedGuestSaves);
             
-            // Update local state
+            // Guest mode comment: Update local state by removing guest save
             setPosts(prevPosts => 
                 prevPosts.map(post => 
                     post.id === postId 
@@ -452,8 +454,8 @@ export const DataProvider = ({ children }) => {
 
     // NEW: Get saved posts for a user
     const getSavedPosts = async (user) => {
+        // Guest mode comment: Handle guest saved posts from sessionStorage
         if (isGuestUser(user)) {
-            // Handle guest saved posts
             const guestSaves = getGuestData(GUEST_KEYS.SAVES);
             const savedPostIds = guestSaves.map(save => save.postId);
             return posts.filter(post => savedPostIds.includes(post.id));
@@ -480,7 +482,7 @@ export const DataProvider = ({ children }) => {
     somewhere else so it only mounts when being called on the home screen. */
     useEffect(() => {
         getPosts()
-    }, [user]) // Added user dependency to reload when user changes
+    }, [user]) // Guest mode comment: Added user dependency to reload when user changes (guest vs real)
 
     return (
         <DataContext.Provider value={{
