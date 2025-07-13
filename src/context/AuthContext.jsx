@@ -1,5 +1,5 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { collection, query, getDocs, where } from "firebase/firestore";
+import { collection, query, getDocs, where, setDoc, doc } from "firebase/firestore";
 import { createContext, useState, useEffect } from "react";
 import { db } from "../config/firebase";
 // Guest mode comment: Import guest utilities for guest authentication
@@ -65,11 +65,44 @@ export const AuthProvider = ({ children }) => {
                             userId: currentUser.uid,
                             username: userDoc.data().username
                         })
+                    } else {
+                        // Guest mode comment: Handle Google sign-in users who don't have a username yet
+                        // Auto-assign username from Google display name
+                        const googleUsername = currentUser.displayName || currentUser.email?.split('@')[0] || 'user';
+                        const cleanUsername = googleUsername.replace(/[^a-zA-Z0-9_]/g, '').toLowerCase();
+                        
+                        // Check if this username is available, if not add a number
+                        let finalUsername = cleanUsername;
+                        let counter = 1;
+                        while (true) {
+                            const usernameCheck = query(collection(db, 'usernames'), where('username', '==', finalUsername));
+                            const usernameSnapshot = await getDocs(usernameCheck);
+                            if (usernameSnapshot.empty) {
+                                break; // Username is available
+                            }
+                            finalUsername = `${cleanUsername}${counter}`;
+                            counter++;
+                        }
+                        
+                        // Create username document for Google user
+                        await setDoc(doc(db, 'usernames', finalUsername), {
+                            userId: currentUser.uid,
+                            username: finalUsername,
+                            email: currentUser.email,
+                            createdAt: new Date().toISOString(),
+                            isGoogleUser: true
+                        });
+                        
+                        setUser({
+                            email: currentUser.email,
+                            userId: currentUser.uid,
+                            username: finalUsername
+                        });
                     }
                 } catch (err) {
                     console.error(err)
                 }
-            } else {
+             } else {
                 setUser(null)
             }
             setLoading(false)
