@@ -16,6 +16,8 @@ const Signup = () => {
     const [emailError, setEmailError] = useState('')
     const [passwordError, setPasswordError] = useState('')
     const [confirmPasswordError, setConfirmPasswordError] = useState('')
+    const [usernameError, setUsernameError] = useState('')
+    const [isCheckingUsername, setIsCheckingUsername] = useState(false)
     // Guest mode comment: Added signInAsGuest function from auth context
     const { user, loading: authLoading, signInAsGuest } = useContext(AuthContext)
     const navigate = useNavigate()
@@ -95,6 +97,88 @@ const Signup = () => {
         return true
     }
 
+    // Username validation function
+    const validateUsername = (username) => {
+        if (!username) {
+            setUsernameError('')
+            return false
+        }
+        
+        // Length: 3-20 characters
+        if (username.length < 3) {
+            setUsernameError('Username must be at least 3 characters long.')
+            return false
+        }
+        
+        if (username.length > 20) {
+            setUsernameError('Username must be less than 20 characters.')
+            return false
+        }
+        
+        // Characters: letters, numbers, underscores, hyphens only
+        if (!/^[a-zA-Z0-9_-]+$/.test(username)) {
+            setUsernameError('Username can only contain letters, numbers, underscores, and hyphens.')
+            return false
+        }
+        
+        // No consecutive special characters
+        if (/[_-]{2,}/.test(username)) {
+            setUsernameError('Username cannot have consecutive underscores or hyphens.')
+            return false
+        }
+        
+        // Cannot start or end with special characters
+        if (/^[_-]|[_-]$/.test(username)) {
+            setUsernameError('Username cannot start or end with underscore or hyphen.')
+            return false
+        }
+        
+        // Reserved words check
+        const reservedWords = [
+            'admin', 'root', 'system', 'user', 'guest', 'test', 'demo',
+            'support', 'help', 'info', 'contact', 'about', 'login', 'signup',
+            'api', 'www', 'mail', 'ftp', 'localhost', 'null', 'undefined'
+        ]
+        
+        if (reservedWords.includes(username.toLowerCase())) {
+            setUsernameError('This username is reserved and cannot be used.')
+            return false
+        }
+        
+        // No profanity or inappropriate words (basic check)
+        const inappropriateWords = ['fuck', 'shit', 'ass', 'bitch', 'dick', 'pussy']
+        if (inappropriateWords.some(word => username.toLowerCase().includes(word))) {
+            setUsernameError('Username contains inappropriate content.')
+            return false
+        }
+        
+        setUsernameError('')
+        return true
+    }
+
+    // Debounced username availability check
+    const debouncedUsernameCheck = (() => {
+        let timeoutId
+        return (username) => {
+            clearTimeout(timeoutId)
+            timeoutId = setTimeout(async () => {
+                if (username && validateUsername(username)) {
+                    setIsCheckingUsername(true)
+                    try {
+                        const isAvailable = await isUsernameAvailable(username)
+                        if (!isAvailable) {
+                            setUsernameError('Username is already taken.')
+                        }
+                    } catch (error) {
+                        console.error('Error checking username availability:', error)
+                    } finally {
+                        setIsCheckingUsername(false)
+                    }
+                }
+            }, 500) // Wait 500ms after user stops typing
+        }
+    })()
+
     const handleEmailChange = (e) => {
         const value = e.target.value
         setEmail(value)
@@ -115,6 +199,13 @@ const Signup = () => {
         const value = e.target.value
         setConfirmPassword(value)
         validateConfirmPassword(value)
+    }
+
+    const handleUsernameChange = (e) => {
+        const value = e.target.value
+        setUsername(value)
+        validateUsername(value)
+        debouncedUsernameCheck(value)
     }
 
     // Redirect if already logged in
@@ -163,6 +254,14 @@ const Signup = () => {
             return
         }
         
+        // Validate username before proceeding
+        if (!validateUsername(username)) {
+            setError('Please fix the username validation errors.')
+            setLoading(false)
+            return
+        }
+
+        // Check if username is available
         const isAvailable = await isUsernameAvailable(username)
         if (isAvailable) {
             try {
@@ -237,12 +336,18 @@ const Signup = () => {
                                 type="username"
                                 placeholder="Enter username..."
                                 value={username}
-                                onChange={(e) => setUsername(e.target.value)}
+                                onChange={handleUsernameChange}
                                 autoComplete="username"
                                 required
-                                disabled={loading}
+                                disabled={loading || isCheckingUsername}
                                 className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 disabled:opacity-50 disabled:cursor-not-allowed"
                             />
+                            {usernameError && (
+                                <p className="mt-1 text-xs text-red-600 dark:text-red-400">{usernameError}</p>
+                            )}
+                            {isCheckingUsername && (
+                                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Checking availability...</p>
+                            )}
                         </div>
                     </div>
                     <div>
@@ -302,7 +407,7 @@ const Signup = () => {
                     <div>
                         <button 
                             type="submit" 
-                            disabled={loading}
+                            disabled={loading || isCheckingUsername}
                             className="flex w-full justify-center rounded-md bg-indigo-600 dark:bg-indigo-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 dark:hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             {loading ? 'Creating Account...' : 'Create Account'}
