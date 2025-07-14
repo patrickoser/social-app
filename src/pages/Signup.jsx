@@ -13,9 +13,49 @@ const Signup = () => {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
+    const [emailError, setEmailError] = useState('')
     // Guest mode comment: Added signInAsGuest function from auth context
     const { user, loading: authLoading, signInAsGuest } = useContext(AuthContext)
     const navigate = useNavigate()
+
+    // Email validation function
+    const validateEmail = (email) => {
+        // Basic email format validation
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+        
+        if (!email) {
+            setEmailError('')
+            return false
+        }
+        
+        if (!emailRegex.test(email)) {
+            setEmailError('Please enter a valid email address.')
+            return false
+        }
+        
+        // Block common disposable email domains
+        const disposableDomains = [
+            'tempmail.com', '10minutemail.com', 'guerrillamail.com', 
+            'mailinator.com', 'yopmail.com', 'throwaway.com', 'temp-mail.org',
+            'sharklasers.com', 'guerrillamailblock.com', 'pokemail.net',
+            'spam4.me', 'bccto.me', 'chacuo.net', 'dispostable.com'
+        ]
+        
+        const emailDomain = email.split('@')[1]?.toLowerCase()
+        if (disposableDomains.includes(emailDomain)) {
+            setEmailError('Please use a valid email address (disposable emails not allowed).')
+            return false
+        }
+        
+        setEmailError('')
+        return true
+    }
+
+    const handleEmailChange = (e) => {
+        const value = e.target.value
+        setEmail(value)
+        validateEmail(value)
+    }
 
     // Redirect if already logged in
     useEffect(() => {
@@ -41,6 +81,13 @@ const Signup = () => {
         e.preventDefault()
         setLoading(true)
         setError('')
+        
+        // Validate email before proceeding
+        if (!validateEmail(email)) {
+            setError('Please fix the email validation errors.')
+            setLoading(false)
+            return
+        }
         
         // Check if passwords match
         if (password !== confirmPassword) {
@@ -138,12 +185,15 @@ const Signup = () => {
                                 type="email"
                                 placeholder="Enter email..."
                                 value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                onChange={handleEmailChange}
                                 autoComplete="email"
                                 required
                                 disabled={loading}
                                 className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 disabled:opacity-50 disabled:cursor-not-allowed"
                             />
+                            {emailError && (
+                                <p className="mt-1 text-xs text-red-600 dark:text-red-400">{emailError}</p>
+                            )}
                         </div>
                     </div>
                     <div>
