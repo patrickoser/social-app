@@ -30,14 +30,72 @@ const Profile = () => {
     const [likedPosts, setLikedPosts] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [activeTab, setActiveTab] = useState("posts")
+    const [uploadError, setUploadError] = useState('')
 
     const { username } = useParams()
 
-    const handleImageChange = e => {
-      if (e.target.files[0]) {
-        setImage(e.target.files[0])
-      }
-    };
+    // File upload restrictions
+    const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp']
+    const MAX_FILE_SIZE = 5 * 1024 * 1024 // 5MB
+    const MAX_DIMENSIONS = { width: 2048, height: 2048 }
+
+    const validateFile = (file) => {
+        setUploadError('')
+        
+        // Check file type
+        if (!ALLOWED_FILE_TYPES.includes(file.type)) {
+            setUploadError('Please select a valid image file (JPEG, PNG, GIF, or WebP).')
+            return false
+        }
+        
+        // Check file extension
+        const fileName = file.name.toLowerCase()
+        const validExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp']
+        const hasValidExtension = validExtensions.some(ext => fileName.endsWith(ext))
+        
+        if (!hasValidExtension) {
+            setUploadError('File must have a valid image extension (.jpg, .jpeg, .png, .gif, .webp).')
+            return false
+        }
+        
+        // Check file size
+        if (file.size > MAX_FILE_SIZE) {
+            setUploadError(`File size must be less than ${MAX_FILE_SIZE / (1024 * 1024)}MB.`)
+            return false
+        }
+        
+        // Check image dimensions (optional - for performance)
+        return new Promise((resolve) => {
+            const img = new Image()
+            img.onload = () => {
+                if (img.width > MAX_DIMENSIONS.width || img.height > MAX_DIMENSIONS.height) {
+                    setUploadError(`Image dimensions must be ${MAX_DIMENSIONS.width}x${MAX_DIMENSIONS.height} or smaller.`)
+                    resolve(false)
+                } else {
+                    resolve(true)
+                }
+            }
+            img.onerror = () => {
+                setUploadError('Invalid image file. Please select a valid image.')
+                resolve(false)
+            }
+            img.src = URL.createObjectURL(file)
+        })
+    }
+
+    const handleImageChange = async (e) => {
+        const file = e.target.files[0]
+        if (file) {
+            const isValid = await validateFile(file)
+            if (isValid) {
+                setImage(file)
+            } else {
+                // Clear the file input
+                e.target.value = ''
+                setImage(null)
+            }
+        }
+    }
 
     const handleBioChange = (e) => {
         setBio(e.target.value)
@@ -194,14 +252,21 @@ const Profile = () => {
                                             <input 
                                                 type="file" 
                                                 onChange={handleImageChange} 
+                                                accept="image/jpeg,image/jpg,image/png,image/gif,image/webp"
                                                 className="text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 dark:file:bg-blue-900 file:text-blue-700 dark:file:text-blue-300 hover:file:bg-blue-100 dark:hover:file:bg-blue-800"
                                             />
                                             <button 
                                                 onClick={handleImageUpload}
-                                                className="px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700"
+                                                disabled={!image}
+                                                className="px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
                                             >
                                                 Upload
                                             </button>
+                                        </div>
+                                    )}
+                                    {uploadError && (
+                                        <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                                            <p className="text-sm text-red-600 dark:text-red-400">{uploadError}</p>
                                         </div>
                                     )}
                                     <ProfilePicture userId={userData.userId} size="2xl" />

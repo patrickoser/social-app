@@ -14,6 +14,8 @@ const Signup = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
     const [emailError, setEmailError] = useState('')
+    const [passwordError, setPasswordError] = useState('')
+    const [confirmPasswordError, setConfirmPasswordError] = useState('')
     // Guest mode comment: Added signInAsGuest function from auth context
     const { user, loading: authLoading, signInAsGuest } = useContext(AuthContext)
     const navigate = useNavigate()
@@ -51,10 +53,68 @@ const Signup = () => {
         return true
     }
 
+    // Password validation function
+    const validatePassword = (password) => {
+        if (!password) {
+            setPasswordError('')
+            return false
+        }
+        
+        if (password.length < 6) {
+            setPasswordError('Password must be at least 6 characters long.')
+            return false
+        }
+        
+        // Optional: Add more password strength requirements
+        const hasUpperCase = /[A-Z]/.test(password)
+        const hasLowerCase = /[a-z]/.test(password)
+        const hasNumbers = /\d/.test(password)
+        
+        if (!hasUpperCase || !hasLowerCase || !hasNumbers) {
+            setPasswordError('Password must contain uppercase, lowercase, and numbers.')
+            return false
+        }
+        
+        setPasswordError('')
+        return true
+    }
+
+    // Confirm password validation function
+    const validateConfirmPassword = (confirmPassword) => {
+        if (!confirmPassword) {
+            setConfirmPasswordError('')
+            return false
+        }
+        
+        if (confirmPassword !== password) {
+            setConfirmPasswordError('Passwords do not match.')
+            return false
+        }
+        
+        setConfirmPasswordError('')
+        return true
+    }
+
     const handleEmailChange = (e) => {
         const value = e.target.value
         setEmail(value)
         validateEmail(value)
+    }
+
+    const handlePasswordChange = (e) => {
+        const value = e.target.value
+        setPassword(value)
+        validatePassword(value)
+        // Re-validate confirm password when password changes
+        if (confirmPassword) {
+            validateConfirmPassword(confirmPassword)
+        }
+    }
+
+    const handleConfirmPasswordChange = (e) => {
+        const value = e.target.value
+        setConfirmPassword(value)
+        validateConfirmPassword(value)
     }
 
     // Redirect if already logged in
@@ -89,9 +149,16 @@ const Signup = () => {
             return
         }
         
+        // Validate password before proceeding
+        if (!validatePassword(password)) {
+            setError('Please fix the password validation errors.')
+            setLoading(false)
+            return
+        }
+        
         // Check if passwords match
-        if (password !== confirmPassword) {
-            setError('Passwords do not match.')
+        if (!validateConfirmPassword(confirmPassword)) {
+            setError('Please fix the password validation errors.')
             setLoading(false)
             return
         }
@@ -203,12 +270,15 @@ const Signup = () => {
                                 type="password"
                                 placeholder="Enter password..."
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={handlePasswordChange}
                                 autoComplete="new-password"
                                 required
                                 disabled={loading}
                                 className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 disabled:opacity-50 disabled:cursor-not-allowed"
                             />
+                            {passwordError && (
+                                <p className="mt-1 text-xs text-red-600 dark:text-red-400">{passwordError}</p>
+                            )}
                         </div>
                     </div>
                     <div>
@@ -218,12 +288,15 @@ const Signup = () => {
                                 type="password"
                                 placeholder="Confirm password..."
                                 value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                onChange={handleConfirmPasswordChange}
                                 autoComplete="new-password"
                                 required
                                 disabled={loading}
                                 className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 disabled:opacity-50 disabled:cursor-not-allowed"
                             />
+                            {confirmPasswordError && (
+                                <p className="mt-1 text-xs text-red-600 dark:text-red-400">{confirmPasswordError}</p>
+                            )}
                         </div>
                     </div>
                     <div>
