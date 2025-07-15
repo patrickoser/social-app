@@ -339,13 +339,13 @@ const Signup = () => {
                                 onChange={handleUsernameChange}
                                 autoComplete="username"
                                 required
-                                disabled={loading || isCheckingUsername}
+                                disabled={loading}
                                 className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 disabled:opacity-50 disabled:cursor-not-allowed"
                             />
                             {usernameError && (
                                 <p className="mt-1 text-xs text-red-600 dark:text-red-400">{usernameError}</p>
                             )}
-                            {isCheckingUsername && (
+                            {isCheckingUsername && !usernameError && (
                                 <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Checking availability...</p>
                             )}
                         </div>
@@ -407,7 +407,7 @@ const Signup = () => {
                     <div>
                         <button 
                             type="submit" 
-                            disabled={loading || isCheckingUsername}
+                            disabled={loading}
                             className="flex w-full justify-center rounded-md bg-indigo-600 dark:bg-indigo-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 dark:hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             {loading ? 'Creating Account...' : 'Create Account'}
