@@ -18,6 +18,7 @@ const Signup = () => {
     const [confirmPasswordError, setConfirmPasswordError] = useState('')
     const [usernameError, setUsernameError] = useState('')
     const [isCheckingUsername, setIsCheckingUsername] = useState(false)
+    const [usernameStatus, setUsernameStatus] = useState('') // 'available', 'taken', or ''
     // Guest mode comment: Added signInAsGuest function from auth context
     const { user, loading: authLoading, signInAsGuest } = useContext(AuthContext)
     const navigate = useNavigate()
@@ -101,35 +102,41 @@ const Signup = () => {
     const validateUsername = (username) => {
         if (!username) {
             setUsernameError('')
+            setUsernameStatus('')
             return false
         }
         
         // Length: 3-20 characters
         if (username.length < 3) {
             setUsernameError('Username must be at least 3 characters long.')
+            setUsernameStatus('')
             return false
         }
         
         if (username.length > 20) {
             setUsernameError('Username must be less than 20 characters.')
+            setUsernameStatus('')
             return false
         }
         
         // Characters: letters, numbers, underscores, hyphens only
         if (!/^[a-zA-Z0-9_-]+$/.test(username)) {
             setUsernameError('Username can only contain letters, numbers, underscores, and hyphens.')
+            setUsernameStatus('')
             return false
         }
         
         // No consecutive special characters
         if (/[_-]{2,}/.test(username)) {
             setUsernameError('Username cannot have consecutive underscores or hyphens.')
+            setUsernameStatus('')
             return false
         }
         
         // Cannot start or end with special characters
         if (/^[_-]|[_-]$/.test(username)) {
             setUsernameError('Username cannot start or end with underscore or hyphen.')
+            setUsernameStatus('')
             return false
         }
         
@@ -142,6 +149,7 @@ const Signup = () => {
         
         if (reservedWords.includes(username.toLowerCase())) {
             setUsernameError('This username is reserved and cannot be used.')
+            setUsernameStatus('')
             return false
         }
         
@@ -149,6 +157,7 @@ const Signup = () => {
         const inappropriateWords = ['fuck', 'shit', 'ass', 'bitch', 'dick', 'pussy']
         if (inappropriateWords.some(word => username.toLowerCase().includes(word))) {
             setUsernameError('Username contains inappropriate content.')
+            setUsernameStatus('')
             return false
         }
         
@@ -164,10 +173,15 @@ const Signup = () => {
             timeoutId = setTimeout(async () => {
                 if (username && validateUsername(username)) {
                     setIsCheckingUsername(true)
+                    setUsernameStatus('') // Clear status while checking
                     try {
                         const isAvailable = await isUsernameAvailable(username)
                         if (!isAvailable) {
                             setUsernameError('Username is already taken.')
+                            setUsernameStatus('taken')
+                        } else {
+                            setUsernameError('')
+                            setUsernameStatus('available')
                         }
                     } catch (error) {
                         console.error('Error checking username availability:', error)
@@ -343,10 +357,29 @@ const Signup = () => {
                                 className="pl-2 block w-full rounded-md border-0 py-1.5 text-gray-900 dark:text-white bg-white dark:bg-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 disabled:opacity-50 disabled:cursor-not-allowed"
                             />
                             {usernameError && (
-                                <p className="mt-1 text-xs text-red-600 dark:text-red-400">{usernameError}</p>
+                                <p className="mt-1 text-xs text-red-600 dark:text-red-400 flex items-center">
+                                    <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                    </svg>
+                                    {usernameError}
+                                </p>
                             )}
                             {isCheckingUsername && !usernameError && (
-                                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Checking availability...</p>
+                                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 flex items-center">
+                                    <svg className="animate-spin w-3 h-3 mr-1" fill="none" viewBox="0 0 24 24">
+                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    Checking availability...
+                                </p>
+                            )}
+                            {usernameStatus === 'available' && (
+                                <p className="mt-1 text-xs text-green-600 dark:text-green-400 flex items-center">
+                                    <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                    </svg>
+                                    Username available!
+                                </p>
                             )}
                         </div>
                     </div>
