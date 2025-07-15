@@ -23,6 +23,73 @@ const Signup = () => {
     const { user, loading: authLoading, signInAsGuest } = useContext(AuthContext)
     const navigate = useNavigate()
 
+    // Username validation function
+    const validateUsername = (username) => {
+        if (!username) {
+            setUsernameError('')
+            setUsernameStatus('')
+            return false
+        }
+        
+        // Length: 3-20 characters
+        if (username.length < 3) {
+            setUsernameError('Username must be at least 3 characters long.')
+            setUsernameStatus('')
+            return false
+        }
+        
+        if (username.length > 20) {
+            setUsernameError('Username must be less than 20 characters.')
+            setUsernameStatus('')
+            return false
+        }
+        
+        // Characters: letters, numbers, underscores, hyphens only
+        if (!/^[a-zA-Z0-9_-]+$/.test(username)) {
+            setUsernameError('Username can only contain letters, numbers, underscores, and hyphens.')
+            setUsernameStatus('')
+            return false
+        }
+        
+        // No consecutive special characters
+        if (/[_-]{2,}/.test(username)) {
+            setUsernameError('Username cannot have consecutive underscores or hyphens.')
+            setUsernameStatus('')
+            return false
+        }
+        
+        // Cannot start or end with special characters
+        if (/^[_-]|[_-]$/.test(username)) {
+            setUsernameError('Username cannot start or end with underscore or hyphen.')
+            setUsernameStatus('')
+            return false
+        }
+        
+        // Reserved words check
+        const reservedWords = [
+            'admin', 'root', 'system', 'user', 'guest', 'test', 'demo',
+            'support', 'help', 'info', 'contact', 'about', 'login', 'signup',
+            'api', 'www', 'mail', 'ftp', 'localhost', 'null', 'undefined'
+        ]
+        
+        if (reservedWords.includes(username.toLowerCase())) {
+            setUsernameError('This username is reserved and cannot be used.')
+            setUsernameStatus('')
+            return false
+        }
+        
+        // No profanity or inappropriate words (basic check)
+        const inappropriateWords = ['fuck', 'shit', 'ass', 'bitch', 'dick', 'pussy']
+        if (inappropriateWords.some(word => username.toLowerCase().includes(word))) {
+            setUsernameError('Username contains inappropriate content.')
+            setUsernameStatus('')
+            return false
+        }
+        
+        setUsernameError('')
+        return true
+    }
+
     // Email validation function
     const validateEmail = (email) => {
         // Basic email format validation
@@ -95,73 +162,6 @@ const Signup = () => {
         }
         
         setConfirmPasswordError('')
-        return true
-    }
-
-    // Username validation function
-    const validateUsername = (username) => {
-        if (!username) {
-            setUsernameError('')
-            setUsernameStatus('')
-            return false
-        }
-        
-        // Length: 3-20 characters
-        if (username.length < 3) {
-            setUsernameError('Username must be at least 3 characters long.')
-            setUsernameStatus('')
-            return false
-        }
-        
-        if (username.length > 20) {
-            setUsernameError('Username must be less than 20 characters.')
-            setUsernameStatus('')
-            return false
-        }
-        
-        // Characters: letters, numbers, underscores, hyphens only
-        if (!/^[a-zA-Z0-9_-]+$/.test(username)) {
-            setUsernameError('Username can only contain letters, numbers, underscores, and hyphens.')
-            setUsernameStatus('')
-            return false
-        }
-        
-        // No consecutive special characters
-        if (/[_-]{2,}/.test(username)) {
-            setUsernameError('Username cannot have consecutive underscores or hyphens.')
-            setUsernameStatus('')
-            return false
-        }
-        
-        // Cannot start or end with special characters
-        if (/^[_-]|[_-]$/.test(username)) {
-            setUsernameError('Username cannot start or end with underscore or hyphen.')
-            setUsernameStatus('')
-            return false
-        }
-        
-        // Reserved words check
-        const reservedWords = [
-            'admin', 'root', 'system', 'user', 'guest', 'test', 'demo',
-            'support', 'help', 'info', 'contact', 'about', 'login', 'signup',
-            'api', 'www', 'mail', 'ftp', 'localhost', 'null', 'undefined'
-        ]
-        
-        if (reservedWords.includes(username.toLowerCase())) {
-            setUsernameError('This username is reserved and cannot be used.')
-            setUsernameStatus('')
-            return false
-        }
-        
-        // No profanity or inappropriate words (basic check)
-        const inappropriateWords = ['fuck', 'shit', 'ass', 'bitch', 'dick', 'pussy']
-        if (inappropriateWords.some(word => username.toLowerCase().includes(word))) {
-            setUsernameError('Username contains inappropriate content.')
-            setUsernameStatus('')
-            return false
-        }
-        
-        setUsernameError('')
         return true
     }
 
