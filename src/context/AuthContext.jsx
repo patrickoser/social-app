@@ -90,7 +90,6 @@ export const AuthProvider = ({ children }) => {
                             counter++;
                         }
                         
-                        /* Create firebase username document for Google user */
                         await setDoc(doc(db, 'usernames', finalUsername), {
                             userId: currentUser.uid,
                             username: finalUsername,
@@ -98,7 +97,6 @@ export const AuthProvider = ({ children }) => {
                             createdAt: new Date().toISOString(),
                         });
                         
-                        /* Set the user state with the new username */
                         setUser({
                             email: currentUser.email,
                             userId: currentUser.uid,
@@ -106,40 +104,38 @@ export const AuthProvider = ({ children }) => {
                         });
                     }
                 } catch (err) {
-                    // Log any errors that occur during the process
                     console.error(err)
                 }
             } else {
-                // If no current user, set user state to null (logged out)
+                /* If no current user, set user state to null (logged out) */
                 setUser(null)
             }
-            // Set loading to false since auth check is complete
+            /* Set loading to false since auth check is complete */
             setLoading(false)
         })
 
-        // Return cleanup function that will run when useEffect unmounts
+        /* Return cleanup function that will run when useEffect unmounts */
         return () => {
-            // If unsubscribe function exists, call it to stop the auth listener
+            /* If unsubscribe function exists, call it to stop the auth listener */
             if(unsubscribe) unsubscribe()
         } 
 
     }, [])
 
-    // Guest mode comment: Set up cleanup on page unload for guest users
-    // This useEffect runs when the user state changes
+    /* Set up cleanup on page unload for guest users */
     useEffect(() => {
-        // Function to handle page unload/refresh
+        /* Function to handle page unload/refresh */
         const handleBeforeUnload = () => {
-            // Check if current user is a guest user
+            /* Check if current user is a guest user */
             if (isGuestUser(user)) {
-                // Clean up all guest data from sessionStorage
+                /* Clean up all guest data from sessionStorage */
                 cleanupGuestData();
             }
         };
 
-        // Add event listener for beforeunload event (page refresh/close)
+        /* Add event listener for beforeunload event (page refresh/close) */
         window.addEventListener('beforeunload', handleBeforeUnload);
-        // Return cleanup function to remove the event listener
+        /* Return cleanup function to remove the event listener */
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
@@ -149,7 +145,6 @@ export const AuthProvider = ({ children }) => {
         <AuthContext.Provider value={{
             user, 
             loading,
-            // Guest mode comment: Expose guest authentication functions
             signInAsGuest,
             signOutGuest,
             signOut,
