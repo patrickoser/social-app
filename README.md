@@ -18,6 +18,8 @@ Learned:
     but they are combined/sorted into one state that is able to define/communicate each posts likes data more clearly.
 
 Working on:
+    Think about taking google user data creation out of the auth useEffect
+
     Comment out all logic related to the new profile picture code. Read through, understand it, comment it.
 
     Comment out all logic related to the intersection observer code in Header. Read through, understand it, comment it.
