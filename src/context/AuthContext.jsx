@@ -2,7 +2,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { collection, query, getDocs, where, setDoc, doc } from "firebase/firestore";
 import { createContext, useState, useEffect } from "react";
 import { db } from "../config/firebase";
-// Guest mode comment: Import guest utilities for guest authentication
+// Import guest utilities for guest authentication
 import { createGuestUser, isGuestUser, cleanupGuestData, GUEST_KEYS } from "../utils/guestUtils";
 
 export const AuthContext = createContext({})
@@ -12,9 +12,8 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState()
     const [loading, setLoading] = useState(true)
 
-    // Guest mode comment: Guest authentication functions - defined outside useEffect to ensure availability
+    // Guest authentication functions - defined outside useEffect to ensure availability
     const signInAsGuest = () => {
-        console.log('signInAsGuest called'); // Debug log
         const guestUser = createGuestUser();
         sessionStorage.setItem(GUEST_KEYS.IS_GUEST, 'true');
         setUser(guestUser);
