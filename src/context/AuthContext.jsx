@@ -67,45 +67,38 @@ export const AuthProvider = ({ children }) => {
                             username: userDoc.data().username
                         })
                     } else {
-                        // Handle Google sign-in users who don't have a username yet
-                        // Auto-assign username from Google display name
-                        // Get username from Google display name, or email prefix, or default to 'user'
+                        /* Get username from Google display name, or email prefix, or default to 'user' */
                         const googleUsername = currentUser.displayName || currentUser.email?.split('@')[0] || 'user';
-                        // Clean the username to only allow letters, numbers, and underscores, then make lowercase
+                        /* Clean the username to only allow letters, numbers, and underscores, then make lowercase */
                         const cleanUsername = googleUsername.replace(/[^a-zA-Z0-9_]/g, '').toLowerCase();
                         
-                        // Check if this username is available, if not add a number
-                        // Start with the cleaned username
+                        /* Check if this username is available, if not add a number */
                         let finalUsername = cleanUsername;
-                        // Counter to add numbers if username is taken
                         let counter = 1;
-                        // Keep trying until we find an available username
                         while (true) {
-                            // Query to check if this username already exists
+                            /* Build a query to check if this username already exists */
                             const usernameCheck = query(collection(db, 'usernames'), where('username', '==', finalUsername));
-                            // Execute the username check query
+                            /* Execute the username check query */
                             const usernameSnapshot = await getDocs(usernameCheck);
-                            // If no documents found, username is available
+                            /* If no documents found, username is available */
                             if (usernameSnapshot.empty) {
-                                break; // Username is available
+                                break; /* Username is available, break out of the loop */
                             }
-                            // If username is taken, add a number to the end
+                            /* If username is taken, add a number to the end */
                             finalUsername = `${cleanUsername}${counter}`;
-                            // Increment counter for next attempt
+                            /* Increment counter for next attempt */
                             counter++;
                         }
                         
-                        // Create username document for Google user
-                        // Save the new username document to Firestore
+                        /* Create firebase username document for Google user */
                         await setDoc(doc(db, 'usernames', finalUsername), {
                             userId: currentUser.uid,
                             username: finalUsername,
                             email: currentUser.email,
                             createdAt: new Date().toISOString(),
-                            isGoogleUser: true
                         });
                         
-                        // Set the user state with the new username
+                        /* Set the user state with the new username */
                         setUser({
                             email: currentUser.email,
                             userId: currentUser.uid,
