@@ -77,9 +77,8 @@ export const DataProvider = ({ children }) => {
     /* Called within 'PostPage'. Takes in 'id' as a parameter and uses it to find the right
     post in firebase and remove it from the database. */
     const deletePost = async (id) => {
-        console.log(id)
         
-        // Guest mode comment: Handle guest post deletion from sessionStorage
+        /* Handle guest post deletion from sessionStorage */
         if (isGuestUser(user)) {
             const guestPosts = getGuestData(GUEST_KEYS.POSTS);
             const updatedGuestPosts = guestPosts.filter(post => post.id !== id);
