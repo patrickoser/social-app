@@ -21,7 +21,7 @@ export const GUEST_KEYS = {
     IS_GUEST: 'isGuest'
 };
 
-// Guest mode comment: Store guest data in sessionStorage (temporary storage)
+/* Store guest data in sessionStorage, stringify if object. */
 export const storeGuestData = (key, data) => {
     if (typeof data === 'object') {
         sessionStorage.setItem(key, JSON.stringify(data));
@@ -30,7 +30,7 @@ export const storeGuestData = (key, data) => {
     }
 };
 
-// Guest mode comment: Retrieve guest data from sessionStorage
+// Retrieve guest data from sessionStorage
 export const getGuestData = (key, defaultValue = []) => {
     const data = sessionStorage.getItem(key);
     if (data) {
