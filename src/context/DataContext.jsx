@@ -47,11 +47,11 @@ export const DataProvider = ({ children }) => {
             const updatedGuestPosts = [...guestPosts, guestPost];
             storeGuestData(GUEST_KEYS.POSTS, updatedGuestPosts);
             
-            // Guest mode comment: Update local state with guest post
+            /* Update local state with guest post */
             setPosts(prevPosts => [...prevPosts, guestPost]);
             setPostContent('');
         } else {
-            // Handle regular Firebase post creation
+            /* Handle regular Firebase post creation */
             try {
                 const docRef = await addDoc(postsCollectionRef, { 
                     username: user.username, 
