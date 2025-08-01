@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    /* Need to go through this and comment out each section because I forget how it works. */
+    /* Auth state listener */
     useEffect(() => {
         let unsubscribe;
 
