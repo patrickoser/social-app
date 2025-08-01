@@ -4,7 +4,6 @@ import { format } from 'date-fns'
 import { db } from "../config/firebase"
 import { collection, getDocs, addDoc, deleteDoc, doc, query, where } from "firebase/firestore"
 import { AuthContext } from "./AuthContext";
-// Guest mode comment: Import guest utilities for guest data management
 import { isGuestUser, storeGuestData, getGuestData, GUEST_KEYS, generateGuestId } from "../utils/guestUtils";
 
 export const DataContext = createContext({})
@@ -17,11 +16,9 @@ export const DataProvider = ({ children }) => {
     const postsCollectionRef = collection(db, "posts")
     const [postIsLoading, setPostIsLoading] = useState(true)
     
-    // LIKES REFERENCE: Points to the likes collection in Firebase
-    // This stays the same - we still use the separate likes collection
+    /* This stays the same - we still use the separate likes collection */
     const likesRef = collection(db, "likes")
-    
-    // SAVES REFERENCE: Points to the saves collection in Firebase
+
     const savesRef = collection(db, "saves")
 
     const { user } = useContext(AuthContext)
@@ -31,9 +28,9 @@ export const DataProvider = ({ children }) => {
         e.preventDefault()
         const datetime = format(new Date(), 'MMMM dd yyyy pp')
         
-        // Guest mode comment: Handle guest post creation differently than Firebase posts
+        /* Handle guest post creation differently than Firebase posts */
         if (isGuestUser(user)) {
-            // Guest mode comment: Create guest post with temporary ID and store in sessionStorage
+            /* Create guest post with temporary ID and store in sessionStorage */
             const guestPost = {
                 id: generateGuestId(),
                 username: user.username,
@@ -45,7 +42,7 @@ export const DataProvider = ({ children }) => {
                 isGuest: true
             };
             
-            // Guest mode comment: Store guest post in sessionStorage
+            /* Store guest post in sessionStorage */
             const guestPosts = getGuestData(GUEST_KEYS.POSTS);
             const updatedGuestPosts = [...guestPosts, guestPost];
             storeGuestData(GUEST_KEYS.POSTS, updatedGuestPosts);
