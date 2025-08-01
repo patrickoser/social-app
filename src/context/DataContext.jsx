@@ -97,8 +97,7 @@ export const DataProvider = ({ children }) => {
         }
     }
 
-    /* Called below in a useEffect. References the "posts" collection in firebase, then uses
-    'setPosts' to update the current state of the 'posts' object.. */
+    /* Called below in a useEffect. Puts all posts, from users and guests into the posts state. */
     const getPosts = async () => {
         setPostIsLoading(true)
         
@@ -484,10 +483,7 @@ export const DataProvider = ({ children }) => {
         <DataContext.Provider value={{
             posts, setPosts, navigate, postContent, setPostContent, createPost,
             deletePost, getPosts, postIsLoading, setPostIsLoading,
-            // REMOVED: likes, getLikes (no longer needed)
-            // ADDED: addLike, removeLike, hasUserLiked (updated versions)
             addLike, removeLike, hasUserLiked,
-            // NEW: Save functionality
             addSave, removeSave, hasUserSaved, getSavedPosts
         }}>
             {children}
