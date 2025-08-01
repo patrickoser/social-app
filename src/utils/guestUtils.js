@@ -1,7 +1,7 @@
-// Guest mode comment: Guest user utilities for managing temporary guest accounts
+// Guest user utilities for managing temporary guest accounts
 import { useState, useEffect } from 'react';
 
-// Guest mode comment: Create a new guest user object with unique ID
+// Create a new guest user object with unique ID
 export const createGuestUser = () => {
     const guestId = 'guest_' + Date.now();
     return {
@@ -13,7 +13,7 @@ export const createGuestUser = () => {
     };
 };
 
-// Guest mode comment: Storage keys for guest data in sessionStorage
+// Storage keys for guest data in sessionStorage
 export const GUEST_KEYS = {
     POSTS: 'guestPosts',
     LIKES: 'guestLikes', 
