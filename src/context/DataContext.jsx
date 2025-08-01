@@ -84,10 +84,10 @@ export const DataProvider = ({ children }) => {
             const updatedGuestPosts = guestPosts.filter(post => post.id !== id);
             storeGuestData(GUEST_KEYS.POSTS, updatedGuestPosts);
             
-            // Guest mode comment: Update local state by removing guest post
+            /* Update local state by removing guest post */
             setPosts(prevPosts => prevPosts.filter(post => post.id !== id));
         } else {
-            // Handle regular Firebase post deletion
+            /* Handle regular Firebase post deletion */
             try {
                 const postDoc = doc(db, "posts", id)
                 await deleteDoc(postDoc)
@@ -102,24 +102,24 @@ export const DataProvider = ({ children }) => {
     const getPosts = async () => {
         setPostIsLoading(true)
         
-        // Guest mode comment: Load guest posts from sessionStorage and combine with Firebase posts
+        /* Load guest posts from sessionStorage and combine with Firebase posts */
         if (isGuestUser(user)) {
             const guestPosts = getGuestData(GUEST_KEYS.POSTS);
-            const allPosts = await getFirebasePosts(); // Get real posts for display
+            const allPosts = await getFirebasePosts(); /* Get real user posts for display */
             const combinedPosts = [...allPosts, ...guestPosts];
             setPosts(combinedPosts);
             setPostIsLoading(false);
         } else {
-            // Handle regular Firebase posts
+            /* Handle just real user Firebase posts */
             try {
                 const data = await getDocs(postsCollectionRef)
                 const fetchedPosts = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
                 setPosts(fetchedPosts)
                 
-                // NEW: After fetching posts, we now attach likes to each post
-                // This is the key change - instead of separate likes state, likes become part of each post
+                /* After fetching posts, we now attach likes to each post.
+                This is the key change - instead of separate likes state, likes become part of each post */
                 await attachLikesToPosts(fetchedPosts)
-                // NEW: Also attach saves to each post
+                /* Also attach saves to each post */
                 await attachSavesToPosts(fetchedPosts)
             } catch(err) {
                 console.log(err.message)
