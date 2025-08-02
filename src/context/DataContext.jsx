@@ -116,7 +116,7 @@ export const DataProvider = ({ children }) => {
                 setPosts(fetchedPosts)
                 
                 /* After fetching posts, we now attach likes to each post.
-                This is the key change - instead of separate likes state, likes become part of each post */
+                Instead of separate likes state, likes become part of each post */
                 await attachLikesToPosts(fetchedPosts)
                 /* Also attach saves to each post */
                 await attachSavesToPosts(fetchedPosts)
@@ -128,7 +128,8 @@ export const DataProvider = ({ children }) => {
         }
     }
 
-    // Guest mode comment: Helper function to get Firebase posts (for guest users to see real posts)
+    /* Helper function to get Firebase posts for guest users to see real posts.
+    Called in getPosts. */
     const getFirebasePosts = async () => {
         try {
             const data = await getDocs(postsCollectionRef)
@@ -142,15 +143,14 @@ export const DataProvider = ({ children }) => {
         }
     }
 
-    // NEW FUNCTION: This is the core of our fix
-    // Takes all posts and attaches their respective likes to each post object
+    /* Takes all posts and attaches their respective likes to each post object */
     const attachLikesToPosts = async (postsToUpdate) => {
         try {
-            // Step 1: Fetch ALL likes from Firebase in one query
+            /* Fetch ALL likes from Firebase in one query */
             const allLikes = await getDocs(likesRef)
             const likesByPost = {}
             
-            // Step 2: Group likes by postId (organize likes by which post they belong to)
+            /* Group likes by postId, organize likes by which post they belong to. */
             allLikes.docs.forEach(doc => {
                 const like = { ...doc.data(), likeId: doc.id }
                 if (!likesByPost[like.postId]) {
@@ -159,9 +159,8 @@ export const DataProvider = ({ children }) => {
                 likesByPost[like.postId].push(like)
             })
             
-            // Step 3: Attach the grouped likes to each post
-            // This transforms: [{id: 'post1', content: '...'}] 
-            // Into: [{id: 'post1', content: '...', likes: [like1, like2, like3]}]
+            /* This transforms: [{id: 'post1', content: '...'}] 
+            Into: [{id: 'post1', content: '...', likes: [like1, like2, like3]}] */
             setPosts(postsToUpdate.map(post => ({
                 ...post,
                 likes: likesByPost[post.id] || [] // If no likes, use empty array
