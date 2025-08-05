@@ -233,21 +233,20 @@ export const DataProvider = ({ children }) => {
                 })
                 
                 if (user) {
-                    // Step 2: Update the specific post's likes in local state
-                    // This is the key change - we update the post's likes array, not global likes
+                    /* Update the specific post's likes in local state */
                     setPosts(prevPosts => 
                         prevPosts.map(post => 
                             post.id === postId 
                                 ? { 
                                     ...post, 
-                                    // Spread existing likes and add the new one
+                                    /* Spread existing likes and add the new one */
                                     likes: [...(post.likes || []), {
                                         userId: user.userId, 
                                         username: user.username, 
                                         likeId: newDoc.id
                                     }]
                                   }
-                                : post // Leave other posts unchanged
+                                : post /* Else, leave other posts unchanged */
                         )
                     )
                 }
