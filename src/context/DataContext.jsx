@@ -163,21 +163,21 @@ export const DataProvider = ({ children }) => {
             Into: [{id: 'post1', content: '...', likes: [like1, like2, like3]}] */
             setPosts(postsToUpdate.map(post => ({
                 ...post,
-                likes: likesByPost[post.id] || [] // If no likes, use empty array
+                likes: likesByPost[post.id] || [] /* If no likes, use empty array */
             })))
         } catch (err) {
             console.error(err)
         }
     }
 
-    // NEW FUNCTION: Similar to attachLikesToPosts but for saves
+    /* Similar to attachLikesToPosts but for saves */
     const attachSavesToPosts = async (postsToUpdate) => {
         try {
-            // Step 1: Fetch ALL saves from Firebase in one query
+            /* Fetch ALL saves from Firebase in one query */
             const allSaves = await getDocs(savesRef)
             const savesByPost = {}
             
-            // Step 2: Group saves by postId (organize saves by which post they belong to)
+            /* Group saves by postId, organize saves by which post they belong to. */
             allSaves.docs.forEach(doc => {
                 const save = { ...doc.data(), saveId: doc.id }
                 if (!savesByPost[save.postId]) {
@@ -186,19 +186,19 @@ export const DataProvider = ({ children }) => {
                 savesByPost[save.postId].push(save)
             })
             
-            // Step 3: Attach the grouped saves to each post
+            /* Attach the grouped saves to each post */
             setPosts(prevPosts => prevPosts.map(post => ({
                 ...post,
-                saves: savesByPost[post.id] || [] // If no saves, use empty array
+                saves: savesByPost[post.id] || [] /* If no saves, use empty array */
             })))
         } catch (err) {
             console.error(err)
         }
     }
 
-    // UPDATED: Now updates the specific post's likes array instead of global likes state
+    /* Updates the specific post's likes array instead of global likes state */
     const addLike = async (postId, user) => {
-        // Guest mode comment: Handle guest likes in sessionStorage
+        /* Handle guest likes in sessionStorage */
         if (isGuestUser(user)) {
             const guestLikes = getGuestData(GUEST_KEYS.LIKES);
             const newLike = {
