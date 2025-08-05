@@ -211,7 +211,7 @@ export const DataProvider = ({ children }) => {
             const updatedGuestLikes = [...guestLikes, newLike];
             storeGuestData(GUEST_KEYS.LIKES, updatedGuestLikes);
             
-            // Guest mode comment: Update local state with guest like
+            /* Update local state with guest like */
             setPosts(prevPosts => 
                 prevPosts.map(post => 
                     post.id === postId 
