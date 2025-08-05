@@ -223,9 +223,9 @@ export const DataProvider = ({ children }) => {
                 )
             );
         } else {
-            // Handle regular Firebase like
+            /* Handle regular user Firebase like */
             try {
-                // Step 1: Add like to Firebase (unchanged)
+                /* Add like to Firebase (unchanged) */
                 const newDoc = await addDoc(likesRef, {
                     userId: user?.userId,
                     username: user?.username,
