@@ -266,7 +266,7 @@ export const DataProvider = ({ children }) => {
             );
             storeGuestData(GUEST_KEYS.LIKES, updatedGuestLikes);
             
-            // Guest mode comment: Update local state by removing guest like
+            /* Update local state by removing guest like */
             setPosts(prevPosts => 
                 prevPosts.map(post => 
                     post.id === postId 
@@ -280,9 +280,9 @@ export const DataProvider = ({ children }) => {
                 )
             );
         } else {
-            // Handle regular Firebase unlike
+            /* Handle regular Firebase unlike */
             try {
-                // Step 1: Find and delete the like from Firebase (unchanged)
+                /* Find and delete the like from Firebase */
                 const likeToDeleteQuery = query(
                     likesRef,
                     where("postId", "==", postId),
