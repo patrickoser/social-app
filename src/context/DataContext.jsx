@@ -256,9 +256,9 @@ export const DataProvider = ({ children }) => {
         }
     }
 
-    // UPDATED: Now removes from the specific post's likes array instead of global likes state
+    /* Removes from the specific post's likes array instead of global likes state */
     const removeLike = async (postId, user) => {
-        // Guest mode comment: Handle guest unlikes in sessionStorage
+        /* Handle guest unlikes in sessionStorage */
         if (isGuestUser(user)) {
             const guestLikes = getGuestData(GUEST_KEYS.LIKES);
             const updatedGuestLikes = guestLikes.filter(like => 
