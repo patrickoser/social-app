@@ -9,17 +9,17 @@ export const ProfilePictureProvider = ({ children }) => {
     const [loadingStates, setLoadingStates] = useState({});
 
     const getProfilePicture = async (userId) => {
-        // Check if we already have this user's picture cached
+        /* Check if we already have this user's picture cached */
         if (profilePictures[userId] !== undefined) {
             return profilePictures[userId];
         }
 
-        // Check if we're already loading this user's picture
+        /* Check if we're already loading this user's picture */
         if (loadingStates[userId]) {
-            return null; // Return null while loading
+            return null; /* Return null while loading */
         }
 
-        // Set loading state for this user
+        /* Set loading state for this user */
         setLoadingStates(prev => ({
             ...prev,
             [userId]: true
