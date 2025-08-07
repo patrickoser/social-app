@@ -296,17 +296,16 @@ export const DataProvider = ({ children }) => {
                 await deleteDoc(likeToDelete)
                 
                 if (user) {
-                    // Step 2: Remove the like from the specific post's likes array
-                    // This is the key change - we filter the post's likes, not global likes
+                    /* Remove the like from the specific post's likes array */
                     setPosts(prevPosts => 
                         prevPosts.map(post => 
                             post.id === postId 
                                 ? { 
                                     ...post, 
-                                    // Filter out the deleted like
+                                    /* Filter out the deleted like */
                                     likes: (post.likes || []).filter(like => like.likeId !== likeId)
                                   }
-                                : post // Leave other posts unchanged
+                                : post /* Else, leave other posts unchanged */
                         )
                     )
                 }
@@ -316,16 +315,15 @@ export const DataProvider = ({ children }) => {
         }
     }
 
-    // UPDATED: Now checks the specific post's likes array instead of global likes state
-    // Changed from: hasUserLiked(user) to hasUserLiked(post, user)
+    /* Checks the specific post's likes array instead of global likes state */
     const hasUserLiked = (post, user) => {
-        // Check if the user's ID exists in this specific post's likes array
+        /* Check if the user's ID exists in this specific post's likes array */
         return post.likes?.find((like) => like.userId === user?.userId)
     }
 
-    // NEW: Add save functionality - similar to addLike
+    /* Add save functionality - similar to addLike */
     const addSave = async (postId, user) => {
-        // Guest mode comment: Handle guest saves in sessionStorage
+        /* Handle guest saves in sessionStorage */
         if (isGuestUser(user)) {
             const guestSaves = getGuestData(GUEST_KEYS.SAVES);
             const newSave = {
@@ -338,7 +336,7 @@ export const DataProvider = ({ children }) => {
             const updatedGuestSaves = [...guestSaves, newSave];
             storeGuestData(GUEST_KEYS.SAVES, updatedGuestSaves);
             
-            // Guest mode comment: Update local state with guest save
+            /* Update local state with guest save */
             setPosts(prevPosts => 
                 prevPosts.map(post => 
                     post.id === postId 
@@ -350,9 +348,9 @@ export const DataProvider = ({ children }) => {
                 )
             );
         } else {
-            // Handle regular Firebase save
+            /* Handle regular Firebase save */
             try {
-                // Step 1: Add save to Firebase
+                /* Add save to Firebase */
                 const newDoc = await addDoc(savesRef, {
                     userId: user?.userId,
                     username: user?.username,
@@ -360,7 +358,7 @@ export const DataProvider = ({ children }) => {
                 })
                 
                 if (user) {
-                    // Step 2: Update the specific post's saves in local state
+                    /* Update the specific post's saves in local state */
                     setPosts(prevPosts => 
                         prevPosts.map(post => 
                             post.id === postId 
