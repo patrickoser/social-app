@@ -380,9 +380,9 @@ export const DataProvider = ({ children }) => {
         }
     }
 
-    // NEW: Remove save functionality - similar to removeLike
+    /* Remove save functionality - similar to removeLike */
     const removeSave = async (postId, user) => {
-        // Guest mode comment: Handle guest unsaves in sessionStorage
+        /* Handle guest unsaves in sessionStorage */
         if (isGuestUser(user)) {
             const guestSaves = getGuestData(GUEST_KEYS.SAVES);
             const updatedGuestSaves = guestSaves.filter(save => 
@@ -390,7 +390,7 @@ export const DataProvider = ({ children }) => {
             );
             storeGuestData(GUEST_KEYS.SAVES, updatedGuestSaves);
             
-            // Guest mode comment: Update local state by removing guest save
+            /* Update local state by removing guest save */
             setPosts(prevPosts => 
                 prevPosts.map(post => 
                     post.id === postId 
@@ -404,9 +404,9 @@ export const DataProvider = ({ children }) => {
                 )
             );
         } else {
-            // Handle regular Firebase unsave
+            /* Handle regular Firebase unsave */
             try {
-                // Step 1: Find and delete the save from Firebase
+                /* Find and delete the save from Firebase */
                 const saveToDeleteQuery = query(
                     savesRef,
                     where("postId", "==", postId),
@@ -420,7 +420,7 @@ export const DataProvider = ({ children }) => {
                 await deleteDoc(saveToDelete)
                 
                 if (user) {
-                    // Step 2: Remove the save from the specific post's saves array
+                    /* Remove the save from the specific post's saves array */
                     setPosts(prevPosts => 
                         prevPosts.map(post => 
                             post.id === postId 
@@ -438,14 +438,14 @@ export const DataProvider = ({ children }) => {
         }
     }
 
-    // NEW: Check if user has saved a post
+    /* Check if user has saved a post */
     const hasUserSaved = (post, user) => {
         return post.saves?.find((save) => save.userId === user?.userId)
     }
 
-    // NEW: Get saved posts for a user
+    /* Get saved posts for a user */
     const getSavedPosts = async (user) => {
-        // Guest mode comment: Handle guest saved posts from sessionStorage
+        /* Handle guest saved posts from sessionStorage */
         if (isGuestUser(user)) {
             const guestSaves = getGuestData(GUEST_KEYS.SAVES);
             const savedPostIds = guestSaves.map(save => save.postId);
