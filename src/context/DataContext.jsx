@@ -451,7 +451,7 @@ export const DataProvider = ({ children }) => {
             const savedPostIds = guestSaves.map(save => save.postId);
             return posts.filter(post => savedPostIds.includes(post.id));
         } else {
-            // Handle regular Firebase saved posts
+            /* Handle regular Firebase saved posts */
             try {
                 const savedPostsQuery = query(
                     savesRef,
@@ -460,7 +460,7 @@ export const DataProvider = ({ children }) => {
                 const savedPostsData = await getDocs(savedPostsQuery)
                 const savedPostIds = savedPostsData.docs.map(doc => doc.data().postId)
                 
-                // Filter posts to only include saved ones
+                /* Filter posts to only include saved ones */
                 return posts.filter(post => savedPostIds.includes(post.id))
             } catch (err) {
                 console.error(err)
@@ -473,7 +473,7 @@ export const DataProvider = ({ children }) => {
     somewhere else so it only mounts when being called on the home screen. */
     useEffect(() => {
         getPosts()
-    }, [user]) // Guest mode comment: Added user dependency to reload when user changes (guest vs real)
+    }, [user]) 
 
     return (
         <DataContext.Provider value={{
