@@ -81,7 +81,8 @@ export const ProfilePictureProvider = ({ children }) => {
     );
 };
 
-// Custom hook for easier usage
+/* Custom hook that wraps useContext for better error handling. 
+   Throws a clear error if used outside ProfilePictureProvider scope. */
 export const useProfilePicture = () => {
     const context = useContext(ProfilePictureContext);
     if (!context) {
