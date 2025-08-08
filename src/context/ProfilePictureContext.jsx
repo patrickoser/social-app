@@ -56,7 +56,7 @@ export const ProfilePictureProvider = ({ children }) => {
 
             return "";
         } finally {
-            /* Clear loading state */
+            /* Set loading state to false. */
             setLoadingStates(prev => ({
                 ...prev,
                 [userId]: false
