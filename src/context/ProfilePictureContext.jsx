@@ -19,22 +19,25 @@ export const ProfilePictureProvider = ({ children }) => {
             return null; /* Return null while loading */
         }
 
-        /* Set loading state for this user */
+        /* Set loading state for this user. This is to prevent multiple requests for the same user. */
         setLoadingStates(prev => ({
             ...prev,
             [userId]: true
         }));
 
         try {
+            /* Point to this user's folder in Firebase Storage.
+            List all items in this user's folder */
             const userRef = ref(storage, `users/${userId}`);
             const res = await listAll(userRef);
-            
+
+            /* If there are any items, get the first one's URL */
             let url = "";
             if (res.items.length > 0) {
                 url = await getDownloadURL(res.items[0]);
             }
 
-            // Store in cache
+            /* Store in cache */
             setProfilePictures(prev => ({
                 ...prev,
                 [userId]: url
@@ -44,8 +47,8 @@ export const ProfilePictureProvider = ({ children }) => {
         } catch (err) {
             console.error("Error fetching profile picture:", err);
             
-            // For permission errors or any other errors, store empty string
-            // This prevents repeated failed requests for the same user
+            /* For permission errors or any other errors, store empty string.
+            This prevents repeated failed requests for the same user. */
             setProfilePictures(prev => ({
                 ...prev,
                 [userId]: ""
@@ -53,7 +56,7 @@ export const ProfilePictureProvider = ({ children }) => {
 
             return "";
         } finally {
-            // Clear loading state
+            /* Clear loading state */
             setLoadingStates(prev => ({
                 ...prev,
                 [userId]: false
