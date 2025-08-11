@@ -2,7 +2,7 @@ import React from "react";
 import Post from "./Post";
 
 const Feed = ({ posts }) => {
-    /* Sorts the posts by date and time. */
+    /* Sorts the posts by date and time. Newest to oldest. */
     const sortedPosts = posts.sort((a, b) => new Date(b.datetime) - new Date(a.datetime))
 
     return (
