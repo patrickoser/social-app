@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 
-// Guest mode comment: Component to show guest mode warning to users
+/* Component to show guest mode warning to users. */
 const GuestIndicator = () => {
-    // Guest mode comment: Get guest status from auth context
+    /* Get guest status from auth context. */
     const { isGuest } = useContext(AuthContext);
 
-    // Guest mode comment: Only show indicator if user is a guest
+    /* Only show indicator if user is a guest. */
     if (!isGuest) return null;
 
     return (
