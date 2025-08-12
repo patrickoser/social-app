@@ -11,7 +11,7 @@ const ProfilePicture = ({
     const [imageUrl, setImageUrl] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    // Size variants
+    /* Size variants. */
     const sizeClasses = {
         xs: "w-6 h-6",
         sm: "w-8 h-8", 
@@ -21,7 +21,7 @@ const ProfilePicture = ({
         "2xl": "w-32 h-32"
     };
 
-    // Default profile picture SVG sizes
+    /* Default profile picture SVG sizes. */
     const svgSizes = {
         xs: "w-3 h-3",
         sm: "w-4 h-4",
@@ -44,7 +44,7 @@ const ProfilePicture = ({
         fetchImage();
     }, [userId, getProfilePicture]);
 
-    // Default profile picture component
+    /* Default profile picture component. */
     const DefaultProfilePic = () => (
         <div className={`${sizeClasses[size]} rounded-full bg-gray-300 dark:bg-gray-600 border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center ${className}`}>
             <svg className={`${svgSizes[size]} text-gray-600 dark:text-gray-400`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -53,14 +53,14 @@ const ProfilePicture = ({
         </div>
     );
 
-    // Loading state
+    /* Loading state. */
     if (isLoading && showLoading) {
         return (
             <div className={`${sizeClasses[size]} rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse ${className}`} />
         );
     }
 
-    // Show image if available, otherwise show default
+    /* Show image if available, otherwise show default. */
     if (imageUrl) {
         return (
             <img 
