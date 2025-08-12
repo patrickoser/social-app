@@ -341,7 +341,7 @@ const Profile = () => {
                                 </div>
                             </div>
                             <div>
-                                {username === user?.username && !isGuestUser(user) && <PostForm />}
+                                {username === user?.username && <PostForm />}
                             </div>
                             <div id="profile-tabs" className="flex justify-evenly border-b border-gray-300 dark:border-gray-700">
                                 <button 
