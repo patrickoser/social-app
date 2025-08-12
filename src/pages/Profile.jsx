@@ -162,28 +162,47 @@ const Profile = () => {
     };
 
     const getProfilePosts = () => {
-        const profilePosts = posts.filter(post => post.username === username)
-        setUserPosts(profilePosts)
+        /* For guest users, get posts from sessionStorage */
+        if (isGuestUser(user) && username === user?.username) {
+            const guestPosts = getGuestData(GUEST_KEYS.POSTS, []);
+            setUserPosts(guestPosts);
+        } else {
+            const profilePosts = posts.filter(post => post.username === username)
+            setUserPosts(profilePosts)
+        }
     }
 
     const getProfileLikes = async () => {
-        try {
-            const likesRef = collection(db, "likes")
-            const q = query(likesRef, where("username", "==", username))
-            const querySnapshot = await getDocs(q)
+        /* For guest users, get likes from sessionStorage */
+        if (isGuestUser(user) && username === user?.username) {
+            const guestLikes = getGuestData(GUEST_KEYS.LIKES, []);
+            setUserLikes(guestLikes);
             
-            const likes = querySnapshot.docs.map(doc => ({
-                ...doc.data(),
-                likeId: doc.id
-            }))
-            setUserLikes(likes)
+            // Get the posts that were liked (from both regular posts and guest posts)
+            const likedPostIds = guestLikes.map(like => like.postId);
+            const guestPosts = getGuestData(GUEST_KEYS.POSTS, []);
+            const allPosts = [...posts, ...guestPosts];
+            const likedPostsData = allPosts.filter(post => likedPostIds.includes(post.id));
+            setLikedPosts(likedPostsData);
+        } else {
+            try {
+                const likesRef = collection(db, "likes")
+                const q = query(likesRef, where("username", "==", username))
+                const querySnapshot = await getDocs(q)
+                
+                const likes = querySnapshot.docs.map(doc => ({
+                    ...doc.data(),
+                    likeId: doc.id
+                }))
+                setUserLikes(likes)
 
-            // Get the posts that were liked
-            const likedPostIds = likes.map(like => like.postId)
-            const likedPostsData = posts.filter(post => likedPostIds.includes(post.id))
-            setLikedPosts(likedPostsData)
-        } catch (err) {
-            console.error("Error fetching likes:", err)
+                // Get the posts that were liked
+                const likedPostIds = likes.map(like => like.postId)
+                const likedPostsData = posts.filter(post => likedPostIds.includes(post.id))
+                setLikedPosts(likedPostsData)
+            } catch (err) {
+                console.error("Error fetching likes:", err)
+            }
         }
     }
 
@@ -192,6 +211,21 @@ const Profile = () => {
         /* Define an asynchronous function to fetch user data */
         const fetchData = async () => {
             setError(null)
+            
+            /* Check if this is a guest user trying to access their own profile */
+            if (isGuestUser(user) && username === user?.username) {
+                /* For guest users, create mock user data */
+                const guestData = {
+                    userId: user.userId,
+                    username: user.username,
+                    bio: 'This is a guest account. Sign up to create a permanent profile!',
+                    isGuest: true
+                };
+                setUserData(guestData);
+                setBio(guestData.bio);
+                return;
+            }
+            
             /* Get the user document from Firestore using the username */
             try {
                 const userDocRef = doc(db, 'usernames', username);
@@ -217,7 +251,7 @@ const Profile = () => {
             fetchData()
         }
         /* Dependency array ensures this runs when the username changes */
-    }, [username]);
+    }, [username, user]);
 
     useEffect(() => {
         if (username && posts) {
@@ -247,7 +281,7 @@ const Profile = () => {
                                             <progress value={progress} max="100" />
                                         </div>
                                     )}
-                                    {username === user?.username && (
+                                    {username === user?.username && !isGuestUser(user) && (
                                         <div className="flex items-center gap-4 mb-4">
                                             <input 
                                                 type="file" 
@@ -294,7 +328,7 @@ const Profile = () => {
                                     ) : (
                                         <div className="flex flex-col items-center gap-4">
                                             <p className="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{bio}</p>
-                                            {username === user?.username && (
+                                            {username === user?.username && !isGuestUser(user) && (
                                                 <button 
                                                     onClick={() => setIsEditing(true)}
                                                     className="px-4 py-2 text-sm font-medium text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/50 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900 focus:ring-4 focus:ring-blue-300"
@@ -307,7 +341,7 @@ const Profile = () => {
                                 </div>
                             </div>
                             <div>
-                                {username === user?.username && <PostForm />}
+                                {username === user?.username && !isGuestUser(user) && <PostForm />}
                             </div>
                             <div id="profile-tabs" className="flex justify-evenly border-b border-gray-300 dark:border-gray-700">
                                 <button 

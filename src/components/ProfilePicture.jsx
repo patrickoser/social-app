@@ -9,7 +9,6 @@ const ProfilePicture = ({
 }) => {
     const { getProfilePicture, loadingStates } = useProfilePicture();
     const [imageUrl, setImageUrl] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
 
     /* Size variants. */
     const sizeClasses = {
@@ -35,10 +34,8 @@ const ProfilePicture = ({
         if (!userId) return;
 
         const fetchImage = async () => {
-            setIsLoading(true);
             const url = await getProfilePicture(userId);
             setImageUrl(url);
-            setIsLoading(false);
         };
 
         fetchImage();
@@ -54,7 +51,7 @@ const ProfilePicture = ({
     );
 
     /* Loading state. */
-    if (isLoading && showLoading) {
+    if (loadingStates[userId] && showLoading) {
         return (
             <div className={`${sizeClasses[size]} rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse ${className}`} />
         );
