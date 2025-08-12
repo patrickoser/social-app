@@ -51,6 +51,8 @@ const Nav = () => {
         <nav className="hidden md:block">
             <ul className="flex flex-col space-y-3 pb-4">
                 {navItems.map((item) => (
+                    /* Key tracks which nav item is which, and efficiently update on array changes/re-renders.
+                    Must be at the top level of the element returned from the map function. */
                     <li key={item.path}>
                         <Link 
                             to={item.path} 
