@@ -6,6 +6,7 @@ const MobileNav = () => {
     const { user } = useContext(AuthContext);
     const location = useLocation();
 
+    /* An array of objects that contain the path, label, and icon for each navigation item. */
     const navItems = [
         {
             path: `/profile/${user?.username}`,
