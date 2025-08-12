@@ -51,6 +51,7 @@ const MobileNav = () => {
         <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-gray-800 border-t border-gray-300 dark:border-gray-700 shadow-lg">
             <div className="flex justify-around items-center py-3">
                 {navItems.map((item) => (
+                    /* Key tracks which nav item is which, and efficiently update on array changes/re-renders. */
                     <Link
                         key={item.path}
                         to={item.path}
