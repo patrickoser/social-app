@@ -58,7 +58,7 @@ const ProfilePicture = ({
         );
     }
 
-    /* Show image if available, otherwise show default. */
+    /* Show image if available, otherwise default returned below. */
     if (imageUrl) {
         return (
             <img 
