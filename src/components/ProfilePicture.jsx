@@ -51,7 +51,7 @@ const ProfilePicture = ({
         </div>
     );
 
-    /* Loading state. */
+    /* Loading state with pulse animation. */
     if (loadingStates[userId] && showLoading) {
         return (
             <div className={`${sizeClasses[size]} rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse ${className}`} />
