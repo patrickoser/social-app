@@ -30,6 +30,7 @@ const ProfilePicture = ({
         "2xl": "w-16 h-16"
     };
 
+    /* Fetch profile picture. */
     useEffect(() => {
         if (!userId) return;
 
