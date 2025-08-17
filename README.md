@@ -20,14 +20,6 @@ Learned:
 Working on:
     Think about taking google user data creation out of the auth useEffect
 
-    Comment out all logic related to the new profile picture code. Read through, understand it, comment it.
-
-    Comment out all logic related to the intersection observer code in Header. Read through, understand it, comment it.
-
-    Comment out all logic related to the Login/SignUp redirect/error/loading handling. Read through, understand it, comment it.
-
-    Comment out all tailwind changes related to responsive design especially in Nav.
-
     Look at other places I have used navigate from context and see if it makes sense to use useNavigate instead.
 
     Adjust security rules for firebase storage to limit what type of file can be uploaded and add size constraints to
@@ -47,64 +39,7 @@ Currently:
     All instances of 'firestore' in Profile was replaced with 'db' but 'db' pops as an error 
     for not being a function on page load.(This seems to be fixed but leaving it just in case that changes so I remember what changed.)
 
-    When userdata is pulled from firebase in Profile it grabs Everything associated with the usernames collection. When the users posts are being pulled/mapped in the Feed below they are not found. Posts are located in a seperate collection and there is no username/userId associating it with the user who created it. Add the username of the posts creator upon each posts creation. That way you can pull all the posts of one user at a time and populate their profile with only their posts.
-    
-    When populating each users likes I will need to map find all the posts they've liked and then pull in just those posts. So I will need a post id and the username/userId of the person who liked it. 
-
-Errors:
-
-    When signing into existing accounts it doesn't redirect to home
-    screen properly. 
-
-    Create post form isnt posting.
-
-Todo:
-    Talk out/write down every step need to add and pull data from the 
-    backend that is associated with individual accounts.
-
-    Each post on the feed and individual profiles should have the
-    username of the account that posted them displayed properly.
-
-    Need to dynamically generate the profile info of each specific 
-    user when their username is clicked on. That means a feed of their 
-    posts, likes, and their pfp, bio and other public image. Might need 
-    to update routes to accomadate cumstom id routes, feed to display 
-    the content of the id being referenced, and any other info apart 
-    of their profile.
-
-    Adjust routes so that each profile has an id associated with it 
-    that will bring you to that specific persons profile. 
-
-    Add default images and the ability to upload their own images. 
-    Hide it behind a dropdown menu.
-
-    'getImageUrl is defined in Nav and Profile. It should be defined
-    and exported rom a context file so I dont repeat myself needlessly.
-
-    Add an error message when a user provides an email/password 
-    combo that doesnt match any existing account.
-
-    Add loading screen when fetching data. Could implement this 
-    using 'createBrowserRouter'.
-
-    Pull in user specifc liked posts in a seperate tab on each 
-    users profile. Users should be able to switch between tabs, 
-    gooing from profile specific posts and likes.
-
-    Add Nav bar to display in Contact page.
-
-    When trying to sign into older/existing accounts I got an error
-    that prevented me from signing in. Worth trying to replicate 
-    and figure out why its happening.
-
-    CRUD Operations
-        A share button that allows users to share posts elsewhere. 
-
-        A tab that shows what posts each user has like on their 
-        profile.
-
-    See if it makes sense to move all firebase auth checks to auth context. 
-
+todo:
     Have firebase check if the email used during sign up is
     already assigned to an account. Should check if user is 
     signing up with google or email/password. If the email is 
@@ -122,38 +57,10 @@ Todo:
 
     Figure out why reloading the page when on a specific PostPage 
     the page doesnt load properly.
-    
-    There should be no Header in the login/signup page.
 
     Look into setting up Tailwind to set some default colors
     and make it easier to reuse them throughout the project.
 
-    Set up structure for Contact page.
-
-Pages needed:
-    Home feed
-        Put Nav bar on left side and have it slide under the content for a mobile friendly version.
-
-        No need to have a seperate page for post creation, it should be a popup window, or a box that expands at the top like Twitter.
-
-    Profile page
-        Your posts scroll across the screen like the Home feed but have a wheel effect where the posts become bigger and emphasized as they reach the center of the screen. As if you are turing a wheel
-
-    Login and signup
-        Can be the same style as the comparable login and signup pages. Looked clean and can easily tweak the color and style as I want.
-
-        Make it possible for users to login/signup using their google account and maybe a couple others but at least google.
-
-    Settings
-        Doesn't have to be an extensive list, just a few features that make sense. Stuff like changing your display name.
-
-    A page to display the individual posts you click on.
-        Posts should have a like button, repost button, and section to add comments.
-
-        To add comments to posts a drop down box will appear so that the user can add their comment. A whole new page is not needed. When the comment is add the page will scroll to the added comment.
-
-Possible additional features:
-    A way for users to message each other.
 
 # React + Vite
 
