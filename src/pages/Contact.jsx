@@ -2,7 +2,6 @@ import React from "react";
 import LeftSidebar from "../components/LeftSidebar";
 import RightSidebar from "../components/RightSidebar";
 import MobileNav from "../components/MobileNav";
-// Guest mode comment: Guest indicator component for showing guest status
 import GuestIndicator from "../components/GuestIndicator";
 
 const Contact = () => {
@@ -11,7 +10,6 @@ const Contact = () => {
             <main className="flex flex-col md:flex-row max-w-7xl mx-auto py-0 px-3">
                 <LeftSidebar />
                 <section className="flex-1 w-full md:w-6/12 mt-5 px-3 md:px-5 pt-3 text-center bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-t border-b border-gray-300 dark:border-gray-700 pb-20 md:pb-6">
-                    {/* Guest mode comment: Show guest indicator when in guest mode */}
                     <GuestIndicator />
                     <div className="mb-8">
                         <h1 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Need to get in touch?</h1>
