@@ -18,12 +18,11 @@ const Signup = () => {
     const [confirmPasswordError, setConfirmPasswordError] = useState('')
     const [usernameError, setUsernameError] = useState('')
     const [isCheckingUsername, setIsCheckingUsername] = useState(false)
-    const [usernameStatus, setUsernameStatus] = useState('') // 'available', 'taken', or ''
-    // Guest mode comment: Added signInAsGuest function from auth context
+    const [usernameStatus, setUsernameStatus] = useState('')
     const { user, loading: authLoading, signInAsGuest } = useContext(AuthContext)
     const navigate = useNavigate()
 
-    // Username validation function
+    /* Username validation function */
     const validateUsername = (username) => {
         if (!username) {
             setUsernameError('')
@@ -31,7 +30,7 @@ const Signup = () => {
             return false
         }
         
-        // Length: 3-20 characters
+        /* Length: 3-20 characters */
         if (username.length < 3) {
             setUsernameError('Username must be at least 3 characters long.')
             setUsernameStatus('')
@@ -44,28 +43,28 @@ const Signup = () => {
             return false
         }
         
-        // Characters: letters, numbers, underscores, hyphens only
+        /* Characters: letters, numbers, underscores, hyphens only */
         if (!/^[a-zA-Z0-9_-]+$/.test(username)) {
             setUsernameError('Username can only contain letters, numbers, underscores, and hyphens.')
             setUsernameStatus('')
             return false
         }
         
-        // No consecutive special characters
+        /* No consecutive special characters */
         if (/[_-]{2,}/.test(username)) {
             setUsernameError('Username cannot have consecutive underscores or hyphens.')
             setUsernameStatus('')
             return false
         }
         
-        // Cannot start or end with special characters
+        /* Cannot start or end with special characters */
         if (/^[_-]|[_-]$/.test(username)) {
             setUsernameError('Username cannot start or end with underscore or hyphen.')
             setUsernameStatus('')
             return false
         }
         
-        // Reserved words check
+        /* Reserved words check */
         const reservedWords = [
             'admin', 'root', 'system', 'user', 'guest', 'test', 'demo',
             'support', 'help', 'info', 'contact', 'about', 'login', 'signup',
@@ -78,7 +77,7 @@ const Signup = () => {
             return false
         }
         
-        // No profanity or inappropriate words (basic check)
+        /* No profanity or inappropriate words (basic check) */
         const inappropriateWords = ['fuck', 'shit', 'ass', 'bitch', 'dick', 'pussy']
         if (inappropriateWords.some(word => username.toLowerCase().includes(word))) {
             setUsernameError('Username contains inappropriate content.')
@@ -90,9 +89,9 @@ const Signup = () => {
         return true
     }
 
-    // Email validation function
+    /* Email validation function */
     const validateEmail = (email) => {
-        // Basic email format validation
+        /* Basic email format validation */
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
         
         if (!email) {
@@ -105,7 +104,7 @@ const Signup = () => {
             return false
         }
         
-        // Block common disposable email domains
+        /* Block common disposable email domains */
         const disposableDomains = [
             'tempmail.com', '10minutemail.com', 'guerrillamail.com', 
             'mailinator.com', 'yopmail.com', 'throwaway.com', 'temp-mail.org',
@@ -123,7 +122,7 @@ const Signup = () => {
         return true
     }
 
-    // Password validation function
+    /* Password validation function */
     const validatePassword = (password) => {
         if (!password) {
             setPasswordError('')
@@ -135,7 +134,7 @@ const Signup = () => {
             return false
         }
         
-        // Optional: Add more password strength requirements
+        /* More password strength requirements */
         const hasUpperCase = /[A-Z]/.test(password)
         const hasLowerCase = /[a-z]/.test(password)
         const hasNumbers = /\d/.test(password)
@@ -149,7 +148,7 @@ const Signup = () => {
         return true
     }
 
-    // Confirm password validation function
+    /* Confirm password validation function */
     const validateConfirmPassword = (confirmPassword) => {
         if (!confirmPassword) {
             setConfirmPasswordError('')
@@ -165,7 +164,7 @@ const Signup = () => {
         return true
     }
 
-    // Debounced username availability check
+    /* Debounced username availability check */
     const debouncedUsernameCheck = (() => {
         let timeoutId
         return (username) => {
@@ -203,7 +202,7 @@ const Signup = () => {
         const value = e.target.value
         setPassword(value)
         validatePassword(value)
-        // Re-validate confirm password when password changes
+        /* Re-validate confirm password when password changes */
         if (confirmPassword) {
             validateConfirmPassword(confirmPassword)
         }
@@ -222,7 +221,7 @@ const Signup = () => {
         debouncedUsernameCheck(value)
     }
 
-    // Redirect if already logged in
+    /* Redirect if already logged in */
     useEffect(() => {
         if (user && !authLoading) {
             navigate('/home')
@@ -232,7 +231,7 @@ const Signup = () => {
     /* Reference the usernames collection. */
     const usernamesRef = collection(db, "usernames")
 
-    /* Queryusernames collection searching for a username in the usernames collection
+    /* Query usernames collection searching for a username in the usernames collection
     that matches the username given in the signup form. If an identical username is 
     found then isUsernameAvailable returns true, otherwise null. */
     const isUsernameAvailable = async (username) => {
