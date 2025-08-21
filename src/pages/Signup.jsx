@@ -231,8 +231,8 @@ const Signup = () => {
     /* Reference the usernames collection. */
     const usernamesRef = collection(db, "usernames")
 
-    /* Query usernames collection searching for a username in the usernames collection
-    that matches the username given in the signup form. If an identical username is 
+    /* Query usernames collection searching for a username that matches 
+    the one given in the signup form. If an identical username is 
     found then isUsernameAvailable returns true, otherwise null. */
     const isUsernameAvailable = async (username) => {
         const usernamesQuery = query(usernamesRef, where("username", "==", username))
@@ -246,35 +246,35 @@ const Signup = () => {
         setLoading(true)
         setError('')
         
-        // Validate email before proceeding
+        /* Validate email before proceeding */
         if (!validateEmail(email)) {
             setError('Please fix the email validation errors.')
             setLoading(false)
             return
         }
         
-        // Validate password before proceeding
+        /* Validate password before proceeding */
         if (!validatePassword(password)) {
             setError('Please fix the password validation errors.')
             setLoading(false)
             return
         }
         
-        // Check if passwords match
+        /* Check if passwords match */
         if (!validateConfirmPassword(confirmPassword)) {
             setError('Please fix the password validation errors.')
             setLoading(false)
             return
         }
         
-        // Validate username before proceeding
+        /* Validate username before proceeding */
         if (!validateUsername(username)) {
             setError('Please fix the username validation errors.')
             setLoading(false)
             return
         }
 
-        // Check if username is available
+        /* Check if username is available */
         const isAvailable = await isUsernameAvailable(username)
         if (isAvailable) {
             try {
@@ -285,15 +285,13 @@ const Signup = () => {
                     userId: user.uid,
                     username: username,
                     email: email,
-                    createdAt: new Date().toISOString() // Optional: add timestamp
+                    createdAt: new Date().toISOString()
                 })
-                /* Add the user to the usernames collection. */
                 console.log(`User Status: ${auth?.currentUser?.email} has created an account and signed in.`)
                 setPassword('')
                 setEmail('')
                 setUsername('')
                 setConfirmPassword('')
-                // Don't navigate here - let useEffect handle it when user state updates
             } catch (err) {
                 console.error(err)
                 setError('Failed to create account. Please try again.')
@@ -315,13 +313,12 @@ const Signup = () => {
         }
     }
 
-    // Guest mode comment: Handle guest sign in without creating account
+    /* Handle guest sign in without creating account */
     const handleGuestSignIn = () => {
         signInAsGuest();
-        // Navigation will be handled by useEffect when user state updates
     };
 
-    // Show loading if auth is still being determined
+    /* Show loading if auth is still being determined */
     if (authLoading) {
         return (
             <div className="flex items-center justify-center min-h-screen bg-white dark:bg-gray-800">
@@ -447,7 +444,7 @@ const Signup = () => {
                     </div>
                 </form>
 
-                {/* Guest mode comment: Guest Sign In Section */}
+                {/* Guest sign in section */}
                 <div className="mt-6">
                     <div className="relative">
                         <div className="absolute inset-0 flex items-center">
