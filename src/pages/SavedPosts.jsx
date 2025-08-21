@@ -5,7 +5,6 @@ import Feed from "../components/Feed";
 import LeftSidebar from "../components/LeftSidebar";
 import RightSidebar from "../components/RightSidebar";
 import MobileNav from "../components/MobileNav";
-// Guest mode comment: Guest indicator component for showing guest status
 import GuestIndicator from "../components/GuestIndicator";
 
 const SavedPosts = () => {
