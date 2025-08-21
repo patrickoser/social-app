@@ -10,15 +10,11 @@ import GuestIndicator from "../components/GuestIndicator";
 import { isGuestUser } from "../utils/guestUtils";
 
 const Settings = () => {
-    /* Might not need to import context as it could be costly w/o
-    useMemo. Might be better to define Navigate component in 
-    here directly. */
     const { navigate } = useContext(DataContext)
-    // Guest mode comment: Added guest-specific auth functions
     const { user, signOutGuest, isGuest } = useContext(AuthContext)
 
     const logout = async () => {
-        // Guest mode comment: Handle guest logout differently than regular logout
+        /* Handle guest logout differently than regular logout */
         if (isGuestUser(user)) {
             console.log(`Guest user has signed out.`)
             signOutGuest();
@@ -34,9 +30,9 @@ const Settings = () => {
         }
     }
 
-    // Guest mode comment: Handle creating account from guest mode
+    /* Handle creating account from guest mode */
     const handleCreateAccount = () => {
-        // Guest mode comment: Log out of guest mode before navigating to signup
+        /* Log out of guest mode before navigating to signup */
         if (isGuestUser(user)) {
             signOutGuest();
         }
@@ -48,11 +44,9 @@ const Settings = () => {
             <main className="flex flex-col md:flex-row max-w-7xl mx-auto py-0 px-3">
                 <LeftSidebar />
                 <section className="flex-1 w-full md:w-6/12 mt-5 px-3 md:px-5 pt-3 text-center bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-t border-b border-gray-300 dark:border-gray-700 pb-20 md:pb-3">
-                    {/* Guest mode comment: Show guest indicator when in guest mode */}
                     <GuestIndicator />
                     <h1 className="text-center text-2xl font-bold mb-6 text-gray-900 dark:text-white">Settings</h1>
                     
-                    {/* Guest mode comment: Show special messaging and create account button for guests */}
                     {isGuest ? (
                         <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
                             <p className="text-sm text-blue-800 dark:text-blue-200 mb-4">
@@ -71,7 +65,6 @@ const Settings = () => {
                         onClick={logout} 
                         className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600"
                     >
-                        {/* Guest mode comment: Show different button text for guests */}
                         {isGuest ? 'Exit Guest Mode' : 'Logout'}
                     </button>
                 </section>
