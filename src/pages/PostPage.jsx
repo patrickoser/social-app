@@ -18,11 +18,30 @@ const PostPage = () => {
     const [post, setPost] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
+    if (isLoading) {
+        return (
+            <div className="flex items-center justify-center min-h-screen bg-white dark:bg-gray-800">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 dark:border-indigo-400"></div>
+            </div>
+        );
+    }
+
+    if (!post) {
+        return (
+            <div className="flex items-center justify-center min-h-screen bg-white dark:bg-gray-800">
+                <div className="text-center">
+                    <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Post Not Found</h1>
+                    <p className="text-gray-600 dark:text-gray-400">The post you're looking for doesn't exist.</p>
+                </div>
+            </div>
+        );
+    }
+
     useEffect(() => {
         const fetchPost = async () => {
             setIsLoading(true);
             try {
-                // Guest mode comment: Check guest posts first before Firebase
+                /* Check guest posts first before Firebase */
                 if (isGuestUser(user)) {
                     const guestPosts = getGuestData(GUEST_KEYS.POSTS);
                     const guestPost = guestPosts.find(p => p.id === id);
@@ -34,7 +53,7 @@ const PostPage = () => {
                     }
                 }
                 
-                // Fetch from Firebase
+                /* Fetch from Firebase */
                 const postsRef = collection(db, "posts");
                 const q = query(postsRef, where("__name__", "==", id));
                 const querySnapshot = await getDocs(q);
@@ -54,25 +73,6 @@ const PostPage = () => {
             fetchPost();
         }
     }, [id, user]);
-
-    if (isLoading) {
-        return (
-            <div className="flex items-center justify-center min-h-screen bg-white dark:bg-gray-800">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 dark:border-indigo-400"></div>
-            </div>
-        );
-    }
-
-    if (!post) {
-        return (
-            <div className="flex items-center justify-center min-h-screen bg-white dark:bg-gray-800">
-                <div className="text-center">
-                    <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Post Not Found</h1>
-                    <p className="text-gray-600 dark:text-gray-400">The post you're looking for doesn't exist.</p>
-                </div>
-            </div>
-        );
-    }
 
     return (
         <>
