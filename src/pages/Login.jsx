@@ -5,18 +5,17 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
-    // Add a feature that checks local storage to see if they
-    // already have an account before redirecting to Signup
+    /* Add a feature that checks local storage to see if they
+    already have an account before redirecting to Signup */
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
-    // Guest mode comment: Added signInAsGuest function from auth context
     const { user, loading: authLoading, signInAsGuest } = useContext(AuthContext)
     const navigate = useNavigate()
 
-    // Redirect if already logged in
+    /* Redirect if already logged in */
     useEffect(() => {
         if (user && !authLoading) {
             navigate('/home')
@@ -33,7 +32,6 @@ const Login = () => {
             console.log(`User Status: ${auth?.currentUser?.email} has signed in.`)
             setEmail('')
             setPassword('')
-            // Don't navigate here - let useEffect handle it when user state updates
         } catch (err) {
             console.error(err)
             setError('Invalid email or password. Please try again.')
@@ -41,13 +39,13 @@ const Login = () => {
         }
     }
 
-    // Guest mode comment: Handle guest sign in without creating account
+    /* Handle guest sign in without creating account */
     const handleGuestSignIn = () => {
         signInAsGuest();
-        // Navigation will be handled by useEffect when user state updates
+        /* Navigation will be handled by useEffect when user state updates */
     };
 
-    // Show loading if auth is still being determined
+    /* Show loading if auth is still being determined */
     if (authLoading) {
         return (
             <div className="flex items-center justify-center min-h-screen bg-white dark:bg-gray-800">
