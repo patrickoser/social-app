@@ -6,9 +6,7 @@ import { AuthContext } from "../context/AuthContext";
 import LeftSidebar from "../components/LeftSidebar";
 import RightSidebar from "../components/RightSidebar";
 import MobileNav from "../components/MobileNav";
-// Guest mode comment: Guest indicator component for showing guest status
 import GuestIndicator from "../components/GuestIndicator";
-// Guest mode comment: Utility function to check if user is a guest
 import { isGuestUser } from "../utils/guestUtils";
 
 const Settings = () => {
