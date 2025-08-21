@@ -44,7 +44,7 @@ const PostPage = () => {
                 /* Check guest posts first before Firebase */
                 if (isGuestUser(user)) {
                     const guestPosts = getGuestData(GUEST_KEYS.POSTS);
-                    const guestPost = guestPosts.find(p => p.id === id);
+                    const guestPost = guestPosts.find(post => post.id === id);
                     
                     if (guestPost) {
                         setPost(guestPost);
