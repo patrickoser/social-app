@@ -7,10 +7,8 @@ import { AuthContext } from "../context/AuthContext";
 import LeftSidebar from "../components/LeftSidebar";
 import RightSidebar from "../components/RightSidebar";
 import MobileNav from "../components/MobileNav";
-// Guest mode comment: Guest indicator component for showing guest status
 import GuestIndicator from "../components/GuestIndicator";
 import ProfilePicture from "../components/ProfilePicture";
-// Guest mode comment: Import guest utilities for guest data handling
 import { isGuestUser, getGuestData, GUEST_KEYS } from "../utils/guestUtils";
 
 const PostPage = () => {
