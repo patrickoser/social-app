@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, googleProvider, db } from '../config/firebase'
 import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { addDoc, getDocs, collection, query, where, doc, setDoc } from "firebase/firestore";
+import { getDocs, collection, query, where, doc, setDoc } from "firebase/firestore";
 import { AuthContext } from "../context/AuthContext";
 
 const Signup = () => {
