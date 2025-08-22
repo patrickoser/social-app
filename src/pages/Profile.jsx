@@ -26,9 +26,7 @@ const Profile = () => {
     const [isEditing, setIsEditing] = useState(false)
     const [userPosts, setUserPosts] = useState([])
     const [error, setError] = useState(null)
-    const [userLikes, setUserLikes] = useState([])
     const [likedPosts, setLikedPosts] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
     const [activeTab, setActiveTab] = useState("posts")
     const [uploadError, setUploadError] = useState('')
 
@@ -176,7 +174,6 @@ const Profile = () => {
         /* For guest users, get likes from sessionStorage */
         if (isGuestUser(user) && username === user?.username) {
             const guestLikes = getGuestData(GUEST_KEYS.LIKES, []);
-            setUserLikes(guestLikes);
             
             // Get the posts that were liked (from both regular posts and guest posts)
             const likedPostIds = guestLikes.map(like => like.postId);
@@ -194,7 +191,6 @@ const Profile = () => {
                     ...doc.data(),
                     likeId: doc.id
                 }))
-                setUserLikes(likes)
 
                 // Get the posts that were liked
                 const likedPostIds = likes.map(like => like.postId)
@@ -257,7 +253,6 @@ const Profile = () => {
         if (username && posts) {
             getProfilePosts()
             getProfileLikes()
-            setIsLoading(false)
         }
     }, [username, posts])
 
