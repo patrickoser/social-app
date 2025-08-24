@@ -40,7 +40,7 @@ const Profile = () => {
     const validateFile = (file) => {
         setUploadError('')
         
-        // Check file type
+        /* Check file type */
         if (!ALLOWED_FILE_TYPES.includes(file.type)) {
             setUploadError('Please select a valid image file (JPEG, PNG, GIF, or WebP).')
             return false
