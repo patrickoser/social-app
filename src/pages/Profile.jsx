@@ -143,7 +143,7 @@ const Profile = () => {
                     the download URL of the file. */
                     const url = await getDownloadURL(ref(storage, `users/${user.userId}/${image.name}`));
                     
-                    // Update the profile picture cache after upload
+                    /* Update the profile picture cache after upload */
                     await getProfilePicture(user.userId);
                     
                 } catch (err) {
@@ -175,7 +175,7 @@ const Profile = () => {
         if (isGuestUser(user) && username === user?.username) {
             const guestLikes = getGuestData(GUEST_KEYS.LIKES, []);
             
-            // Get the posts that were liked (from both regular posts and guest posts)
+            /* Get the posts that were liked (from both regular posts and guest posts) */
             const likedPostIds = guestLikes.map(like => like.postId);
             const guestPosts = getGuestData(GUEST_KEYS.POSTS, []);
             const allPosts = [...posts, ...guestPosts];
@@ -192,7 +192,7 @@ const Profile = () => {
                     likeId: doc.id
                 }))
 
-                // Get the posts that were liked
+                /* Get the posts that were liked */
                 const likedPostIds = likes.map(like => like.postId)
                 const likedPostsData = posts.filter(post => likedPostIds.includes(post.id))
                 setLikedPosts(likedPostsData)
@@ -267,7 +267,6 @@ const Profile = () => {
                     <>
                         <LeftSidebar />
                         <section className="flex-1 w-full md:w-6/12 mt-5 px-3 md:px-5 text-center bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-t border-gray-300 dark:border-gray-700 pb-20 md:pb-0">
-                            {/* Guest mode comment: Show guest indicator when in guest mode */}
                             <GuestIndicator />
                             <div id="profile-bio" className="flex flex-col items-center p-4 border-b border-gray-300 dark:border-gray-700">
                                 <div id="img-con" className="flex flex-col items-center mb-4">
