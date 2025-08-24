@@ -56,13 +56,13 @@ const Profile = () => {
             return false
         }
         
-        // Check file size
+        /* Check file size */
         if (file.size > MAX_FILE_SIZE) {
             setUploadError(`File size must be less than ${MAX_FILE_SIZE / (1024 * 1024)}MB.`)
             return false
         }
         
-        // Check image dimensions (optional - for performance)
+        /* Check image dimensions (optional - for performance) */
         return new Promise((resolve) => {
             const img = new Image()
             img.onload = () => {
@@ -88,7 +88,7 @@ const Profile = () => {
             if (isValid) {
                 setImage(file)
             } else {
-                // Clear the file input
+                /* Clear the file input */
                 e.target.value = ''
                 setImage(null)
             }
