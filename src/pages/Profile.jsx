@@ -32,7 +32,7 @@ const Profile = () => {
 
     const { username } = useParams()
 
-    // File upload restrictions
+    /* File upload restrictions */
     const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp']
     const MAX_FILE_SIZE = 5 * 1024 * 1024 // 5MB
     const MAX_DIMENSIONS = { width: 2048, height: 2048 }
