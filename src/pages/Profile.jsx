@@ -46,7 +46,7 @@ const Profile = () => {
             return false
         }
         
-        // Check file extension
+        /* Check file extension */
         const fileName = file.name.toLowerCase()
         const validExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp']
         const hasValidExtension = validExtensions.some(ext => fileName.endsWith(ext))
