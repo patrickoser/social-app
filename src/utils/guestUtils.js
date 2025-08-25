@@ -1,5 +1,4 @@
 // Guest user utilities for managing temporary guest accounts
-import { useState, useEffect } from 'react';
 
 // Create a new guest user object with unique ID
 export const createGuestUser = () => {
