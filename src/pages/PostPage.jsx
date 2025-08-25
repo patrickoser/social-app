@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { DataContext } from "../context/DataContext";
@@ -17,6 +17,7 @@ const PostPage = () => {
     const { hasUserLiked, addLike, removeLike, deletePost } = useContext(DataContext);
     const [post, setPost] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -54,6 +55,16 @@ const PostPage = () => {
             fetchPost();
         }
     }, [id, user]);
+
+    const handleDelete = async () => {
+        try {
+            await deletePost(post.id);
+            // Redirect to home page after successful deletion
+            navigate('/home');
+        } catch (error) {
+            console.error('Error deleting post:', error);
+        }
+    };
 
     return (
         <>
@@ -93,7 +104,7 @@ const PostPage = () => {
                             {post?.likes && <span className="text-base text-gray-600 dark:text-gray-300 mr-4"> {post.likes.length} </span>}
                             {post?.username === user?.username && (
                                 <button 
-                                    onClick={() => deletePost(post?.id)} 
+                                    onClick={handleDelete} 
                                     className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600"
                                 >Delete</button>
                             )}

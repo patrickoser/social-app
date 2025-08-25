@@ -91,6 +91,26 @@ export const DataProvider = ({ children }) => {
             try {
                 const postDoc = doc(db, "posts", id)
                 await deleteDoc(postDoc)
+                
+                /* Also delete associated likes and saves */
+                try {
+                    // Delete likes for this post
+                    const likesQuery = query(likesRef, where("postId", "==", id));
+                    const likesSnapshot = await getDocs(likesQuery);
+                    const deleteLikesPromises = likesSnapshot.docs.map(doc => deleteDoc(doc.ref));
+                    await Promise.all(deleteLikesPromises);
+                    
+                    // Delete saves for this post
+                    const savesQuery = query(savesRef, where("postId", "==", id));
+                    const savesSnapshot = await getDocs(savesQuery);
+                    const deleteSavesPromises = savesSnapshot.docs.map(doc => deleteDoc(doc.ref));
+                    await Promise.all(deleteSavesPromises);
+                } catch (err) {
+                    console.error("Error deleting associated likes/saves:", err);
+                }
+                
+                /* Update local state by removing the post */
+                setPosts(prevPosts => prevPosts.filter(post => post.id !== id));
             } catch (err) {
                 console.error(err)
             }
