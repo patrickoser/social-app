@@ -1,7 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "../config/firebase";
 import { DataContext } from "../context/DataContext";
 import { AuthContext } from "../context/AuthContext";
 import LeftSidebar from "../components/LeftSidebar";
@@ -9,66 +7,41 @@ import RightSidebar from "../components/RightSidebar";
 import MobileNav from "../components/MobileNav";
 import GuestIndicator from "../components/GuestIndicator";
 import ProfilePicture from "../components/ProfilePicture";
-import { isGuestUser, getGuestData, GUEST_KEYS } from "../utils/guestUtils";
+
 
 const PostPage = () => {
     const { id } = useParams();
     const { user } = useContext(AuthContext);
-    const { hasUserLiked, addLike, removeLike, deletePost } = useContext(DataContext);
-    const [post, setPost] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
+    const { hasUserLiked, addLike, removeLike, deletePost, posts, postIsLoading } = useContext(DataContext);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const fetchPost = async () => {
-            setIsLoading(true);
-            try {
-                /* Check guest posts first before Firebase */
-                if (isGuestUser(user)) {
-                    const guestPosts = getGuestData(GUEST_KEYS.POSTS);
-                    const guestPost = guestPosts.find(post => post.id === id);
-                    
-                    if (guestPost) {
-                        setPost(guestPost);
-                        setIsLoading(false);
-                        return;
-                    }
-                }
-                
-                /* Fetch from Firebase */
-                const postsRef = collection(db, "posts");
-                const q = query(postsRef, where("__name__", "==", id));
-                const querySnapshot = await getDocs(q);
-                
-                if (!querySnapshot.empty) {
-                    const postData = { ...querySnapshot.docs[0].data(), id: querySnapshot.docs[0].id };
-                    setPost(postData);
-                }
-            } catch (error) {
-                console.error("Error fetching post:", error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        if (id) {
-            fetchPost();
-        }
-    }, [id, user]);
+    /* Get the post from DataContext posts */
+    const post = posts?.find(p => p.id === id);
 
     const handleDelete = async () => {
         try {
             await deletePost(post.id);
-            // Redirect to home page after successful deletion
             navigate('/home');
         } catch (error) {
             console.error('Error deleting post:', error);
         }
     };
 
+    const handleLike = async () => {
+        try {
+            if (hasUserLiked(post, user)) {
+                await removeLike(id, user);
+            } else {
+                await addLike(id, user);
+            }
+        } catch (error) {
+            console.error('Error updating like:', error);
+        }
+    };
+
     return (
         <>
-            {isLoading ? (
+            {postIsLoading ? (
                 <div className="flex items-center justify-center min-h-screen bg-white dark:bg-gray-800">
                     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 dark:border-indigo-400"></div>
                 </div>
@@ -98,7 +71,7 @@ const PostPage = () => {
                         </div>
                         <div className="flex justify-end items-center px-4 pb-4">
                             <button 
-                                onClick={hasUserLiked(post, user) ? () => removeLike(id, user) : () => addLike(id, user)} 
+                                onClick={handleLike} 
                                 className="px-4 py-2 text-base font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white mr-2"
                             >Like</button>
                             {post?.likes && <span className="text-base text-gray-600 dark:text-gray-300 mr-4"> {post.likes.length} </span>}

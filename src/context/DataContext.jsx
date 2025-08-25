@@ -322,8 +322,8 @@ export const DataProvider = ({ children }) => {
                             post.id === postId 
                                 ? { 
                                     ...post, 
-                                    /* Filter out the deleted like */
-                                    likes: (post.likes || []).filter(like => like.likeId !== likeId)
+                                    /* Filter out the deleted like by userId for consistency */
+                                    likes: (post.likes || []).filter(like => like.userId !== user.userId)
                                   }
                                 : post /* Else, leave other posts unchanged */
                         )
