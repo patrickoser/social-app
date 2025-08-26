@@ -117,49 +117,31 @@ export const DataProvider = ({ children }) => {
         }
     }
 
-    /* Called below in a useEffect. Puts all posts, from users and guests into the posts state. */
+    /* Fetches all posts from Firebase and combines with guest posts if needed */
     const getPosts = async () => {
         setPostIsLoading(true)
         
-        /* Load guest posts from sessionStorage and combine with Firebase posts */
-        if (isGuestUser(user)) {
-            const guestPosts = getGuestData(GUEST_KEYS.POSTS);
-            const allPosts = await getFirebasePosts(); /* Get real user posts for display */
-            const combinedPosts = [...allPosts, ...guestPosts];
-            setPosts(combinedPosts);
-            setPostIsLoading(false);
-        } else {
-            /* Handle just real user Firebase posts */
-            try {
-                const data = await getDocs(postsCollectionRef)
-                const fetchedPosts = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-                setPosts(fetchedPosts)
-                
-                /* After fetching posts, we now attach likes to each post.
-                Instead of separate likes state, likes become part of each post */
-                await attachLikesToPosts(fetchedPosts)
-                /* Also attach saves to each post */
-                await attachSavesToPosts(fetchedPosts)
-            } catch(err) {
-                console.log(err.message)
-            } finally {
-                setPostIsLoading(false)
-            }
-        }
-    }
-
-    /* Helper function to get Firebase posts for guest users to see real posts.
-    Called in getPosts. */
-    const getFirebasePosts = async () => {
         try {
+            /* Always fetch Firebase posts first */
             const data = await getDocs(postsCollectionRef)
             const fetchedPosts = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+            
+            /* Attach likes and saves to posts */
             await attachLikesToPosts(fetchedPosts)
             await attachSavesToPosts(fetchedPosts)
-            return fetchedPosts;
+            
+            /* Add guest posts if user is a guest */
+            if (isGuestUser(user)) {
+                const guestPosts = getGuestData(GUEST_KEYS.POSTS);
+                const combinedPosts = [...fetchedPosts, ...guestPosts];
+                setPosts(combinedPosts);
+            } else {
+                setPosts(fetchedPosts);
+            }
         } catch(err) {
             console.log(err.message)
-            return []
+        } finally {
+            setPostIsLoading(false)
         }
     }
 
