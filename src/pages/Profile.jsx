@@ -27,6 +27,7 @@ const Profile = () => {
     const [error, setError] = useState(null)
     const [activeTab, setActiveTab] = useState("posts")
     const [uploadError, setUploadError] = useState('')
+    const [isUserDataLoading, setIsUserDataLoading] = useState(true)
 
     const { username } = useParams()
 
@@ -169,6 +170,7 @@ const Profile = () => {
     useEffect(() => {
         /* Define an asynchronous function to fetch user data */
         const fetchData = async () => {
+            setIsUserDataLoading(true)
             setError(null)
             
             /* Check if this is a guest user trying to access their own profile */
@@ -182,6 +184,7 @@ const Profile = () => {
                 };
                 setUserData(guestData);
                 setBio(guestData.bio);
+                setIsUserDataLoading(false);
                 return;
             }
             
@@ -203,6 +206,8 @@ const Profile = () => {
                 /* If there is an error, log the error message */
                 setUserData(null)
                 setError('Error fetching user data')
+            } finally {
+                setIsUserDataLoading(false);
             }
         };
         /* Call the fetchData function */
@@ -217,8 +222,10 @@ const Profile = () => {
     return (
         <>
             <main className="flex flex-col md:flex-row max-w-7xl mx-auto py-0 px-3">
-                {postIsLoading ? (
-                    <h3 className="text-gray-900 dark:text-white">Loading...</h3>
+                {postIsLoading || isUserDataLoading ? (
+                    <div className="w-full flex items-center justify-center min-h-screen bg-white dark:bg-gray-800">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 dark:border-indigo-400"></div>
+                    </div>
                 ) : error ? (
                     <h3 className="text-red-600 dark:text-red-400">{error}</h3>
                 ) : userData ? (
