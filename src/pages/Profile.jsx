@@ -3,7 +3,7 @@ import PostForm from "../components/PostForm";
 import { DataContext } from "../context/DataContext";
 import { AuthContext } from "../context/AuthContext";
 import { storage, db } from "../config/firebase"; 
-import { doc, getDoc, updateDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useParams } from "react-router-dom";
 import Post from "../components/Post";
@@ -24,13 +24,17 @@ const Profile = () => {
     const [bio, setBio] = useState("")
     const [userData, setUserData] = useState(null)
     const [isEditing, setIsEditing] = useState(false)
-    const [userPosts, setUserPosts] = useState([])
     const [error, setError] = useState(null)
-    const [likedPosts, setLikedPosts] = useState([])
     const [activeTab, setActiveTab] = useState("posts")
     const [uploadError, setUploadError] = useState('')
 
     const { username } = useParams()
+
+    /* Simple computed values from DataContext */
+    const userPosts = posts.filter(post => post.username === username)
+    const likedPosts = posts.filter(post => 
+        post.likes?.some(like => like.username === username)
+    )
 
     /* File upload restrictions */
     const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp']
@@ -159,48 +163,7 @@ const Profile = () => {
         );
     };
 
-    const getProfilePosts = () => {
-        /* For guest users, get posts from sessionStorage */
-        if (isGuestUser(user) && username === user?.username) {
-            const guestPosts = getGuestData(GUEST_KEYS.POSTS, []);
-            setUserPosts(guestPosts);
-        } else {
-            const profilePosts = posts.filter(post => post.username === username)
-            setUserPosts(profilePosts)
-        }
-    }
 
-    const getProfileLikes = async () => {
-        /* For guest users, get likes from sessionStorage */
-        if (isGuestUser(user) && username === user?.username) {
-            const guestLikes = getGuestData(GUEST_KEYS.LIKES, []);
-            
-            /* Get the posts that were liked (from both regular posts and guest posts) */
-            const likedPostIds = guestLikes.map(like => like.postId);
-            const guestPosts = getGuestData(GUEST_KEYS.POSTS, []);
-            const allPosts = [...posts, ...guestPosts];
-            const likedPostsData = allPosts.filter(post => likedPostIds.includes(post.id));
-            setLikedPosts(likedPostsData);
-        } else {
-            try {
-                const likesRef = collection(db, "likes")
-                const q = query(likesRef, where("username", "==", username))
-                const querySnapshot = await getDocs(q)
-                
-                const likes = querySnapshot.docs.map(doc => ({
-                    ...doc.data(),
-                    likeId: doc.id
-                }))
-
-                /* Get the posts that were liked */
-                const likedPostIds = likes.map(like => like.postId)
-                const likedPostsData = posts.filter(post => likedPostIds.includes(post.id))
-                setLikedPosts(likedPostsData)
-            } catch (err) {
-                console.error("Error fetching likes:", err)
-            }
-        }
-    }
 
     /* useEffect hook to fetch user data when the component mounts or when the username changes */
     useEffect(() => {
@@ -249,12 +212,7 @@ const Profile = () => {
         /* Dependency array ensures this runs when the username changes */
     }, [username, user]);
 
-    useEffect(() => {
-        if (username && posts) {
-            getProfilePosts()
-            getProfileLikes()
-        }
-    }, [username, posts])
+
 
     return (
         <>
