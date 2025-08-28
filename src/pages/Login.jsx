@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { auth } from "../config/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { AuthContext } from "../context/AuthContext";
+import { logger } from "../utils/logger";
 
 const Login = () => {
     /* Add a feature that checks local storage to see if they
@@ -38,11 +39,11 @@ const Login = () => {
         
         try {
             await signInWithEmailAndPassword(auth, email, password)
-            console.log(`User Status: ${auth?.currentUser?.email} has signed in.`)
+            logger.info(`User signed in successfully: ${auth?.currentUser?.email}`)
             setEmail('')
             setPassword('')
         } catch (err) {
-            console.error(err)
+            logger.error('Sign in failed:', err)
             setError('Invalid email or password. Please try again.')
             setLoading(false)
         }
