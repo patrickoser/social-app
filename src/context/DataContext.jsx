@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState, useContext } from "react";
+import { createContext, useEffect, useState, useContext, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { format } from 'date-fns'
 import { db } from "../config/firebase"
@@ -25,7 +25,7 @@ export const DataProvider = ({ children }) => {
     const { user } = useContext(AuthContext)
 
     /* Called from within 'PostForm' component. Adds a new post to the "posts" collection. */
-    const createPost = async (e) => {
+    const createPost = useCallback(async (e) => {
         e.preventDefault()
         const datetime = format(new Date(), 'MMMM dd yyyy pp')
         
@@ -73,11 +73,11 @@ export const DataProvider = ({ children }) => {
                 logger.error('Error creating post:', err)
             }
         }
-    }
+    }, [user, postContent])
     
     /* Called within 'PostPage'. Takes in 'id' as a parameter and uses it to find the right
     post in firebase and remove it from the database. */
-    const deletePost = async (id) => {
+    const deletePost = useCallback(async (id) => {
         
         /* Handle guest post deletion from sessionStorage */
         if (isGuestUser(user)) {
@@ -116,10 +116,10 @@ export const DataProvider = ({ children }) => {
                 logger.error('Error deleting post:', err)
             }
         }
-    }
+    }, [user])
 
     /* Fetches all posts from Firebase and combines with guest posts if needed */
-    const getPosts = async () => {
+    const getPosts = useCallback(async () => {
         setPostIsLoading(true)
         
         try {
@@ -144,7 +144,7 @@ export const DataProvider = ({ children }) => {
         } finally {
             setPostIsLoading(false)
         }
-    }
+    }, [user])
 
     /* Takes all posts and attaches their respective likes to each post object */
     const attachLikesToPosts = async (postsToUpdate) => {

@@ -121,7 +121,7 @@ export const AuthProvider = ({ children }) => {
             if(unsubscribe) unsubscribe()
         } 
 
-    }, [])
+    }, [auth])
 
     /* Set up cleanup on page unload for guest users */
     useEffect(() => {
