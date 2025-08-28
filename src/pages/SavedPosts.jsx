@@ -6,6 +6,7 @@ import LeftSidebar from "../components/LeftSidebar";
 import RightSidebar from "../components/RightSidebar";
 import MobileNav from "../components/MobileNav";
 import GuestIndicator from "../components/GuestIndicator";
+import { logger } from "../utils/logger";
 
 const SavedPosts = () => {
     const { getSavedPosts } = useContext(DataContext);
@@ -20,7 +21,7 @@ const SavedPosts = () => {
                 const posts = await getSavedPosts(user);
                 setSavedPosts(posts);
             } catch (error) {
-                console.error('Error loading saved posts:', error);
+                logger.error('Error loading saved posts:', error);
             } finally {
                 setIsLoading(false);
             }

@@ -3,6 +3,7 @@ import { collection, query, getDocs, where, setDoc, doc } from "firebase/firesto
 import { createContext, useState, useEffect } from "react";
 import { db } from "../config/firebase";
 import { createGuestUser, isGuestUser, cleanupGuestData, GUEST_KEYS } from "../utils/guestUtils";
+import { logger } from "../utils/logger";
 
 export const AuthContext = createContext({})
 
@@ -33,7 +34,7 @@ export const AuthProvider = ({ children }) => {
             try {
                 await auth.signOut();
             } catch (error) {
-                console.error('Error signing out:', error);
+                logger.error('Error signing out:', error);
             }
         }
     };
@@ -104,7 +105,7 @@ export const AuthProvider = ({ children }) => {
                         });
                     }
                 } catch (err) {
-                    console.error(err)
+                    logger.error('Error during auth state change:', err)
                 }
             } else {
                 /* If no current user, set user state to null (logged out) */

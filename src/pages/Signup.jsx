@@ -4,6 +4,7 @@ import { auth, googleProvider, db } from '../config/firebase'
 import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { getDocs, collection, query, where, doc, setDoc } from "firebase/firestore";
 import { AuthContext } from "../context/AuthContext";
+import { logger } from "../utils/logger";
 
 const Signup = () => {
 
@@ -183,7 +184,7 @@ const Signup = () => {
                             setUsernameStatus('available')
                         }
                     } catch (error) {
-                        console.error('Error checking username availability:', error)
+                        logger.error('Error checking username availability:', error)
                     } finally {
                         setIsCheckingUsername(false)
                     }
@@ -287,13 +288,13 @@ const Signup = () => {
                     email: email,
                     createdAt: new Date().toISOString()
                 })
-                console.log(`User Status: ${auth?.currentUser?.email} has created an account and signed in.`)
+                logger.info(`User account created and signed in: ${auth?.currentUser?.email}`)
                 setPassword('')
                 setEmail('')
                 setUsername('')
                 setConfirmPassword('')
             } catch (err) {
-                console.error(err)
+                logger.error('Failed to create account:', err)
                 setError('Failed to create account. Please try again.')
                 setLoading(false)
             }
@@ -308,7 +309,7 @@ const Signup = () => {
         try {
             await signInWithPopup(auth, googleProvider)
         } catch (err) {
-            console.error(err)
+            logger.error('Google sign in failed:', err)
             setError('Failed to sign in with Google. Please try again.')
         }
     }

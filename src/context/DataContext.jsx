@@ -5,6 +5,7 @@ import { db } from "../config/firebase"
 import { collection, getDocs, addDoc, deleteDoc, doc, query, where } from "firebase/firestore"
 import { AuthContext } from "./AuthContext";
 import { isGuestUser, storeGuestData, getGuestData, GUEST_KEYS, generateGuestId } from "../utils/guestUtils";
+import { logger } from "../utils/logger";
 
 export const DataContext = createContext({})
 
@@ -69,7 +70,7 @@ export const DataProvider = ({ children }) => {
                 setPosts(prevPosts =>[...prevPosts, newPost])
                 setPostContent('')
             } catch(err) {
-                console.error(err)
+                logger.error('Error creating post:', err)
             }
         }
     }
@@ -106,13 +107,13 @@ export const DataProvider = ({ children }) => {
                     const deleteSavesPromises = savesSnapshot.docs.map(doc => deleteDoc(doc.ref));
                     await Promise.all(deleteSavesPromises);
                 } catch (err) {
-                    console.error("Error deleting associated likes/saves:", err);
+                    logger.error("Error deleting associated likes/saves:", err);
                 }
                 
                 /* Update local state by removing the post */
                 setPosts(prevPosts => prevPosts.filter(post => post.id !== id));
             } catch (err) {
-                console.error(err)
+                logger.error('Error deleting post:', err)
             }
         }
     }
@@ -139,7 +140,7 @@ export const DataProvider = ({ children }) => {
                 setPosts(fetchedPosts);
             }
         } catch(err) {
-            console.log(err.message)
+            logger.error('Error fetching posts:', err.message)
         } finally {
             setPostIsLoading(false)
         }
@@ -168,7 +169,7 @@ export const DataProvider = ({ children }) => {
                 likes: likesByPost[post.id] || [] /* If no likes, use empty array */
             })))
         } catch (err) {
-            console.error(err)
+            logger.error('Error attaching likes to posts:', err)
         }
     }
 
@@ -194,7 +195,7 @@ export const DataProvider = ({ children }) => {
                 saves: savesByPost[post.id] || [] /* If no saves, use empty array */
             })))
         } catch (err) {
-            console.error(err)
+            logger.error('Error attaching saves to posts:', err)
         }
     }
 
@@ -253,7 +254,7 @@ export const DataProvider = ({ children }) => {
                     )
                 }
             } catch (err) {
-                console.error(err)
+                logger.error('Error adding like:', err)
             }
         }
     }
@@ -312,7 +313,7 @@ export const DataProvider = ({ children }) => {
                     )
                 }
             } catch (err) {
-                console.error(err)
+                logger.error('Error removing like:', err)
             }
         }
     }
@@ -377,7 +378,7 @@ export const DataProvider = ({ children }) => {
                     )
                 }
             } catch (err) {
-                console.error(err)
+                logger.error('Error removing like:', err)
             }
         }
     }
@@ -435,7 +436,7 @@ export const DataProvider = ({ children }) => {
                     )
                 }
             } catch (err) {
-                console.error(err)
+                logger.error('Error removing save:', err)
             }
         }
     }
@@ -465,7 +466,7 @@ export const DataProvider = ({ children }) => {
                 /* Filter posts to only include saved ones */
                 return posts.filter(post => savedPostIds.includes(post.id))
             } catch (err) {
-                console.error(err)
+                logger.error('Error getting saved posts:', err)
                 return []
             }
         }

@@ -7,6 +7,7 @@ import RightSidebar from "../components/RightSidebar";
 import MobileNav from "../components/MobileNav";
 import GuestIndicator from "../components/GuestIndicator";
 import ProfilePicture from "../components/ProfilePicture";
+import { logger } from "../utils/logger";
 
 
 const PostPage = () => {
@@ -23,7 +24,7 @@ const PostPage = () => {
             await deletePost(post.id);
             navigate('/home');
         } catch (error) {
-            console.error('Error deleting post:', error);
+            logger.error('Error deleting post:', error);
         }
     };
 
@@ -35,7 +36,7 @@ const PostPage = () => {
                 await addLike(id, user);
             }
         } catch (error) {
-            console.error('Error updating like:', error);
+            logger.error('Error updating like:', error);
         }
     };
 

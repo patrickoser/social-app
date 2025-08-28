@@ -14,6 +14,7 @@ import ProfilePicture from "../components/ProfilePicture";
 import { useProfilePicture } from "../context/ProfilePictureContext";
 import GuestIndicator from "../components/GuestIndicator";
 import { isGuestUser, getGuestData, GUEST_KEYS } from "../utils/guestUtils";
+import { logger } from "../utils/logger";
 
 const Profile = () => {
     const { user } = useContext(AuthContext) 
@@ -110,7 +111,7 @@ const Profile = () => {
             await updateDoc(userDoc, { bio });
             setIsEditing(false);
         } catch (error) {
-            console.error('Error updating bio:', error);
+            logger.error('Error updating bio:', error);
         }
     }
   
@@ -152,7 +153,7 @@ const Profile = () => {
                     await getProfilePicture(user.userId);
                     
                 } catch (err) {
-                    console.error(err);
+                    logger.error('Error getting download URL:', err);
                 } finally {
                     /* These lines reset the progress and image states after the upload is complete. 
                     This is done in a finally block to ensure that it happens whether the upload 

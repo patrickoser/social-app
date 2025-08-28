@@ -8,6 +8,7 @@ import RightSidebar from "../components/RightSidebar";
 import MobileNav from "../components/MobileNav";
 import GuestIndicator from "../components/GuestIndicator";
 import { isGuestUser } from "../utils/guestUtils";
+import { logger } from "../utils/logger";
 
 const Settings = () => {
     const { navigate } = useContext(DataContext)
@@ -16,16 +17,16 @@ const Settings = () => {
     const logout = async () => {
         /* Handle guest logout differently than regular logout */
         if (isGuestUser(user)) {
-            console.log(`Guest user has signed out.`)
+            logger.info('Guest user signed out')
             signOutGuest();
             navigate('/login');
         } else {
-            console.log(`User Status: ${auth?.currentUser?.email} has signed out.`)
+            logger.info(`User signed out: ${auth?.currentUser?.email}`)
             try {
                 await signOut(auth)
                 navigate('/login')
             } catch (err) {
-                console.error(err)
+                logger.error('Error during sign out:', err)
             }
         }
     }

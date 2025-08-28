@@ -18,6 +18,8 @@ Learned:
     but they are combined/sorted into one state that is able to define/communicate each posts likes data more clearly.
 
 Working on:
+    Profile.jsx line 118 - Check if this is handling errors right. looks off.
+
     Think about taking google user data creation out of the auth useEffect
 
     Look at other places I have used navigate from context and see if it makes sense to use useNavigate instead.

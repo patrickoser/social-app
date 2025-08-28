@@ -1,6 +1,7 @@
 import { createContext, useState, useContext } from "react";
 import { ref, listAll, getDownloadURL } from "firebase/storage";
 import { storage } from "../config/firebase";
+import { logger } from "../utils/logger";
 
 export const ProfilePictureContext = createContext({});
 
@@ -45,7 +46,7 @@ export const ProfilePictureProvider = ({ children }) => {
 
             return url;
         } catch (err) {
-            console.error("Error fetching profile picture:", err);
+            logger.error("Error fetching profile picture:", err);
             
             /* For permission errors or any other errors, store empty string.
             This prevents repeated failed requests for the same user. */
