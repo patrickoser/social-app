@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useMemo } from "react";
 import PostForm from "../components/PostForm";
 import { DataContext } from "../context/DataContext";
 import { AuthContext } from "../context/AuthContext";
@@ -32,11 +32,18 @@ const Profile = () => {
 
     const { username } = useParams()
 
-    /* Simple computed values from DataContext */
-    const userPosts = posts.filter(post => post.username === username)
-    const likedPosts = posts.filter(post => 
-        post.likes?.some(like => like.username === username)
-    )
+    /* Memoized computed values to prevent unnecessary recalculations */
+    const userPosts = useMemo(() => 
+        posts.filter(post => post.username === username), 
+        [posts, username]
+    );
+    
+    const likedPosts = useMemo(() => 
+        posts.filter(post => 
+            post.likes?.some(like => like.username === username)
+        ), 
+        [posts, username]
+    );
 
     /* File upload restrictions */
     const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp']
@@ -120,9 +127,7 @@ const Profile = () => {
         The ref() function takes two arguments: the storage instance and the path where the file will be 
         stored. In this case, the image will be stored in the "images" folder and the name of the image 
         will be the original name of the file. */
-        console.log(user.userId)
         const storageRef = ref(storage, `users/${user.userId}/${image.name}`)
-        console.log(storageRef)
 
         /* This line starts the upload of the image to Firebase Storage. The uploadBytesResumable() 
         function takes two arguments: the storage reference and the file to be uploaded. It returns 
@@ -140,7 +145,7 @@ const Profile = () => {
                 setProgress(progress);
             },
             err => {
-                console.log(err);
+                logger.error('Upload error:', err);
             },
             async () => {
                 try {

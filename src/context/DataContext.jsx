@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState, useContext, useCallback } from "react";
+import { createContext, useEffect, useState, useContext, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { format } from 'date-fns'
 import { db } from "../config/firebase"
@@ -95,13 +95,13 @@ export const DataProvider = ({ children }) => {
                 
                 /* Also delete associated likes and saves */
                 try {
-                    // Delete likes for this post
+                    /* Delete likes for this post */
                     const likesQuery = query(likesRef, where("postId", "==", id));
                     const likesSnapshot = await getDocs(likesQuery);
                     const deleteLikesPromises = likesSnapshot.docs.map(doc => deleteDoc(doc.ref));
                     await Promise.all(deleteLikesPromises);
                     
-                    // Delete saves for this post
+                    /* Delete saves for this post */
                     const savesQuery = query(savesRef, where("postId", "==", id));
                     const savesSnapshot = await getDocs(savesQuery);
                     const deleteSavesPromises = savesSnapshot.docs.map(doc => deleteDoc(doc.ref));
@@ -200,7 +200,7 @@ export const DataProvider = ({ children }) => {
     }
 
     /* Updates the specific post's likes array instead of global likes state */
-    const addLike = async (postId, user) => {
+    const addLike = useCallback(async (postId, user) => {
         /* Handle guest likes in sessionStorage */
         if (isGuestUser(user)) {
             const guestLikes = getGuestData(GUEST_KEYS.LIKES);
@@ -257,10 +257,10 @@ export const DataProvider = ({ children }) => {
                 logger.error('Error adding like:', err)
             }
         }
-    }
+    }, [user])
 
     /* Removes from the specific post's likes array instead of global likes state */
-    const removeLike = async (postId, user) => {
+    const removeLike = useCallback(async (postId, user) => {
         /* Handle guest unlikes in sessionStorage */
         if (isGuestUser(user)) {
             const guestLikes = getGuestData(GUEST_KEYS.LIKES);
@@ -316,16 +316,16 @@ export const DataProvider = ({ children }) => {
                 logger.error('Error removing like:', err)
             }
         }
-    }
+    }, [user])
 
     /* Checks the specific post's likes array instead of global likes state */
-    const hasUserLiked = (post, user) => {
+    const hasUserLiked = useCallback((post, user) => {
         /* Check if the user's ID exists in this specific post's likes array */
         return post.likes?.find((like) => like.userId === user?.userId)
-    }
+    }, [])
 
     /* Add save functionality - similar to addLike */
-    const addSave = async (postId, user) => {
+    const addSave = useCallback(async (postId, user) => {
         /* Handle guest saves in sessionStorage */
         if (isGuestUser(user)) {
             const guestSaves = getGuestData(GUEST_KEYS.SAVES);
@@ -381,10 +381,10 @@ export const DataProvider = ({ children }) => {
                 logger.error('Error removing like:', err)
             }
         }
-    }
+    }, [user])
 
     /* Remove save functionality - similar to removeLike */
-    const removeSave = async (postId, user) => {
+    const removeSave = useCallback(async (postId, user) => {
         /* Handle guest unsaves in sessionStorage */
         if (isGuestUser(user)) {
             const guestSaves = getGuestData(GUEST_KEYS.SAVES);
@@ -439,12 +439,12 @@ export const DataProvider = ({ children }) => {
                 logger.error('Error removing save:', err)
             }
         }
-    }
+    }, [user])
 
     /* Check if user has saved a post */
-    const hasUserSaved = (post, user) => {
+    const hasUserSaved = useCallback((post, user) => {
         return post.saves?.find((save) => save.userId === user?.userId)
-    }
+    }, [])
 
     /* Get saved posts for a user */
     const getSavedPosts = async (user) => {
@@ -478,13 +478,20 @@ export const DataProvider = ({ children }) => {
         getPosts()
     }, [user]) 
 
+    // Memoize the entire context value to prevent unnecessary re-renders
+    const contextValue = useMemo(() => ({
+        posts, setPosts, navigate, postContent, setPostContent, createPost,
+        deletePost, getPosts, postIsLoading, setPostIsLoading,
+        addLike, removeLike, hasUserLiked,
+        addSave, removeSave, hasUserSaved, getSavedPosts
+    }), [
+        posts, postContent, postIsLoading, user, navigate,
+        createPost, deletePost, getPosts, addLike, removeLike, 
+        hasUserLiked, addSave, removeSave, hasUserSaved, getSavedPosts
+    ]);
+
     return (
-        <DataContext.Provider value={{
-            posts, setPosts, navigate, postContent, setPostContent, createPost,
-            deletePost, getPosts, postIsLoading, setPostIsLoading,
-            addLike, removeLike, hasUserLiked,
-            addSave, removeSave, hasUserSaved, getSavedPosts
-        }}>
+        <DataContext.Provider value={contextValue}>
             {children}
         </DataContext.Provider>
     )

@@ -1,6 +1,6 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { collection, query, getDocs, where, setDoc, doc } from "firebase/firestore";
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useMemo, useCallback } from "react";
 import { db } from "../config/firebase";
 import { createGuestUser, isGuestUser, cleanupGuestData, GUEST_KEYS } from "../utils/guestUtils";
 import { logger } from "../utils/logger";
@@ -12,21 +12,21 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState()
     const [loading, setLoading] = useState(true)
 
-    /* Guest authentication functions - defined outside useEffect to ensure availability */
-    const signInAsGuest = () => {
+    /* Guest authentication functions - memoized to prevent unnecessary re-renders */
+    const signInAsGuest = useCallback(() => {
         const guestUser = createGuestUser();
         sessionStorage.setItem(GUEST_KEYS.IS_GUEST, 'true');
         setUser(guestUser);
-    };
+    }, []);
 
     /* Sign out guest and clean up their data */
-    const signOutGuest = () => {
+    const signOutGuest = useCallback(() => {
         cleanupGuestData();
         setUser(null);
-    };
+    }, []);
 
     /* Enhanced sign out that handles both guest and regular users */
-    const signOut = async () => {
+    const signOut = useCallback(async () => {
         if (isGuestUser(user)) {
             signOutGuest();
         } else {
@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
                 logger.error('Error signing out:', error);
             }
         }
-    };
+    }, [user, signOutGuest]);
 
     /* Auth state listener */
     useEffect(() => {
@@ -142,15 +142,18 @@ export const AuthProvider = ({ children }) => {
         };
     }, [user]);
 
+    // Memoize the context value to prevent unnecessary re-renders
+    const contextValue = useMemo(() => ({
+        user, 
+        loading,
+        signInAsGuest,
+        signOutGuest,
+        signOut,
+        isGuest: isGuestUser(user)
+    }), [user, loading, signInAsGuest, signOutGuest, signOut]);
+
     return (
-        <AuthContext.Provider value={{
-            user, 
-            loading,
-            signInAsGuest,
-            signOutGuest,
-            signOut,
-            isGuest: isGuestUser(user)
-        }}>
+        <AuthContext.Provider value={contextValue}>
             {!loading &&
                 children
             }
