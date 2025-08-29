@@ -127,33 +127,14 @@ export const DataProvider = ({ children }) => {
             const data = await getDocs(postsCollectionRef)
             const fetchedPosts = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
             
-            /* Attach likes and saves to posts */
-            await attachLikesToPosts(fetchedPosts)
-            await attachSavesToPosts(fetchedPosts)
-            
-            /* Add guest posts if user is a guest */
-            if (isGuestUser(user)) {
-                const guestPosts = getGuestData(GUEST_KEYS.POSTS);
-                const combinedPosts = [...fetchedPosts, ...guestPosts];
-                setPosts(combinedPosts);
-            } else {
-                setPosts(fetchedPosts);
-            }
-        } catch(err) {
-            logger.error('Error fetching posts:', err.message)
-        } finally {
-            setPostIsLoading(false)
-        }
-    }, [user])
-
-    /* Takes all posts and attaches their respective likes to each post object */
-    const attachLikesToPosts = async (postsToUpdate) => {
-        try {
-            /* Fetch ALL likes from Firebase in one query */
+            /* Fetch all likes and saves from Firebase */
             const allLikes = await getDocs(likesRef)
-            const likesByPost = {}
+            const allSaves = await getDocs(savesRef)
             
-            /* Group likes by postId, organize likes by which post they belong to. */
+            /* Group likes and saves by postId */
+            const likesByPost = {}
+            const savesByPost = {}
+            
             allLikes.docs.forEach(doc => {
                 const like = { ...doc.data(), likeId: doc.id }
                 if (!likesByPost[like.postId]) {
@@ -162,25 +143,6 @@ export const DataProvider = ({ children }) => {
                 likesByPost[like.postId].push(like)
             })
             
-            /* This transforms: [{id: 'post1', content: '...'}] 
-            Into: [{id: 'post1', content: '...', likes: [like1, like2, like3]}] */
-            setPosts(postsToUpdate.map(post => ({
-                ...post,
-                likes: likesByPost[post.id] || [] /* If no likes, use empty array */
-            })))
-        } catch (err) {
-            logger.error('Error attaching likes to posts:', err)
-        }
-    }
-
-    /* Similar to attachLikesToPosts but for saves */
-    const attachSavesToPosts = async (postsToUpdate) => {
-        try {
-            /* Fetch ALL saves from Firebase in one query */
-            const allSaves = await getDocs(savesRef)
-            const savesByPost = {}
-            
-            /* Group saves by postId, organize saves by which post they belong to. */
             allSaves.docs.forEach(doc => {
                 const save = { ...doc.data(), saveId: doc.id }
                 if (!savesByPost[save.postId]) {
@@ -189,15 +151,56 @@ export const DataProvider = ({ children }) => {
                 savesByPost[save.postId].push(save)
             })
             
-            /* Attach the grouped saves to each post */
-            setPosts(prevPosts => prevPosts.map(post => ({
+            /* Attach Firebase likes and saves to posts */
+            let postsWithData = fetchedPosts.map(post => ({
                 ...post,
-                saves: savesByPost[post.id] || [] /* If no saves, use empty array */
-            })))
-        } catch (err) {
-            logger.error('Error attaching saves to posts:', err)
+                likes: likesByPost[post.id] || [],
+                saves: savesByPost[post.id] || []
+            }))
+            
+            /* Add guest posts and attach guest likes/saves if user is a guest */
+            if (isGuestUser(user)) {
+                const guestPosts = getGuestData(GUEST_KEYS.POSTS);
+                const guestLikes = getGuestData(GUEST_KEYS.LIKES);
+                const guestSaves = getGuestData(GUEST_KEYS.SAVES);
+                
+                /* Attach guest likes and saves to existing posts */
+                postsWithData = postsWithData.map(post => {
+                    const postGuestLikes = guestLikes.filter(like => like.postId === post.id);
+                    const postGuestSaves = guestSaves.filter(save => save.postId === post.id);
+                    
+                    return {
+                        ...post,
+                        likes: [...post.likes, ...postGuestLikes],
+                        saves: [...post.saves, ...postGuestSaves]
+                    };
+                });
+                
+                /* Add guest posts with their likes and saves */
+                const guestPostsWithData = guestPosts.map(post => {
+                    const postGuestLikes = guestLikes.filter(like => like.postId === post.id);
+                    const postGuestSaves = guestSaves.filter(save => save.postId === post.id);
+                    
+                    return {
+                        ...post,
+                        likes: postGuestLikes,
+                        saves: postGuestSaves
+                    };
+                });
+                
+                postsWithData = [...postsWithData, ...guestPostsWithData];
+            }
+            
+            /* Single setPosts call with complete data */
+            setPosts(postsWithData);
+        } catch(err) {
+            logger.error('Error fetching posts:', err.message)
+        } finally {
+            setPostIsLoading(false)
         }
-    }
+    }, [user])
+
+
 
     /* Updates the specific post's likes array instead of global likes state */
     const addLike = useCallback(async (postId, user) => {

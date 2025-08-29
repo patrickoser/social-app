@@ -36,7 +36,7 @@ const Post = ({ post }) => {
                     <button
                         onClick={hasUserLiked(post, user) ? () => removeLike(post.id, user) : () => addLike(post.id, user)}
                         className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
-                    >Like</button>
+                    >{hasUserLiked(post, user) ? 'Unlike' : 'Like'}</button>
                     {post.likes && <p className="text-gray-600 dark:text-gray-300"> {post.likes.length} </p>}
                 </div>
                 <button className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Share</button>
