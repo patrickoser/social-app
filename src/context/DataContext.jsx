@@ -259,7 +259,7 @@ export const DataProvider = ({ children }) => {
                 logger.error('Error adding like:', err)
             }
         }
-    }, [user])
+    }, [user, posts])
 
     /* Removes from the specific post's likes array instead of global likes state */
     const removeLike = useCallback(async (postId, user) => {
@@ -318,7 +318,7 @@ export const DataProvider = ({ children }) => {
                 logger.error('Error removing like:', err)
             }
         }
-    }, [user])
+    }, [user, posts])
 
     /* Checks the specific post's likes array instead of global likes state */
     const hasUserLiked = useCallback((post, user) => {
