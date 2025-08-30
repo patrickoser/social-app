@@ -485,7 +485,7 @@ export const DataProvider = ({ children }) => {
         getPosts()
     }, [user]) 
 
-    // Memoize the entire context value to prevent unnecessary re-renders
+    /* Memoize the entire context value to prevent unnecessary re-renders */
     const contextValue = useMemo(() => ({
         posts, setPosts, navigate, postContent, setPostContent, createPost,
         deletePost, getPosts, postIsLoading, setPostIsLoading,
