@@ -1,6 +1,6 @@
 /* Guest user utilities for managing temporary guest accounts */
 
-// Create a new guest user object with unique ID
+/* Create a new guest user object with unique ID */
 export const createGuestUser = () => {
     const guestId = 'guest_' + Date.now();
     return {
