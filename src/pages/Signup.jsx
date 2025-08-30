@@ -173,7 +173,7 @@ const Signup = () => {
             timeoutId = setTimeout(async () => {
                 if (username && validateUsername(username)) {
                     setIsCheckingUsername(true)
-                    setUsernameStatus('') // Clear status while checking
+                    setUsernameStatus('') /* Clear status while checking */
                     try {
                         const isAvailable = await isUsernameAvailable(username)
                         if (!isAvailable) {
