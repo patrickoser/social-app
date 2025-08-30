@@ -189,7 +189,7 @@ const Signup = () => {
                         setIsCheckingUsername(false)
                     }
                 }
-            }, 500) // Wait 500ms after user stops typing
+            }, 500) /* Wait 500ms after user stops typing */
         }
     })()
 
