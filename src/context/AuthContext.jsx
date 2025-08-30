@@ -142,7 +142,7 @@ export const AuthProvider = ({ children }) => {
         };
     }, [user]);
 
-    // Memoize the context value to prevent unnecessary re-renders
+    /* Memoize the context value to prevent unnecessary re-renders */
     const contextValue = useMemo(() => ({
         user, 
         loading,
