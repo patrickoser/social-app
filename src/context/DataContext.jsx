@@ -120,14 +120,12 @@ export const DataProvider = ({ children }) => {
 
     /* Fetches all posts from Firebase and combines with guest posts if needed */
     const getPosts = useCallback(async () => {
-        console.log('getPosts called');
         setPostIsLoading(true)
         
         try {
             /* Always fetch Firebase posts first */
             const data = await getDocs(postsCollectionRef)
             const fetchedPosts = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-            console.log('Fetched posts from Firebase:', fetchedPosts);
             
             /* Attach likes and saves to posts */
             await attachLikesToPosts(fetchedPosts)
@@ -137,7 +135,6 @@ export const DataProvider = ({ children }) => {
             if (isGuestUser(user)) {
                 const guestPosts = getGuestData(GUEST_KEYS.POSTS);
                 const combinedPosts = [...fetchedPosts, ...guestPosts];
-                console.log('Setting posts with guest posts:', combinedPosts);
                 setPosts(combinedPosts);
             }
             /* Remove the else block that was overwriting posts with likes */
@@ -152,11 +149,9 @@ export const DataProvider = ({ children }) => {
 
     /* Takes all posts and attaches their respective likes to each post object */
     const attachLikesToPosts = async (postsToUpdate) => {
-        console.log('attachLikesToPosts called with:', postsToUpdate);
         try {
             /* Fetch ALL likes from Firebase in one query */
             const allLikes = await getDocs(likesRef)
-            console.log('All likes from Firebase:', allLikes.docs.map(doc => ({ ...doc.data(), likeId: doc.id })));
             
             const likesByPost = {}
             
@@ -169,8 +164,6 @@ export const DataProvider = ({ children }) => {
                 likesByPost[like.postId].push(like)
             })
             
-            console.log('Likes grouped by postId:', likesByPost);
-            
             /* This transforms: [{id: 'post1', content: '...'}] 
             Into: [{id: 'post1', content: '...', likes: [like1, like2, like3]}] */
             const postsWithLikes = postsToUpdate.map(post => ({
@@ -178,7 +171,6 @@ export const DataProvider = ({ children }) => {
                 likes: likesByPost[post.id] || [] /* If no likes, use empty array */
             }));
             
-            console.log('Posts with likes attached:', postsWithLikes);
             setPosts(postsWithLikes);
         } catch (err) {
             logger.error('Error attaching likes to posts:', err)
@@ -213,8 +205,6 @@ export const DataProvider = ({ children }) => {
 
     /* Updates the specific post's likes array instead of global likes state */
     const addLike = useCallback(async (postId, user) => {
-        console.log('addLike called with postId:', postId, 'user:', user);
-        console.log('Current posts before update:', posts);
         
         /* Handle guest likes in sessionStorage */
         if (isGuestUser(user)) {
@@ -239,7 +229,6 @@ export const DataProvider = ({ children }) => {
                           }
                         : post
                 );
-                console.log('Updated posts after guest like:', newPosts);
                 return newPosts;
             });
         } else {
@@ -268,7 +257,6 @@ export const DataProvider = ({ children }) => {
                                   }
                                 : post /* Else, leave other posts unchanged */
                         );
-                        console.log('Updated posts after Firebase like:', newPosts);
                         return newPosts;
                     });
                 }
