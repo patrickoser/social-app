@@ -1,4 +1,4 @@
-// Guest user utilities for managing temporary guest accounts
+/* Guest user utilities for managing temporary guest accounts */
 
 // Create a new guest user object with unique ID
 export const createGuestUser = () => {
@@ -12,7 +12,7 @@ export const createGuestUser = () => {
     };
 };
 
-// Storage keys for guest data in sessionStorage
+/* Storage keys for guest data in sessionStorage */
 export const GUEST_KEYS = {
     POSTS: 'guestPosts',
     LIKES: 'guestLikes', 
@@ -29,7 +29,7 @@ export const storeGuestData = (key, data) => {
     }
 };
 
-// Retrieve guest data from sessionStorage
+/* Retrieve guest data from sessionStorage */
 export const getGuestData = (key, defaultValue = []) => {
     const data = sessionStorage.getItem(key);
     if (data) {
@@ -42,19 +42,19 @@ export const getGuestData = (key, defaultValue = []) => {
     return defaultValue;
 };
 
-// Guest mode comment: Clean up all guest data when guest leaves
+/* Clean up all guest data when guest leaves */
 export const cleanupGuestData = () => {
     Object.values(GUEST_KEYS).forEach(key => {
         sessionStorage.removeItem(key);
     });
 };
 
-// Guest mode comment: Check if current user is a guest user
+/* Check if current user is a guest user */
 export const isGuestUser = (user) => {
     return user && user.isGuest === true;
 };
 
-// Guest mode comment: Generate unique guest ID for temporary data
+/* Generate unique guest ID for temporary data */
 export const generateGuestId = () => {
     return 'guest_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 }; 
