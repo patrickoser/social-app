@@ -120,12 +120,14 @@ export const DataProvider = ({ children }) => {
 
     /* Fetches all posts from Firebase and combines with guest posts if needed */
     const getPosts = useCallback(async () => {
+        console.log('getPosts called');
         setPostIsLoading(true)
         
         try {
             /* Always fetch Firebase posts first */
             const data = await getDocs(postsCollectionRef)
             const fetchedPosts = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+            console.log('Fetched posts from Firebase:', fetchedPosts);
             
             /* Attach likes and saves to posts */
             await attachLikesToPosts(fetchedPosts)
@@ -135,10 +137,10 @@ export const DataProvider = ({ children }) => {
             if (isGuestUser(user)) {
                 const guestPosts = getGuestData(GUEST_KEYS.POSTS);
                 const combinedPosts = [...fetchedPosts, ...guestPosts];
+                console.log('Setting posts with guest posts:', combinedPosts);
                 setPosts(combinedPosts);
-            } else {
-                setPosts(fetchedPosts);
             }
+            /* Remove the else block that was overwriting posts with likes */
         } catch(err) {
             logger.error('Error fetching posts:', err.message)
         } finally {
@@ -150,9 +152,12 @@ export const DataProvider = ({ children }) => {
 
     /* Takes all posts and attaches their respective likes to each post object */
     const attachLikesToPosts = async (postsToUpdate) => {
+        console.log('attachLikesToPosts called with:', postsToUpdate);
         try {
             /* Fetch ALL likes from Firebase in one query */
             const allLikes = await getDocs(likesRef)
+            console.log('All likes from Firebase:', allLikes.docs.map(doc => ({ ...doc.data(), likeId: doc.id })));
+            
             const likesByPost = {}
             
             /* Group likes by postId, organize likes by which post they belong to. */
@@ -164,12 +169,17 @@ export const DataProvider = ({ children }) => {
                 likesByPost[like.postId].push(like)
             })
             
+            console.log('Likes grouped by postId:', likesByPost);
+            
             /* This transforms: [{id: 'post1', content: '...'}] 
             Into: [{id: 'post1', content: '...', likes: [like1, like2, like3]}] */
-            setPosts(postsToUpdate.map(post => ({
+            const postsWithLikes = postsToUpdate.map(post => ({
                 ...post,
                 likes: likesByPost[post.id] || [] /* If no likes, use empty array */
-            })))
+            }));
+            
+            console.log('Posts with likes attached:', postsWithLikes);
+            setPosts(postsWithLikes);
         } catch (err) {
             logger.error('Error attaching likes to posts:', err)
         }
@@ -203,6 +213,9 @@ export const DataProvider = ({ children }) => {
 
     /* Updates the specific post's likes array instead of global likes state */
     const addLike = useCallback(async (postId, user) => {
+        console.log('addLike called with postId:', postId, 'user:', user);
+        console.log('Current posts before update:', posts);
+        
         /* Handle guest likes in sessionStorage */
         if (isGuestUser(user)) {
             const guestLikes = getGuestData(GUEST_KEYS.LIKES);
@@ -217,16 +230,18 @@ export const DataProvider = ({ children }) => {
             storeGuestData(GUEST_KEYS.LIKES, updatedGuestLikes);
             
             /* Update local state with guest like */
-            setPosts(prevPosts => 
-                prevPosts.map(post => 
+            setPosts(prevPosts => {
+                const newPosts = prevPosts.map(post => 
                     post.id === postId 
                         ? { 
                             ...post, 
                             likes: [...(post.likes || []), newLike]
                           }
                         : post
-                )
-            );
+                );
+                console.log('Updated posts after guest like:', newPosts);
+                return newPosts;
+            });
         } else {
             /* Handle regular user Firebase like */
             try {
@@ -239,8 +254,8 @@ export const DataProvider = ({ children }) => {
                 
                 if (user) {
                     /* Update the specific post's likes in local state */
-                    setPosts(prevPosts => 
-                        prevPosts.map(post => 
+                    setPosts(prevPosts => {
+                        const newPosts = prevPosts.map(post => 
                             post.id === postId 
                                 ? { 
                                     ...post, 
@@ -252,8 +267,10 @@ export const DataProvider = ({ children }) => {
                                     }]
                                   }
                                 : post /* Else, leave other posts unchanged */
-                        )
-                    )
+                        );
+                        console.log('Updated posts after Firebase like:', newPosts);
+                        return newPosts;
+                    });
                 }
             } catch (err) {
                 logger.error('Error adding like:', err)
@@ -324,7 +341,7 @@ export const DataProvider = ({ children }) => {
     const hasUserLiked = useCallback((post, user) => {
         /* Check if the user's ID exists in this specific post's likes array */
         return post.likes?.find((like) => like.userId === user?.userId)
-    }, [])
+    }, [posts])
 
     /* Add save functionality - similar to addLike */
     const addSave = useCallback(async (postId, user) => {
@@ -395,7 +412,7 @@ export const DataProvider = ({ children }) => {
             );
             storeGuestData(GUEST_KEYS.SAVES, updatedGuestSaves);
             
-            /* Update local state by removing guest save */
+            /* Update local state by removing guest like */
             setPosts(prevPosts => 
                 prevPosts.map(post => 
                     post.id === postId 
