@@ -91,7 +91,7 @@ Users can explore the app without creating an account. Guest data is stored in s
 Posts, likes, and saves update in real-time using Firebase's real-time capabilities.
 
 ### Responsive Design
-Mobile-first approach with dedicated mobile navigation and responsive layouts for all screen sizes.
+Mobile-first approach with dedicated mobile navigation and responsive layouts for all screen sizes. 
 
 ### File Upload
 Profile picture uploads with validation for file type, size, and dimensions.
