@@ -13,7 +13,7 @@ import MobileNav from "../components/MobileNav";
 import ProfilePicture from "../components/ProfilePicture";
 import { useProfilePicture } from "../context/ProfilePictureContext";
 import GuestIndicator from "../components/GuestIndicator";
-import { isGuestUser, getGuestData, GUEST_KEYS } from "../utils/guestUtils";
+import { isGuestUser } from "../utils/guestUtils";
 import { logger } from "../utils/logger";
 
 const Profile = () => {
