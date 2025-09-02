@@ -128,16 +128,19 @@ export const DataProvider = ({ children }) => {
             const fetchedPosts = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
             
             /* Attach likes and saves to posts */
-            await attachLikesToPosts(fetchedPosts)
-            await attachSavesToPosts(fetchedPosts)
+            const postsWithLikes = await attachLikesToPosts(fetchedPosts)
+            const postsWithLikesAndSaves = await attachSavesToPosts(postsWithLikes)
             
             /* Add guest posts if user is a guest */
             if (isGuestUser(user)) {
                 const guestPosts = getGuestData(GUEST_KEYS.POSTS);
-                const combinedPosts = [...fetchedPosts, ...guestPosts];
+                /* Combine Firebase posts (with likes and saves) and guest posts */
+                const combinedPosts = [...postsWithLikesAndSaves, ...guestPosts];
                 setPosts(combinedPosts);
+            } else {
+                /* For non-guest users, posts have likes and saves attached */
+                setPosts(postsWithLikesAndSaves);
             }
-            /* Remove the else block that was overwriting posts with likes */
         } catch(err) {
             logger.error('Error fetching posts:', err.message)
         } finally {
@@ -171,9 +174,10 @@ export const DataProvider = ({ children }) => {
                 likes: likesByPost[post.id] || [] /* If no likes, use empty array */
             }));
             
-            setPosts(postsWithLikes);
+            return postsWithLikes;
         } catch (err) {
             logger.error('Error attaching likes to posts:', err)
+            return postsToUpdate; /* Return original posts if error */
         }
     }
 
@@ -194,12 +198,15 @@ export const DataProvider = ({ children }) => {
             })
             
             /* Attach the grouped saves to each post */
-            setPosts(prevPosts => prevPosts.map(post => ({
+            const postsWithSaves = postsToUpdate.map(post => ({
                 ...post,
                 saves: savesByPost[post.id] || [] /* If no saves, use empty array */
-            })))
+            }));
+            
+            return postsWithSaves;
         } catch (err) {
             logger.error('Error attaching saves to posts:', err)
+            return postsToUpdate; /* Return original posts if error */
         }
     }
 
