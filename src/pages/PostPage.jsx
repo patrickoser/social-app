@@ -40,6 +40,18 @@ const PostPage = () => {
         }
     };
 
+    const handleSave = async () => {
+        try {
+            if (hasUserSaved(post, user)) {
+                await removeSave(id, user);
+            } else {
+                await addSave(id, user);
+            }
+        } catch (error) {
+            logger.error('Error updating save:', error);
+        }
+    };
+
     return (
         <>
             {postIsLoading ? (
@@ -76,6 +88,10 @@ const PostPage = () => {
                                 className="px-4 py-2 text-base font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white mr-2"
                             >{hasUserLiked(post, user) ? 'Unlike' : 'Like'}</button>
                             {post?.likes && <span className="text-base text-gray-600 dark:text-gray-300 mr-4"> {post.likes.length} </span>}
+                            <button 
+                                onClick={handleSave} 
+                                className="px-4 py-2 text-base font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white mr-4"
+                            >{hasUserSaved(post, user) ? 'Unsave' : 'Save'}</button>
                             {post?.username === user?.username && (
                                 <button 
                                     onClick={handleDelete} 
