@@ -13,7 +13,7 @@ import { logger } from "../utils/logger";
 const PostPage = () => {
     const { id } = useParams();
     const { user } = useContext(AuthContext);
-    const { hasUserLiked, addLike, removeLike, deletePost, posts, postIsLoading } = useContext(DataContext);
+    const { hasUserLiked, hasUserSaved, addLike, removeLike, addSave, removeSave, deletePost, posts, postIsLoading } = useContext(DataContext);
     const navigate = useNavigate();
 
     /* Get the post from DataContext posts */
@@ -74,7 +74,7 @@ const PostPage = () => {
                             <button 
                                 onClick={handleLike} 
                                 className="px-4 py-2 text-base font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white mr-2"
-                            >Like</button>
+                            >{hasUserLiked(post, user) ? 'Unlike' : 'Like'}</button>
                             {post?.likes && <span className="text-base text-gray-600 dark:text-gray-300 mr-4"> {post.likes.length} </span>}
                             {post?.username === user?.username && (
                                 <button 
