@@ -19,7 +19,7 @@ import { logger } from "../utils/logger";
 const Profile = () => {
     const { user } = useContext(AuthContext) 
     const { posts, postIsLoading } = useContext(DataContext)
-    const { getProfilePicture } = useProfilePicture();
+    const { refreshProfilePicture } = useProfilePicture();
     const [image, setImage] = useState(null)
     const [progress, setProgress] = useState(0)
     const [bio, setBio] = useState("")
@@ -154,8 +154,8 @@ const Profile = () => {
                     the download URL of the file. */
                     const url = await getDownloadURL(ref(storage, `users/${user.userId}/${image.name}`));
                     
-                    /* Update the profile picture cache after upload */
-                    await getProfilePicture(user.userId);
+                    /* Refresh the profile picture cache to show the new image immediately */
+                    await refreshProfilePicture(user.userId);
                     
                 } catch (err) {
                     logger.error('Error getting download URL:', err);

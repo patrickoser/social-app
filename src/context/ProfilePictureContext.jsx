@@ -65,6 +65,25 @@ export const ProfilePictureProvider = ({ children }) => {
         }
     };
 
+    const refreshProfilePicture = async (userId) => {
+        /* Remove the cached image for this user to force a fresh fetch */
+        setProfilePictures(prev => {
+            const newState = { ...prev };
+            delete newState[userId];
+            return newState;
+        });
+
+        /* Also clear any loading state */
+        setLoadingStates(prev => {
+            const newState = { ...prev };
+            delete newState[userId];
+            return newState;
+        });
+
+        /* Fetch the updated profile picture */
+        return await getProfilePicture(userId);
+    };
+
     const clearCache = () => {
         setProfilePictures({});
         setLoadingStates({});
@@ -75,7 +94,8 @@ export const ProfilePictureProvider = ({ children }) => {
             profilePictures,
             getProfilePicture,
             loadingStates,
-            clearCache
+            clearCache,
+            refreshProfilePicture
         }}>
             {children}
         </ProfilePictureContext.Provider>
