@@ -85,7 +85,7 @@ const PostPage = () => {
                         <div className="flex justify-end items-center px-4 pb-4">
                             <button 
                                 onClick={handleLike} 
-                                className="px-4 py-2 text-base font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white mr-2"
+                                className="px-4 py-2 text-base font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
                             >{hasUserLiked(post, user) ? 'Unlike' : 'Like'}</button>
                             {post?.likes && <span className="text-base text-gray-600 dark:text-gray-300 mr-4"> {post.likes.length} </span>}
                             <button 
